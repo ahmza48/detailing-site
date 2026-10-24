@@ -12,9 +12,9 @@ import { pageMetadata } from "@/lib/seo";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Industries & Project Environments",
+  title: "Structural Detailing for Energy & Industrial Projects",
   description:
-    "Where our structural drafting, modelling and detailing services are applied: onshore oil & gas, gas processing and NGL, offshore energy, refining and petrochemicals, process plants, and power and industrial facilities.",
+    "Structural drafting, modelling and detailing for onshore, offshore, refineries, gas processing, petrochemical and industrial facility projects.",
   path: "/industries",
   image: "/images/industry-oil-gas.jpg",
 });
@@ -24,8 +24,8 @@ export default function IndustriesPage() {
     <>
       <Hero
         eyebrow="Industries"
-        title="Energy & Industrial"
-        accent="Project Applications"
+        title="Civil & Structural Documentation"
+        accent="for Energy and Industrial Facilities"
         intro="Structural drafting, modelling, detailing and material documentation for onshore and offshore facilities, gas processing plants, refineries, petrochemical installations and other industrial structures."
         image="/images/industry-oil-gas.jpg"
         imageAlt="Large oil and gas processing complex with pipes, tanks and structures"

@@ -15,9 +15,9 @@ import { outsourcingLink } from "@/lib/site";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Civil & Structural Engineering Services",
+  title: "Structural Detailing, CAD Drafting & Modelling Services",
   description:
-    "Six civil and structural service lines for energy and industrial projects: CAD drafting, 3D modelling, steel detailing, RCC detailing, brownfield modifications, and MTO and documentation, plus engineering outsourcing.",
+    "Explore engineering production services: structural CAD drawings, plant modelling, fabrication detailing, rebar schedules, modifications and material take-offs.",
   path: "/services",
   image: "/images/services-overview.jpg",
 });
@@ -46,8 +46,8 @@ export default function ServicesPage() {
     <>
       <Hero
         eyebrow="Services"
-        title="Civil & Structural"
-        accent="Engineering Services"
+        title="Civil & Structural Drafting, 3D Modelling"
+        accent="and Structural Detailing Services"
         intro="Engineering production and documentation support for energy and industrial projects. Each service can be commissioned on its own or combined into an agreed subcontract drawing or model package."
         image="/images/services-overview.jpg"
         imageAlt="Multi-level steel process structure with large-bore piping"

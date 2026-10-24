@@ -12,9 +12,9 @@ import { serviceBySlug, servicePath } from "@/lib/services";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Structures & Applications",
+  title: "Pipe Racks, Platforms & Industrial Structural Drawings",
   description:
-    "Find structural drafting, modelling, detailing and MTO services by structure type: pipe racks, platforms, equipment and cable tray supports, industrial buildings, foundations, existing plant rehabilitation and offshore steelwork.",
+    "Explore pipe racks, pipe bridges, equipment supports, platforms and foundations and the drawings, models and detailing packages available for each.",
   path: "/applications",
   image: "/images/onshore-pipe-rack.jpg",
 });
@@ -24,8 +24,8 @@ export default function ApplicationsPage() {
     <>
       <Hero
         eyebrow="Structures & Applications"
-        title="Find the Right Service"
-        accent="by Structure Type"
+        title="Industrial Structures & Engineering"
+        accent="Documentation Applications"
         intro="Start from the structure you are dealing with. Each one shows which services produce its drawings, models, fabrication information and quantities."
         image="/images/onshore-pipe-rack.jpg"
         imageAlt="Steel pipe rack and process structures at an onshore plant"

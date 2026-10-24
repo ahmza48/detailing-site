@@ -12,7 +12,15 @@ export const site = {
     "Civil & structural engineering support, modelling and detailing for energy and industrial projects",
   description:
     "Civil and structural CAD drafting, TEKLA Structures modelling, steel fabrication detailing, RCC reinforcement documentation and brownfield modification packages for EPC contractors, engineering consultancies and steel fabricators in the energy and industrial sectors.",
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com").replace(/\/$/, ""),
+  /**
+   * Canonical origin. NEXT_PUBLIC_SITE_URL should be set to the custom domain; until it is, Vercel's
+   * production domain (provided at build time) keeps canonicals, robots and the sitemap on a real host.
+   */
+  url: (
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
+    "https://www.example.com"
+  ).replace(/\/$/, ""),
   /** Shown publicly only when set. */
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || undefined,
   phone: {

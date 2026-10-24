@@ -13,9 +13,9 @@ import { software, softwareQualifier } from "@/lib/software";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Software, Deliverables & Technical Capabilities",
+  title: "Engineering Software & Technical Capabilities",
   description:
-    "Technical deliverables, software experience, file formats and workflow for structural drafting, modelling and detailing: Tekla Structures, AutoCAD, MicroStation, Navisworks and plant design environments.",
+    "Software experience, model formats, structural drawing deliverables, engineering specifications and package review processes.",
   path: "/capabilities",
   image: "/images/capabilities-overview.jpg",
 });
@@ -121,8 +121,8 @@ export default function CapabilitiesPage() {
     <>
       <Hero
         eyebrow="Technical Capabilities"
-        title="Software, Deliverables"
-        accent="& Technical Capability"
+        title="Civil & Structural Modelling,"
+        accent="Drafting and Detailing Capabilities"
         intro="The capability an engineering package needs depends on more than a software name: compatibility with approved design information, coordinates, discipline references, fabrication practice, revisions and agreed formats."
         image="/images/capabilities-overview.jpg"
         imageAlt="Structural steel framing seen from below"

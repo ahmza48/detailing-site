@@ -16,9 +16,9 @@ import { priorEnvironments } from "@/lib/site";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About",
+  title: "About Us: Structural Engineering Support",
   description:
-    "Hormuz-Energy's specialist civil and structural production focus, the professional background of its senior team, and its approach to engineering work packages.",
+    "Learn about Hormuz-Energy's specialist civil and structural production focus, professional background and approach to engineering work packages.",
   path: "/about",
   image: "/images/about-experience.jpg",
 });
@@ -70,8 +70,8 @@ export default function AboutPage() {
     <>
       <Hero
         eyebrow="About"
-        title="Built on Decades"
-        accent="Of Project Experience"
+        title="About Hormuz-Energy"
+        accent="Civil & Structural Engineering Support"
         intro="A specialist civil and structural engineering support offering for consultancies, EPC contractors, steel fabricators and industrial project teams, informed by senior personnel experience on energy and industrial projects."
         image="/images/about-experience.jpg"
         imageAlt="Refinery process columns and steel structures in daylight"

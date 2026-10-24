@@ -9,9 +9,9 @@ import { site, telHref, whatsappHref } from "@/lib/site";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Request an Engineering Services Quote",
+  title: "Request a Structural Detailing Quote",
   description:
-    "Request a quote for structural CAD drafting, TEKLA modelling, steel detailing, RCC detailing, brownfield modifications, MTO or engineering outsourcing. Send your scope of work, design inputs and schedule.",
+    "Share your structural drafting, shop drawing, Tekla modelling, brownfield or MTO package for technical scope and quotation review.",
   path: "/contact",
   image: "/images/contact-overview.jpg",
 });
@@ -50,8 +50,8 @@ export default function ContactPage() {
     <>
       <Hero
         eyebrow="Request a Quote"
-        title="Request an Engineering"
-        accent="Services Quote"
+        title="Request a Structural Detailing,"
+        accent="CAD Drafting or Modelling Quote"
         intro="Share the work package your team needs delivered: a structural GA set, a Tekla detailing model, shop drawings, reinforcement documentation, an existing-plant modification or a material take-off. We review the requirements and current resources before confirming feasibility, clarifications and a quotation approach."
         image="/images/contact-overview.jpg"
         imageAlt="Process towers and a crane under an evening sky"

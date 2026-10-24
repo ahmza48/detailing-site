@@ -13,9 +13,9 @@ import { serviceBySlug } from "@/lib/services";
 import { experienceDisclaimer, portfolioNote } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Selected Professional Project Experience",
+  title: "Structural Detailing Project Experience & Work Samples",
   description:
-    "Representative onshore and offshore energy projects from the professional experience of our senior team: oil & gas, refinery, NGL and gas developments across the Gulf and beyond.",
+    "See accurately attributed prior professional experience in energy facilities and available structural drawing and modelling examples.",
   path: "/project-experience",
   image: "/images/project-umm-lulu.jpg",
 });
@@ -27,8 +27,8 @@ export default function ProjectExperiencePage() {
 
       <Hero
         eyebrow="Project experience"
-        title="Selected Professional"
-        accent="Project Experience"
+        title="Relevant Professional Experience"
+        accent="& Technical Work Samples"
         intro="Representative projects from the prior professional experience of our senior team members, mapped to the services they relate to today. None of these are projects contracted to Hormuz-Energy."
         image="/images/project-umm-lulu.jpg"
         imageAlt="Offshore platform topsides at a fabrication yard"

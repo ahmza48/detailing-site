@@ -11,9 +11,9 @@ import { serviceBySlug, servicePath, type ServiceSlug } from "@/lib/services";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Engineering Drafting & Structural Detailing Outsourcing",
+  title: "Engineering Drafting & Detailing Outsourcing",
   description:
-    "Outsourced structural CAD drafting, TEKLA modelling, steel detailing and engineering documentation for EPC contractors, consultancies and fabricators.",
+    "Subcontract structural CAD, Tekla modelling, steel detailing, rebar drawing and revision work packages for EPC contractors, consultancies and fabricators.",
   path: "/engineering-outsourcing",
   image: "/images/capabilities-overview.jpg",
   keywords: ["structural detailing outsourcing", "subcontract steel detailing", "outsourced Tekla modelling", "CAD drafting outsourcing"],
@@ -106,7 +106,7 @@ export default function OutsourcingPage() {
       <Hero
         eyebrow="Engineering Outsourcing & Subcontract Support"
         title="Engineering Drafting, Modelling"
-        accent="& Steel Detailing Outsourcing"
+        accent="& Detailing Outsourcing"
         intro="Additional technical capacity for a defined drawing, model or detailing package, without expanding your permanent team. Assignments are accepted subject to the expertise available, your project requirements and agreed responsibilities; you keep design authority."
         image="/images/capabilities-overview.jpg"
         imageAlt="Structural steel framing seen from below"

@@ -10,9 +10,9 @@ import { pageMetadata } from "@/lib/seo";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Quality & Delivery",
+  title: "Quality & Delivery of Engineering Drawings",
   description:
-    "How structural drawing, modelling and detailing packages are checked, revised and handed over: production checking, revision control, client review and document handover.",
+    "Scope definition, technical queries, drawing and model checking, revision management, review cycles and controlled engineering documentation handover.",
   path: "/quality-delivery",
   image: "/images/capabilities-overview.jpg",
 });
@@ -65,8 +65,8 @@ export default function QualityDeliveryPage() {
     <>
       <Hero
         eyebrow="Technical Capabilities"
-        title="Quality &"
-        accent="Delivery"
+        title="Quality-Controlled Engineering"
+        accent="Drawing & Model Delivery"
         intro="A drawing or model package is only useful when its scope, source information, revision history and checking responsibilities are understood. This is how each package is set up, checked and handed over."
         image="/images/capabilities-overview.jpg"
         imageAlt="Structural steel framing seen from below"

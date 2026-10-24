@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   ...pageMetadata({
     title: "Structural Detailing & Engineering Support for Energy and Industrial Projects",
     description:
-      "Civil and structural CAD drafting, TEKLA Structures modelling, steel fabrication detailing, RCC reinforcement documentation and brownfield modification packages for EPC contractors, consultancies and steel fabricators.",
+      "Civil and structural drafting, Tekla modelling, steel shop drawings, rebar detailing and brownfield documentation for EPC contractors and fabricators.",
     path: "/",
     keywords: [
       "structural detailing services",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "Tekla modelling services",
     ],
   }),
-  title: { absolute: `${site.name} | Structural Detailing & Engineering Support for Energy Projects` },
+  title: { absolute: `Structural Detailing & Engineering Support | ${site.name}` },
 };
 
 /** Buyer-defined package examples (spec v2 §5.4). Descriptive scope examples, not claims of delivered projects. */

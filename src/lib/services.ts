@@ -330,7 +330,7 @@ export const services: Service[] = [
     seo: {
       title: "Civil & Structural CAD Drafting Services",
       description:
-        "Civil and structural CAD drafting for industrial projects: GA plans, framing layouts, foundations, sections, revisions and agreed native/PDF deliverables.",
+        "Structural GA drawings, framing layouts, foundations, sections and coordinated CAD revisions based on approved engineering design inputs.",
       keywords: [
         "structural CAD drafting",
         "GA drawings",
@@ -350,7 +350,7 @@ export const services: Service[] = [
     group: "drawings-models",
     title: "3D Structural Modelling & Plant Model Support",
     menuText: "TEKLA and plant models, updates and exchanges",
-    heading: ["TEKLA Structures &", "3D Structural Modelling"],
+    heading: ["Tekla Structures &", "3D Structural Modelling Services"],
     image: "/images/plant-model.jpg",
     imageAlt: "Tall steel process structure with platforms and piping against a blue sky",
     summary:
@@ -570,9 +570,9 @@ export const services: Service[] = [
     ],
     cta: "Share your existing model or approved structural drawings, required modelling platform and version, reference coordinates and expected outputs to discuss a 3D modelling package.",
     seo: {
-      title: "TEKLA Structures & 3D Structural Modelling Services",
+      title: "Tekla Structures & 3D Structural Modelling",
       description:
-        "TEKLA Structures and structural 3D modelling support, model updates, geometric coordination and agreed digital outputs for energy and industrial projects.",
+        "Tekla structural modelling, plant model updates, coordination views and agreed model exchange outputs for industrial engineering packages.",
       keywords: [
         "Tekla structural modelling",
         "plant structural modelling",
@@ -826,9 +826,9 @@ export const services: Service[] = [
     ],
     cta: "Request a steel detailing proposal. Send approved structural drawings, connection information, project or fabricator standards, approximate tonnage or drawing volume, and the required issue programme.",
     seo: {
-      title: "Structural Steel Detailing & Fabrication Drawing Services",
+      title: "Structural Steel Detailing & Shop Drawings",
       description:
-        "Structural steel detailing for pipe racks, platforms and industrial steelwork, including assembly, part, shop and erection drawings and material schedules.",
+        "Steel assembly, single-part and erection drawings, approved connection detailing and material schedules for fabricators and EPC projects.",
       keywords: [
         "structural steel detailing services",
         "steel detailing outsourcing",
@@ -1053,9 +1053,9 @@ export const services: Service[] = [
     ],
     cta: "Need reinforced concrete details or BBS for foundations, equipment bases or structural members? Send the approved concrete and reinforcement design, project detailing rules and expected deliverables.",
     seo: {
-      title: "RCC & Reinforcement Detailing, Rebar Drawings and BBS",
+      title: "Reinforced Concrete & Rebar Detailing",
       description:
-        "Concrete and reinforcement detailing from approved designs, including foundations, rebar drawings, placing details, bar bending schedules and quantities.",
+        "Equipment foundation details, reinforcement placing drawings, rebar schedules and bar bending schedules from approved concrete design information.",
       keywords: [
         "RCC detailing services",
         "reinforcement detailing",
@@ -1284,9 +1284,9 @@ export const services: Service[] = [
     ],
     cta: "Have an existing pipe rack, platform or equipment-support modification? Send existing drawings, verified site data, approved modification information and the target issue sequence for scope review.",
     seo: {
-      title: "Brownfield Structural Modifications & As-Built Documentation",
+      title: "Brownfield Structural Modifications & As-Builts",
       description:
-        "Brownfield structural drawing and model modifications, steel support changes, reinstatement documentation and as-built updates from verified site records.",
+        "Existing-facility structural drawing revisions, replacement supports, model updates, material changes and as-built records from verified site information.",
       keywords: [
         "brownfield structural modifications",
         "existing structure detailing",
@@ -1550,9 +1550,9 @@ export const services: Service[] = [
     ],
     cta: "Share your drawing or model package, current revision, required material categories and reporting format to request structural MTO, BOM or documentation support.",
     seo: {
-      title: "Structural Material Take-Offs, BOM & Engineering Documentation",
+      title: "Structural MTO, BOM & Engineering Documentation",
       description:
-        "Structural steel MTO, BOM, reinforcement and concrete quantity reports, drawing registers and controlled engineering documentation packages.",
+        "Structural steel material take-offs, bills of materials, quantity reports, drawing registers and controlled revision documentation.",
       keywords: ["steel MTO", "BOM", "model-based quantities", "drawing registers", "material take-off services"],
     },
   },
