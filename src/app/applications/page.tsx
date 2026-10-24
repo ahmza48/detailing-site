@@ -14,7 +14,7 @@ import { tc } from "@/lib/text";
 export const metadata: Metadata = pageMetadata({
   title: "Structures & Applications",
   description:
-    "Find structural drafting, modelling, detailing and MTO services by structure type: pipe racks, platforms, equipment supports, industrial buildings, foundations, brownfield alterations and offshore packages.",
+    "Find structural drafting, modelling, detailing and MTO services by structure type: pipe racks, platforms, equipment and cable tray supports, industrial buildings, foundations, existing plant rehabilitation and offshore steelwork.",
   path: "/applications",
   image: "/images/onshore-pipe-rack.jpg",
 });
@@ -55,6 +55,35 @@ export default function ApplicationsPage() {
             accent="Not Separate Services"
             intro="A pipe rack can need a GA drawing, a 3D model, shop and erection drawings and an MTO. Each of those belongs to one service; the paths below show how they connect, so you can scope exactly what you need."
           />
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {[
+              {
+                title: "Greenfield",
+                text: "Design documentation, structural arrangement and model development, fabrication and construction detail progression, and initial registers and quantities.",
+              },
+              {
+                title: "Brownfield",
+                text: "Existing records and verified geometry, approved alterations, interfaces to retained structures, and revised models and record documentation.",
+              },
+            ].map((stage, i) => (
+              <div
+                key={stage.title}
+                data-reveal
+                style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
+                className="rounded-xl bg-paper p-6"
+              >
+                <h3 className="text-base font-extrabold text-navy-900">{stage.title} Projects</h3>
+                <p className="mt-2 text-sm leading-6 text-ink">{stage.text}</p>
+              </div>
+            ))}
+          </div>
+          <p data-reveal className="mt-4 text-sm leading-6 text-slate">
+            Greenfield and brownfield are lifecycle conditions, not separate services.{" "}
+            <Link href="/services/brownfield-structural-modifications" className="font-semibold text-navy-900 underline-offset-4 hover:underline">
+              Brownfield Structural Modifications & As-Built Documentation
+            </Link>{" "}
+            leads existing-plant packages.
+          </p>
         </div>
       </section>
 
@@ -73,6 +102,9 @@ export default function ApplicationsPage() {
               <h2 id={`${application.id}-title`} data-reveal className="display-lg text-balance text-navy-900">
                 {tc(application.title)}
               </h2>
+              <p data-reveal className="mt-5 text-base leading-7 text-ink">
+                {application.description}
+              </p>
               <ul data-reveal className="mt-5 flex flex-wrap gap-2.5">
                 {application.examples.map((example) => (
                   <li key={example} className="rounded-full border border-line bg-white px-4 py-2 text-sm font-semibold text-navy-900">

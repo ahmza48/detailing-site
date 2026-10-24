@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Building2, Check, Factory, FileLock2, HardHat, Ruler } from "lucide-react";
+import { ArrowRight, Building2, Check, Factory, FileLock2, HardHat, Plus, Ruler } from "lucide-react";
 import { ArrowLink, ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { Hero } from "@/components/Hero";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { SectionHeading } from "@/components/SectionHeading";
-import { engagementSteps } from "@/lib/delivery";
 import { pageMetadata } from "@/lib/seo";
-import { servicePath, type ServiceSlug } from "@/lib/services";
+import { serviceBySlug, servicePath, type ServiceSlug } from "@/lib/services";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
@@ -22,14 +21,14 @@ export const metadata: Metadata = pageMetadata({
 
 const quoteHref = "/contact?service=engineering-outsourcing";
 
-/** Typical subcontract packages (spec 4, outsourcing item 3). */
+/** Services available for outsourcing (spec v2 §7.1): short links, not duplicated service copy. */
 const packages: { service: ServiceSlug; title: string; text: string }[] = [
-  { service: "civil-structural-drafting", title: "Civil and structural drawing packages", text: "GA, plans, sections and foundation layouts from your approved design." },
-  { service: "plant-structural-3d-modelling", title: "TEKLA and structural model packages", text: "Model development or updates to your modelling rules, without drawings unless scoped." },
-  { service: "steel-detailing-fabrication", title: "Steel detailing packages", text: "Assembly, single-part and erection drawings with lists for fabrication." },
-  { service: "rcc-reinforcement-detailing", title: "RCC and reinforcement packages", text: "Concrete details, rebar placing drawings and bar bending schedules." },
-  { service: "brownfield-structural-modifications", title: "Brownfield revision packages", text: "Modification drawings, model updates and as-builts for existing plant." },
-  { service: "material-takeoffs-documentation", title: "MTO and documentation backlogs", text: "Quantities, registers, redline incorporation and controlled re-issue." },
+  { service: "civil-structural-drafting", title: "CAD drafting", text: "Structural arrangements, foundation plans and drawing updates." },
+  { service: "plant-structural-3d-modelling", title: "3D structural model production", text: "Tekla steel models, supported plant structure updates and model coordination." },
+  { service: "steel-detailing-fabrication", title: "Steel detailing", text: "Assembly, part, shop and erection documentation and agreed fabrication reports." },
+  { service: "rcc-reinforcement-detailing", title: "Concrete and rebar detailing", text: "Concrete details, reinforcement sheets and bar bending schedules." },
+  { service: "brownfield-structural-modifications", title: "Brownfield revisions", text: "Modifications to existing drawings, replacement steel and record updates." },
+  { service: "material-takeoffs-documentation", title: "MTO and documentation", text: "Material schedules, drawing registers and review-comment processing." },
 ];
 
 const audiences = [
@@ -48,10 +47,57 @@ const agreedUpFront = [
   { title: "Changes", text: "How change instructions are issued, assessed and incorporated." },
 ];
 
+/** Engagement arrangements (spec v2 §7.2). Offered subject to the expertise available for each request. */
 const engagementOptions = [
-  { title: "Fixed-scope package", text: "A defined set of deliverables against agreed inputs." },
-  { title: "Deliverable or milestone-based", text: "Packages issued and accepted in agreed stages." },
-  { title: "Recurring work packages", text: "Repeat packages for an ongoing programme or backlog." },
+  {
+    title: "Fixed-scope work package",
+    scope: "Defined models, drawings, quantities and review deliverables.",
+    defined: "Inputs, inclusions and exclusions, revision allowances, milestones and acceptance criteria.",
+  },
+  {
+    title: "Drawing or revision backlog",
+    scope: "Batch drafting, redline implementation and drawing conversion.",
+    defined: "Number of sheets, complexity, source condition, revision tags and expected throughput.",
+  },
+  {
+    title: "Milestone-based support",
+    scope: "A multi-stage detailing or model package.",
+    defined: "Milestone submissions, review hold points, the technical query process and authorised scope changes.",
+  },
+  {
+    title: "Resource-based support, where resourced",
+    scope: "Recurring drafting or modelling support.",
+    defined: "Competence, software and licence arrangements, availability, hours, confidentiality and supervision.",
+  },
+];
+
+/** From RFQ to an agreed work package (spec v2 §7.3). */
+const outsourcingSteps = [
+  { title: "Share the scope", text: "Project, deliverables, input maturity, software and target dates." },
+  { title: "Technical clarification", text: "Drawing and model types, formats, specifications, interfaces and the design engineer." },
+  { title: "Statement of work", text: "Inclusions, exclusions, review cycles, checking, pricing basis and change handling." },
+  { title: "Package production", text: "Produced to agreed conventions; queries raised for unresolved design data." },
+  { title: "Review and submission", text: "Production checks, revisions issued and authorised comments incorporated." },
+  { title: "Close-out", text: "Final register, revisioned files, quantity reports and models where included." },
+];
+
+const faqs = [
+  {
+    q: "Do we have to outsource a whole project?",
+    a: "No. Depending on your requirements and resource availability, the scope may be a defined group of drawings, a model or a complete detailing package.",
+  },
+  {
+    q: "Can your team follow our title blocks and numbering?",
+    a: "Client templates and procedures are assessed during scope definition and incorporated when compatible and agreed.",
+  },
+  {
+    q: "Who approves engineering design?",
+    a: "The responsible engineer or design authority defined by the project contract. Drafting and detailing alone do not provide engineering sign-off.",
+  },
+  {
+    q: "What if design information changes?",
+    a: "Changes are evaluated against the agreed scope and revision allowances before they are incorporated and resubmitted.",
+  },
 ];
 
 export default function OutsourcingPage() {
@@ -61,7 +107,7 @@ export default function OutsourcingPage() {
         eyebrow="Engineering Outsourcing & Subcontract Support"
         title="Engineering Drafting, Modelling"
         accent="& Steel Detailing Outsourcing"
-        intro="Subcontract a defined structural drawing, modelling, detailing or documentation package. You keep design authority; we deliver the production work to your standards and review cycle."
+        intro="Additional technical capacity for a defined drawing, model or detailing package, without expanding your permanent team. Assignments are accepted subject to the expertise available, your project requirements and agreed responsibilities; you keep design authority."
         image="/images/capabilities-overview.jpg"
         imageAlt="Structural steel framing seen from below"
         crumbs={[
@@ -69,7 +115,7 @@ export default function OutsourcingPage() {
           { name: "Engineering Outsourcing & Subcontract Support", path: "/engineering-outsourcing" },
         ]}
       >
-        <ButtonLink href={quoteHref}>Request an Outsourcing Quote</ButtonLink>
+        <ButtonLink href={quoteHref}>Request an Outsourcing Proposal</ButtonLink>
         <ButtonLink href="/services" variant="light">
           View Services
         </ButtonLink>
@@ -81,7 +127,7 @@ export default function OutsourcingPage() {
           <SectionHeading
             slab
             title="What We Can Take Off Your Team"
-            intro="Defined technical packages from any of the six service lines. You subcontract the drawing or modelling work, not the engineering design."
+            intro="Defined technical packages from any of the six service areas: a clearly specified deliverable package, a backlog of drawing revisions or a negotiated recurring arrangement. You subcontract the drawing or modelling work, not the engineering design."
           />
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {packages.map((pkg, i) => (
@@ -95,9 +141,9 @@ export default function OutsourcingPage() {
                   </span>
                   <span className="mt-5 text-lg leading-snug font-extrabold text-navy-900 group-hover:text-energy-ink">{tc(pkg.title)}</span>
                   <span className="mt-2 flex-1 text-[0.9375rem] leading-7 text-ink">{pkg.text}</span>
-                  <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-navy-900">
-                    <ArrowRight aria-hidden className="size-4 text-energy-deep transition-transform group-hover:translate-x-1" />
-                    Service details
+                  <span className="mt-4 inline-flex items-start gap-2 text-sm font-bold text-navy-900">
+                    <ArrowRight aria-hidden className="mt-0.5 size-4 shrink-0 text-energy-deep transition-transform group-hover:translate-x-1" />
+                    {serviceBySlug(pkg.service)?.title}
                   </span>
                 </Link>
               </li>
@@ -162,13 +208,16 @@ export default function OutsourcingPage() {
               {engagementOptions.map((option) => (
                 <li key={option.title} className="border-t border-line py-4">
                   <p className="font-bold text-navy-900">{tc(option.title)}</p>
-                  <p className="mt-1 text-sm leading-6 text-ink">{option.text}</p>
+                  <p className="mt-1 text-sm leading-6 text-ink">{option.scope}</p>
+                  <p className="mt-1 text-sm leading-6 text-slate">
+                    <span className="font-semibold text-navy-900">Defined up front:</span> {option.defined}
+                  </p>
                 </li>
               ))}
             </ul>
             <p className="mt-4 text-sm leading-6 text-slate">
-              The engagement model, schedule and price are agreed for each package in the written proposal. Capacity is
-              confirmed per request; no fixed turnaround is assumed.
+              Not every arrangement suits every request. The engagement model, schedule and price are agreed for each
+              package in the written proposal; capacity is confirmed per request and no fixed turnaround is assumed.
             </p>
           </div>
           <div data-reveal className="rounded-xl bg-navy-800 p-7 text-mist sm:p-9">
@@ -181,15 +230,17 @@ export default function OutsourcingPage() {
               </li>
               <li className="flex gap-3">
                 <Check aria-hidden className="mt-1.5 size-4 shrink-0 text-energy" />
-                A non-disclosure agreement can be put in place before project files are shared.
+                Drawings, models and data are shared for technical review and quotation only through channels and
+                permissions agreed with you.
               </li>
               <li className="flex gap-3">
                 <Check aria-hidden className="mt-1.5 size-4 shrink-0 text-energy" />
-                Project files are exchanged through your document system or a transfer method agreed with you.
+                Confidentiality agreements and controlled file transfer can be discussed before sensitive work packages
+                are received.
               </li>
               <li className="flex gap-3">
                 <Check aria-hidden className="mt-1.5 size-4 shrink-0 text-energy" />
-                Project data is used only for your package; intellectual property terms follow the agreed contract.
+                Client drawings, models and project details are not published without authorisation.
               </li>
             </ul>
           </div>
@@ -199,33 +250,68 @@ export default function OutsourcingPage() {
       {/* Workflow */}
       <section className="bg-paper">
         <div className="container-site section-y">
-          <SectionHeading centered title="From Enquiry to Handover" intro="How an outsourced package proceeds." />
+          <SectionHeading
+            centered
+            title="From Your RFQ to an Agreed Work Package"
+            intro="How an outsourced package proceeds, from the first scope summary to close-out."
+          />
           <div className="mt-14">
-            <ProcessSteps steps={engagementSteps} />
+            <ProcessSteps steps={outsourcingSteps} />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQs */}
+      <section className="bg-white">
+        <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <SectionHeading slab title="Common Questions" />
+            <p data-reveal className="mt-5 text-base leading-7 text-ink">
+              What buyers usually ask before subcontracting a drawing, model or detailing package.
+            </p>
+          </div>
+          <div className="space-y-3 lg:col-span-7">
+            {faqs.map((faq, i) => (
+              <details
+                key={faq.q}
+                data-reveal
+                style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
+                open={i === 0}
+                className="group/faq rounded-xl bg-paper"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-xl px-6 py-5 text-base font-bold text-navy-900 [&::-webkit-details-marker]:hidden">
+                  {faq.q}
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white text-energy-deep transition-transform duration-300 group-open/faq:rotate-45">
+                    <Plus aria-hidden className="size-4" />
+                  </span>
+                </summary>
+                <p className="px-6 pb-6 text-[0.9375rem] leading-7 text-ink">{faq.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Proof */}
-      <section className="bg-white">
+      <section className="bg-paper">
         <div className="container-site section-y grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-6">
             <SectionHeading slab title="Before You Commission" />
             <p data-reveal className="mt-5 text-base leading-7 text-ink">
-              Review the professional experience behind the team, the standards framework we work within, and how every
-              package is checked and handed over.
+              Review the professional experience behind the team, how project standards are applied, and how packages
+              are checked and handed over.
             </p>
           </div>
-          <ul className="grid gap-4 sm:grid-cols-3 lg:col-span-6">
+          <ul className="grid gap-4 self-start sm:grid-cols-3 lg:col-span-6">
             {[
               { href: "/project-experience", label: "Professional experience" },
-              { href: "/capabilities/codes-standards", label: "Codes & standards" },
+              { href: "/capabilities/codes-standards", label: "Project standards" },
               { href: "/quality-delivery", label: "Quality & delivery" },
             ].map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="lift group flex h-full flex-col justify-between rounded-xl border border-line p-5 transition-colors hover:border-energy-deep"
+                  className="lift group flex h-full flex-col justify-between rounded-xl border border-line bg-white p-5 transition-colors hover:border-energy-deep"
                 >
                   <span className="text-base font-extrabold text-navy-900 group-hover:text-energy-ink">{link.label}</span>
                   <ArrowRight aria-hidden className="mt-4 size-4 text-energy-deep transition-transform group-hover:translate-x-1" />
@@ -234,7 +320,7 @@ export default function OutsourcingPage() {
             ))}
           </ul>
           <div className="lg:col-span-12">
-            <ArrowLink href={quoteHref}>Request an outsourcing quote</ArrowLink>
+            <ArrowLink href={quoteHref}>Request an outsourcing proposal</ArrowLink>
           </div>
         </div>
       </section>

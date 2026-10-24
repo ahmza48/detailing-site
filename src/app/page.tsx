@@ -13,13 +13,14 @@ import { FeaturedProject, ProjectCard } from "@/components/ProjectCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceCard } from "@/components/ServicePreview";
 import { SoftwareCapabilities } from "@/components/SoftwareCapabilities";
+import { applications } from "@/lib/applications";
 import { engagementSteps } from "@/lib/delivery";
 import { industries, industryPath } from "@/lib/industries";
-import { featuredProjectIds, projects } from "@/lib/projects";
+import { featuredProjectIds, projectById, projectPath, projects } from "@/lib/projects";
 import { pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath, services, type ServiceSlug } from "@/lib/services";
 import { softwareQualifier } from "@/lib/software";
-import { associatedOrganizations, site, trustMetrics } from "@/lib/site";
+import { referencedAssetOwners, site, standardsStatement, trustMetrics } from "@/lib/site";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = {
@@ -39,32 +40,55 @@ export const metadata: Metadata = {
   title: { absolute: `${site.name} | Structural Detailing & Engineering Support for Energy Projects` },
 };
 
-/** Buyer-defined scenarios (spec 7.1 item 4). Descriptive, not claims of delivered projects. */
-const workPackages: { title: string; provide: string; receive: string; services: ServiceSlug[] }[] = [
+/** Buyer-defined package examples (spec v2 §5.4). Descriptive scope examples, not claims of delivered projects. */
+const workPackages: { title: string; provide: string; receive: string; clarify: string; services: ServiceSlug[] }[] = [
   {
-    title: "Pipe rack steel fabrication package",
-    provide: "Approved rack GA and connection design, steel and bolting specifications.",
-    receive: "Detailing model, assembly, single-part and erection drawings, bolt and material lists.",
-    services: ["steel-detailing-fabrication", "material-takeoffs-documentation"],
+    title: "Pipe rack steel detailing package",
+    provide:
+      "Approved structural GA and design, section and connection requirements, steel grades, site and fabricator requirements, interface drawings and accepted drawing standards.",
+    receive:
+      "Detailing model, member and connection details, assembly and single-part shop drawings, erection GA, member and bolt schedules and MTO as agreed.",
+    clarify: "Missing connections, interfaces to pipe supports and foundations, the marking method and drawing review cycles.",
+    services: ["steel-detailing-fabrication", "plant-structural-3d-modelling", "material-takeoffs-documentation"],
   },
   {
-    title: "TEKLA modelling assignment",
-    provide: "Approved design drawings, model origin, version and modelling rules.",
-    receive: "Native TEKLA model, agreed exchange files and model reports. Drawings only if scoped.",
-    services: ["plant-structural-3d-modelling"],
+    title: "Tekla structural model package",
+    provide:
+      "Design plans and sections, model origin, levels and coordinates, interface reference files, modelling rules, level of detail, Tekla version and handover format.",
+    receive: "Native model, model snapshots, coordinated structural components, agreed exchange files and material reports.",
+    clarify: "Fabrication drawings are additional unless they are included in the model scope.",
+    services: ["plant-structural-3d-modelling", "steel-detailing-fabrication"],
   },
   {
-    title: "Industrial RCC and foundation drawings",
-    provide: "Concrete GA, reinforcement design requirements and vendor foundation data.",
-    receive: "Foundation and RCC details, reinforcement placing drawings and bar bending schedules.",
-    services: ["civil-structural-drafting", "rcc-reinforcement-detailing"],
+    title: "Industrial concrete foundation and rebar package",
+    provide:
+      "Approved foundation drawings or design geometry, vendor equipment and anchor layouts, reinforcing instructions, material designations and project detailing and scheduling standards.",
+    receive: "Concrete arrangements, equipment-foundation details, rebar placing sheets, schedules and BBS as scoped.",
+    clarify: "Design responsibility for reinforcement, embed and anchor information, laps and the scheduling convention.",
+    services: ["civil-structural-drafting", "rcc-reinforcement-detailing", "material-takeoffs-documentation"],
   },
   {
-    title: "Existing plant modification package",
-    provide: "Existing records, survey information, mark-ups and the approved modification design.",
-    receive: "Modification drawings with existing / removed / new legends, model updates and as-builts.",
-    services: ["brownfield-structural-modifications"],
+    title: "Brownfield structural modification package",
+    provide:
+      "Existing plant drawings and models, verified survey and site data, the approved change design, site constraints and updated vendor and piping interfaces.",
+    receive:
+      "Existing / removal / new work drawings, replacement support details, revision-marked models, updated MTO and verified final record drawings where contracted.",
+    clarify: "Unresolved site discrepancies and who owns field validation.",
+    services: [
+      "brownfield-structural-modifications",
+      "civil-structural-drafting",
+      "plant-structural-3d-modelling",
+      "material-takeoffs-documentation",
+    ],
   },
+];
+
+/** When buyers need extra delivery capacity (spec v2 §5.5). */
+const capacityNeeds = [
+  { q: "Drawing backlog or peak workload?", a: "Assign a defined CAD package or revision backlog against your standards and schedule." },
+  { q: "Fabrication package required?", a: "Commission assembly, single-part and erection documentation from agreed detailing inputs." },
+  { q: "Existing plant changes?", a: "Controlled brownfield drawing and model updates from verified records and approved changes." },
+  { q: "Mixed technical outputs?", a: "Drawings, model updates and material schedules under one statement of work and issue register." },
 ];
 
 export default function HomePage() {
@@ -80,7 +104,7 @@ export default function HomePage() {
         tall
         title="Structural Detailing & Engineering Support"
         accent="for Energy and Industrial Projects"
-        intro="Civil and structural CAD drafting, TEKLA Structures modelling, steel fabrication detailing, RCC reinforcement documentation and brownfield modification packages for EPC contractors, engineering consultancies and steel fabricators."
+        intro="We support EPC contractors, engineering consultancies and steel fabricators with civil and structural CAD drafting, Tekla Structures and 3D structural modelling, shop and erection drawings, reinforced concrete detailing, material take-offs and brownfield modification documentation, organised around your approved engineering inputs, project specifications and agreed deliverables."
         image="/images/hero-offshore.jpg"
         imageAlt="Offshore jack-up rig beside a crane vessel at sunset"
       >
@@ -103,7 +127,7 @@ export default function HomePage() {
           <SectionHeading
             centered
             title="Six Technical Services"
-            intro="Engineering production for energy and industrial facilities, from arrangement drawings and models to fabrication documentation. Each service can be engaged on its own, working from your approved design information."
+            intro="From a defined drawing package to an outsourced detailing assignment. Working to your project requirements means confirming applicable standards, software versions, drawing conventions, discipline interfaces, checking responsibilities and revision procedures before the package proceeds."
           />
           <ul className="mt-14 grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service, index) => (
@@ -124,8 +148,8 @@ export default function HomePage() {
         <div className="container-site section-y">
           <SectionHeading
             slab
-            title="Typical Work Packages"
-            intro="How clients usually commission us: what you provide, and what you receive."
+            title="Engineering Packages We Can Support"
+            intro="Typical packages and how they are defined: what you provide, what you receive and what is clarified before work starts. These are scope examples, not a record of delivered projects."
           />
           <ul className="mt-12 grid gap-5 md:grid-cols-2">
             {workPackages.map((pkg, i) => (
@@ -138,12 +162,16 @@ export default function HomePage() {
                 <h3 className="text-lg font-extrabold text-navy-900">{tc(pkg.title)}</h3>
                 <dl className="mt-4 flex-1 space-y-3 text-[0.9375rem] leading-6">
                   <div>
-                    <dt className="text-[0.6875rem] font-bold tracking-[0.12em] text-teal-700 uppercase">You provide</dt>
+                    <dt className="text-[0.6875rem] font-bold tracking-[0.12em] text-teal-700 uppercase">Client inputs</dt>
                     <dd className="mt-1 text-ink">{pkg.provide}</dd>
                   </div>
                   <div>
-                    <dt className="text-[0.6875rem] font-bold tracking-[0.12em] text-teal-700 uppercase">You receive</dt>
+                    <dt className="text-[0.6875rem] font-bold tracking-[0.12em] text-teal-700 uppercase">Potential outputs</dt>
                     <dd className="mt-1 text-ink">{pkg.receive}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[0.6875rem] font-bold tracking-[0.12em] text-teal-700 uppercase">Clarified up front</dt>
+                    <dd className="mt-1 text-ink">{pkg.clarify}</dd>
                   </div>
                 </dl>
                 <ul className="mt-5 flex flex-wrap gap-2 border-t border-line pt-4">
@@ -171,7 +199,11 @@ export default function HomePage() {
       {/* 5. Industries & applications */}
       <section className="bg-paper">
         <div className="container-site section-y">
-          <SectionHeading centered title="Industries & Applications" intro="Onshore and offshore, new build and existing plant." />
+          <SectionHeading
+            centered
+            title="Industries & Project Environments"
+            intro="Onshore and offshore, new build and existing plant. Sector pages describe facility constraints; the work itself is defined by the service."
+          />
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((industry, index) => (
               <li key={industry.slug} data-reveal style={{ "--reveal-delay": `${(index % 3) * 60}ms` } as React.CSSProperties}>
@@ -195,11 +227,27 @@ export default function HomePage() {
               </li>
             ))}
           </ul>
+          <div data-reveal className="mt-12 text-center">
+            <h3 className="text-lg font-extrabold text-navy-900">Or Find by Structure Type</h3>
+            <ul className="mt-5 flex flex-wrap justify-center gap-2.5">
+              {applications.map((application) => (
+                <li key={application.id}>
+                  <Link
+                    href={`/applications#${application.id}`}
+                    className="inline-flex items-center gap-2.5 rounded-lg border border-line bg-white px-4 py-2.5 text-sm font-semibold text-navy-900 transition-colors hover:border-energy-deep hover:text-energy-ink"
+                  >
+                    <span aria-hidden className="size-1.5 rounded-full bg-energy-deep" />
+                    {tc(application.title)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div data-reveal className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
             <ButtonLink href="/industries" variant="light">
               All Industries
             </ButtonLink>
-            <ArrowLink href="/applications">Find by structure type</ArrowLink>
+            <ArrowLink href="/applications">Structures & Applications</ArrowLink>
           </div>
         </div>
       </section>
@@ -240,7 +288,7 @@ export default function HomePage() {
       <section className="bg-navy-800 text-mist">
         <div className="container-site section-y">
           <div className="flex flex-wrap items-end justify-between gap-8">
-            <SectionHeading slab onDark title="Engineering Capabilities" intro={softwareQualifier} />
+            <SectionHeading slab onDark title="Standards, Software & Delivery Control" intro={standardsStatement} />
             <div className="flex flex-wrap gap-3">
               <ButtonLink href="/capabilities/codes-standards" variant="light">
                 Codes & Standards
@@ -253,6 +301,9 @@ export default function HomePage() {
           <div className="mt-12">
             <SoftwareCapabilities detailed={false} />
           </div>
+          <p data-reveal className="mt-8 max-w-3xl text-sm leading-6 text-haze">
+            {softwareQualifier}
+          </p>
         </div>
       </section>
 
@@ -291,18 +342,25 @@ export default function HomePage() {
         <div className="container-site section-y">
           <SectionHeading
             centered
-            title="Project Exposure Across the Energy Sector"
-            intro="Our senior team's experience includes project involvement associated with leading energy organizations across the Gulf and international markets."
+            title="Asset Owners Referenced in Prior Personnel Projects"
+            intro="Named only where the owner is recorded against a project in our senior team's prior experience, and shown with that project. These organisations are not Hormuz-Energy clients and do not endorse the company."
           />
-          <ul data-reveal className="mx-auto mt-12 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
-            {[...associatedOrganizations, "And other energy organizations"].map((name, index, all) => (
-              <li
-                key={name}
-                className={`flex min-h-20 items-center justify-center rounded-xl bg-white px-4 py-4 text-center shadow-[0_4px_16px_rgb(0_36_56/0.08)] ${
-                  index === all.length - 1 ? "text-sm font-normal text-slate" : "text-base font-extrabold text-navy-900"
-                }`}
-              >
-                {name}
+          <ul data-reveal className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {referencedAssetOwners.map((owner) => (
+              <li key={owner.name} className="rounded-xl bg-white px-5 py-5 text-center shadow-[0_4px_16px_rgb(0_36_56/0.08)]">
+                <p className="text-base font-extrabold text-navy-900">{owner.name}</p>
+                <ul className="mt-2 space-y-1 text-sm leading-5">
+                  {owner.projectIds.map((id) => {
+                    const project = projectById(id);
+                    return project ? (
+                      <li key={id}>
+                        <Link href={projectPath(id)} className="text-ink underline-offset-4 hover:text-energy-ink hover:underline">
+                          {project.name}
+                        </Link>
+                      </li>
+                    ) : null;
+                  })}
+                </ul>
               </li>
             ))}
           </ul>
@@ -316,14 +374,14 @@ export default function HomePage() {
       {/* 9. Engineering outsourcing */}
       <ImageBand
         title="Engineering Outsourcing & Subcontract Support"
-        accent="for EPCs, Consultancies & Fabricators"
+        accent="For Extra Delivery Capacity"
         image="/images/onshore-pipe-rack.jpg"
         imageAlt="Steel pipe rack and process structures at an onshore plant"
         actions={
           <>
             <ButtonLink href="/engineering-outsourcing">How Outsourcing Works</ButtonLink>
             <ArrowLink href="/contact?service=engineering-outsourcing" onDark>
-              Request an outsourcing quote
+              Discuss your engineering package
             </ArrowLink>
           </>
         }
@@ -332,16 +390,17 @@ export default function HomePage() {
           Subcontract a defined drawing, modelling, detailing or documentation package. Your engineers keep design
           authority; we deliver the production work to your standards, formats and review cycle.
         </p>
-        <ul className="grid gap-x-8 gap-y-2 sm:grid-cols-2">
-          {["Defined scope and deliverables", "Inputs and responsibilities agreed", "Your review cycle and formats", "NDA available before file exchange"].map(
-            (item) => (
-              <li key={item} className="flex items-center gap-3 text-[0.9375rem] font-medium">
-                <Check aria-hidden className="size-4 shrink-0 text-energy" />
-                {tc(item)}
-              </li>
-            ),
-          )}
-        </ul>
+        <dl className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+          {capacityNeeds.map((need) => (
+            <div key={need.q}>
+              <dt className="flex items-start gap-3 font-bold text-white">
+                <Check aria-hidden className="mt-1 size-4 shrink-0 text-energy" />
+                {need.q}
+              </dt>
+              <dd className="mt-1 pl-7 text-sm leading-6">{need.a}</dd>
+            </div>
+          ))}
+        </dl>
       </ImageBand>
 
       {/* 10. How it works */}

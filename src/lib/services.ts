@@ -128,7 +128,7 @@ export const services: Service[] = [
     image: "/images/drawings-qaqc.jpg",
     imageAlt: "Engineering drawings on a desk with drafting pencils and a scale rule",
     summary:
-      "General arrangements, framing layouts, structural plans, foundations, sections and coordinated drawing revisions based on approved engineering inputs.",
+      "Prepare and update structural general arrangements, framing plans, elevations, sections, foundation and equipment-base drawings from approved engineering inputs. Dimensions, reference levels, interfaces and revisions are coordinated within your drawing standards.",
     intro: [
       "We prepare civil and structural CAD documentation for EPC contractors, structural engineering consultancies and industrial project teams, developed from approved design information for energy and industrial facilities.",
       "Drawing packages may cover structural general arrangements, framing plans, sections and elevations, foundation and equipment-base drawings, and the interface details needed for coordination, technical review and downstream construction documentation.",
@@ -354,7 +354,7 @@ export const services: Service[] = [
     image: "/images/plant-model.jpg",
     imageAlt: "Tall steel process structure with platforms and piping against a blue sky",
     summary:
-      "TEKLA Structures modelling, plant structural modelling workflows, model updates, geometric coordination and agreed model exchanges.",
+      "Tekla steel models and suitable plant structural model updates developed from agreed design information in supported software environments, with coordination views, exchange files and documentation outputs where included in scope.",
     intro: [
       "We support structural steel and industrial project teams with 3D model development, updates, coordination and model-based documentation.",
       "Work may involve a Tekla Structures model developed from approved engineering drawings, a modification to an existing steel model, or structural modelling support within a compatible plant design environment.",
@@ -596,7 +596,7 @@ export const services: Service[] = [
     image: "/images/tekla-model.jpg",
     imageAlt: "Bolted structural steel connection where four members meet",
     summary:
-      "Shop and assembly drawings, single-part details, erection documentation, specified connections and material schedules for steel structures.",
+      "Engineer-approved structural information translated into steel detailing models, assembly and single-part shop drawings, specified connection details, erection plans and fabrication schedules for pipe racks, platforms and industrial steelwork.",
     intro: [
       "We provide structural steel detailing support for industrial facilities, pipe racks, pipe bridges, access platforms, equipment supports and associated steelwork.",
       "The service translates approved structural design information, connection requirements and fabricator practices into a coordinated detailing model, fabrication documents, erection information and material schedules for project review and workshop use.",
@@ -855,7 +855,7 @@ export const services: Service[] = [
     image: "/images/rcc-detailing.jpg",
     imageAlt: "Reinforcement cages being fixed for a concrete structure",
     summary:
-      "Concrete structure drawings, equipment foundations, rebar placing details, reinforcement schedules and bar bending schedules.",
+      "Concrete structural details, foundation and equipment-base drawings, reinforcing-bar placing details and bar bending schedules (BBS), based on approved concrete design and project detailing requirements.",
     intro: [
       "We prepare reinforced concrete (RCC) and rebar detailing documentation from approved structural design information for energy and industrial project packages.",
       "Work can include foundation and equipment-base details, beams, columns, slabs and pedestals, reinforcement layouts and placing drawings, embedded-item interfaces and bar bending schedules.",
@@ -1079,7 +1079,7 @@ export const services: Service[] = [
     image: "/images/brownfield-structure.jpg",
     imageAlt: "Existing refinery units with columns, piping and steel structures",
     summary:
-      "Existing-structure modifications, plant support changes, replacement steelwork, updated models and as-built documentation from verified records.",
+      "Drawings and model updates for existing facilities, including replacement steelwork, equipment-support changes, structural interfaces and existing, removed and new work. Records are updated from authorised, verified field information.",
     intro: [
       "Existing onshore and offshore facilities often need structural changes while relying on drawing records, survey information and models from earlier project stages.",
       "We support agreed brownfield modification work by preparing existing-condition, removal and proposed-work drawings, replacement steel details, structural model updates, material schedules and final record-drawing updates based on approved engineering inputs.",
@@ -1310,7 +1310,7 @@ export const services: Service[] = [
     image: "/images/services-overview.jpg",
     imageAlt: "Multi-level steel process structure with large-bore piping",
     summary:
-      "Steel and concrete quantities, bills of materials, drawing registers, review-comment incorporation and revision-controlled handover packages.",
+      "Structural steel quantities, bills of materials, member and bolt schedules, reinforcement quantities and revision-controlled drawing records, reconciled with the agreed source revision and measurement basis.",
     intro: [
       "We prepare structural quantity information and supporting drawing documentation for steel, concrete and reinforcement packages.",
       "Depending on the agreed source and measurement basis, assignments may include steel material take-offs, member, profile and plate lists, bolt schedules, bills of materials, reinforcement schedules and model-derived quantity reports. We also support drawing registers, review-comment incorporation, revision records and native and PDF package preparation.",

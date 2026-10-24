@@ -3,7 +3,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { pageMetadata } from "@/lib/seo";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Plus } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
 import { site, telHref, whatsappHref } from "@/lib/site";
 import { tc } from "@/lib/text";
@@ -25,6 +25,26 @@ const helpful = [
   "Target schedule and key issue dates",
 ];
 
+/** Inline FAQ (spec v2 §13.3). */
+const faqs = [
+  {
+    q: "What should I send first?",
+    a: "The project type, the services you need, a target issue date and a short description. Drawing and model source information is shared once an appropriate transfer method is agreed.",
+  },
+  {
+    q: "Can you work with our standards?",
+    a: "The applicable standards, owner specifications, drawing conventions and formats are assessed in the technical review.",
+  },
+  {
+    q: "Can you provide a full subcontract detailing package?",
+    a: "A defined package may combine modelling, steel shop drawings, quantities and document issue. The included outputs are agreed in the statement of work.",
+  },
+  {
+    q: "Do you perform design sign-off?",
+    a: "Not as part of CAD, modelling or drawing production. Professional sign-off has to be separately established if it is needed.",
+  },
+];
+
 export default function ContactPage() {
   return (
     <>
@@ -32,7 +52,7 @@ export default function ContactPage() {
         eyebrow="Request a Quote"
         title="Request an Engineering"
         accent="Services Quote"
-        intro="Send the scope of work, the design inputs you have and your target schedule. We will review it and respond with questions or a written proposal."
+        intro="Share the work package your team needs delivered: a structural GA set, a Tekla detailing model, shop drawings, reinforcement documentation, an existing-plant modification or a material take-off. We review the requirements and current resources before confirming feasibility, clarifications and a quotation approach."
         image="/images/contact-overview.jpg"
         imageAlt="Process towers and a crane under an evening sky"
         crumbs={[{ name: "Request a Quote", path: "/contact" }]}
@@ -131,10 +151,42 @@ export default function ContactPage() {
             <SectionHeading
               slab
               title="Quote Request"
-              intro="A short scope summary is enough to start. Confidential drawings and models are exchanged after first contact, through your document system or a transfer method agreed with you, and under an NDA if you request one."
+              intro="A short scope summary is enough to start. Confidential drawings and models are exchanged after first contact, through your document system or a transfer method agreed with you; confidentiality arrangements can be discussed first if you ask."
               className="mb-10"
             />
             <ContactForm />
+          </div>
+        </div>
+      </section>
+
+      {/* Inline FAQ */}
+      <section className="bg-paper">
+        <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <SectionHeading slab title="Before You Send" />
+            <p data-reveal className="mt-5 text-base leading-7 text-ink">
+              Quick answers to the questions most enquiries start with. No fixed turnaround is promised; we respond
+              once the request has been reviewed.
+            </p>
+          </div>
+          <div className="space-y-3 lg:col-span-7">
+            {faqs.map((faq, i) => (
+              <details
+                key={faq.q}
+                data-reveal
+                style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
+                open={i === 0}
+                className="group/faq rounded-xl bg-white shadow-[0_4px_16px_rgb(0_36_56/0.06)]"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-xl px-6 py-5 text-base font-bold text-navy-900 [&::-webkit-details-marker]:hidden">
+                  {faq.q}
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-paper text-energy-deep transition-transform duration-300 group-open/faq:rotate-45">
+                    <Plus aria-hidden className="size-4" />
+                  </span>
+                </summary>
+                <p className="px-6 pb-6 text-[0.9375rem] leading-7 text-ink">{faq.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>

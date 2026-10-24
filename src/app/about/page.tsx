@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Globe2, Layers, Target, UserCheck } from "lucide-react";
+import { ArrowRight, Building2, Factory, HardHat, Ruler } from "lucide-react";
 import { ArrowLink, ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { Disclaimer } from "@/components/Disclaimer";
@@ -10,7 +10,7 @@ import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SoftwareCapabilities } from "@/components/SoftwareCapabilities";
 import { softwareQualifier } from "@/lib/software";
-import { industries, industryPath } from "@/lib/industries";
+import { servicePath, services } from "@/lib/services";
 import { pageMetadata } from "@/lib/seo";
 import { priorEnvironments } from "@/lib/site";
 import { tc } from "@/lib/text";
@@ -18,16 +18,17 @@ import { tc } from "@/lib/text";
 export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
-    "A specialist civil and structural design, detailing and modelling team for the energy sector, led by senior professionals with decades of EPC and consultancy project experience in the Gulf and Pakistan.",
+    "Hormuz-Energy's specialist civil and structural production focus, the professional background of its senior team, and its approach to engineering work packages.",
   path: "/about",
   image: "/images/about-experience.jpg",
 });
 
+/** Who we support (spec v2 §12.1): buyers, not industries. */
 const pillars = [
-  { icon: Target, title: "Energy-sector focus", text: "Civil and structural production for oil & gas, refining, gas processing and industrial facilities." },
-  { icon: UserCheck, title: "Senior-led delivery", text: "Senior professionals with more than 30 years of individual project experience." },
-  { icon: Layers, title: "Onshore and offshore", text: "Greenfield developments and brownfield modifications alike." },
-  { icon: Globe2, title: "Flexible remote model", text: "Capacity that scales with your schedule and review cycles." },
+  { icon: Building2, title: "EPC contractors", text: "Structural production capacity for defined packages during detailed engineering." },
+  { icon: Ruler, title: "Engineering consultancies", text: "Drawing, modelling and documentation support for your design team." },
+  { icon: Factory, title: "Steel fabricators", text: "Shop and erection drawings and lists from approved design packages." },
+  { icon: HardHat, title: "Industrial project teams", text: "Modification drawings and records for work on existing plant." },
 ];
 
 const approach = [
@@ -41,7 +42,7 @@ const approach = [
   },
   {
     title: "Check and review",
-    text: "Deliverables follow the project-agreed checking process: an originator self-check, an independent production check where resourced and agreed, and model review where a model exists.",
+    text: "Deliverables follow the project-agreed checking process: an originator self-check, a second-person check where resourced and agreed, and model review where a model exists.",
   },
   {
     title: "Issue and maintain",
@@ -53,13 +54,13 @@ const principles = [
   { title: "Defined scope", text: "Deliverables, inputs, exclusions and responsibilities agreed in writing before work starts." },
   { title: "Design authority respected", text: "Design decisions and approvals stay with the responsible engineer; we produce the documentation." },
   { title: "Coordinated reviews", text: "Queries raised early, comments closed out in writing, and every revision identified." },
-  { title: "Confidentiality", text: "Project files used only for the package, with an NDA available before files are shared." },
+  { title: "Confidentiality", text: "Confidentiality agreements and controlled file transfer can be discussed before files are shared; client work is never published without authorisation." },
 ];
 
 const quality = [
   "Originator self-check against inputs and standards",
-  "Independent production check, where resourced and agreed",
-  "Model review for interfaces and clashes",
+  "Second-person check, where resourced and agreed",
+  "Model review for interfaces, where reference models exist",
   "Recorded comments with verified close-out",
   "Revision control on every issued deliverable",
 ];
@@ -71,7 +72,7 @@ export default function AboutPage() {
         eyebrow="About"
         title="Built on Decades"
         accent="Of Project Experience"
-        intro="A specialist civil and structural drafting, detailing and modelling team for energy and industrial projects, formed around senior professionals who have spent their careers on these projects."
+        intro="A specialist civil and structural engineering support offering for consultancies, EPC contractors, steel fabricators and industrial project teams, informed by senior personnel experience on energy and industrial projects."
         image="/images/about-experience.jpg"
         imageAlt="Refinery process columns and steel structures in daylight"
         crumbs={[{ name: "About", path: "/about" }]}
@@ -81,7 +82,7 @@ export default function AboutPage() {
       <section className="bg-white">
         <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <SectionHeading slab title="Specialised." accent="Experienced. Precise." />
+            <SectionHeading slab title="Who We Support" />
             <ul className="mt-10 grid gap-4 sm:grid-cols-2">
               {pillars.map((pillar, i) => (
                 <li
@@ -99,18 +100,19 @@ export default function AboutPage() {
           </div>
           <div data-reveal className="lg:col-span-7">
             <p className="text-xl leading-relaxed font-semibold text-navy-900 sm:text-2xl sm:leading-relaxed">
-              We provide civil and structural drafting, design support, detailing and 3D modelling for energy and
-              industrial projects. Engineering production and documentation is our specialist focus.
+              Hormuz-Energy is developing a specialist engineering support offering: civil and structural drawing
+              production, steel detailing, Tekla and associated 3D structural modelling, concrete and rebar
+              documentation and plant modification drawing support.
             </p>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate sm:text-lg">
-              As a company we are building our independent presence. The experience behind it is long established:
-              our senior professionals bring decades of practical experience gained across engineering consultancies,
-              EPC organizations and construction environments in Pakistan and the Gulf.
+              As a company we are building our independent presence. The technical background informing this focus
+              includes senior personnel experience on energy, refinery, industrial and onshore and offshore projects,
+              gained through previous employers in Pakistan, the Gulf and other international markets.
             </p>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate sm:text-lg">
-              That background shapes how we work. We support EPC contractors, engineering consultancies and
-              fabricators as a focused structural resource, working from the design issued by the responsible
-              engineering organization and turning it into accurate models, drawings and schedules.
+              That experience guides the types of work package we assess. Each new assignment is accepted according to
+              current team competence, software compatibility, project requirements and agreed technical
+              responsibilities, and is produced from the design issued by the responsible engineering organization.
             </p>
           </div>
         </div>
@@ -122,7 +124,7 @@ export default function AboutPage() {
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-6">
               <SectionHeading
-                eyebrow="Our experience"
+                eyebrow="Professional background"
                 title="Decades of Experience"
                 accent="Across Critical Energy Projects"
                 onDark
@@ -133,7 +135,7 @@ export default function AboutPage() {
                 Our senior professionals have contributed to numerous greenfield and brownfield developments across
                 the UAE, Saudi Arabia, Qatar, Pakistan and other international markets — supporting complex
                 structural deliverables from plant modelling and general arrangements through detailed shop and
-                fabrication drawings.
+                fabrication drawings. This is individual professional experience, not a history of company projects.
               </p>
               <ArrowLink href="/project-experience" onDark className="mt-7">
                 View project experience
@@ -166,27 +168,27 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Industries */}
+      {/* Technical focus */}
       <section className="bg-white">
         <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <SectionHeading
-              eyebrow="Our industries"
-              title="Energy & Process Facilities"
-              intro="Our work is concentrated on the facilities where our senior team's experience lies."
+              eyebrow="Technical focus"
+              title="Six Technical Services"
+              intro="Civil and structural production for energy and process facilities, where our senior team's experience lies."
             />
             <ArrowLink href="/industries" className="mt-7">
-              Industries we support
+              Industries & project environments
             </ArrowLink>
           </div>
           <ul data-reveal className="grid border-t border-line sm:grid-cols-2 sm:gap-x-10 lg:col-span-7">
-            {industries.map((industry) => (
-              <li key={industry.slug} className="border-b border-line">
+            {services.map((service) => (
+              <li key={service.slug} className="border-b border-line">
                 <Link
-                  href={industryPath(industry.slug)}
+                  href={servicePath(service.slug)}
                   className="group flex min-h-14 items-center justify-between gap-4 py-2 text-[0.9375rem] font-bold text-navy-900 transition-colors hover:text-teal-700"
                 >
-                  {industry.name}
+                  {service.title}
                   <ArrowRight aria-hidden className="size-4 shrink-0 text-energy-ink transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </li>
@@ -202,7 +204,7 @@ export default function AboutPage() {
             eyebrow="Delivery approach"
             title="A Disciplined Path"
             accent="From Input to Issue"
-            intro="A flexible, remotely delivered model that scales with project demand and integrates with our clients' document control and review cycles."
+            intro="How we approach work packages: a remotely delivered model that works within our clients' document control and review cycles. Capacity is confirmed for each request."
           />
           <ol className="mt-14 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-4">
             {approach.map((step, index) => (

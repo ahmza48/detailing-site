@@ -74,16 +74,23 @@ export const experienceDisclaimer =
 export const portfolioNote =
   "Selected experience shown on this website includes projects undertaken by senior team members during previous employment or engagements with established EPC, engineering and construction organizations. Project and client names are presented solely to demonstrate relevant professional experience and do not imply direct contractual relationships with this company.";
 
-/** Organizations associated with projects in the senior team's prior experience. Text only, no logos. */
-export const associatedOrganizations = [
-  "ADNOC",
-  "Saudi Aramco",
-  "ADMA",
-  "Maersk Oil Qatar",
-  "Dolphin Energy / QOC",
-  "SABIC",
-  "BHP",
+/**
+ * Asset owners referenced in the senior team's prior project experience
+ * (spec v2 §12.4). Listed only where the owner is recorded against a project in
+ * src/lib/projects.ts, and always shown with that project: never as clients,
+ * partners or endorsements. TODO_VERIFY publication permission with the owner.
+ * Removed pending verification (no recorded project): Maersk Oil Qatar, SABIC, BHP.
+ */
+export const referencedAssetOwners: { name: string; projectIds: string[] }[] = [
+  { name: "ADNOC", projectIds: ["onshore-civil-structural"] },
+  { name: "ADMA", projectIds: ["offshore-structural"] },
+  { name: "Saudi Aramco", projectIds: ["rcc-detailing"] },
+  { name: "Dolphin Energy / QOC", projectIds: ["drawings-qaqc"] },
 ];
+
+/** Sitewide standards statement (spec v2 §9.1). */
+export const standardsStatement =
+  "Project-specific standards, specifications and client procedures are reviewed and incorporated into the agreed documentation and detailing scope. Applicability, editions, deviations and approval responsibilities are confirmed before work proceeds.";
 
 /** Prior employers and project environments of senior personnel. Not partnerships. */
 export const priorEnvironments = [

@@ -90,7 +90,7 @@ export const enquiryLabels: Record<Exclude<EnquiryField, "attachment" | "message
   software: "Software and version",
   deliverables: "Required deliverables / quantity",
   targetDate: "Target start or milestone",
-  nda: "NDA requested before file exchange",
+  nda: "Contact about NDA / secure file transfer before drawings are sent",
 };
 
 export type EnquiryState = {

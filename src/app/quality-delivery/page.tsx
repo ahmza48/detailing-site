@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Check, FileCheck2 } from "lucide-react";
+import { Check, FileCheck2, Plus } from "lucide-react";
 import { ArrowLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { Hero } from "@/components/Hero";
@@ -20,8 +20,45 @@ export const metadata: Metadata = pageMetadata({
 const tone: Record<string, string> = {
   Included: "bg-energy-deep text-white",
   "Where resourced and agreed": "bg-navy-800 text-white",
+  "Where included in scope": "bg-navy-800 text-white",
+  "Client / contract role": "bg-paper text-navy-900 ring-1 ring-line",
+  "Requires verified source": "bg-paper text-navy-900 ring-1 ring-line",
   "Not included": "bg-paper text-slate ring-1 ring-line",
 };
+
+/** Input / output traceability (spec v2 §11.4): a hypothetical example, not a screenshot of an existing system. */
+const traceability = {
+  inputs: [
+    ["Input drawing revision", "D-04"],
+    ["Connection information", "Approved connection details"],
+    ["Coordinate basis", "Agreed drawing and model coordinate scheme"],
+  ],
+  outputs: [
+    ["Drawing sheet list", "Sheet numbers and member marks"],
+    ["Steel quantities", "Source revision recorded on the schedule"],
+    ["Client review", "Review status per sheet"],
+    ["Issue record", "Transmittal ID"],
+  ],
+};
+
+const faqs = [
+  {
+    q: "What happens when an approved design drawing changes?",
+    a: "The effect on the model, shop sheets, quantities and document revisions is assessed and incorporated according to the contracted revision process.",
+  },
+  {
+    q: "Can you check the structural adequacy of an existing design?",
+    a: "Only under a separate, qualified design-verification scope. Ordinary production checking is a different activity.",
+  },
+  {
+    q: "How are technical questions communicated?",
+    a: "Missing information, conflicting dimensions and interface issues are recorded and submitted as clear technical queries or RFIs to the designated client engineer.",
+  },
+  {
+    q: "What do you provide at close-out?",
+    a: "The contract-defined native formats, PDFs, models, material reports, issue registers and supporting files.",
+  },
+];
 
 export default function QualityDeliveryPage() {
   return (
@@ -30,7 +67,7 @@ export default function QualityDeliveryPage() {
         eyebrow="Technical Capabilities"
         title="Quality &"
         accent="Delivery"
-        intro="How each package is set up, produced, checked, revised and handed over, and where our responsibility ends."
+        intro="A drawing or model package is only useful when its scope, source information, revision history and checking responsibilities are understood. This is how each package is set up, checked and handed over."
         image="/images/capabilities-overview.jpg"
         imageAlt="Structural steel framing seen from below"
         crumbs={[
@@ -45,9 +82,9 @@ export default function QualityDeliveryPage() {
           <SectionHeading
             slab
             title="What Checking Means Here"
-            intro="Production checking is different from engineering design verification. This is what is, and is not, part of our service."
+            intro="Our agreed drawing and model review may include checking references, dimensions, member identification, drawing-to-model consistency, material schedules, document numbers and revisions. Where a second-person check or independent technical review is contractually required, the assignment is resourced and planned for it. Engineering design verification or statutory approval is provided only through qualified professionals under a separately established scope."
           />
-          <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {checkTypes.map((check, i) => (
               <li
                 key={check.title}
@@ -69,8 +106,8 @@ export default function QualityDeliveryPage() {
         <div className="container-site section-y">
           <SectionHeading
             slab
-            title="From Scope to Close-Out"
-            intro="The sequence followed on each package. Steps are scaled to the size of the package and the project's own procedures."
+            title="Technical Delivery Sequence"
+            intro="Seven stages, scaled to the size of the package and the project's own procedures. The scope of each check and the authority to accept engineering changes are defined by the project."
           />
           <ol className="mt-12 grid gap-x-10 lg:grid-cols-2">
             {qualityProcess.map((step, i) => (
@@ -124,6 +161,47 @@ export default function QualityDeliveryPage() {
         </div>
       </section>
 
+      {/* Traceability example */}
+      <section className="bg-paper">
+        <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <SectionHeading
+              slab
+              title="Input / Output Traceability"
+              intro="An example of the records a steel fabrication package can carry, so every output can be traced back to the input revision it came from. The records are defined by contract."
+            />
+          </div>
+          <div data-reveal className="rounded-xl bg-white p-6 shadow-[0_6px_20px_rgb(0_36_56/0.07)] sm:p-8 lg:col-span-7">
+            <span className="inline-block rounded-full bg-navy-900 px-3 py-1 text-[0.6875rem] font-bold tracking-[0.08em] text-white uppercase">
+              Hypothetical illustrative example
+            </span>
+            <div className="mt-6 grid gap-8 sm:grid-cols-2">
+              {(
+                [
+                  ["Inputs recorded", traceability.inputs],
+                  ["Outputs recorded", traceability.outputs],
+                ] as const
+              ).map(([heading, rows]) => (
+                <div key={heading}>
+                  <h3 className="text-base font-extrabold text-navy-900">{heading}</h3>
+                  <dl className="mt-3 border-t border-line text-sm">
+                    {rows.map(([label, value]) => (
+                      <div key={label} className="border-b border-line py-3">
+                        <dt className="text-[0.6875rem] font-bold tracking-[0.1em] text-teal-700 uppercase">{label}</dt>
+                        <dd className="mt-1 font-semibold text-navy-900">{value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              ))}
+            </div>
+            <p className="mt-5 text-xs leading-5 text-slate">
+              Illustrative workflow only. It does not represent existing internal software or automation.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Responsibility */}
       <section className="bg-navy-900 text-white">
         <div className="container-site section-y grid gap-10 lg:grid-cols-12 lg:gap-16">
@@ -156,6 +234,37 @@ export default function QualityDeliveryPage() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* FAQs */}
+      <section className="bg-white">
+        <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <SectionHeading slab title="Common Questions" />
+            <p data-reveal className="mt-5 text-base leading-7 text-ink">
+              How changes, technical queries, checking and close-out are handled on a package.
+            </p>
+          </div>
+          <div className="space-y-3 lg:col-span-7">
+            {faqs.map((faq, i) => (
+              <details
+                key={faq.q}
+                data-reveal
+                style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
+                open={i === 0}
+                className="group/faq rounded-xl bg-paper"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-xl px-6 py-5 text-base font-bold text-navy-900 [&::-webkit-details-marker]:hidden">
+                  {faq.q}
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white text-energy-deep transition-transform duration-300 group-open/faq:rotate-45">
+                    <Plus aria-hidden className="size-4" />
+                  </span>
+                </summary>
+                <p className="px-6 pb-6 text-[0.9375rem] leading-7 text-ink">{faq.a}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 
