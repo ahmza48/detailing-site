@@ -204,15 +204,15 @@ export const projects: Project[] = [
     experienceThrough: ["JGC Descon"],
     teamRole: "Plant structural 3D modelling, as part of a senior team member's prior engagement",
     services: [
-      "Frameworks Plus 3D modelling",
+      "FrameWorks Plus 3D modelling",
       "Concrete and steel buildings",
       "Platforms, pipe racks, stairs and ladders",
       "Underground facility PDS 3D modelling",
     ],
-    tools: ["Frameworks Plus", "PDS"],
+    tools: ["FrameWorks Plus", "PDS"],
     deliverables: ["Structural 3D models", "Steel structural arrangement drawings"],
     description:
-      "Senior team experience on this refinery reconstruction covered Frameworks Plus 3D modelling and steel structural arrangement drawings for concrete and steel buildings, platforms, pipe racks, stairs and ladders, together with PDS 3D modelling of underground facilities.",
+      "Senior team experience on this refinery reconstruction covered FrameWorks Plus 3D modelling and steel structural arrangement drawings for concrete and steel buildings, platforms, pipe racks, stairs and ladders, together with PDS 3D modelling of underground facilities.",
     image: "/images/project-atyrau.jpg",
     imageAlt: "Refinery columns and steel structures at dusk",
     diagrams: [
@@ -237,10 +237,10 @@ export const projects: Project[] = [
       "PDS modelling",
       "Navigator / model review",
     ],
-    tools: ["PDS", "Frameworks Plus", "SPR", "Navigator"],
+    tools: ["PDS", "FrameWorks Plus", "SPR", "Navigator"],
     deliverables: ["Detailed engineering drawings", "Structural models", "Material take-off (MTO)"],
     description:
-      "Senior team experience included detailed engineering drawings, PDS modelling with Frameworks Plus, model review using Navigator and SPR, and material take-off.",
+      "Senior team experience included detailed engineering drawings, PDS modelling with FrameWorks Plus, model review using Navigator and SPR, and material take-off.",
     image: "/images/project-dolphin.jpg",
     imageAlt: "Gas processing facility lit at night",
     diagrams: [

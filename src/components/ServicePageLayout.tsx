@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, CircleSlash, Plus } from "lucide-react";
+import { applications } from "@/lib/applications";
 import { industries, industryPath } from "@/lib/industries";
 import { projectPath, projectsForService } from "@/lib/projects";
 import { serviceJsonLd } from "@/lib/seo";
-import { servicePath, type Service } from "@/lib/services";
+import { serviceBySlug, servicePath, type RelatedLink, type Service } from "@/lib/services";
 import { software, softwareQualifier } from "@/lib/software";
 import { ArrowLink, ButtonLink } from "./ButtonLink";
 import { CTASection } from "./CTASection";
@@ -24,10 +25,26 @@ const delay = (i: number) => ({ "--reveal-delay": `${i * 70}ms` }) as React.CSSP
 const subserviceColumns = (count: number) =>
   count === 2 ? "lg:grid-cols-2" : count === 4 || count === 7 || count === 8 ? "lg:grid-cols-4" : "lg:grid-cols-3";
 
+/** Related next steps take their labels from the registries, so renames never leave stale link text. */
+function resolveRelated(link: RelatedLink): { href: string; label: string; text: string } {
+  if ("service" in link) {
+    const target = serviceBySlug(link.service);
+    return { href: servicePath(link.service), label: target?.title ?? link.service, text: link.text };
+  }
+  if ("application" in link) {
+    const target = applications.find((a) => a.id === link.application);
+    return { href: `/applications#${link.application}`, label: tc(target?.title ?? link.application), text: link.text };
+  }
+  return link;
+}
+
+const relatedColumns = (count: number) => (count === 3 ? "lg:grid-cols-3" : count === 2 ? "lg:grid-cols-2" : "lg:grid-cols-4");
+
 /**
- * Detailed service page (spec 7.3): hero → at a glance → ordered subservices →
- * applications → inputs vs outputs → standards → software → process →
- * responsibility → evidence → FAQs → related → CTA.
+ * Detailed service page (spec v2 §4.0): hero → overview and where the service
+ * fits → scope of services → structures / applications → inputs vs
+ * deliverables → project requirements & interfaces → software & formats →
+ * workflow → review & responsibility → experience → FAQs → related → CTA.
  */
 export function ServicePageLayout({ service }: { service: Service }) {
   const projects = projectsForService(service.slug, service.leadProject);
@@ -58,7 +75,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
           { name: service.title, path: servicePath(service.slug) },
         ]}
       >
-        <ButtonLink href={quoteHref}>Request this Service</ButtonLink>
+        <ButtonLink href={quoteHref}>Request a Quote</ButtonLink>
         {lead && (
           <ButtonLink href={projectPath(lead.id)} variant="light">
             Related Experience
@@ -77,6 +94,14 @@ export function ServicePageLayout({ service }: { service: Service }) {
                 {paragraph}
               </p>
             ))}
+            <div data-reveal className="mt-8 rounded-r-xl border-l-4 border-energy-deep bg-paper p-6 sm:p-7">
+              <h3 className="text-lg font-extrabold text-navy-900">Where This Service Fits</h3>
+              {service.fit.map((paragraph) => (
+                <p key={paragraph} className="mt-3 text-[0.9375rem] leading-7 text-ink">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
             <ul className="mt-8 flex flex-wrap gap-2.5">
               {service.highlights.map((item) => (
                 <li key={item} className="rounded-full border border-line bg-paper px-4 py-2 text-sm font-semibold text-navy-900">
@@ -134,8 +159,8 @@ export function ServicePageLayout({ service }: { service: Service }) {
         <div className="container-site section-y">
           <SectionHeading
             slab
-            title="What the Service Covers"
-            intro="The work within this service, in the order it is usually produced. Any part can be scoped on its own."
+            title="Scope of Services"
+            intro="The work within this service, in the order it is usually produced. Any part can be scoped on its own; the deliverables for each package are agreed in writing."
           />
           <div className="mt-12 space-y-12">
             {service.subserviceGroups.map((group, g) => (
@@ -174,7 +199,11 @@ export function ServicePageLayout({ service }: { service: Service }) {
       <section className="bg-white">
         <div className="container-site section-y">
           <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHeading slab title="Typical Structures" intro="Structures this service regularly covers on energy and industrial projects." />
+            <SectionHeading
+              slab
+              title="Typical Structures & Applications"
+              intro="Structures this service regularly covers on energy and industrial projects. These are applications, not stages of the work."
+            />
             <ArrowLink href="/applications">Find by structure type</ArrowLink>
           </div>
           <ul data-reveal className="mt-8 flex flex-wrap gap-2.5">
@@ -193,7 +222,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
           <div className="mt-14 grid gap-5 lg:grid-cols-2">
             <div data-reveal className="rounded-xl border border-line p-7 sm:p-9">
               <p className="eyebrow text-teal-700">What we work from</p>
-              <h3 className="mt-2 text-xl font-extrabold text-navy-900">Inputs From Your Team</h3>
+              <h3 className="mt-2 text-xl font-extrabold text-navy-900">Project Inputs</h3>
               <ul className="mt-6">
                 {service.inputs.map((item) => (
                   <li key={item} className="flex gap-3.5 border-t border-line py-3.5 text-[0.9375rem] leading-6 font-medium text-ink">
@@ -206,7 +235,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
             </div>
             <div data-reveal className="rounded-xl bg-navy-800 p-7 text-mist sm:p-9">
               <p className="eyebrow text-energy">What you receive</p>
-              <h3 className="mt-2 text-xl font-extrabold text-white">Deliverables</h3>
+              <h3 className="mt-2 text-xl font-extrabold text-white">Typical Deliverables</h3>
               <ul className="mt-6">
                 {service.outputs.map((item) => (
                   <li key={item} className="flex gap-3.5 border-t border-white/15 py-3.5 text-[0.9375rem] leading-6 font-medium">
@@ -215,16 +244,23 @@ export function ServicePageLayout({ service }: { service: Service }) {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-xs leading-5 text-haze">Deliverables, formats and assumptions are confirmed in the scope of work.</p>
+              <p className="mt-4 text-xs leading-5 text-haze">
+                Actual deliverables, formats and assumptions are negotiated and confirmed in the scope of work for each package.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Codes & standards */}
+      {/* Project requirements & interfaces (standards are illustrative examples only) */}
       <section className="bg-paper">
         <div className="container-site section-y">
-          <StandardsSummary refs={service.standardsRefs} note={service.standardsNote} />
+          <StandardsSummary
+            title="Project Requirements & Interfaces"
+            refs={service.standardsRefs}
+            note={service.standardsNote}
+            requirements={service.requirements}
+          />
         </div>
       </section>
 
@@ -233,10 +269,17 @@ export function ServicePageLayout({ service }: { service: Service }) {
         <section className="bg-white">
           <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
-              <SectionHeading slab title="Software & Workflow" />
+              <SectionHeading slab title="Software & Exchange Formats" />
               <p data-reveal className="mt-5 text-base leading-7 text-ink">
                 {service.software.note}
               </p>
+              <ul data-reveal aria-label="Typical exchange formats" className="mt-6 flex flex-wrap gap-2">
+                {service.software.formats.map((format) => (
+                  <li key={format} className="rounded-full border border-line bg-paper px-3.5 py-1.5 text-sm font-semibold text-navy-900">
+                    {format}
+                  </li>
+                ))}
+              </ul>
               <p data-reveal className="mt-4 text-sm leading-6 text-slate">
                 {softwareQualifier}
               </p>
@@ -269,7 +312,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
         <div className="container-site section-y">
           <SectionHeading
             centered
-            title="How the Work Proceeds"
+            title="Typical Workflow"
             intro="The usual sequence for this service. Steps can overlap, and review comments loop back to earlier steps."
           />
           <div className="mt-14">
@@ -282,13 +325,15 @@ export function ServicePageLayout({ service }: { service: Service }) {
       <section className="bg-navy-900 text-white">
         <div className="container-site section-y grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-6">
-            <SectionHeading eyebrow="Scope & responsibility" title="Not Included by Implication" onDark />
+            <SectionHeading eyebrow="Review & responsibility" title="Drawing & Model Review" onDark />
             <p data-reveal className="mt-6 max-w-xl text-base leading-7 text-white/85">
-              {service.boundaryNote}
+              {service.review}
             </p>
-            <p data-reveal className="mt-4 max-w-xl text-sm leading-6 text-haze">
-              Design responsibility and approvals remain with the responsible engineer unless separately agreed with
-              appropriately qualified professionals. Work outside these limits can be discussed as a custom scope.
+            <h3 data-reveal className="mt-8 text-lg font-extrabold text-white">
+              Technical Responsibility
+            </h3>
+            <p data-reveal className="mt-3 max-w-xl text-sm leading-6 text-haze">
+              {service.responsibility}
             </p>
             <div data-reveal className="mt-7 flex flex-wrap gap-x-7 gap-y-3">
               <ArrowLink href="/quality-delivery" onDark>
@@ -299,19 +344,27 @@ export function ServicePageLayout({ service }: { service: Service }) {
               </ArrowLink>
             </div>
           </div>
-          <ul className="lg:col-span-6 lg:pt-2">
-            {service.boundaries.map((item, i) => (
-              <li
-                key={item}
-                data-reveal
-                style={delay(i)}
-                className="flex gap-4 border-t border-white/20 py-5 text-base leading-snug font-semibold last:border-b"
-              >
-                <CircleSlash aria-hidden className="mt-0.5 size-5 shrink-0 text-energy" />
-                {tc(item)}
-              </li>
-            ))}
-          </ul>
+          <div className="lg:col-span-6 lg:pt-2">
+            <h3 data-reveal className="mb-5 text-lg font-extrabold text-white">
+              Not Included by Implication
+            </h3>
+            <ul>
+              {service.boundaries.map((item, i) => (
+                <li
+                  key={item}
+                  data-reveal
+                  style={delay(i)}
+                  className="flex gap-4 border-t border-white/20 py-5 text-base leading-snug font-semibold last:border-b"
+                >
+                  <CircleSlash aria-hidden className="mt-0.5 size-5 shrink-0 text-energy" />
+                  {tc(item)}
+                </li>
+              ))}
+            </ul>
+            <p data-reveal className="mt-6 max-w-xl text-sm leading-6 text-haze">
+              {service.boundaryNote} Work outside these limits can be discussed as a custom scope.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -412,8 +465,8 @@ export function ServicePageLayout({ service }: { service: Service }) {
       <section className="bg-white">
         <div className="container-site section-y">
           <SectionHeading slab title="Related Next Steps" />
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {service.related.map((link) => (
+          <ul className={`mt-10 grid gap-4 sm:grid-cols-2 ${relatedColumns(service.related.length)}`}>
+            {service.related.map(resolveRelated).map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
@@ -432,7 +485,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
       <CTASection
         title="Request a quote for"
         accent={service.title}
-        copy="Send the scope of work, the design inputs you have and your target schedule. We will confirm the deliverables, standards and formats in a written proposal."
+        copy={service.cta}
         serviceSlug={service.slug}
       />
     </>

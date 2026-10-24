@@ -301,7 +301,7 @@ export default function CapabilitiesPage() {
               eyebrow="3D modelling"
               title="Modelling Inside the Project Environment"
               onDark
-              intro="Structural models built in Tekla Structures, with prior project experience in PDS and Frameworks Plus plant environments and exposure to PDMS. Positioned for energy and process plants, not architectural BIM."
+              intro="Structural models built in Tekla Structures, with prior project experience in PDS and FrameWorks Plus plant environments and exposure to PDMS. Positioned for energy and process plants, not architectural BIM."
             />
             <ul data-reveal className="mt-8 max-w-xl border-t border-white/15">
               {["Steel and concrete structures", "Underground facilities", "Existing model modification and brownfield updates", "Navisworks model review and coordination"].map((item) => (

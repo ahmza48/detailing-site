@@ -44,7 +44,7 @@ export const software: SoftwareTool[] = [
     legacy: true,
   },
   {
-    name: "Frameworks Plus",
+    name: "FrameWorks Plus",
     discipline: "Plant structural modelling",
     use: "Steel and concrete structural modelling and arrangement drawing extraction in PDS-based projects.",
     services: ["plant-structural-3d-modelling"],
