@@ -203,7 +203,7 @@ function IndustryLayout({ industry }: { industry: Industry }) {
               className="mt-6"
               text="Prior professional engagements of senior team members during previous employment, not projects contracted to Hormuz-Energy. Photographs are representative industry images."
             />
-            <div className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div className={`mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 ${projects.length > 2 ? "lg:grid-cols-4" : "max-w-3xl"}`}>
               {projects.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} />
               ))}

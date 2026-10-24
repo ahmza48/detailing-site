@@ -252,11 +252,15 @@ export const projects: Project[] = [
 ];
 
 export const projectById = (id: string) => projects.find((p) => p.id === id);
-/** Projects relevant to a service, primary matches first. */
-export const projectsForService = (slug: ServiceSlug) =>
+/** Projects relevant to a service: the lead project first, then primary matches. */
+export const projectsForService = (slug: ServiceSlug, leadId?: string) =>
   projects
     .filter((p) => p.serviceSlugs.includes(slug))
-    .sort((a, b) => a.serviceSlugs.indexOf(slug) - b.serviceSlugs.indexOf(slug));
+    .sort((a, b) => {
+      if (a.id === leadId) return -1;
+      if (b.id === leadId) return 1;
+      return a.serviceSlugs.indexOf(slug) - b.serviceSlugs.indexOf(slug);
+    });
 export const projectsForIndustry = (slug: IndustrySlug) => projects.filter((p) => p.industrySlugs.includes(slug));
 export const projectPath = (id: string) => `/project-experience#${id}`;
 

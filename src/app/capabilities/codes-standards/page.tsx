@@ -7,7 +7,7 @@ import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath, services } from "@/lib/services";
-import { standardById, standardGroups, standards } from "@/lib/standards";
+import { standardById, standardGroups, standards, type StandardReference } from "@/lib/standards";
 
 export const metadata: Metadata = pageMetadata({
   title: "Engineering Codes, Standards & Project Specifications",
@@ -28,6 +28,63 @@ const registerFields = [
   "Checker responsibility",
   "Date of clarification and the agreed hierarchy",
 ];
+
+
+function StandardCard({ standard, index }: { standard: StandardReference; index: number }) {
+  return (
+    <li
+      data-reveal
+      style={{ "--reveal-delay": `${(index % 2) * 70}ms` } as React.CSSProperties}
+      className="flex flex-col rounded-xl bg-white p-6 shadow-[0_6px_20px_rgb(0_36_56/0.07)] ring-1 ring-line"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-bold tracking-[0.08em] text-teal-700 uppercase">{standard.publisher}</p>
+          <h3 className="mt-1 text-lg font-extrabold text-navy-900">{standard.identifier}</h3>
+          <p className="text-sm font-semibold text-ink">{standard.title}</p>
+        </div>
+        {standard.sourceUrl && (
+          <a
+            href={standard.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center gap-1 text-xs font-bold text-energy-ink hover:underline"
+          >
+            Publisher
+            <ArrowUpRight aria-hidden className="size-3.5" />
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+        )}
+      </div>
+      <p className="mt-4 text-sm leading-6 text-ink">{standard.context}</p>
+      <dl className="mt-4 grid gap-3 border-t border-line pt-4 text-sm sm:grid-cols-2">
+        <div>
+          <dt className="text-[0.6875rem] font-bold tracking-[0.1em] text-slate uppercase">Responsibility</dt>
+          <dd className="mt-1 font-semibold text-navy-900">{standard.responsibility}</dd>
+        </div>
+        <div>
+          <dt className="text-[0.6875rem] font-bold tracking-[0.1em] text-slate uppercase">Relevant services</dt>
+          <dd className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
+            {standard.relevantServices.length === 0 && <span className="text-slate">Organisational only</span>}
+            {standard.relevantServices.length === services.length ? (
+              <span className="font-semibold text-navy-900">All services</span>
+            ) : (
+              standard.relevantServices.map((slug) => {
+                const service = serviceBySlug(slug);
+                return service ? (
+                  <Link key={slug} href={servicePath(slug)} className="font-semibold text-energy-ink hover:underline">
+                    {service.title}
+                  </Link>
+                ) : null;
+              })
+            )}
+          </dd>
+        </div>
+      </dl>
+      <p className="mt-4 rounded-lg bg-paper px-4 py-3 text-xs leading-5 text-slate">{standard.caution}</p>
+    </li>
+  );
+}
 
 export default function CodesStandardsPage() {
   return (
@@ -74,72 +131,49 @@ export default function CodesStandardsPage() {
         </div>
       </section>
 
-      {standardGroups.map((group, g) => {
-        const items = standards.filter((s) => s.group === group.id);
-        return (
-          <section key={group.id} id={group.id} className={g % 2 === 0 ? "bg-paper" : "bg-white"}>
+      {/* Design and construction standards: the largest group gets its own section */}
+      {standardGroups
+        .filter((group) => group.id === "design-construction")
+        .map((group) => (
+          <section key={group.id} id={group.id} className="bg-paper">
             <div className="container-site section-y">
               <SectionHeading slab title={group.title} size="md" intro={group.text} />
               <ul className="mt-10 grid gap-5 lg:grid-cols-2">
-                {items.map((standard, i) => (
-                  <li
-                    key={standard.id}
-                    data-reveal
-                    style={{ "--reveal-delay": `${(i % 2) * 70}ms` } as React.CSSProperties}
-                    className="flex flex-col rounded-xl bg-white p-6 shadow-[0_6px_20px_rgb(0_36_56/0.07)] ring-1 ring-line"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <p className="text-xs font-bold tracking-[0.08em] text-teal-700 uppercase">{standard.publisher}</p>
-                        <h3 className="mt-1 text-lg font-extrabold text-navy-900">{standard.identifier}</h3>
-                        <p className="text-sm font-semibold text-ink">{standard.title}</p>
-                      </div>
-                      {standard.sourceUrl && (
-                        <a
-                          href={standard.sourceUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex shrink-0 items-center gap-1 text-xs font-bold text-energy-ink hover:underline"
-                        >
-                          Publisher
-                          <ArrowUpRight aria-hidden className="size-3.5" />
-                          <span className="sr-only">(opens in a new tab)</span>
-                        </a>
-                      )}
-                    </div>
-                    <p className="mt-4 text-sm leading-6 text-ink">{standard.context}</p>
-                    <dl className="mt-4 grid gap-3 border-t border-line pt-4 text-sm sm:grid-cols-2">
-                      <div>
-                        <dt className="text-[0.6875rem] font-bold tracking-[0.1em] text-slate uppercase">Responsibility</dt>
-                        <dd className="mt-1 font-semibold text-navy-900">{standard.responsibility}</dd>
-                      </div>
-                      <div>
-                        <dt className="text-[0.6875rem] font-bold tracking-[0.1em] text-slate uppercase">Relevant services</dt>
-                        <dd className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
-                          {standard.relevantServices.length === 0 && <span className="text-slate">Organisational only</span>}
-                          {standard.relevantServices.length === services.length ? (
-                            <span className="font-semibold text-navy-900">All services</span>
-                          ) : (
-                            standard.relevantServices.map((slug) => {
-                              const service = serviceBySlug(slug);
-                              return service ? (
-                                <Link key={slug} href={servicePath(slug)} className="font-semibold text-energy-ink hover:underline">
-                                  {service.title}
-                                </Link>
-                              ) : null;
-                            })
-                          )}
-                        </dd>
-                      </div>
-                    </dl>
-                    <p className="mt-4 rounded-lg bg-paper px-4 py-3 text-xs leading-5 text-slate">{standard.caution}</p>
-                  </li>
-                ))}
+                {standards
+                  .filter((s) => s.group === group.id)
+                  .map((standard, i) => (
+                    <StandardCard key={standard.id} standard={standard} index={i} />
+                  ))}
               </ul>
             </div>
           </section>
-        );
-      })}
+        ))}
+
+      {/* Smaller groups side by side */}
+      <section className="bg-white">
+        <div className="container-site section-y grid gap-8 lg:grid-cols-3">
+          {standardGroups
+            .filter((group) => group.id !== "design-construction")
+            .map((group) => (
+              <div key={group.id} id={group.id} className="flex flex-col">
+                <span aria-hidden className="slab mb-5 h-9 w-11" />
+                <h2 data-reveal className="text-xl leading-7 font-extrabold text-navy-900">
+                  {group.title}
+                </h2>
+                <p data-reveal className="mt-3 text-[0.9375rem] leading-7 text-ink">
+                  {group.text}
+                </p>
+                <ul className="mt-6 grid gap-5">
+                  {standards
+                    .filter((s) => s.group === group.id)
+                    .map((standard, i) => (
+                      <StandardCard key={standard.id} standard={standard} index={i} />
+                    ))}
+                </ul>
+              </div>
+            ))}
+        </div>
+      </section>
 
       {/* Standards by service */}
       <section className="bg-navy-900 text-white">

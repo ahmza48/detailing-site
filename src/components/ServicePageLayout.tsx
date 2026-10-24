@@ -19,13 +19,17 @@ import { StandardsSummary } from "./StandardsSummary";
 const pad = (n: number) => String(n).padStart(2, "0");
 const delay = (i: number) => ({ "--reveal-delay": `${i * 70}ms` }) as React.CSSProperties;
 
+/** Desktop columns that avoid a single orphaned card on the last row. */
+const subserviceColumns = (count: number) =>
+  count === 2 ? "lg:grid-cols-2" : count === 4 || count === 7 || count === 8 ? "lg:grid-cols-4" : "lg:grid-cols-3";
+
 /**
  * Detailed service page (spec 7.3): hero → at a glance → ordered subservices →
  * applications → inputs vs outputs → standards → software → process →
  * responsibility → evidence → FAQs → related → CTA.
  */
 export function ServicePageLayout({ service }: { service: Service }) {
-  const projects = projectsForService(service.slug);
+  const projects = projectsForService(service.slug, service.leadProject);
   const [lead, ...moreProjects] = projects;
   const tools = software.filter((tool) => service.software.tools.includes(tool.name));
   const sectors = industries.filter((industry) => industry.packages.some((p) => p.service === service.slug));
@@ -140,7 +144,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
                     {group.heading}
                   </h3>
                 )}
-                <ol className={`grid gap-5 sm:grid-cols-2 ${group.items.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}>
+                <ol className={`grid gap-5 sm:grid-cols-2 ${subserviceColumns(group.items.length)}`}>
                   {group.items.map((item, i) => {
                     const number = groupOffsets[g] + i + 1;
                     return (

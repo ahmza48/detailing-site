@@ -61,6 +61,8 @@ export type Service = {
   /** How this service relates to neighbouring services. */
   boundaryNote: string;
   faqs: { q: string; a: string }[];
+  /** Project shown first as evidence (keeps the anchor each service used before the restructure). */
+  leadProject: string;
   /** 2–4 closely related next steps. */
   related: { href: string; label: string; text: string }[];
   seo: { title: string; description: string; keywords: string[] };
@@ -88,6 +90,7 @@ export const services: Service[] = [
   /* ------------------------------------------------------------------ S01 */
   {
     id: "S01",
+    leadProject: "onshore-civil-structural",
     slug: "civil-structural-drafting",
     status: "confirmed",
     group: "drawings-models",
@@ -239,6 +242,7 @@ export const services: Service[] = [
   /* ------------------------------------------------------------------ S02 */
   {
     id: "S02",
+    leadProject: "plant-3d-modelling",
     slug: "plant-structural-3d-modelling",
     status: "confirmed",
     group: "drawings-models",
@@ -397,6 +401,7 @@ export const services: Service[] = [
   /* ------------------------------------------------------------------ S03 */
   {
     id: "S03",
+    leadProject: "steel-detailing",
     slug: "steel-detailing-fabrication",
     status: "confirmed",
     group: "detailing",
@@ -551,6 +556,7 @@ export const services: Service[] = [
   /* ------------------------------------------------------------------ S04 */
   {
     id: "S04",
+    leadProject: "rcc-detailing",
     slug: "rcc-reinforcement-detailing",
     status: "confirmed",
     group: "detailing",
@@ -697,6 +703,7 @@ export const services: Service[] = [
   /* ------------------------------------------------------------------ S05 */
   {
     id: "S05",
+    leadProject: "brownfield-modifications",
     slug: "brownfield-structural-modifications",
     status: "confirmed",
     group: "modifications-docs",
@@ -845,6 +852,7 @@ export const services: Service[] = [
   /* ------------------------------------------------------------------ S06 */
   {
     id: "S06",
+    leadProject: "drawings-qaqc",
     slug: "material-takeoffs-documentation",
     status: "confirmed",
     group: "modifications-docs",

@@ -2,7 +2,7 @@
 
 Corporate website for a civil & structural design, detailing and 3D modelling company serving onshore and offshore energy projects.
 
-Next.js 16 (App Router, Cache Components) · TypeScript · Tailwind CSS v4 · Manrope via `next/font` · Lucide icons.
+Next.js 16 (App Router, Cache Components) · TypeScript · Tailwind CSS v4 · Montserrat (self-hosted) · Lucide icons.
 
 ## Commands
 
@@ -29,16 +29,26 @@ npm run photos     # re-download the banner photographs into public/images
 
 | File | Content |
 | --- | --- |
-| `src/lib/site.ts` | Name, navigation, trust metrics, organization lists, disclaimers |
-| `src/lib/services.ts` | The seven service categories and all service-page copy |
-| `src/lib/projects.ts` | Representative project experience (one per service) |
-| `src/lib/industries.ts` | Industries and their related services |
-| `src/lib/software.ts` | Software and tools |
+| `src/lib/site.ts` | Name, contact details, navigation and menus, trust metrics, organization lists, disclaimers |
+| `src/lib/services.ts` | The six canonical services (S01–S06): ordered subservices, inputs/outputs, boundaries, standards, workflow, FAQs |
+| `src/lib/industries.ts` | Six industry / project-environment pages and the services relevant to each |
+| `src/lib/applications.ts` | Structures & applications directory and each structure's documentation path |
+| `src/lib/projects.ts` | Prior professional project experience, mapped to services and industries |
+| `src/lib/standards.ts` | Codes & standards register (no editions; confirmed per project) |
+| `src/lib/delivery.ts` | Engagement steps, quality process, check types |
+| `src/lib/software.ts` | Software experience and the services each tool supports |
+| `src/lib/contact.ts` | RFQ options and validation |
 | `src/lib/seo.ts` | Metadata builder and JSON-LD |
+
+The restructure that produced this model, the route migration and the open claims register are documented in `docs/RESTRUCTURE_REPORT.md`.
 
 ## Content rules
 
 - Project and organization names describe the **prior professional experience of senior team members**. Never word them as clients or contracts of the company.
 - "30+ years" refers to senior professional experience, not company age.
 - List only proven capabilities. Structural analysis packages and offshore analysis services are intentionally absent.
+- Onshore and offshore are industries, not services. Engineering Outsourcing is an engagement route, not a seventh service.
+- Production checking is described on Quality & Delivery. Never promise independent checks, design verification or certification unless a real, documented workflow exists.
+- Software is listed as senior personnel's experience; versions and formats are confirmed at scope review.
+- `TODO_VERIFY` comments mark facts awaiting owner evidence; they must never appear in rendered text.
 - No client or software logos without permission.
