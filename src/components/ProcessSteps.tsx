@@ -1,3 +1,5 @@
+import { tc } from "@/lib/text";
+
 /** Numbered, connected step strip (the existing "How We Deliver" pattern), reused across pages. */
 const columns: Record<number, string> = {
   3: "lg:grid-cols-3",
@@ -36,7 +38,7 @@ export function ProcessSteps({
           >
             {String(i + 1).padStart(2, "0")}
           </span>
-          <h3 className={`mt-5 text-base leading-snug font-extrabold ${onDark ? "text-white" : "text-navy-900"}`}>{step.title}</h3>
+          <h3 className={`mt-5 text-base leading-snug font-extrabold ${onDark ? "text-white" : "text-navy-900"}`}>{tc(step.title)}</h3>
           <p className={`mx-auto mt-2 max-w-xs text-sm leading-6 ${onDark ? "text-haze" : "text-ink"}`}>{step.text}</p>
         </li>
       ))}

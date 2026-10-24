@@ -7,6 +7,7 @@ import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { checkTypes, qualityProcess, qualityRecords } from "@/lib/delivery";
 import { pageMetadata } from "@/lib/seo";
+import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
   title: "Quality & Delivery",
@@ -55,7 +56,7 @@ export default function QualityDeliveryPage() {
                 className="flex flex-col rounded-xl border border-line p-6"
               >
                 <span className={`self-start rounded-full px-3 py-1 text-xs font-bold ${tone[check.included]}`}>{check.included}</span>
-                <h3 className="mt-4 text-lg leading-snug font-extrabold text-navy-900">{check.title}</h3>
+                <h3 className="mt-4 text-lg leading-snug font-extrabold text-navy-900">{tc(check.title)}</h3>
                 <p className="mt-2 text-sm leading-6 text-ink">{check.text}</p>
               </li>
             ))}
@@ -81,7 +82,7 @@ export default function QualityDeliveryPage() {
               >
                 <span className="text-2xl font-extrabold text-energy-ink tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                 <div>
-                  <h3 className="text-lg font-extrabold text-navy-900">{step.title}</h3>
+                  <h3 className="text-lg font-extrabold text-navy-900">{tc(step.title)}</h3>
                   <p className="mt-1.5 text-[0.9375rem] leading-7 text-ink">{step.text}</p>
                 </div>
               </li>
@@ -103,7 +104,7 @@ export default function QualityDeliveryPage() {
             />
           </div>
           <div className="flex flex-col justify-center px-5 py-16 sm:px-8 lg:px-16 lg:py-24">
-            <SectionHeading slab title="Records and Handover" size="md" />
+            <SectionHeading slab title="Records and Handover" />
             <p data-reveal className="mt-5 max-w-xl text-base leading-7 text-ink">
               Depending on the size of the package and your document control procedure, the following records can be set
               up and handed over with the deliverables.
@@ -112,7 +113,7 @@ export default function QualityDeliveryPage() {
               {qualityRecords.map((record) => (
                 <li key={record} className="flex items-center gap-3 border-b border-line py-3 text-[0.9375rem] font-semibold text-ink">
                   <FileCheck2 aria-hidden className="size-4 shrink-0 text-energy-deep" />
-                  {record}
+                  {tc(record)}
                 </li>
               ))}
             </ul>
@@ -127,7 +128,7 @@ export default function QualityDeliveryPage() {
       <section className="bg-navy-900 text-white">
         <div className="container-site section-y grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-6">
-            <SectionHeading eyebrow="Responsibility" title="Design Approval Stays With the Engineer" size="md" onDark />
+            <SectionHeading eyebrow="Responsibility" title="Design Approval Stays With the Engineer" onDark />
             <p data-reveal className="mt-6 max-w-xl text-base leading-7 text-white/85">
               Our deliverables are produced from approved design information and checked within the agreed production
               scope. They are not an engineering approval, and they do not replace review by your responsible engineer or

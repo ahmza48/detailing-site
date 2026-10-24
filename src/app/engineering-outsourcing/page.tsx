@@ -9,6 +9,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { engagementSteps } from "@/lib/delivery";
 import { pageMetadata } from "@/lib/seo";
 import { servicePath, type ServiceSlug } from "@/lib/services";
+import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
   title: "Engineering Drafting & Structural Detailing Outsourcing",
@@ -92,7 +93,7 @@ export default function OutsourcingPage() {
                   <span className="grid size-10 place-items-center rounded-lg bg-navy-900 text-sm font-bold text-energy tabular-nums">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="mt-5 text-lg leading-snug font-extrabold text-navy-900 group-hover:text-energy-ink">{pkg.title}</span>
+                  <span className="mt-5 text-lg leading-snug font-extrabold text-navy-900 group-hover:text-energy-ink">{tc(pkg.title)}</span>
                   <span className="mt-2 flex-1 text-[0.9375rem] leading-7 text-ink">{pkg.text}</span>
                   <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-navy-900">
                     <ArrowRight aria-hidden className="size-4 text-energy-deep transition-transform group-hover:translate-x-1" />
@@ -143,7 +144,7 @@ export default function OutsourcingPage() {
                 className="rounded-xl bg-white p-6 shadow-[0_6px_20px_rgb(0_36_56/0.07)]"
               >
                 <Check aria-hidden className="size-5 text-energy-deep" />
-                <h3 className="mt-3 text-base font-extrabold text-navy-900">{item.title}</h3>
+                <h3 className="mt-3 text-base font-extrabold text-navy-900">{tc(item.title)}</h3>
                 <p className="mt-2 text-sm leading-6 text-ink">{item.text}</p>
               </li>
             ))}
@@ -156,11 +157,11 @@ export default function OutsourcingPage() {
         <div className="container-site section-y grid gap-5 lg:grid-cols-2">
           <div data-reveal className="rounded-xl border border-line p-7 sm:p-9">
             <p className="eyebrow text-teal-700">Engagement options</p>
-            <h2 className="mt-2 text-xl font-extrabold text-navy-900">How packages can be structured</h2>
+            <h3 className="mt-2 text-xl font-extrabold text-navy-900">How Packages Can Be Structured</h3>
             <ul className="mt-6">
               {engagementOptions.map((option) => (
                 <li key={option.title} className="border-t border-line py-4">
-                  <p className="font-bold text-navy-900">{option.title}</p>
+                  <p className="font-bold text-navy-900">{tc(option.title)}</p>
                   <p className="mt-1 text-sm leading-6 text-ink">{option.text}</p>
                 </li>
               ))}
@@ -172,7 +173,7 @@ export default function OutsourcingPage() {
           </div>
           <div data-reveal className="rounded-xl bg-navy-800 p-7 text-mist sm:p-9">
             <FileLock2 aria-hidden className="size-7 text-energy" />
-            <h2 className="mt-4 text-xl font-extrabold text-white">Confidentiality and file exchange</h2>
+            <h3 className="mt-4 text-xl font-extrabold text-white">Confidentiality and File Exchange</h3>
             <ul className="mt-5 space-y-3 text-[0.9375rem] leading-7">
               <li className="flex gap-3">
                 <Check aria-hidden className="mt-1.5 size-4 shrink-0 text-energy" />
@@ -209,7 +210,7 @@ export default function OutsourcingPage() {
       <section className="bg-white">
         <div className="container-site section-y grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-6">
-            <SectionHeading slab title="Before You Commission" size="md" />
+            <SectionHeading slab title="Before You Commission" />
             <p data-reveal className="mt-5 text-base leading-7 text-ink">
               Review the professional experience behind the team, the standards framework we work within, and how every
               package is checked and handed over.

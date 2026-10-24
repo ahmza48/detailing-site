@@ -13,6 +13,7 @@ import { softwareQualifier } from "@/lib/software";
 import { industries, industryPath } from "@/lib/industries";
 import { pageMetadata } from "@/lib/seo";
 import { priorEnvironments } from "@/lib/site";
+import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
   title: "About",
@@ -90,7 +91,7 @@ export default function AboutPage() {
                   className="rounded-xl bg-paper p-5"
                 >
                   <pillar.icon aria-hidden className="size-6 text-energy-deep" />
-                  <h3 className="mt-3 text-[0.9375rem] font-extrabold text-navy-900">{pillar.title}</h3>
+                  <h3 className="mt-3 text-[0.9375rem] font-extrabold text-navy-900">{tc(pillar.title)}</h3>
                   <p className="mt-1.5 text-sm leading-6 text-ink">{pillar.text}</p>
                 </li>
               ))}
@@ -172,7 +173,6 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="Our industries"
               title="Energy & Process Facilities"
-              size="md"
               intro="Our work is concentrated on the facilities where our senior team's experience lies."
             />
             <ArrowLink href="/industries" className="mt-7">
@@ -213,7 +213,7 @@ export default function AboutPage() {
                 className="border-t-2 border-navy-900 pt-6 pb-10"
               >
                 <span className="text-xs font-bold text-energy-ink tabular-nums">{String(index + 1).padStart(2, "0")}</span>
-                <h3 className="mt-3 text-lg font-extrabold text-navy-900">{step.title}</h3>
+                <h3 className="mt-3 text-lg font-extrabold text-navy-900">{tc(step.title)}</h3>
                 <p className="mt-3 text-[0.9375rem] leading-relaxed text-slate">{step.text}</p>
               </li>
             ))}
@@ -237,14 +237,13 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="Quality & review"
               title="Checked Before It Is Issued"
-              size="md"
               intro="Structural deliverables are only useful if they can be relied on. Checking is part of production, not a step added at the end."
             />
             <ul data-reveal className="mt-8 max-w-xl border-t border-line">
               {quality.map((item) => (
                 <li key={item} className="flex items-center gap-3 border-b border-line py-3.5 text-[0.9375rem] font-semibold text-ink">
                   <span aria-hidden className="size-1.5 shrink-0 bg-energy-deep" />
-                  {item}
+                  {tc(item)}
                 </li>
               ))}
             </ul>
@@ -267,7 +266,7 @@ export default function AboutPage() {
                 style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
                 className="rounded-xl bg-white p-6 shadow-[0_6px_20px_rgb(0_36_56/0.07)]"
               >
-                <h3 className="text-base font-extrabold text-navy-900">{principle.title}</h3>
+                <h3 className="text-base font-extrabold text-navy-900">{tc(principle.title)}</h3>
                 <p className="mt-2 text-sm leading-6 text-ink">{principle.text}</p>
               </li>
             ))}
@@ -282,7 +281,6 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="Software experience"
               title="Tools of the Energy Sector"
-              size="md"
               onDark
               intro={softwareQualifier}
             />

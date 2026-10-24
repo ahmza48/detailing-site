@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { industries, industryPath, type Industry } from "@/lib/industries";
 import { serviceBySlug, servicePath } from "@/lib/services";
 import { ButtonLink } from "./ButtonLink";
+import { tc } from "@/lib/text";
 
 /** Large image-led industry block on the Industries hub, leading to the industry page. */
 export function IndustrySection({ industry, index }: { industry: Industry; index: number }) {
@@ -35,7 +36,7 @@ export function IndustrySection({ industry, index }: { industry: Industry; index
         </div>
 
         <div data-reveal className="flex flex-col justify-center px-5 py-14 sm:px-8 lg:px-16 lg:py-20">
-          <h2 id={`${industry.slug}-title`} className="display-md text-balance text-navy-900 uppercase">
+          <h2 id={`${industry.slug}-title`} className="display-lg text-balance text-navy-900">
             <Link href={industryPath(industry.slug)} className="hover:text-energy-ink">
               {industry.name}
             </Link>
@@ -47,7 +48,7 @@ export function IndustrySection({ industry, index }: { industry: Industry; index
             {industry.structures.slice(0, 5).map((item) => (
               <li key={item} className="flex items-center gap-2.5">
                 <span aria-hidden className="size-1.5 bg-energy-deep" />
-                {item}
+                {tc(item)}
               </li>
             ))}
           </ul>

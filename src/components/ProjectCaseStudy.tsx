@@ -4,6 +4,7 @@ import type { Project } from "@/lib/projects";
 import { serviceBySlug, servicePath } from "@/lib/services";
 import { ArrowLink } from "./ButtonLink";
 import { DiagramViewer } from "./DiagramViewer";
+import { tc } from "@/lib/text";
 
 function Meta({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -22,7 +23,7 @@ function BulletList({ title, items }: { title: string; items: string[] }) {
         {items.map((item) => (
           <li key={item} className="flex gap-3">
             <span aria-hidden className="mt-2 size-1.5 shrink-0 bg-energy-deep" />
-            {item}
+            {tc(item)}
           </li>
         ))}
       </ul>

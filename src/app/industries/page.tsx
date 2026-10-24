@@ -9,6 +9,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { applications } from "@/lib/applications";
 import { industries } from "@/lib/industries";
 import { pageMetadata } from "@/lib/seo";
+import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
   title: "Industries & Project Environments",
@@ -113,7 +114,7 @@ export default function IndustriesPage() {
                   />
                   <div aria-hidden className="absolute inset-0 -z-10 bg-linear-to-t from-navy-900/95 via-navy-900/50 to-navy-900/10" />
                   <span className="flex w-full items-end justify-between gap-3 text-base leading-5 font-extrabold">
-                    {application.title}
+                    {tc(application.title)}
                     <ArrowRight aria-hidden className="size-4 shrink-0 text-energy transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
                 </Link>

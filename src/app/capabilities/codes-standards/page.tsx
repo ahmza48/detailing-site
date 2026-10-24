@@ -6,6 +6,7 @@ import { CTASection } from "@/components/CTASection";
 import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { pageMetadata } from "@/lib/seo";
+import { tc } from "@/lib/text";
 import { serviceBySlug, servicePath, services } from "@/lib/services";
 import { standardById, standardGroups, standards, type StandardReference } from "@/lib/standards";
 
@@ -41,7 +42,7 @@ function StandardCard({ standard, index }: { standard: StandardReference; index:
         <div>
           <p className="text-xs font-bold tracking-[0.08em] text-teal-700 uppercase">{standard.publisher}</p>
           <h3 className="mt-1 text-lg font-extrabold text-navy-900">{standard.identifier}</h3>
-          <p className="text-sm font-semibold text-ink">{standard.title}</p>
+          <p className="text-sm font-semibold text-ink">{tc(standard.title)}</p>
         </div>
         {standard.sourceUrl && (
           <a
@@ -120,7 +121,7 @@ export default function CodesStandardsPage() {
           <aside data-reveal className="lg:col-span-5">
             <div className="rounded-xl bg-navy-900 p-7 text-mist sm:p-9">
               <Info aria-hidden className="size-6 text-energy" />
-              <h2 className="mt-4 text-lg font-extrabold text-white">Editions are project-specific</h2>
+              <h3 className="mt-4 text-lg font-extrabold text-white">Editions Are Project-Specific</h3>
               <p className="mt-3 text-[0.9375rem] leading-7">
                 No edition is assumed. If your contract specifies an older or newer edition, the package follows the
                 contract, subject to your responsible engineer&rsquo;s review. Client and project specifications normally
@@ -137,7 +138,7 @@ export default function CodesStandardsPage() {
         .map((group) => (
           <section key={group.id} id={group.id} className="bg-paper">
             <div className="container-site section-y">
-              <SectionHeading slab title={group.title} size="md" intro={group.text} />
+              <SectionHeading slab title={group.title} intro={group.text} />
               <ul className="mt-10 grid gap-5 lg:grid-cols-2">
                 {standards
                   .filter((s) => s.group === group.id)
@@ -151,15 +152,20 @@ export default function CodesStandardsPage() {
 
       {/* Smaller groups side by side */}
       <section className="bg-white">
-        <div className="container-site section-y grid gap-8 lg:grid-cols-3">
+        <div className="container-site section-y">
+          <SectionHeading
+            slab
+            title="Specifications, Information & Approvals"
+            intro="Project specifications, information-management procedures and quality frameworks that sit alongside the design standards."
+          />
+          <div className="mt-12 grid gap-8 lg:grid-cols-3">
           {standardGroups
             .filter((group) => group.id !== "design-construction")
             .map((group) => (
               <div key={group.id} id={group.id} className="flex flex-col">
-                <span aria-hidden className="slab mb-5 h-9 w-11" />
-                <h2 data-reveal className="text-xl leading-7 font-extrabold text-navy-900">
-                  {group.title}
-                </h2>
+                <h3 data-reveal className="border-t-2 border-navy-900 pt-5 text-xl leading-7 font-extrabold text-navy-900">
+                  {tc(group.title)}
+                </h3>
                 <p data-reveal className="mt-3 text-[0.9375rem] leading-7 text-ink">
                   {group.text}
                 </p>
@@ -172,6 +178,7 @@ export default function CodesStandardsPage() {
                 </ul>
               </div>
             ))}
+          </div>
         </div>
       </section>
 
@@ -225,7 +232,7 @@ export default function CodesStandardsPage() {
       <section className="bg-white">
         <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <SectionHeading slab title="Confirmed at Project Initiation" size="md" />
+            <SectionHeading slab title="Confirmed at Project Initiation" />
             <p data-reveal className="mt-5 text-base leading-7 text-ink">
               For each package, the applicable standards are agreed and recorded before production starts, so everyone
               works to the same basis.
@@ -238,7 +245,7 @@ export default function CodesStandardsPage() {
             {registerFields.map((field) => (
               <li key={field} className="flex items-center gap-3 border-b border-line py-3.5 text-[0.9375rem] font-medium text-ink">
                 <Check aria-hidden className="size-4 shrink-0 text-energy-deep" />
-                {field}
+                {tc(field)}
               </li>
             ))}
           </ul>

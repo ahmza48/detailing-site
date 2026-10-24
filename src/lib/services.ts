@@ -35,6 +35,8 @@ export type Service = {
   group: ServiceGroupId;
   /** Card headline and menu label. */
   title: string;
+  /** One-line description for the navigation menu. */
+  menuText: string;
   /** H1, split so the second part carries the accent colour. */
   heading: [string, string];
   image: string;
@@ -95,6 +97,7 @@ export const services: Service[] = [
     status: "confirmed",
     group: "drawings-models",
     title: "Civil & Structural CAD Drafting",
+    menuText: "GA, plans, sections and foundation layouts",
     heading: ["Civil & Structural", "CAD Drafting Services"],
     image: "/images/drawings-qaqc.jpg",
     imageAlt: "Engineering drawings on a desk with drafting pencils and a scale rule",
@@ -247,6 +250,7 @@ export const services: Service[] = [
     status: "confirmed",
     group: "drawings-models",
     title: "3D Structural & Plant Modelling",
+    menuText: "TEKLA and plant models, updates and exchanges",
     heading: ["TEKLA Structures &", "3D Structural Modelling"],
     image: "/images/plant-model.jpg",
     imageAlt: "Tall steel process structure with platforms and piping against a blue sky",
@@ -406,6 +410,7 @@ export const services: Service[] = [
     status: "confirmed",
     group: "detailing",
     title: "Structural Steel Detailing & Fabrication",
+    menuText: "Shop, assembly and erection drawings",
     heading: ["Structural Steel Detailing &", "Fabrication Drawings"],
     image: "/images/tekla-model.jpg",
     imageAlt: "Bolted structural steel connection where four members meet",
@@ -561,6 +566,7 @@ export const services: Service[] = [
     status: "confirmed",
     group: "detailing",
     title: "RCC & Reinforcement Detailing",
+    menuText: "RCC details, rebar drawings and BBS",
     heading: ["RCC & Reinforcement Detailing,", "Rebar Drawings and BBS"],
     image: "/images/rcc-detailing.jpg",
     imageAlt: "Reinforcement cages being fixed for a concrete structure",
@@ -708,6 +714,7 @@ export const services: Service[] = [
     status: "confirmed",
     group: "modifications-docs",
     title: "Brownfield Modifications & As-Builts",
+    menuText: "Modification packages and as-builts",
     heading: ["Brownfield Structural Modifications", "& As-Built Documentation"],
     image: "/images/brownfield-structure.jpg",
     imageAlt: "Existing refinery units with columns, piping and steel structures",
@@ -857,6 +864,7 @@ export const services: Service[] = [
     status: "confirmed",
     group: "modifications-docs",
     title: "MTO & Engineering Documentation",
+    menuText: "Quantities, registers and controlled issue",
     heading: ["Material Take-Offs, Schedules", "& Engineering Documentation"],
     image: "/images/services-overview.jpg",
     imageAlt: "Multi-level steel process structure with large-bore piping",

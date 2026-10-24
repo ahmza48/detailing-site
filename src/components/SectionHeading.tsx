@@ -8,7 +8,6 @@ type Props = {
   intro?: ReactNode;
   onDark?: boolean;
   as?: "h2" | "h3";
-  size?: "lg" | "md";
   /** Centred layout with the green slab mark behind the heading. */
   centered?: boolean;
   /** Show the green slab mark above a left-aligned heading. */
@@ -23,13 +22,12 @@ export function SectionHeading({
   intro,
   onDark = false,
   as: Tag = "h2",
-  size = "lg",
   centered = false,
   slab = false,
   className = "",
 }: Props) {
   const heading = (
-    <Tag className={`${size === "lg" ? "display-lg" : "display-md"} relative text-balance ${onDark ? "text-white" : "text-navy-900"}`}>
+    <Tag className={`display-lg relative text-balance ${onDark ? "text-white" : "text-navy-900"}`}>
       {title}
       {accent && <span className={`block ${onDark ? "text-energy" : "text-energy-deep"}`}>{accent}</span>}
     </Tag>

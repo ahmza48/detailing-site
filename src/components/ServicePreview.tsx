@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { servicePath, type Service } from "@/lib/services";
 import { ButtonLink } from "./ButtonLink";
+import { tc } from "@/lib/text";
 
 /** Service card for the homepage grid: rounded photograph, title, summary. */
 export function ServiceCard({ service, index }: { service: Service; index: number }) {
@@ -62,10 +63,10 @@ export function ServicePreview({ service, index }: { service: Service; index: nu
         </div>
 
         <div data-reveal className="lg:col-span-6">
-          <span aria-hidden className="slab mb-5 scale-75 origin-left" />
+          <span aria-hidden className="slab mb-6" />
           <h2
             id={`${service.slug}-title`}
-            className={`text-2xl leading-8 font-extrabold text-balance uppercase sm:text-[1.75rem] sm:leading-9 ${dark ? "text-mist" : "text-navy-900"}`}
+            className={`display-lg text-balance ${dark ? "text-mist" : "text-navy-900"}`}
           >
             {service.title}
           </h2>
@@ -79,7 +80,7 @@ export function ServicePreview({ service, index }: { service: Service; index: nu
                 }`}
               >
                 <ArrowRight aria-hidden className={`size-4 shrink-0 ${dark ? "text-energy" : "text-energy-deep"}`} />
-                {item}
+                {tc(item)}
               </li>
             ))}
           </ul>

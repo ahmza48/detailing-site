@@ -88,7 +88,7 @@ export default function ProjectExperiencePage() {
       <section id="work-samples" className="bg-navy-900 text-white">
         <div className="container-site section-y grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-6">
-            <SectionHeading slab eyebrow="Technical work samples" title="Company Work and Demonstration Samples" size="md" onDark />
+            <SectionHeading slab eyebrow="Technical work samples" title="Company Work and Demonstration Samples" onDark />
           </div>
           <div data-reveal className="space-y-4 text-base leading-7 text-white/85 lg:col-span-6">
             <p>

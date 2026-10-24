@@ -15,6 +15,7 @@ import { industries, industryBySlug, industryPath, type Industry } from "@/lib/i
 import { projectsForIndustry } from "@/lib/projects";
 import { pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath } from "@/lib/services";
+import { tc } from "@/lib/text";
 
 export function generateStaticParams() {
   return industries.map((industry) => ({ slug: industry.slug }));
@@ -62,8 +63,8 @@ function IndustryLayout({ industry }: { industry: Industry }) {
       <section className="bg-white">
         <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div data-reveal className="lg:col-span-7">
-            <p className="eyebrow text-teal-700">Overview</p>
-            <h2 className="mt-3 text-xl leading-8 font-bold text-navy-900 sm:text-2xl sm:leading-9">{industry.intro[0]}</h2>
+            <SectionHeading slab title="Industry Overview" />
+            <p className="mt-6 text-lg leading-8 font-semibold text-navy-900 sm:text-xl sm:leading-9">{industry.intro[0]}</p>
             {industry.intro.slice(1).map((paragraph) => (
               <p key={paragraph} className="mt-5 text-base leading-7 text-ink sm:text-[1.0625rem] sm:leading-8">
                 {paragraph}
@@ -73,12 +74,12 @@ function IndustryLayout({ industry }: { industry: Industry }) {
           <aside data-reveal className="lg:col-span-5">
             <div className="rounded-xl bg-navy-900 p-7 text-mist shadow-[0_18px_40px_rgb(0_36_56/0.18)] sm:p-9">
               <span aria-hidden className="slab mb-5 h-9 w-11" />
-              <h2 className="text-lg font-extrabold uppercase">Typical structures</h2>
+              <h3 className="text-lg font-extrabold">Typical Structures</h3>
               <ul className="mt-5">
                 {industry.structures.map((item) => (
                   <li key={item} className="flex gap-3 border-t border-white/12 py-3 text-sm font-semibold">
                     <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-energy" />
-                    {item}
+                    {tc(item)}
                   </li>
                 ))}
               </ul>
@@ -91,7 +92,7 @@ function IndustryLayout({ industry }: { industry: Industry }) {
       <section className="bg-navy-900 text-white">
         <div className="container-site section-y grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-6">
-            <SectionHeading title={industry.focus.heading} size="md" onDark />
+            <SectionHeading title={industry.focus.heading} onDark />
             <p data-reveal className="mt-6 max-w-xl text-base leading-7 text-white/85 sm:text-lg sm:leading-8">
               {industry.focus.body}
             </p>
@@ -153,32 +154,35 @@ function IndustryLayout({ industry }: { industry: Industry }) {
         <div className="container-site section-y grid gap-5 lg:grid-cols-2">
           <div data-reveal className="rounded-xl border border-line p-7 sm:p-9">
             <p className="eyebrow text-teal-700">Typical inputs & constraints</p>
-            <h2 className="mt-2 text-xl font-extrabold text-navy-900">What shapes the work here</h2>
+            <h3 className="mt-2 text-xl font-extrabold text-navy-900">What Shapes the Work Here</h3>
             <ul className="mt-6">
               {industry.constraints.map((item) => (
                 <li key={item} className="flex gap-3.5 border-t border-line py-3.5 text-[0.9375rem] leading-6 font-medium text-ink">
                   <ArrowRight aria-hidden className="mt-1 size-4 shrink-0 text-energy-deep" />
-                  {item}
+                  {tc(item)}
                 </li>
               ))}
             </ul>
           </div>
           <div data-reveal className="rounded-xl bg-navy-800 p-7 text-mist sm:p-9">
             <p className="eyebrow text-energy">Scope & responsibility</p>
-            <h2 className="mt-2 text-xl font-extrabold text-white">Design stays with the responsible engineer</h2>
+            <h3 className="mt-2 text-xl font-extrabold text-white">Design Stays With the Responsible Engineer</h3>
             <p className="mt-4 text-[0.9375rem] leading-7">
               We produce drawings, models, detailing and documentation from approved design information. Design
               decisions, calculations and approvals remain with the responsible engineer.
             </p>
             {industry.boundaries && (
-              <ul className="mt-5">
-                {industry.boundaries.map((item) => (
-                  <li key={item} className="flex gap-3.5 border-t border-white/15 py-3.5 text-[0.9375rem] leading-6 font-medium">
-                    <CircleSlash aria-hidden className="mt-1 size-4 shrink-0 text-energy" />
-                    Not included: {item.charAt(0).toLowerCase() + item.slice(1)}
-                  </li>
-                ))}
-              </ul>
+              <>
+                <p className="mt-6 text-xs font-bold tracking-[0.12em] text-energy uppercase">Not included</p>
+                <ul className="mt-2">
+                  {industry.boundaries.map((item) => (
+                    <li key={item} className="flex gap-3.5 border-t border-white/15 py-3.5 text-[0.9375rem] leading-6 font-medium">
+                      <CircleSlash aria-hidden className="mt-1 size-4 shrink-0 text-energy" />
+                      {tc(item)}
+                    </li>
+                  ))}
+                </ul>
+              </>
             )}
           </div>
         </div>
@@ -196,7 +200,7 @@ function IndustryLayout({ industry }: { industry: Industry }) {
         <section className="bg-white">
           <div className="container-site section-y">
             <div className="flex flex-wrap items-end justify-between gap-6">
-              <SectionHeading slab title="Selected Professional Experience" size="md" />
+              <SectionHeading slab title="Selected Professional Experience" />
               <ArrowLink href="/project-experience">All professional experience</ArrowLink>
             </div>
             <Disclaimer
@@ -215,7 +219,7 @@ function IndustryLayout({ industry }: { industry: Industry }) {
       {/* Other industries */}
       <section className="bg-paper">
         <div className="container-site section-y">
-          <SectionHeading slab title="Other Industries" size="md" />
+          <SectionHeading slab title="Other Industries" />
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {others.map((other) => (
               <li key={other.slug}>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { software, type SoftwareTool } from "@/lib/software";
+import { tc } from "@/lib/text";
 
 /** Closing note cell fills the remainder of the last four-column row. */
 const fillSpan: Record<number, string> = {
@@ -37,7 +38,7 @@ export function SoftwareCapabilities({
             {tool.name}
           </h3>
           <p className={`mt-1 text-xs font-medium ${onDark ? "text-haze" : "text-slate"}`}>
-            {tool.discipline}
+            {tc(tool.discipline)}
           </p>
           {detailed && (
             <p className={`mt-4 text-sm leading-relaxed ${onDark ? "text-haze" : "text-slate"}`}>{tool.use}</p>

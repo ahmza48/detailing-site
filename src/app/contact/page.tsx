@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { Hero } from "@/components/Hero";
+import { SectionHeading } from "@/components/SectionHeading";
 import { pageMetadata } from "@/lib/seo";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
 import { site, telHref, whatsappHref } from "@/lib/site";
+import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
   title: "Request an Engineering Services Quote",
@@ -51,7 +53,7 @@ export default function ContactPage() {
               {helpful.map((item) => (
                 <li key={item} className="flex gap-3 border-b border-line py-3.5 text-[0.9375rem] font-medium text-ink">
                   <span aria-hidden className="mt-2 size-1.5 shrink-0 bg-energy-deep" />
-                  {item}
+                  {tc(item)}
                 </li>
               ))}
             </ul>
@@ -126,12 +128,12 @@ export default function ContactPage() {
           </aside>
 
           <div className="lg:col-span-8">
-            <h2 className="display-md text-navy-900 uppercase">Quote request</h2>
-            <p className="mt-3 mb-8 max-w-2xl text-[0.9375rem] leading-7 text-ink">
-              A short scope summary is enough to start. Confidential drawings and models are exchanged after first
-              contact, through your document system or a transfer method agreed with you, and under an NDA if you
-              request one.
-            </p>
+            <SectionHeading
+              slab
+              title="Quote Request"
+              intro="A short scope summary is enough to start. Confidential drawings and models are exchanged after first contact, through your document system or a transfer method agreed with you, and under an NDA if you request one."
+              className="mb-10"
+            />
             <ContactForm />
           </div>
         </div>

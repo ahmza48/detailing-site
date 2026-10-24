@@ -3,9 +3,36 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
-import { ArrowRight, ChevronDown, MapPin, Menu, Phone, X } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Box,
+  ChevronDown,
+  ClipboardList,
+  Construction,
+  Cylinder,
+  DraftingCompass,
+  Factory,
+  FileStack,
+  FlaskConical,
+  Flame,
+  Grid3x3,
+  Handshake,
+  Layers,
+  MapPin,
+  Menu,
+  MonitorCog,
+  Phone,
+  ShieldCheck,
+  Ship,
+  Wrench,
+  X,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import { industries, industryPath } from "@/lib/industries";
-import { serviceGroups, servicePath, servicesInGroup } from "@/lib/services";
+import { serviceGroups, servicePath, servicesInGroup, type ServiceSlug } from "@/lib/services";
+import type { IndustrySlug } from "@/lib/industries";
 import {
   applicationsLink,
   capabilitiesMenu,
@@ -33,14 +60,40 @@ const sectionAlso: Partial<Record<NavMenuId, string[]>> = {
 
 const stagger = (index: number) => ({ "--i": index }) as React.CSSProperties;
 
-type MenuSection = { heading?: string; links: (NavLink & { index?: string })[] };
+type MenuLink = NavLink & { text?: string; icon: LucideIcon };
+type MenuSection = { heading?: string; links: MenuLink[] };
 type MenuContent = {
   title: string;
   text: string;
   all: NavLink;
   sections: MenuSection[];
-  /** Highlighted link below the list (Engineering Outsourcing in Services). */
-  highlight?: NavLink & { text: string };
+  /** Columns for the links grid in the desktop panel. */
+  columns: 1 | 2;
+};
+
+const serviceIcons: Record<ServiceSlug, LucideIcon> = {
+  "civil-structural-drafting": DraftingCompass,
+  "plant-structural-3d-modelling": Box,
+  "steel-detailing-fabrication": Construction,
+  "rcc-reinforcement-detailing": Grid3x3,
+  "brownfield-structural-modifications": Wrench,
+  "material-takeoffs-documentation": ClipboardList,
+};
+
+const industryIcons: Record<IndustrySlug, LucideIcon> = {
+  "onshore-oil-gas": Flame,
+  "gas-processing-ngl": Cylinder,
+  "offshore-energy": Ship,
+  "refining-petrochemicals": Factory,
+  "process-plants": FlaskConical,
+  "power-industrial": Zap,
+};
+
+const capabilityMeta: Record<string, { icon: LucideIcon; text: string }> = {
+  "/capabilities": { icon: MonitorCog, text: "Deliverables and software experience" },
+  "/capabilities/codes-standards": { icon: BookOpen, text: "How project standards are applied" },
+  "/quality-delivery": { icon: ShieldCheck, text: "Checking, revisions and handover" },
+  "/capabilities#formats": { icon: FileStack, text: "Platforms, versions and exchange" },
 };
 
 /** Dropdown contents. Built once; the same data drives the mobile accordions. */
@@ -49,32 +102,80 @@ const menus: Record<NavMenuId, MenuContent> = {
     title: "Our Services",
     text: "Six technical service lines, from arrangement drawings to fabrication documentation. Any one can be engaged on its own.",
     all: { label: "View all services", href: "/services" },
-    sections: serviceGroups.map((group) => ({
-      heading: group.title,
-      links: servicesInGroup(group.id).map((service) => ({
-        label: service.title,
-        href: servicePath(service.slug),
-        index: service.id.slice(1),
+    columns: 2,
+    sections: [
+      ...serviceGroups.map((group) => ({
+        heading: group.title,
+        links: servicesInGroup(group.id).map((service) => ({
+          label: service.title,
+          href: servicePath(service.slug),
+          text: service.menuText,
+          icon: serviceIcons[service.slug],
+        })),
       })),
-    })),
-    highlight: { ...outsourcingLink, text: "Subcontract a defined drawing, modelling or detailing package." },
+      {
+        heading: "Engagement route",
+        links: [{ ...outsourcingLink, text: "Subcontract a defined drawing, modelling or detailing package", icon: Handshake }],
+      },
+    ],
   },
   industries: {
     title: "Industries",
     text: "Where our services are applied, onshore and offshore, on new and existing facilities.",
     all: { label: "All industries", href: "/industries" },
+    columns: 2,
     sections: [
-      { links: industries.map((industry) => ({ label: industry.short, href: industryPath(industry.slug) })) },
-      { heading: "Find by structure", links: [applicationsLink] },
+      {
+        links: industries.map((industry) => ({
+          label: industry.short,
+          href: industryPath(industry.slug),
+          icon: industryIcons[industry.slug],
+        })),
+      },
+      {
+        heading: "Find by structure",
+        links: [{ ...applicationsLink, text: "Pipe racks, platforms, supports, foundations", icon: Layers }],
+      },
     ],
   },
   capabilities: {
     title: "Technical Capabilities",
     text: "Software, deliverables, standards and how every package is checked and handed over.",
     all: { label: "Capabilities overview", href: "/capabilities" },
-    sections: [{ links: capabilitiesMenu }],
+    columns: 2,
+    sections: [
+      {
+        links: capabilitiesMenu.map((link) => ({ ...link, ...capabilityMeta[link.href] })),
+      },
+    ],
   },
 };
+
+/** One menu entry: tinted icon tile, label and optional one-line description. */
+function MenuItem({ link, current }: { link: MenuLink; current: boolean }) {
+  const Icon = link.icon;
+  return (
+    <Link
+      href={link.href}
+      aria-current={current ? "page" : undefined}
+      className={`group flex items-start gap-3.5 rounded-lg p-3 transition-colors duration-200 hover:bg-paper ${current ? "bg-paper" : ""}`}
+    >
+      <span
+        className={`grid size-10 shrink-0 place-items-center rounded-lg transition-colors duration-200 group-hover:bg-energy-deep group-hover:text-white ${
+          current ? "bg-energy-deep text-white" : "bg-energy-deep/10 text-energy-ink"
+        }`}
+      >
+        <Icon aria-hidden className="size-5" strokeWidth={1.75} />
+      </span>
+      <span className="min-w-0 flex-1 pt-0.5">
+        <span className={`block text-sm leading-5 font-bold ${current ? "text-energy-ink" : "text-navy-900"} group-hover:text-energy-ink`}>
+          {link.label}
+        </span>
+        {link.text && <span className="mt-0.5 block text-xs leading-4 text-slate">{link.text}</span>}
+      </span>
+    </Link>
+  );
+}
 
 export function Navbar() {
   const pathname = usePathname();
@@ -250,7 +351,7 @@ export function Navbar() {
                     <div
                       id={panelId}
                       className={`absolute top-full pt-4 ${
-                        wide ? "left-1/2 w-[50rem] -translate-x-[40%]" : "left-1/2 w-[38rem] -translate-x-1/2"
+                        wide ? "left-1/2 w-[54rem] -translate-x-[40%]" : "left-1/2 w-[44rem] -translate-x-1/2"
                       }`}
                     >
                       <div
@@ -272,53 +373,23 @@ export function Navbar() {
                             {menu.all.label}
                           </Link>
                         </div>
-                        <div className="p-3">
+                        <div className="p-4">
                           {menu.sections.map((section, s) => (
-                            <div key={section.heading ?? s} className={s > 0 ? "mt-2 border-t border-line pt-2" : ""}>
+                            <div key={section.heading ?? s} className={s > 0 ? "mt-2 border-t border-line pt-3" : ""}>
                               {section.heading && (
-                                <p className="px-4 pt-2 pb-1 text-[0.6875rem] font-bold tracking-[0.12em] text-energy-ink uppercase">
+                                <p className="px-3 pt-1 pb-1.5 text-[0.6875rem] font-bold tracking-[0.12em] text-energy-ink uppercase">
                                   {section.heading}
                                 </p>
                               )}
-                              <ul>
-                                {section.links.map((link, index) => {
-                                  const current = pathname === link.href;
-                                  return (
-                                    <li key={link.href} className="menu-item" style={stagger(s * 3 + index)}>
-                                      <Link
-                                        href={link.href}
-                                        aria-current={current ? "page" : undefined}
-                                        className={`group flex items-center gap-4 rounded-lg px-4 py-2 text-sm font-semibold transition-colors duration-200 hover:bg-paper ${
-                                          current ? "bg-paper text-energy-ink" : "text-navy-900"
-                                        }`}
-                                      >
-                                        {link.index && (
-                                          <span className="w-5 text-xs font-bold text-energy-deep tabular-nums">{link.index}</span>
-                                        )}
-                                        <span className="flex-1">{link.label}</span>
-                                        <ArrowRight
-                                          aria-hidden
-                                          className="size-4 shrink-0 -translate-x-2 text-energy-deep opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100"
-                                        />
-                                      </Link>
-                                    </li>
-                                  );
-                                })}
+                              <ul className={`grid gap-1 ${menu.columns === 2 && section.links.length > 1 ? "grid-cols-2" : ""}`}>
+                                {section.links.map((link, index) => (
+                                  <li key={link.href} className="menu-item" style={stagger(s * 2 + index)}>
+                                    <MenuItem link={link} current={pathname === link.href} />
+                                  </li>
+                                ))}
                               </ul>
                             </div>
                           ))}
-                          {menu.highlight && (
-                            <Link
-                              href={menu.highlight.href}
-                              className="group mt-3 flex items-center gap-4 rounded-lg bg-navy-900 px-4 py-3 text-white transition-colors hover:bg-navy-800"
-                            >
-                              <span className="flex-1">
-                                <span className="block text-sm font-bold">{menu.highlight.label}</span>
-                                <span className="block text-xs text-haze">{menu.highlight.text}</span>
-                              </span>
-                              <ArrowRight aria-hidden className="size-4 text-energy transition-transform group-hover:translate-x-1" />
-                            </Link>
-                          )}
                         </div>
                       </div>
                     </div>
@@ -429,15 +500,6 @@ export function Navbar() {
                               </ul>
                             </div>
                           ))}
-                          {menu.highlight && (
-                            <Link
-                              href={menu.highlight.href}
-                              className="mt-2 flex min-h-12 items-center gap-2 py-2 text-[0.9375rem] font-bold text-white"
-                            >
-                              {menu.highlight.label}
-                              <ArrowRight aria-hidden className="size-4 text-energy" />
-                            </Link>
-                          )}
                         </div>
                       )}
                     </>

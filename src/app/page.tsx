@@ -20,6 +20,7 @@ import { pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath, services, type ServiceSlug } from "@/lib/services";
 import { softwareQualifier } from "@/lib/software";
 import { associatedOrganizations, site, trustMetrics } from "@/lib/site";
+import { tc } from "@/lib/text";
 
 export const metadata: Metadata = {
   ...pageMetadata({
@@ -134,7 +135,7 @@ export default function HomePage() {
                 style={{ "--reveal-delay": `${(i % 2) * 70}ms` } as React.CSSProperties}
                 className="flex flex-col rounded-xl border border-line p-7"
               >
-                <h3 className="text-lg font-extrabold text-navy-900">{pkg.title}</h3>
+                <h3 className="text-lg font-extrabold text-navy-900">{tc(pkg.title)}</h3>
                 <dl className="mt-4 flex-1 space-y-3 text-[0.9375rem] leading-6">
                   <div>
                     <dt className="text-[0.6875rem] font-bold tracking-[0.12em] text-teal-700 uppercase">You provide</dt>
@@ -336,7 +337,7 @@ export default function HomePage() {
             (item) => (
               <li key={item} className="flex items-center gap-3 text-[0.9375rem] font-medium">
                 <Check aria-hidden className="size-4 shrink-0 text-energy" />
-                {item}
+                {tc(item)}
               </li>
             ),
           )}

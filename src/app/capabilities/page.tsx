@@ -10,6 +10,7 @@ import { SoftwareCapabilities } from "@/components/SoftwareCapabilities";
 import { pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath, type ServiceSlug } from "@/lib/services";
 import { software, softwareQualifier } from "@/lib/software";
+import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
   title: "Software, Deliverables & Technical Capabilities",
@@ -136,12 +137,12 @@ export default function CapabilitiesPage() {
                   style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties}
                   className="flex flex-col border-t-2 border-navy-900 pt-6 pb-10"
                 >
-                  <h3 className="text-lg font-extrabold text-navy-900">{group.group}</h3>
+                  <h3 className="text-lg font-extrabold text-navy-900">{tc(group.group)}</h3>
                   <ul className="mt-4 flex-1 space-y-2.5 text-[0.9375rem] font-medium text-slate">
                     {group.items.map((item) => (
                       <li key={item} className="flex gap-3">
                         <span aria-hidden className="mt-2 size-1.5 shrink-0 bg-energy-deep" />
-                        {item}
+                        {tc(item)}
                       </li>
                     ))}
                   </ul>
@@ -206,7 +207,7 @@ export default function CapabilitiesPage() {
       <section id="formats" className="bg-white">
         <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <SectionHeading slab title="File Formats & Workflow" size="md" />
+            <SectionHeading slab title="File Formats & Workflow" />
             <p data-reveal className="mt-5 text-base leading-7 text-ink">
               Compatibility is agreed, not assumed. Platforms, versions and formats are confirmed during scope review and
               recorded before production starts.
@@ -225,7 +226,7 @@ export default function CapabilitiesPage() {
               >
                 <span className="text-2xl font-extrabold text-energy-ink tabular-nums">{String(index + 1).padStart(2, "0")}</span>
                 <div>
-                  <h3 className="text-lg font-extrabold text-navy-900">{step.title}</h3>
+                  <h3 className="text-lg font-extrabold text-navy-900">{tc(step.title)}</h3>
                   <p className="mt-2 text-[0.9375rem] leading-relaxed text-slate">{step.text}</p>
                 </div>
               </li>
@@ -299,7 +300,6 @@ export default function CapabilitiesPage() {
             <SectionHeading
               eyebrow="3D modelling"
               title="Modelling Inside the Project Environment"
-              size="md"
               onDark
               intro="Structural models built in Tekla Structures, with prior project experience in PDS and Frameworks Plus plant environments and exposure to PDMS. Positioned for energy and process plants, not architectural BIM."
             />
@@ -307,7 +307,7 @@ export default function CapabilitiesPage() {
               {["Steel and concrete structures", "Underground facilities", "Existing model modification and brownfield updates", "Navisworks model review and coordination"].map((item) => (
                 <li key={item} className="flex items-center gap-3 border-b border-white/15 py-3.5 text-[0.9375rem] font-semibold">
                   <span aria-hidden className="size-1.5 shrink-0 bg-energy" />
-                  {item}
+                  {tc(item)}
                 </li>
               ))}
             </ul>

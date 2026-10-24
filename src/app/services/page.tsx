@@ -11,6 +11,7 @@ import { applications } from "@/lib/applications";
 import { industries, industryPath } from "@/lib/industries";
 import { pageMetadata } from "@/lib/seo";
 import { serviceGroups, services, servicesInGroup } from "@/lib/services";
+import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
   title: "Civil & Structural Engineering Services",
@@ -111,7 +112,7 @@ export default function ServicesPage() {
             {flow.map((step, i) => (
               <li key={step.label} className="relative flex flex-col rounded-xl bg-white p-5 shadow-[0_6px_20px_rgb(0_36_56/0.07)]">
                 <span className="text-xs font-bold text-energy-deep tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                <span className="mt-2 text-base font-extrabold text-navy-900">{step.label}</span>
+                <span className="mt-2 text-base font-extrabold text-navy-900">{tc(step.label)}</span>
                 <span className="mt-1 text-sm leading-6 text-ink">{step.note}</span>
                 {i < flow.length - 1 && (
                   <MoveRight aria-hidden className="absolute top-1/2 -right-3 z-10 hidden size-5 -translate-y-1/2 text-energy-deep lg:block" />
@@ -130,9 +131,9 @@ export default function ServicesPage() {
       {/* Editorial blocks, grouped */}
       {serviceGroups.map((group) => (
         <div key={group.id}>
-          <div className="bg-navy-900">
-            <div className="container-site py-6">
-              <h2 className="text-sm font-bold tracking-[0.14em] text-energy uppercase">{group.title}</h2>
+          <div className="bg-navy-900 text-white">
+            <div className="container-site pt-14 pb-10 lg:pt-20">
+              <SectionHeading slab title={group.title} intro={group.text} onDark />
             </div>
           </div>
           {servicesInGroup(group.id).map((service) => (
@@ -145,7 +146,7 @@ export default function ServicesPage() {
       <section className="bg-white">
         <div className="container-site section-y grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <SectionHeading slab title="Find by Structure" size="md" intro="Start from the structure you are dealing with." />
+            <SectionHeading slab title="Find by Structure" intro="Start from the structure you are dealing with." />
             <ul data-reveal className="mt-6 border-t border-line">
               {applications.map((application) => (
                 <li key={application.id} className="border-b border-line">
@@ -153,7 +154,7 @@ export default function ServicesPage() {
                     href={`/applications#${application.id}`}
                     className="group flex min-h-12 items-center justify-between gap-4 py-2 text-[0.9375rem] font-bold text-navy-900 hover:text-energy-ink"
                   >
-                    {application.title}
+                    {tc(application.title)}
                     <ArrowRight aria-hidden className="size-4 shrink-0 text-energy-deep transition-transform group-hover:translate-x-1" />
                   </Link>
                 </li>
@@ -161,7 +162,7 @@ export default function ServicesPage() {
             </ul>
           </div>
           <div>
-            <SectionHeading slab title="Find by Industry" size="md" intro="Onshore, offshore, refining and industrial environments." />
+            <SectionHeading slab title="Find by Industry" intro="Onshore, offshore, refining and industrial environments." />
             <ul data-reveal className="mt-6 border-t border-line">
               {industries.map((industry) => (
                 <li key={industry.slug} className="border-b border-line">

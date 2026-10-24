@@ -15,6 +15,7 @@ import { ProjectCard } from "./ProjectCard";
 import { ProcessSteps } from "./ProcessSteps";
 import { SectionHeading } from "./SectionHeading";
 import { StandardsSummary } from "./StandardsSummary";
+import { tc } from "@/lib/text";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const delay = (i: number) => ({ "--reveal-delay": `${i * 70}ms` }) as React.CSSProperties;
@@ -69,8 +70,8 @@ export function ServicePageLayout({ service }: { service: Service }) {
       <section className="bg-white">
         <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div data-reveal className="lg:col-span-7">
-            <p className="eyebrow text-teal-700">Overview</p>
-            <h2 className="mt-3 text-xl leading-8 font-bold text-navy-900 sm:text-2xl sm:leading-9">{introLead}</h2>
+            <SectionHeading slab title="Service Overview" />
+            <p className="mt-6 text-lg leading-8 font-semibold text-navy-900 sm:text-xl sm:leading-9">{introLead}</p>
             {introRest.map((paragraph) => (
               <p key={paragraph} className="mt-5 text-base leading-7 text-ink sm:text-[1.0625rem] sm:leading-8">
                 {paragraph}
@@ -79,7 +80,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
             <ul className="mt-8 flex flex-wrap gap-2.5">
               {service.highlights.map((item) => (
                 <li key={item} className="rounded-full border border-line bg-paper px-4 py-2 text-sm font-semibold text-navy-900">
-                  {item}
+                  {tc(item)}
                 </li>
               ))}
             </ul>
@@ -88,7 +89,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
           <aside data-reveal className="lg:col-span-5">
             <div className="rounded-xl bg-navy-900 p-7 text-mist shadow-[0_18px_40px_rgb(0_36_56/0.18)] sm:p-9">
               <span aria-hidden className="slab mb-5 h-9 w-11" />
-              <h2 className="text-lg font-extrabold uppercase">At a glance</h2>
+              <h3 className="text-lg font-extrabold">At a Glance</h3>
               <dl className="mt-6 divide-y divide-white/12 border-y border-white/12 text-sm">
                 <div className="py-4">
                   <dt className="text-[0.6875rem] font-semibold tracking-[0.12em] text-haze uppercase">Deliverable</dt>
@@ -157,7 +158,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
                         <span className="grid size-10 place-items-center rounded-lg bg-navy-900 text-sm font-bold text-energy tabular-nums">
                           {pad(number)}
                         </span>
-                        <h4 className="mt-5 text-base leading-snug font-extrabold text-navy-900">{item.title}</h4>
+                        <h4 className="mt-5 text-base leading-snug font-extrabold text-navy-900">{tc(item.title)}</h4>
                         <p className="mt-2 text-[0.9375rem] leading-7 text-ink">{item.description}</p>
                       </li>
                     );
@@ -183,7 +184,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
                 className="inline-flex items-center gap-2.5 rounded-lg border border-line bg-paper px-4 py-2.5 text-sm font-semibold text-navy-900"
               >
                 <span aria-hidden className="size-1.5 rounded-full bg-energy-deep" />
-                {item}
+                {tc(item)}
               </li>
             ))}
           </ul>
@@ -192,12 +193,12 @@ export function ServicePageLayout({ service }: { service: Service }) {
           <div className="mt-14 grid gap-5 lg:grid-cols-2">
             <div data-reveal className="rounded-xl border border-line p-7 sm:p-9">
               <p className="eyebrow text-teal-700">What we work from</p>
-              <h3 className="mt-2 text-xl font-extrabold text-navy-900">Inputs from your team</h3>
+              <h3 className="mt-2 text-xl font-extrabold text-navy-900">Inputs From Your Team</h3>
               <ul className="mt-6">
                 {service.inputs.map((item) => (
                   <li key={item} className="flex gap-3.5 border-t border-line py-3.5 text-[0.9375rem] leading-6 font-medium text-ink">
                     <ArrowRight aria-hidden className="mt-1 size-4 shrink-0 text-energy-deep" />
-                    {item}
+                    {tc(item)}
                   </li>
                 ))}
               </ul>
@@ -210,7 +211,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
                 {service.outputs.map((item) => (
                   <li key={item} className="flex gap-3.5 border-t border-white/15 py-3.5 text-[0.9375rem] leading-6 font-medium">
                     <Check aria-hidden className="mt-1 size-4 shrink-0 text-energy" />
-                    {item}
+                    {tc(item)}
                   </li>
                 ))}
               </ul>
@@ -232,7 +233,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
         <section className="bg-white">
           <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
-              <SectionHeading slab title="Software & Workflow" size="md" />
+              <SectionHeading slab title="Software & Workflow" />
               <p data-reveal className="mt-5 text-base leading-7 text-ink">
                 {service.software.note}
               </p>
@@ -254,7 +255,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
                   }`}
                 >
                   <h3 className="text-lg font-extrabold text-navy-900">{tool.name}</h3>
-                  <p className="mt-1 text-xs font-semibold tracking-[0.08em] text-teal-700 uppercase">{tool.discipline}</p>
+                  <p className="mt-1 text-xs font-semibold tracking-[0.08em] text-teal-700 uppercase">{tc(tool.discipline)}</p>
                   <p className="mt-3 text-sm leading-6 text-ink">{tool.use}</p>
                 </li>
               ))}
@@ -281,7 +282,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
       <section className="bg-navy-900 text-white">
         <div className="container-site section-y grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-6">
-            <SectionHeading eyebrow="Scope & responsibility" title="Not Included by Implication" size="md" onDark />
+            <SectionHeading eyebrow="Scope & responsibility" title="Not Included by Implication" onDark />
             <p data-reveal className="mt-6 max-w-xl text-base leading-7 text-white/85">
               {service.boundaryNote}
             </p>
@@ -307,7 +308,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
                 className="flex gap-4 border-t border-white/20 py-5 text-base leading-snug font-semibold last:border-b"
               >
                 <CircleSlash aria-hidden className="mt-0.5 size-5 shrink-0 text-energy" />
-                {item}
+                {tc(item)}
               </li>
             ))}
           </ul>
@@ -322,7 +323,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
               <Image src={lead.image} alt={lead.imageAlt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
             </div>
             <div className="flex flex-col justify-center px-5 py-16 sm:px-8 lg:px-16 lg:py-24">
-              <SectionHeading eyebrow="Selected professional experience" title={lead.name} size="md" onDark />
+              <SectionHeading eyebrow="Selected professional experience" title={lead.name} onDark />
               {lead.subtitle && <p className="mt-2 font-bold text-energy">{lead.subtitle}</p>}
               <Disclaimer
                 onDark
@@ -359,7 +360,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
       {moreProjects.length > 0 && (
         <section className="bg-white">
           <div className="container-site section-y">
-            <SectionHeading slab title="Further Relevant Experience" size="md" />
+            <SectionHeading slab title="Further Relevant Experience" />
             <div className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
               {moreProjects.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} />
@@ -376,7 +377,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
       <section className="bg-paper">
         <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <SectionHeading slab title="Common Questions" size="md" />
+            <SectionHeading slab title="Common Questions" />
             <p data-reveal className="mt-5 text-base leading-7 text-ink">
               Straight answers on how this service works. Scopes outside what is described here are reviewed case by
               case; we confirm we have the right competence before quoting.
@@ -410,7 +411,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
       {/* Related next steps */}
       <section className="bg-white">
         <div className="container-site section-y">
-          <SectionHeading slab title="Related Next Steps" size="md" />
+          <SectionHeading slab title="Related Next Steps" />
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {service.related.map((link) => (
               <li key={link.href}>

@@ -9,6 +9,7 @@ import { applications } from "@/lib/applications";
 import { industryBySlug, industryPath } from "@/lib/industries";
 import { pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath } from "@/lib/services";
+import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
   title: "Structures & Applications",
@@ -39,7 +40,7 @@ export default function ApplicationsPage() {
           {applications.map((application) => (
             <li key={application.id}>
               <a href={`#${application.id}`} className="inline-flex min-h-11 items-center transition-colors hover:text-teal-700">
-                {application.title}
+                {tc(application.title)}
               </a>
             </li>
           ))}
@@ -69,13 +70,13 @@ export default function ApplicationsPage() {
               <Image src={application.image} alt={application.imageAlt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
             </div>
             <div className="lg:col-span-7">
-              <h2 id={`${application.id}-title`} data-reveal className="display-md text-balance text-navy-900 uppercase">
-                {application.title}
+              <h2 id={`${application.id}-title`} data-reveal className="display-lg text-balance text-navy-900">
+                {tc(application.title)}
               </h2>
               <ul data-reveal className="mt-5 flex flex-wrap gap-2.5">
                 {application.examples.map((example) => (
                   <li key={example} className="rounded-full border border-line bg-white px-4 py-2 text-sm font-semibold text-navy-900">
-                    {example}
+                    {tc(example)}
                   </li>
                 ))}
               </ul>
@@ -92,7 +93,7 @@ export default function ApplicationsPage() {
                     <li key={`${label}-${i}`} className="border-b border-line">
                       <Link href={href} className="group grid grid-cols-[2rem_1fr_auto] items-center gap-x-3 py-3.5 sm:grid-cols-[2.5rem_14rem_1fr_auto]">
                         <span className="text-xs font-bold text-energy-deep tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                        <span className="text-[0.9375rem] font-bold text-navy-900 group-hover:text-energy-ink">{step.role}</span>
+                        <span className="text-[0.9375rem] font-bold text-navy-900 group-hover:text-energy-ink">{tc(step.role)}</span>
                         <span className="col-start-2 text-sm text-slate sm:col-start-3">{label}</span>
                         <ArrowRight
                           aria-hidden
