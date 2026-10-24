@@ -1,3 +1,4 @@
+import type { IndustrySlug } from "./industries";
 import type { ServiceSlug } from "./services";
 
 export type ProjectDiagram = {
@@ -10,7 +11,16 @@ export type ProjectDiagram = {
 export type Project = {
   /** Anchor ID on /project-experience. */
   id: string;
-  serviceSlug: ServiceSlug;
+  /**
+   * All experience on this site is prior personnel experience (spec 7.5):
+   * work by senior team members during previous employment, not projects
+   * contracted to Hormuz-Energy. TODO_VERIFY: confirm names, roles, software
+   * and deliverables against the source CV before adding new detail.
+   */
+  classification: "prior-personnel-experience";
+  /** Relevant canonical services, most relevant first. */
+  serviceSlugs: ServiceSlug[];
+  industrySlugs: IndustrySlug[];
   name: string;
   subtitle?: string;
   sector: string;
@@ -43,7 +53,9 @@ const placeholder = (id: string, n: number, type: string): ProjectDiagram => ({
 export const projects: Project[] = [
   {
     id: "onshore-civil-structural",
-    serviceSlug: "onshore-civil-structural-design-detailing",
+    classification: "prior-personnel-experience",
+    serviceSlugs: ["civil-structural-drafting", "steel-detailing-fabrication", "material-takeoffs-documentation"],
+    industrySlugs: ["onshore-oil-gas"],
     name: "Hail & Ghasha Development Project",
     subtitle: "Package 2 – Onshore Facilities",
     sector: "Oil & Gas",
@@ -69,7 +81,9 @@ export const projects: Project[] = [
   },
   {
     id: "offshore-structural",
-    serviceSlug: "offshore-structural-design-detailing",
+    classification: "prior-personnel-experience",
+    serviceSlugs: ["steel-detailing-fabrication"],
+    industrySlugs: ["offshore-energy"],
     name: "Umm Lulu Full Development Project",
     subtitle: "Package 1",
     sector: "Oil & Gas",
@@ -92,7 +106,9 @@ export const projects: Project[] = [
   },
   {
     id: "brownfield-modifications",
-    serviceSlug: "brownfield-structural-modifications",
+    classification: "prior-personnel-experience",
+    serviceSlugs: ["brownfield-structural-modifications", "civil-structural-drafting", "material-takeoffs-documentation"],
+    industrySlugs: ["onshore-oil-gas"],
     name: "BAB & ASAB",
     subtitle: "Rehabilitation and Integrity Reinstatement",
     sector: "Oil & Gas",
@@ -125,7 +141,9 @@ export const projects: Project[] = [
   },
   {
     id: "steel-detailing",
-    serviceSlug: "steel-detailing-fabrication",
+    classification: "prior-personnel-experience",
+    serviceSlugs: ["steel-detailing-fabrication", "plant-structural-3d-modelling"],
+    industrySlugs: ["refining-petrochemicals"],
     name: "70,000 BPD Diwaniya Refinery Expansion Project",
     sector: "Refinery",
     environment: "Onshore",
@@ -148,7 +166,9 @@ export const projects: Project[] = [
   },
   {
     id: "rcc-detailing",
-    serviceSlug: "rcc-reinforcement-detailing",
+    classification: "prior-personnel-experience",
+    serviceSlugs: ["rcc-reinforcement-detailing", "civil-structural-drafting"],
+    industrySlugs: ["gas-processing-ngl"],
     name: "Hawiyah NGL Recovery Project",
     sector: "NGL / Gas Processing",
     environment: "Onshore",
@@ -173,7 +193,9 @@ export const projects: Project[] = [
   },
   {
     id: "plant-3d-modelling",
-    serviceSlug: "plant-structural-3d-modelling",
+    classification: "prior-personnel-experience",
+    serviceSlugs: ["plant-structural-3d-modelling", "civil-structural-drafting"],
+    industrySlugs: ["refining-petrochemicals"],
     name: "Atyrau Refinery Reconstruction Project",
     subtitle: "Kazakhstan",
     sector: "Refinery",
@@ -202,7 +224,9 @@ export const projects: Project[] = [
   },
   {
     id: "drawings-qaqc",
-    serviceSlug: "structural-drawings-mto-qaqc",
+    classification: "prior-personnel-experience",
+    serviceSlugs: ["plant-structural-3d-modelling", "civil-structural-drafting", "material-takeoffs-documentation"],
+    industrySlugs: ["gas-processing-ngl"],
     name: "Dolphin Energy Project",
     sector: "Gas / Energy",
     location: "Qatar / UAE",
@@ -228,7 +252,16 @@ export const projects: Project[] = [
 ];
 
 export const projectById = (id: string) => projects.find((p) => p.id === id);
-export const projectByService = (slug: ServiceSlug) => projects.find((p) => p.serviceSlug === slug);
+/** Projects relevant to a service: the lead project first, then primary matches. */
+export const projectsForService = (slug: ServiceSlug, leadId?: string) =>
+  projects
+    .filter((p) => p.serviceSlugs.includes(slug))
+    .sort((a, b) => {
+      if (a.id === leadId) return -1;
+      if (b.id === leadId) return 1;
+      return a.serviceSlugs.indexOf(slug) - b.serviceSlugs.indexOf(slug);
+    });
+export const projectsForIndustry = (slug: IndustrySlug) => projects.filter((p) => p.industrySlugs.includes(slug));
 export const projectPath = (id: string) => `/project-experience#${id}`;
 
 /** Projects featured on the homepage. */

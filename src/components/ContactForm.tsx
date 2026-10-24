@@ -1,16 +1,21 @@
 "use client";
 
 import { startTransition, useActionState, useEffect, useRef } from "react";
-import { ArrowRight, CircleAlert, CircleCheck, LoaderCircle } from "lucide-react";
+import { ArrowRight, ChevronDown, CircleAlert, CircleCheck, LoaderCircle } from "lucide-react";
 import { submitEnquiry } from "@/app/contact/actions";
 import {
   ACCEPTED_FILE_EXTENSIONS,
+  clientTypes,
+  designStatusOptions,
+  industryOptions,
   initialEnquiryState,
+  outsourcingOption,
   projectTypes,
   serviceOptions,
+  technicalServiceOptions,
   type EnquiryField,
 } from "@/lib/contact";
-import { services } from "@/lib/services";
+import { legacyServiceSlugs, services } from "@/lib/services";
 import { buttonBase } from "./ButtonLink";
 
 const controlClass =
@@ -60,10 +65,18 @@ export function ContactForm() {
   const values = state.values ?? {};
 
   // Pre-select the service when arriving from a service page (/contact?service=<slug>).
+  // Older service slugs map to their successors; the matching technical line is ticked too.
   useEffect(() => {
-    const slug = new URLSearchParams(window.location.search).get("service");
-    const match = services.find((service) => service.slug === slug);
-    if (match && serviceRef.current && !serviceRef.current.value) serviceRef.current.value = match.title;
+    const raw = new URLSearchParams(window.location.search).get("service") ?? "";
+    const slug = legacyServiceSlugs[raw] ?? raw;
+    const title =
+      slug === "engineering-outsourcing" ? outsourcingOption : services.find((service) => service.slug === slug)?.title;
+    if (!title || !serviceRef.current || serviceRef.current.value) return;
+    serviceRef.current.value = title;
+    const boxes = serviceRef.current.form?.querySelectorAll<HTMLInputElement>('input[name="technicalServices"]') ?? [];
+    boxes.forEach((box) => {
+      if (box.value === title) box.checked = true;
+    });
   }, []);
 
   // Move focus to the outcome so keyboard and screen-reader users are not left at the button.
@@ -107,7 +120,7 @@ export function ContactForm() {
       <Field name="name" label="Name" error={errors.name}>
         {(props) => <input {...props} type="text" required autoComplete="name" defaultValue={values.name} className={controlClass} />}
       </Field>
-      <Field name="company" label="Company" error={errors.company}>
+      <Field name="company" label="Organisation" error={errors.company}>
         {(props) => (
           <input {...props} type="text" required autoComplete="organization" defaultValue={values.company} className={controlClass} />
         )}
@@ -120,24 +133,17 @@ export function ContactForm() {
       <Field name="phone" label="Phone" optional error={errors.phone}>
         {(props) => <input {...props} type="tel" autoComplete="tel" defaultValue={values.phone} className={controlClass} />}
       </Field>
-      <Field name="country" label="Country" error={errors.country}>
+      <Field name="clientType" label="Client type" optional>
         {(props) => (
-          <input {...props} type="text" required autoComplete="country-name" defaultValue={values.country} className={controlClass} />
-        )}
-      </Field>
-      <Field name="projectType" label="Project type" error={errors.projectType}>
-        {(props) => (
-          <select {...props} required defaultValue={values.projectType ?? ""} className={controlClass}>
-            <option value="" disabled>
-              Select project type
-            </option>
-            {projectTypes.map((type) => (
+          <select {...props} defaultValue={values.clientType ?? ""} className={controlClass}>
+            <option value="">Select client type</option>
+            {clientTypes.map((type) => (
               <option key={type}>{type}</option>
             ))}
           </select>
         )}
       </Field>
-      <Field name="service" label="Service needed" error={errors.service} className="sm:col-span-2">
+      <Field name="service" label="Service needed" error={errors.service}>
         {(props) => (
           <select {...props} ref={serviceRef} required defaultValue={values.service ?? ""} className={controlClass}>
             <option value="" disabled>
@@ -149,23 +155,108 @@ export function ContactForm() {
           </select>
         )}
       </Field>
+
+      <fieldset className="sm:col-span-2">
+        <legend className="text-sm font-bold text-navy-900">
+          Technical services involved<span className="ml-2 font-medium text-slate">Optional, tick any that apply</span>
+        </legend>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2">
+          {technicalServiceOptions.map((option) => (
+            <label
+              key={option}
+              className="flex min-h-11 cursor-pointer items-center gap-3 rounded-lg border border-navy-900/15 bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-navy-900/40 has-checked:border-energy-deep has-checked:bg-paper"
+            >
+              <input
+                type="checkbox"
+                name="technicalServices"
+                value={option}
+                defaultChecked={values.technicalServices?.split(", ").includes(option)}
+                className="size-4 accent-energy-deep"
+              />
+              {option}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
       <Field
         name="message"
-        label="Message"
+        label="Scope summary"
         error={errors.message}
-        hint="Outline the structures, deliverables, software environment and schedule involved."
+        hint="Describe the structures, the design inputs you have, the deliverables you need and your target schedule."
         className="sm:col-span-2"
       >
         {(props) => (
           <textarea {...props} required rows={6} minLength={20} maxLength={5000} defaultValue={values.message} className={`${controlClass} resize-y`} />
         )}
       </Field>
+
+      <details
+        className="group/details rounded-xl border border-line sm:col-span-2"
+        open={Boolean(values.projectType || values.industry || values.software || values.deliverables)}
+      >
+        <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-5 py-3 text-sm font-bold text-navy-900 [&::-webkit-details-marker]:hidden">
+          Technical details (optional)
+          <ChevronDown aria-hidden className="size-4 text-energy-deep transition-transform group-open/details:rotate-180" />
+        </summary>
+        <div className="grid gap-x-6 gap-y-6 border-t border-line p-5 sm:grid-cols-2">
+          <Field name="country" label="Country / project location" optional error={errors.country}>
+            {(props) => <input {...props} type="text" autoComplete="country-name" defaultValue={values.country} className={controlClass} />}
+          </Field>
+          <Field name="industry" label="Industry" optional>
+            {(props) => (
+              <select {...props} defaultValue={values.industry ?? ""} className={controlClass}>
+                <option value="">Select industry</option>
+                {industryOptions.map((option) => (
+                  <option key={option}>{option}</option>
+                ))}
+              </select>
+            )}
+          </Field>
+          <Field name="projectType" label="Project type" optional>
+            {(props) => (
+              <select {...props} defaultValue={values.projectType ?? ""} className={controlClass}>
+                <option value="">Select project type</option>
+                {projectTypes.map((type) => (
+                  <option key={type}>{type}</option>
+                ))}
+              </select>
+            )}
+          </Field>
+          <Field name="designStatus" label="Design status" optional>
+            {(props) => (
+              <select {...props} defaultValue={values.designStatus ?? ""} className={controlClass}>
+                <option value="">Select design status</option>
+                {designStatusOptions.map((option) => (
+                  <option key={option}>{option}</option>
+                ))}
+              </select>
+            )}
+          </Field>
+          <Field name="software" label="Required software and version" optional hint="For example Tekla Structures 2024, AutoCAD, native or IFC exchange.">
+            {(props) => <input {...props} type="text" defaultValue={values.software} className={controlClass} />}
+          </Field>
+          <Field name="targetDate" label="Target start or milestone" optional>
+            {(props) => <input {...props} type="text" defaultValue={values.targetDate} className={controlClass} />}
+          </Field>
+          <Field
+            name="deliverables"
+            label="Required deliverables and approximate quantity"
+            optional
+            hint="For example 40 shop drawings or BBS for 12 foundations, plus the codes and standards that apply."
+            className="sm:col-span-2"
+          >
+            {(props) => <textarea {...props} rows={3} maxLength={600} defaultValue={values.deliverables} className={`${controlClass} resize-y`} />}
+          </Field>
+        </div>
+      </details>
+
       <Field
         name="attachment"
-        label="Drawings or scope document"
+        label="Non-confidential scope document"
         optional
         error={errors.attachment}
-        hint={`One file up to 8 MB (${ACCEPTED_FILE_EXTENSIONS.join(", ")}). Larger packages can be shared after first contact.`}
+        hint={`One file up to 8 MB (${ACCEPTED_FILE_EXTENSIONS.join(", ")}). Please do not attach confidential drawings here; project files are exchanged after first contact, under an NDA if required.`}
         className="sm:col-span-2"
       >
         {(props) => (
@@ -177,6 +268,14 @@ export function ContactForm() {
           />
         )}
       </Field>
+
+      <label className="flex min-h-11 cursor-pointer items-start gap-3 text-sm text-ink sm:col-span-2">
+        <input type="checkbox" name="nda" value="yes" defaultChecked={values.nda === "Yes"} className="mt-0.5 size-4 accent-energy-deep" />
+        <span>
+          <span className="font-bold text-navy-900">Request an NDA before project files are exchanged</span>
+          <span className="block text-slate">We will send one for review before asking for drawings or models.</span>
+        </span>
+      </label>
 
       {/* Honeypot: hidden from people and assistive technology */}
       <div aria-hidden className="hidden">
@@ -195,13 +294,14 @@ export function ContactForm() {
             </>
           ) : (
             <>
-              Submit Project Enquiry
+              Submit Quote Request
               <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
             </>
           )}
         </button>
         <p className="mt-4 text-xs leading-relaxed text-slate">
-          Your details are used only to respond to this enquiry.
+          Only name, organisation, work email, service and scope summary are required. Your details are used only to
+          respond to this enquiry.
         </p>
       </div>
     </form>

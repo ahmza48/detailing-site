@@ -7,11 +7,11 @@
 export const site = {
   name: process.env.NEXT_PUBLIC_COMPANY_NAME || "Hormuz-Energy",
   shortName: process.env.NEXT_PUBLIC_COMPANY_SHORT_NAME || "Hormuz",
-  descriptor: "Civil & Structural Design · Detailing · 3D Modelling",
+  descriptor: "Civil & Structural Engineering Support, Modelling & Detailing",
   tagline:
-    "Civil & Structural Design, Detailing and 3D Modelling for Onshore & Offshore Energy Projects",
+    "Civil & structural engineering support, modelling and detailing for energy and industrial projects",
   description:
-    "Specialist civil and structural design, detailing and 3D modelling support for onshore and offshore energy projects, backed by senior professionals with more than three decades of hands-on experience across Gulf and international developments.",
+    "Civil and structural CAD drafting, TEKLA Structures modelling, steel fabrication detailing, RCC reinforcement documentation and brownfield modification packages for EPC contractors, engineering consultancies and steel fabricators in the energy and industrial sectors.",
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com").replace(/\/$/, ""),
   /** Shown publicly only when set. */
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || undefined,
@@ -42,17 +42,31 @@ export const site = {
 export const telHref = `tel:${site.phone.e164}`;
 export const whatsappHref = `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(site.whatsapp.message)}`;
 
-export type NavItem = { label: string; href: string };
+export type NavLink = { label: string; href: string };
+export type NavMenuId = "services" | "industries" | "capabilities";
+export type NavItem = NavLink & { menu?: NavMenuId };
 
+/** Desktop and mobile navigation (spec 3.2). "Request a Quote" is rendered separately as the CTA. */
 export const primaryNav: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Project Experience", href: "/project-experience" },
-  { label: "Industries", href: "/industries" },
-  { label: "Capabilities", href: "/capabilities" },
-  { label: "Contact", href: "/contact" },
+  { label: "Services", href: "/services", menu: "services" },
+  { label: "Industries", href: "/industries", menu: "industries" },
+  { label: "Projects & Work Samples", href: "/project-experience" },
+  { label: "Technical Capabilities", href: "/capabilities", menu: "capabilities" },
+  { label: "About Us", href: "/about" },
 ];
+
+export const quoteCta: NavLink = { label: "Request a Quote", href: "/contact" };
+
+export const capabilitiesMenu: NavLink[] = [
+  { label: "Software & Deliverables", href: "/capabilities" },
+  { label: "Codes & Standards", href: "/capabilities/codes-standards" },
+  { label: "Quality & Delivery", href: "/quality-delivery" },
+  { label: "File Formats & Workflow", href: "/capabilities#formats" },
+];
+
+export const outsourcingLink: NavLink = { label: "Engineering Outsourcing", href: "/engineering-outsourcing" };
+export const applicationsLink: NavLink = { label: "Structures & Applications", href: "/applications" };
 
 export const experienceDisclaimer =
   "Selected project experience reflects work undertaken by senior team members during previous employment and professional engagements with established EPC, engineering and construction organizations. Project/client references are provided to demonstrate relevant experience and do not imply that the present company directly contracted with the named asset owners.";
@@ -83,6 +97,10 @@ export const priorEnvironments = [
 
 export type Metric = { value: string; label: string };
 
+/**
+ * "30+ Years" refers to senior personnel's professional experience, never
+ * company age. TODO_VERIFY: whose experience and the basis, against the CV.
+ */
 export const trustMetrics: Metric[] = [
   { value: "30+ Years", label: "Senior Professional Experience" },
   { value: "Onshore + Offshore", label: "Project Exposure" },

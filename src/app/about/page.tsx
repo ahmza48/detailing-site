@@ -9,9 +9,11 @@ import { ExperienceMetrics } from "@/components/ExperienceMetrics";
 import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SoftwareCapabilities } from "@/components/SoftwareCapabilities";
-import { industries } from "@/lib/industries";
+import { softwareQualifier } from "@/lib/software";
+import { industries, industryPath } from "@/lib/industries";
 import { pageMetadata } from "@/lib/seo";
 import { priorEnvironments } from "@/lib/site";
+import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
   title: "About",
@@ -22,8 +24,8 @@ export const metadata: Metadata = pageMetadata({
 });
 
 const pillars = [
-  { icon: Target, title: "Energy-sector focus", text: "Structural work for oil & gas, refining, gas processing and process plants only." },
-  { icon: UserCheck, title: "Senior-led delivery", text: "Packages led by professionals with 30+ years of project experience." },
+  { icon: Target, title: "Energy-sector focus", text: "Civil and structural production for oil & gas, refining, gas processing and industrial facilities." },
+  { icon: UserCheck, title: "Senior-led delivery", text: "Senior professionals with more than 30 years of individual project experience." },
   { icon: Layers, title: "Onshore and offshore", text: "Greenfield developments and brownfield modifications alike." },
   { icon: Globe2, title: "Flexible remote model", text: "Capacity that scales with your schedule and review cycles." },
 ];
@@ -35,11 +37,11 @@ const approach = [
   },
   {
     title: "Model and detail",
-    text: "Structures are modelled or drawn in the project's specified environment, with drawings and material take-off produced from the same source.",
+    text: "Structures are modelled or drawn in the environment agreed at scope review, with drawings and material take-off produced from the same source.",
   },
   {
     title: "Check and review",
-    text: "Deliverables are self-checked, independently checked and, where a model exists, reviewed against surrounding disciplines before issue.",
+    text: "Deliverables follow the project-agreed checking process: an originator self-check, an independent production check where resourced and agreed, and model review where a model exists.",
   },
   {
     title: "Issue and maintain",
@@ -47,9 +49,16 @@ const approach = [
   },
 ];
 
+const principles = [
+  { title: "Defined scope", text: "Deliverables, inputs, exclusions and responsibilities agreed in writing before work starts." },
+  { title: "Design authority respected", text: "Design decisions and approvals stay with the responsible engineer; we produce the documentation." },
+  { title: "Coordinated reviews", text: "Queries raised early, comments closed out in writing, and every revision identified." },
+  { title: "Confidentiality", text: "Project files used only for the package, with an NDA available before files are shared." },
+];
+
 const quality = [
   "Originator self-check against inputs and standards",
-  "Independent check by a senior detailer or checker",
+  "Independent production check, where resourced and agreed",
   "Model review for interfaces and clashes",
   "Recorded comments with verified close-out",
   "Revision control on every issued deliverable",
@@ -62,7 +71,7 @@ export default function AboutPage() {
         eyebrow="About"
         title="Built on Decades"
         accent="Of Project Experience"
-        intro="A specialist structural design, detailing and modelling team for the energy sector, formed around senior professionals who have spent their careers on these projects."
+        intro="A specialist civil and structural drafting, detailing and modelling team for energy and industrial projects, formed around senior professionals who have spent their careers on these projects."
         image="/images/about-experience.jpg"
         imageAlt="Refinery process columns and steel structures in daylight"
         crumbs={[{ name: "About", path: "/about" }]}
@@ -82,7 +91,7 @@ export default function AboutPage() {
                   className="rounded-xl bg-paper p-5"
                 >
                   <pillar.icon aria-hidden className="size-6 text-energy-deep" />
-                  <h3 className="mt-3 text-[0.9375rem] font-extrabold text-navy-900">{pillar.title}</h3>
+                  <h3 className="mt-3 text-[0.9375rem] font-extrabold text-navy-900">{tc(pillar.title)}</h3>
                   <p className="mt-1.5 text-sm leading-6 text-ink">{pillar.text}</p>
                 </li>
               ))}
@@ -90,8 +99,8 @@ export default function AboutPage() {
           </div>
           <div data-reveal className="lg:col-span-7">
             <p className="text-xl leading-relaxed font-semibold text-navy-900 sm:text-2xl sm:leading-relaxed">
-              We provide civil and structural design, detailing and 3D modelling for onshore and offshore energy
-              projects. It is the only work we do.
+              We provide civil and structural drafting, design support, detailing and 3D modelling for energy and
+              industrial projects. Engineering production and documentation is our specialist focus.
             </p>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate sm:text-lg">
               As a company we are building our independent presence. The experience behind it is long established:
@@ -164,7 +173,6 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="Our industries"
               title="Energy & Process Facilities"
-              size="md"
               intro="Our work is concentrated on the facilities where our senior team's experience lies."
             />
             <ArrowLink href="/industries" className="mt-7">
@@ -173,9 +181,9 @@ export default function AboutPage() {
           </div>
           <ul data-reveal className="grid border-t border-line sm:grid-cols-2 sm:gap-x-10 lg:col-span-7">
             {industries.map((industry) => (
-              <li key={industry.id} className="border-b border-line">
+              <li key={industry.slug} className="border-b border-line">
                 <Link
-                  href={`/industries#${industry.id}`}
+                  href={industryPath(industry.slug)}
                   className="group flex min-h-14 items-center justify-between gap-4 py-2 text-[0.9375rem] font-bold text-navy-900 transition-colors hover:text-teal-700"
                 >
                   {industry.name}
@@ -205,7 +213,7 @@ export default function AboutPage() {
                 className="border-t-2 border-navy-900 pt-6 pb-10"
               >
                 <span className="text-xs font-bold text-energy-ink tabular-nums">{String(index + 1).padStart(2, "0")}</span>
-                <h3 className="mt-3 text-lg font-extrabold text-navy-900">{step.title}</h3>
+                <h3 className="mt-3 text-lg font-extrabold text-navy-900">{tc(step.title)}</h3>
                 <p className="mt-3 text-[0.9375rem] leading-relaxed text-slate">{step.text}</p>
               </li>
             ))}
@@ -229,21 +237,40 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="Quality & review"
               title="Checked Before It Is Issued"
-              size="md"
               intro="Structural deliverables are only useful if they can be relied on. Checking is part of production, not a step added at the end."
             />
             <ul data-reveal className="mt-8 max-w-xl border-t border-line">
               {quality.map((item) => (
                 <li key={item} className="flex items-center gap-3 border-b border-line py-3.5 text-[0.9375rem] font-semibold text-ink">
                   <span aria-hidden className="size-1.5 shrink-0 bg-energy-deep" />
-                  {item}
+                  {tc(item)}
                 </li>
               ))}
             </ul>
-            <ArrowLink href="/services/structural-drawings-mto-qaqc" className="mt-8">
-              Drawings, MTO &amp; QA/QC
+            <ArrowLink href="/quality-delivery" className="mt-8">
+              Quality &amp; Delivery
             </ArrowLink>
           </div>
+        </div>
+      </section>
+
+      {/* Principles */}
+      <section className="bg-paper">
+        <div className="container-site section-y">
+          <SectionHeading slab title="How We Work" intro="The principles behind every package, whatever its size." />
+          <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {principles.map((principle, i) => (
+              <li
+                key={principle.title}
+                data-reveal
+                style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
+                className="rounded-xl bg-white p-6 shadow-[0_6px_20px_rgb(0_36_56/0.07)]"
+              >
+                <h3 className="text-base font-extrabold text-navy-900">{tc(principle.title)}</h3>
+                <p className="mt-2 text-sm leading-6 text-ink">{principle.text}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -251,7 +278,12 @@ export default function AboutPage() {
       <section className="bg-navy-950 text-white">
         <div className="container-site section-y">
           <div className="flex flex-wrap items-end justify-between gap-8">
-            <SectionHeading eyebrow="Software capability" title="Tools of the Energy Sector" size="md" onDark />
+            <SectionHeading
+              eyebrow="Software experience"
+              title="Tools of the Energy Sector"
+              onDark
+              intro={softwareQualifier}
+            />
             <ButtonLink href="/capabilities" variant="outlineLight">
               View Capabilities
             </ButtonLink>

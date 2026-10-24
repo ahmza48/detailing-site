@@ -1,17 +1,19 @@
 import Link from "next/link";
 import { MapPin, Phone } from "lucide-react";
-import { experienceDisclaimer, site, telHref, whatsappHref } from "@/lib/site";
+import { experienceDisclaimer, outsourcingLink, site, telHref, whatsappHref } from "@/lib/site";
 import { services, servicePath } from "@/lib/services";
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./WhatsAppButton";
 
 const company = [
-  { label: "About", href: "/about" },
+  { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Project Experience", href: "/project-experience" },
   { label: "Industries", href: "/industries" },
-  { label: "Capabilities", href: "/capabilities" },
-  { label: "Contact", href: "/contact" },
+  { label: "Projects & Work Samples", href: "/project-experience" },
+  { label: "Technical Capabilities", href: "/capabilities" },
+  { label: "Codes & Standards", href: "/capabilities/codes-standards" },
+  { label: "Quality & Delivery", href: "/quality-delivery" },
+  { label: "Request a Quote", href: "/contact" },
 ];
 
 const linkClass = "inline-flex min-h-9 items-center text-sm transition-colors hover:text-energy";
@@ -22,12 +24,12 @@ export function Footer() {
   return (
     <footer className="bg-navy-900 text-mist">
       <div className="container-site grid gap-12 py-16 lg:grid-cols-12 lg:py-20">
-        <div className="lg:col-span-4">
+        <div className="lg:col-span-3">
           <Logo className="text-white" />
           <p className="mt-6 max-w-xs text-sm leading-6">{site.tagline}.</p>
         </div>
 
-        <nav aria-label="Footer" className={`lg:col-span-2 ${columnClass}`}>
+        <nav aria-label="Footer" className={`lg:col-span-3 ${columnClass}`}>
           <ul>
             {company.map((item) => (
               <li key={item.href}>
@@ -48,6 +50,11 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href={outsourcingLink.href} className={`${linkClass} font-bold text-energy`}>
+                {outsourcingLink.label}
+              </Link>
+            </li>
           </ul>
         </nav>
 

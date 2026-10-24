@@ -1,4 +1,4 @@
-import type { EnquiryValues } from "./contact";
+import { enquiryLabels, type EnquiryValues } from "./contact";
 import { site } from "./site";
 
 /**
@@ -24,15 +24,10 @@ export async function deliverEnquiry(values: EnquiryValues, attachment?: File): 
   const to = process.env.CONTACT_TO_EMAIL;
   const from = process.env.CONTACT_FROM_EMAIL;
 
-  const rows: [string, string][] = [
-    ["Name", values.name],
-    ["Company", values.company],
-    ["Work email", values.email],
-    ["Phone", values.phone || "—"],
-    ["Country", values.country],
-    ["Service needed", values.service],
-    ["Project type", values.projectType],
-  ];
+  // Every labelled field, in form order; blanks shown as a dash so the reader sees what was left empty.
+  const rows = (Object.keys(enquiryLabels) as (keyof typeof enquiryLabels)[]).map(
+    (key): [string, string] => [enquiryLabels[key], values[key] || "—"],
+  );
 
   if (!apiKey || !to || !from) {
     if (process.env.NODE_ENV !== "production") {

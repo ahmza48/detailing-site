@@ -1,7 +1,10 @@
+import Link from "next/link";
+import { industryBySlug, industryPath } from "@/lib/industries";
 import type { Project } from "@/lib/projects";
 import { serviceBySlug, servicePath } from "@/lib/services";
 import { ArrowLink } from "./ButtonLink";
 import { DiagramViewer } from "./DiagramViewer";
+import { tc } from "@/lib/text";
 
 function Meta({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -20,7 +23,7 @@ function BulletList({ title, items }: { title: string; items: string[] }) {
         {items.map((item) => (
           <li key={item} className="flex gap-3">
             <span aria-hidden className="mt-2 size-1.5 shrink-0 bg-energy-deep" />
-            {item}
+            {tc(item)}
           </li>
         ))}
       </ul>
@@ -30,7 +33,9 @@ function BulletList({ title, items }: { title: string; items: string[] }) {
 
 /** Editorial case-study section. `id` is the anchor targeted from service pages. */
 export function ProjectCaseStudy({ project, index }: { project: Project; index: number }) {
-  const service = serviceBySlug(project.serviceSlug);
+  const relevant = project.serviceSlugs.map(serviceBySlug).filter((s) => s !== undefined);
+  const sectors = project.industrySlugs.map(industryBySlug).filter((i) => i !== undefined);
+  const primary = relevant[0];
 
   return (
     <section
@@ -44,16 +49,16 @@ export function ProjectCaseStudy({ project, index }: { project: Project; index: 
           <div className="lg:col-span-9">
             <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-bold tracking-[0.18em] uppercase">
               <span className="text-energy-ink tabular-nums">{String(index + 1).padStart(2, "0")}</span>
-              {service && <span className="text-teal-700">{service.title}</span>}
+              {primary && <span className="text-teal-700">{primary.title}</span>}
             </p>
             <h2 id={`${project.id}-title`} className="display-lg mt-4 text-balance text-navy-900">
               {project.name}
             </h2>
             {project.subtitle && <p className="mt-3 text-lg font-bold text-teal-700 sm:text-xl">{project.subtitle}</p>}
           </div>
-          <p className="text-xs leading-relaxed text-slate lg:col-span-3 lg:text-right">
-            Senior team member experience,
-            <br className="hidden lg:block" /> prior professional engagement
+          <p className="rounded-lg bg-white/60 text-xs leading-relaxed font-semibold text-slate lg:col-span-3 lg:text-right">
+            Prior professional engagement of a senior team member.
+            <br className="hidden lg:block" /> Not a project contracted to Hormuz-Energy.
           </p>
         </header>
 
@@ -77,20 +82,44 @@ export function ProjectCaseStudy({ project, index }: { project: Project; index: 
             <h3 className="sr-only">Project description</h3>
             <p className="max-w-2xl text-lg leading-relaxed font-medium text-ink sm:text-xl">{project.description}</p>
             <div className="mt-9 grid gap-8 sm:grid-cols-2">
-              <BulletList title="Services delivered" items={project.services} />
+              <BulletList title="Scope (prior engagement)" items={project.services} />
               <BulletList title="Deliverables" items={project.deliverables} />
             </div>
-            {service && (
-              <ArrowLink href={servicePath(service.slug)} className="mt-9">
-                Related service<span className="sr-only">: {service.title}</span>
+            <div className="mt-9 border-t border-line pt-6">
+              <h4 className="text-[0.6875rem] font-bold tracking-[0.18em] text-teal-700 uppercase">Relevant services today</h4>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {relevant.map((service) => (
+                  <li key={service.slug}>
+                    <Link
+                      href={servicePath(service.slug)}
+                      className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3.5 py-1.5 text-sm font-semibold text-navy-900 transition-colors hover:border-energy-deep hover:text-energy-ink"
+                    >
+                      <span className="text-xs font-bold text-energy-deep">{service.id}</span>
+                      {service.title}
+                    </Link>
+                  </li>
+                ))}
+                {sectors.map((industry) => (
+                  <li key={industry.slug}>
+                    <Link
+                      href={industryPath(industry.slug)}
+                      className="inline-flex items-center rounded-full bg-navy-900 px-3.5 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-navy-800"
+                    >
+                      {industry.short}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ArrowLink href={`/contact?service=${primary?.slug ?? ""}`} className="mt-5">
+                Discuss similar requirements
               </ArrowLink>
-            )}
+            </div>
           </div>
         </div>
 
         <div data-reveal className="mt-14">
           <h3 className="mb-5 text-[0.6875rem] font-bold tracking-[0.18em] text-teal-700 uppercase">
-            Drawings &amp; models
+            Drawings &amp; models <span className="font-semibold text-slate normal-case tracking-normal">(placeholder illustrations)</span>
           </h3>
           <DiagramViewer diagrams={project.diagrams} projectName={project.name} />
         </div>
