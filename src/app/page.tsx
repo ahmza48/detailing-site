@@ -315,7 +315,7 @@ export default function HomePage() {
 
       {/* 9. Engineering outsourcing */}
       <ImageBand
-        title="Engineering Outsourcing"
+        title="Engineering Outsourcing & Subcontract Support"
         accent="for EPCs, Consultancies & Fabricators"
         image="/images/onshore-pipe-rack.jpg"
         imageAlt="Steel pipe rack and process structures at an onshore plant"

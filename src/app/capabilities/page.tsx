@@ -312,7 +312,7 @@ export default function CapabilitiesPage() {
               ))}
             </ul>
             <ArrowLink href="/services/plant-structural-3d-modelling" onDark className="mt-8">
-              3D Structural & Plant Modelling
+              3D Structural Modelling & Plant Model Support
             </ArrowLink>
           </div>
           <div data-reveal="image" className="relative min-h-72 overflow-hidden bg-navy-950 lg:min-h-[36rem]">

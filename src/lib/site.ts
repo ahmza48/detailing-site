@@ -65,7 +65,7 @@ export const capabilitiesMenu: NavLink[] = [
   { label: "File Formats & Workflow", href: "/capabilities#formats" },
 ];
 
-export const outsourcingLink: NavLink = { label: "Engineering Outsourcing", href: "/engineering-outsourcing" };
+export const outsourcingLink: NavLink = { label: "Engineering Outsourcing & Subcontract Support", href: "/engineering-outsourcing" };
 export const applicationsLink: NavLink = { label: "Structures & Applications", href: "/applications" };
 
 export const experienceDisclaimer =

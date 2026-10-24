@@ -58,7 +58,7 @@ export default function OutsourcingPage() {
   return (
     <>
       <Hero
-        eyebrow="Engineering Outsourcing"
+        eyebrow="Engineering Outsourcing & Subcontract Support"
         title="Engineering Drafting, Modelling"
         accent="& Steel Detailing Outsourcing"
         intro="Subcontract a defined structural drawing, modelling, detailing or documentation package. You keep design authority; we deliver the production work to your standards and review cycle."
@@ -66,7 +66,7 @@ export default function OutsourcingPage() {
         imageAlt="Structural steel framing seen from below"
         crumbs={[
           { name: "Services", path: "/services" },
-          { name: "Engineering Outsourcing", path: "/engineering-outsourcing" },
+          { name: "Engineering Outsourcing & Subcontract Support", path: "/engineering-outsourcing" },
         ]}
       >
         <ButtonLink href={quoteHref}>Request an Outsourcing Quote</ButtonLink>
