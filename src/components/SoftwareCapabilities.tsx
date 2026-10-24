@@ -53,7 +53,7 @@ export function SoftwareCapabilities({
           <div>
             <h3 className="text-lg font-extrabold">Working in your environment</h3>
             <p className="mt-2 text-sm leading-6">
-              Models and drawings are delivered in the platform, version and standards your project specifies.
+              Supported platforms, versions and file formats are confirmed for each package during scope review.
             </p>
           </div>
           <Link href="/contact" className="group mt-5 inline-flex items-center gap-2 text-sm font-bold">

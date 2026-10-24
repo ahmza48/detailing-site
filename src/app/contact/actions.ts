@@ -22,7 +22,9 @@ export async function submitEnquiry(_previous: EnquiryState, formData: FormData)
 
   const result = await deliverEnquiry(parsed.values, parsed.attachment);
   if (!result.ok) {
-    const fallback = site.contactEmail ? ` Please email us directly at ${site.contactEmail}.` : " Please try again shortly.";
+    const fallback = site.contactEmail
+      ? ` Please email us directly at ${site.contactEmail}.`
+      : ` Please try again shortly, or call or WhatsApp us on ${site.phone.display}.`;
     return {
       status: "error",
       message: `We could not send your enquiry at this time.${fallback}`,

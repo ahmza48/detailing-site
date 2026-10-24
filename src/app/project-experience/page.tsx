@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { ArrowLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { Disclaimer } from "@/components/Disclaimer";
 import { ExperienceMetrics } from "@/components/ExperienceMetrics";
 import { HashTarget } from "@/components/HashTarget";
 import { Hero } from "@/components/Hero";
+import { SectionHeading } from "@/components/SectionHeading";
 import { ProjectCaseStudy } from "@/components/ProjectCaseStudy";
 import { projects } from "@/lib/projects";
 import { pageMetadata } from "@/lib/seo";
@@ -11,7 +13,7 @@ import { serviceBySlug } from "@/lib/services";
 import { experienceDisclaimer, portfolioNote } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Project Experience",
+  title: "Selected Professional Project Experience",
   description:
     "Representative onshore and offshore energy projects from the professional experience of our senior team: oil & gas, refinery, NGL and gas developments across the Gulf and beyond.",
   path: "/project-experience",
@@ -25,9 +27,9 @@ export default function ProjectExperiencePage() {
 
       <Hero
         eyebrow="Project experience"
-        title="Experience Built Across"
-        accent="Demanding Energy Environments"
-        intro="One representative project for each of our service lines, drawn from the prior professional experience of our senior team members."
+        title="Selected Professional"
+        accent="Project Experience"
+        intro="Representative projects from the prior professional experience of our senior team members, mapped to the services they relate to today. None of these are projects contracted to Hormuz-Energy."
         image="/images/project-umm-lulu.jpg"
         imageAlt="Offshore platform topsides at a fabrication yard"
         crumbs={[{ name: "Project Experience", path: "/project-experience" }]}
@@ -63,7 +65,7 @@ export default function ProjectExperiencePage() {
                       <span className="block text-[0.9375rem] leading-snug font-extrabold text-navy-900 group-hover:text-teal-700">
                         {project.name}
                       </span>
-                      <span className="block text-xs font-medium text-slate">{serviceBySlug(project.serviceSlug)?.title}</span>
+                      <span className="block text-xs font-medium text-slate">{serviceBySlug(project.serviceSlugs[0])?.title}</span>
                     </span>
                   </a>
                 </li>
@@ -80,6 +82,27 @@ export default function ProjectExperiencePage() {
       <section className="border-t border-line bg-white">
         <div className="container-site py-10">
           <Disclaimer />
+        </div>
+      </section>
+
+      <section id="work-samples" className="bg-navy-900 text-white">
+        <div className="container-site section-y grid gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-6">
+            <SectionHeading slab eyebrow="Technical work samples" title="Company Work and Demonstration Samples" size="md" onDark />
+          </div>
+          <div data-reveal className="space-y-4 text-base leading-7 text-white/85 lg:col-span-6">
+            <p>
+              This collection is for authorised Hormuz-Energy deliverables and clearly labelled demonstration samples, each
+              with its project type, software, source information and limits stated.
+            </p>
+            <p>
+              Until those are published, the drawing and model views above are placeholder illustrations. They do not
+              reproduce any project&rsquo;s documentation and are not presented as delivered work.
+            </p>
+            <ArrowLink href="/contact" onDark>
+              Ask about samples relevant to your scope
+            </ArrowLink>
+          </div>
         </div>
       </section>
 

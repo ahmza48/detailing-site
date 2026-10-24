@@ -7,17 +7,18 @@ import { WhatsAppIcon } from "@/components/WhatsAppButton";
 import { site, telHref, whatsappHref } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Contact",
+  title: "Request an Engineering Services Quote",
   description:
-    "Discuss a structural detailing, modelling or drawing scope for your energy project. Enquiries welcome from EPC contractors, engineering consultancies, fabricators and package vendors.",
+    "Request a quote for structural CAD drafting, TEKLA modelling, steel detailing, RCC detailing, brownfield modifications, MTO or engineering outsourcing. Send your scope of work, design inputs and schedule.",
   path: "/contact",
   image: "/images/contact-overview.jpg",
 });
 
 const helpful = [
   "Type of structures and approximate quantity or tonnage",
+  "Design inputs available and their status",
   "Deliverables required and their format",
-  "Modelling or drawing environment specified",
+  "Software, version and standards specified",
   "Greenfield or brownfield, onshore or offshore",
   "Target schedule and key issue dates",
 ];
@@ -26,21 +27,21 @@ export default function ContactPage() {
   return (
     <>
       <Hero
-        eyebrow="Contact"
-        title="Discuss Your"
-        accent="Structural Scope"
-        intro="Tell us what your project needs. We will review the scope and respond with how our team can support it."
+        eyebrow="Request a Quote"
+        title="Request an Engineering"
+        accent="Services Quote"
+        intro="Send the scope of work, the design inputs you have and your target schedule. We will review it and respond with questions or a written proposal."
         image="/images/contact-overview.jpg"
         imageAlt="Process towers and a crane under an evening sky"
-        crumbs={[{ name: "Contact", path: "/contact" }]}
+        crumbs={[{ name: "Request a Quote", path: "/contact" }]}
       />
 
       <section className="bg-white">
         <div className="container-site section-y grid gap-14 lg:grid-cols-12 lg:gap-20">
           <aside className="lg:col-span-4">
             <p data-reveal className="text-xl leading-relaxed font-semibold text-navy-900">
-              We welcome enquiries from EPC contractors, engineering consultancies, fabricators, package vendors and
-              energy-sector project teams.
+              We welcome enquiries from EPC contractors, engineering consultancies, steel fabricators, industrial
+              contractors and energy-sector project teams.
             </p>
 
             <h2 data-reveal className="mt-10 text-xs font-bold tracking-[0.18em] text-teal-700 uppercase">
@@ -125,7 +126,12 @@ export default function ContactPage() {
           </aside>
 
           <div className="lg:col-span-8">
-            <h2 className="display-md mb-8 text-navy-900 uppercase">Project enquiry</h2>
+            <h2 className="display-md text-navy-900 uppercase">Quote request</h2>
+            <p className="mt-3 mb-8 max-w-2xl text-[0.9375rem] leading-7 text-ink">
+              A short scope summary is enough to start. Confidential drawings and models are exchanged after first
+              contact, through your document system or a transfer method agreed with you, and under an NDA if you
+              request one.
+            </p>
             <ContactForm />
           </div>
         </div>

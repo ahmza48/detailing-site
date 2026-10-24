@@ -21,7 +21,7 @@ export function CTASection({
       accent={accent}
       image="/images/contact-overview.jpg"
       imageAlt="Process towers and a crane under an evening sky"
-      actions={<ButtonLink href={serviceSlug ? `/contact?service=${serviceSlug}` : "/contact"}>Discuss a Project</ButtonLink>}
+      actions={<ButtonLink href={serviceSlug ? `/contact?service=${serviceSlug}` : "/contact"}>Request a Quote</ButtonLink>}
     >
       <p>{copy}</p>
     </ImageBand>
