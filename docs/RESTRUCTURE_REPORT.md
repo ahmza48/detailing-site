@@ -107,6 +107,13 @@ No CV was available in the repository, so no new project detail was added.
 4. Publish authorised or clearly labelled demonstration work samples, then add `/work-samples`.
 5. Replace generic photography with the company's own images where available.
 
-## 9. Framework notice
+## 9. Framework security upgrade
 
-`next build` reports that this Next.js version (16.4.0) is affected by a known security advisory and recommends running `next upgrade --agent=security`. The upgrade was not run; it is outside this restructure and needs owner approval.
+`next build` on Next.js 16.4.0 reported advisory GHSA-p3m5-59mp-jv5r (denial of service in App Router Server Actions, affecting 16.0.0–16.4.0; the RFQ form uses a Server Action). `next upgrade --agent=security` required a 16.5.0 canary CLI, so the fix was applied by upgrading to the patched stable release instead:
+
+- `next` and `eslint-config-next` 16.4.0 → 16.4.3 (exact versions), via pnpm (which manages `node_modules`).
+- `package-lock.json` regenerated to match, and its stale `zod` entry (GHSA-mrhx-c7xc-m3w5) updated.
+- `pnpm audit` and `npm audit --package-lock-only`: no known vulnerabilities.
+- Lint, type check, production build (no advisory), crawl QA and browser regression re-run: all pass.
+
+The repository tracks both `pnpm-lock.yaml` and `package-lock.json`. Keeping one package manager (pnpm, given the current `node_modules`) and removing the other lockfile would avoid drift; that is left for the owner to decide.
