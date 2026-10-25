@@ -7,8 +7,8 @@ import { site } from "@/lib/site";
  * artwork for light backgrounds. Source: public/logo/Emerald HORMUZ ENERGY Logo.png.
  */
 const sources = {
-  light: "/logo/hormuz-energy-logo-light.png",
-  color: "/logo/hormuz-energy-logo.png",
+  light: "/logo/hormuz-energy-emerald-light.png",
+  color: "/logo/hormuz-energy-emerald.png",
 } as const;
 
 export function Logo({ variant = "light", className = "" }: { variant?: keyof typeof sources; className?: string }) {
@@ -19,6 +19,7 @@ export function Logo({ variant = "light", className = "" }: { variant?: keyof ty
       width={640}
       height={169}
       priority
+      sizes="180px"
       className={`h-9 w-auto sm:h-10 ${className}`}
     />
   );
