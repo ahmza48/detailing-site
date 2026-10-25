@@ -25,6 +25,8 @@ export type Industry = {
   summary: string;
   intro: string[];
   structures: string[];
+  /** Core services commissioned in this sector (owner brief, Oct 2026). */
+  scope: string[];
   /** Relevant service packages, with what each contributes in this environment. */
   packages: { service: ServiceSlug; note: string }[];
   /** Typical inputs and constraints in this environment. */
@@ -40,6 +42,20 @@ export type Industry = {
 export const industries: Industry[] = [
   {
     slug: "onshore-oil-gas",
+    scope: [
+      "Structural drafting and detailing for onshore oil and gas facilities",
+      "Wellhead and pipeline-main structural GA drawings",
+      "Wellhead access platforms",
+      "Pipe rack manifold structures",
+      "Pipe racks, pipe bridges and associated structural steelwork",
+      "Flowline and trunk-line structural-support documentation",
+      "Equipment-support structures, platforms and skid frames",
+      "Structural supports for cable trays and facility services",
+      "Steel and concrete structural drawing packages",
+      "Greenfield drawing and modelling production",
+      "Brownfield facility updates and modifications",
+      "Structural replacement and rerouting-related drawing updates",
+    ],
     name: "Onshore Oil & Gas Facilities",
     short: "Onshore Oil & Gas",
     legacyAnchors: ["oil-gas"],
@@ -92,6 +108,16 @@ export const industries: Industry[] = [
   },
   {
     slug: "gas-processing-ngl",
+    scope: [
+      "Process-industry structural arrangements",
+      "Pipe racks, pipe bridges and associated structural steelwork",
+      "Equipment-support structures, platforms and skid frames",
+      "Equipment foundations, bases and plinths with reinforcement detailing",
+      "Steel and concrete structural drawing packages",
+      "Structural modelling and fabrication documentation",
+      "Model-based quantity extraction and material documentation",
+      "Plant upgrade and expansion packages",
+    ],
     name: "Gas Processing & NGL Facilities",
     short: "Gas Processing / NGL",
     legacyAnchors: ["gas-processing-ngl"],
@@ -141,6 +167,16 @@ export const industries: Industry[] = [
   },
   {
     slug: "offshore-energy",
+    scope: [
+      "Structural drafting and detailing for offshore facilities, within the available project scope and competence",
+      "FrameWorks Plus steel structure GA, plans, elevations and model sections",
+      "Platform access structures, walkways and secondary steelwork",
+      "Equipment-support and access-structure modifications",
+      "Spreader bar section and detail drawings, from approved lifting design",
+      "Structural modelling and fabrication documentation",
+      "Brownfield facility updates and modifications",
+      "Model-based quantity extraction and material documentation",
+    ],
     name: "Offshore Energy Facilities",
     short: "Offshore Energy",
     legacyAnchors: ["offshore"],
@@ -195,6 +231,16 @@ export const industries: Industry[] = [
   },
   {
     slug: "refining-petrochemicals",
+    scope: [
+      "Refinery and petrochemical facility structural drawings",
+      "Process-industry structural arrangements",
+      "Pipe racks, pipe bridges and associated structural steelwork",
+      "Equipment-support structures, platforms and maintenance access",
+      "Plant upgrade, expansion and reinstatement packages",
+      "Brownfield facility updates and modifications",
+      "Structural replacement and rerouting-related drawing updates",
+      "Structural modelling in PDS / FrameWorks Plus environments, where supported",
+    ],
     name: "Refining & Petrochemical Facilities",
     short: "Refining & Petrochemicals",
     legacyAnchors: ["refineries", "petrochemical"],
@@ -244,6 +290,16 @@ export const industries: Industry[] = [
   },
   {
     slug: "process-plants",
+    scope: [
+      "Process-industry structural arrangements",
+      "Structural framing, pipe rack and equipment-support drawings",
+      "Platforms, walkways and secondary steelwork",
+      "Concrete supports, equipment foundations and bases",
+      "Steel and concrete structural drawing packages",
+      "Structural modelling and fabrication documentation",
+      "Plant upgrade and expansion packages",
+      "Model-based quantity extraction and material documentation",
+    ],
     name: "Fertiliser, Chemical & Process Plants",
     short: "Fertiliser / Process Plants",
     legacyAnchors: ["fertilizer-process"],
@@ -291,6 +347,16 @@ export const industries: Industry[] = [
   },
   {
     slug: "power-industrial",
+    scope: [
+      "Substation foundations and equipment bases",
+      "Transformer and electrical equipment skids",
+      "Cable tray support structures",
+      "Structural framing, steel buildings and industrial sheds",
+      "Access platforms, stairs, ladders and handrails",
+      "Industrial foundation drawing packages",
+      "Monorail and lifting-support steelwork, subject to specialist design criteria",
+      "Facility expansion structures and replacement steelwork",
+    ],
     name: "Power Generation & Industrial Facilities",
     short: "Power & Industrial",
     legacyAnchors: ["power-electrical", "industrial-energy"],

@@ -14,6 +14,7 @@ import { Hero } from "./Hero";
 import { JsonLd } from "./JsonLd";
 import { ProjectCard } from "./ProjectCard";
 import { ProcessSteps } from "./ProcessSteps";
+import { ScopeChecklist } from "./ScopeChecklist";
 import { SectionHeading } from "./SectionHeading";
 import { StandardsSummary } from "./StandardsSummary";
 import { tc } from "@/lib/text";
@@ -85,7 +86,8 @@ export function ServicePageLayout({ service }: { service: Service }) {
 
       {/* Overview + at a glance */}
       <section className="bg-white">
-        <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="container-site section-y">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div data-reveal className="lg:col-span-7">
             <SectionHeading slab title="Service Overview" />
             <p className="mt-6 text-lg leading-8 font-semibold text-navy-900 sm:text-xl sm:leading-9">{introLead}</p>
@@ -94,21 +96,6 @@ export function ServicePageLayout({ service }: { service: Service }) {
                 {paragraph}
               </p>
             ))}
-            <div data-reveal className="mt-8 rounded-r-xl border-l-4 border-energy-deep bg-paper p-6 sm:p-7">
-              <h3 className="text-lg font-extrabold text-navy-900">Where This Service Fits</h3>
-              {service.fit.map((paragraph) => (
-                <p key={paragraph} className="mt-3 text-[0.9375rem] leading-7 text-ink">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-            <ul className="mt-8 flex flex-wrap gap-2.5">
-              {service.highlights.map((item) => (
-                <li key={item} className="rounded-full border border-line bg-paper px-4 py-2 text-sm font-semibold text-navy-900">
-                  {tc(item)}
-                </li>
-              ))}
-            </ul>
           </div>
 
           <aside data-reveal className="lg:col-span-5">
@@ -151,6 +138,32 @@ export function ServicePageLayout({ service }: { service: Service }) {
               </ButtonLink>
             </div>
           </aside>
+        </div>
+
+        {/* Where it fits (left) + full core-services checklist (right) */}
+        <div className="mt-14 grid gap-10 border-t border-line pt-14 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <div data-reveal className="rounded-r-xl border-l-4 border-energy-deep bg-paper p-6 sm:p-7 lg:sticky lg:top-28">
+              <h3 className="text-lg font-extrabold text-navy-900">Where This Service Fits</h3>
+              {service.fit.map((paragraph) => (
+                <p key={paragraph} className="mt-3 text-[0.9375rem] leading-7 text-ink">
+                  {paragraph}
+                </p>
+              ))}
+              <ButtonLink href={quoteHref} variant="light" className="mt-6">
+                Discuss Your Scope
+              </ButtonLink>
+            </div>
+          </div>
+          <div data-reveal className="lg:col-span-7">
+            <h3 className="text-lg font-extrabold text-navy-900">Core Services</h3>
+            <p className="mt-2 mb-6 text-[0.9375rem] leading-7 text-ink">
+              The work that can be commissioned under this service. Any item can be scoped on its own or as part of a
+              package; deliverables are agreed in writing for each project.
+            </p>
+            <ScopeChecklist groups={service.coreScope} note={service.coreScopeNote} />
+          </div>
+        </div>
         </div>
       </section>
 

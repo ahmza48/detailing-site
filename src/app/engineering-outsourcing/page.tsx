@@ -5,6 +5,7 @@ import { ArrowLink, ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { Hero } from "@/components/Hero";
 import { ProcessSteps } from "@/components/ProcessSteps";
+import { ScopeChecklist } from "@/components/ScopeChecklist";
 import { SectionHeading } from "@/components/SectionHeading";
 import { pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath, type ServiceSlug } from "@/lib/services";
@@ -29,6 +30,37 @@ const packages: { service: ServiceSlug; title: string; text: string }[] = [
   { service: "rcc-reinforcement-detailing", title: "Concrete and rebar detailing", text: "Concrete details, reinforcement sheets and bar bending schedules." },
   { service: "brownfield-structural-modifications", title: "Brownfield revisions", text: "Modifications to existing drawings, replacement steel and record updates." },
   { service: "material-takeoffs-documentation", title: "MTO and documentation", text: "Material schedules, drawing registers and review-comment processing." },
+];
+
+/** Outsourced production scope (owner brief, Oct 2026). */
+const outsourcingScope = [
+  {
+    heading: "Production Work",
+    items: [
+      "Outsourced civil and structural CAD drafting",
+      "Outsourced structural steel detailing",
+      "Outsourced Tekla modelling and drawing production",
+      "Fabrication and erection drawing packages",
+      "Concrete structural drafting and reinforcement detailing",
+      "Material take-offs, BOMs and quantity schedules",
+      "Brownfield drawing and model revision support",
+      "Legacy model and drawing production support",
+    ],
+  },
+  {
+    heading: "Ways of Working",
+    items: [
+      "Drawing backlog reduction",
+      "Additional production capacity during project peaks",
+      "Dedicated CAD and Tekla resources, subject to availability",
+      "Project-based or deliverable-based subcontracting",
+      "Long-term outsourced production support",
+      "Remote drafting and detailing support for consultancies, EPC contractors and steel fabricators",
+      "White-label production support, where contractually agreed",
+      "Hourly, daily, monthly, milestone-based or project-based arrangements, subject to agreement",
+      "Defined scopes of work, deliverables, review cycles and revision responsibilities",
+    ],
+  },
 ];
 
 const audiences = [
@@ -149,6 +181,23 @@ export default function OutsourcingPage() {
               </li>
             ))}
           </ul>
+
+          <div className="mt-14 grid gap-10 border-t border-line pt-14 lg:grid-cols-12 lg:gap-16">
+            <div data-reveal className="lg:col-span-4">
+              <h3 className="text-lg font-extrabold text-navy-900">Outsourced Production Scope</h3>
+              <p className="mt-3 text-[0.9375rem] leading-7 text-ink">
+                What an extended-team or subcontract arrangement can cover, and how it can be structured.
+              </p>
+              <p className="mt-4 text-sm leading-6 text-slate">
+                Related requirements, such as specialist modelling, scanning-related drawing updates, BIM coordination or
+                civil infrastructure and site-service drawings, are assessed individually and accepted only where the
+                required expertise, software, inputs and resources are available.
+              </p>
+            </div>
+            <div data-reveal className="lg:col-span-8">
+              <ScopeChecklist groups={outsourcingScope} />
+            </div>
+          </div>
         </div>
       </section>
 

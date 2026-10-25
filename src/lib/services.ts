@@ -27,6 +27,8 @@ export type ServiceGroupId = "drawings-models" | "detailing" | "modifications-do
 /** Capability tier (spec 1.3). Every listed service is currently "confirmed"; TODO_VERIFY with the owner. */
 export type CapabilityStatus = "confirmed" | "extended" | "on-request";
 
+export type ScopeGroup = { heading?: string; items: string[] };
+
 export type Subservice = { id: string; title: string; description: string };
 export type SubserviceGroup = { heading?: string; items: Subservice[] };
 
@@ -61,6 +63,10 @@ export type Service = {
   highlights: string[];
   /** What the deliverable is, for the "At a glance" panel. */
   deliverableType: string;
+  /** Full core-services checklist shown beside "Where this service fits" (owner brief, Oct 2026). */
+  coreScope: ScopeGroup[];
+  /** Qualification shown under the checklist. */
+  coreScopeNote?: string;
   subserviceGroups: SubserviceGroup[];
   inputs: string[];
   outputs: string[];
@@ -146,6 +152,32 @@ export const services: Service[] = [
       "Drawing revisions and as-built updates",
     ],
     deliverableType: "2D engineering arrangement drawings",
+    coreScope: [
+      {
+        items: [
+          "General arrangement (GA) drawings",
+          "Structural plans, elevations, sections and detailed drawings",
+          "Steel structural arrangement and framing drawings",
+          "Column, beam, bracing and grid layout drawings",
+          "Structural setting-out, levels and dimensional drawings",
+          "Foundation plans, sections and details",
+          "Equipment foundations, bases and concrete plinth drawings",
+          "Pipe rack, pipe bridge and industrial structure arrangement drawings",
+          "Substation foundation and structural drawings",
+          "Industrial building and steel-framed structure drawings",
+          "Structural support and equipment-support drawings",
+          "RCC structural drawings for columns, beams, slabs and foundations",
+          "Concrete-to-steel interface drawings",
+          "Drawing conversion, redrafting and CAD reconstruction from suitable reference information",
+          "Existing drawing updates and revisions",
+          "Redline and markup incorporation",
+          "As-built drawing preparation based on verified site information",
+          "Sheet setup, dimensions, annotations, notes and cross-references",
+          "Title blocks, drawing numbering and client drafting standards",
+          "Drawing registers, revision identification and drawing-package preparation",
+        ],
+      },
+    ],
     subserviceGroups: [
       {
         items: [
@@ -372,6 +404,50 @@ export const services: Service[] = [
       "Agreed native and exchange formats",
     ],
     deliverableType: "3D structural and plant models with agreed exchanges",
+    coreScope: [
+      {
+        heading: "Tekla Structures & 3D Modelling",
+        items: [
+          "3D structural steel modelling using Tekla Structures",
+          "Beams, columns, bracing and secondary structural members",
+          "Plates, stiffeners, brackets and connection components",
+          "Hollow-section structures and storage-tank structural steelwork",
+          "Pipe racks, platforms, access structures and equipment-support frames",
+          "Warehouses, factories and industrial sheds",
+          "Model development from approved 2D drawings and design information",
+          "Existing model updates from approved revisions and markups",
+          "Structural member numbering and model organisation",
+          "Model-based GA, fabrication, assembly and erection drawings",
+          "3D views and model-generated drawing views",
+          "Model-based material take-offs and component schedules",
+          "Model and drawing consistency checks",
+          "Geometric coordination and clash identification within the agreed scope",
+          "Model updates for brownfield modifications and structural replacements",
+          "Model and drawing revision coordination",
+          "IFC and other agreed model-exchange formats, where supported",
+          "Native model handover, subject to software compatibility, licensing and contract",
+        ],
+      },
+      {
+        heading: "Plant Design & Legacy Model Support",
+        items: [
+          "Compatible legacy plant-design models and drawing workflows",
+          "PDS-based modelling and drawing support, where current capability is available",
+          "FrameWorks Plus (FWP) modelling and drawing workflows, where supported",
+          "SPR-related model and drawing workflows, where applicable",
+          "MicroStation drafting and legacy drawing updates",
+          "Existing plant-model updates and drawing revisions",
+          "Facility layout and structural-interface documentation",
+          "Underground facility modelling, within the agreed scope",
+          "Structural steelwork coordination with piping and facility layouts",
+          "Pipe rack and pipe bridge interface coordination",
+          "Legacy drawing conversion and documentation updates",
+          "Model-based quantity extraction, where supported",
+        ],
+      },
+    ],
+    coreScopeNote:
+      "PDMS-related support and piping layout or isometric drawing support are offered only after the available software, compatible files, personnel expertise and project requirements are confirmed. Complete piping design, piping stress analysis, process engineering and mechanical design are not implied.",
     subserviceGroups: [
       {
         heading: "Model Setup & Development",
@@ -614,6 +690,53 @@ export const services: Service[] = [
       "BOM, bolt and part lists",
     ],
     deliverableType: "Fabrication and erection documentation package",
+    coreScope: [
+      {
+        heading: "Steel Detailing & Fabrication Drawings",
+        items: [
+          "Structural steel detailing from approved design drawings and engineering information",
+          "Steel general arrangement and framing drawings",
+          "Shop and fabrication drawings",
+          "Erection and installation drawings",
+          "Assembly drawings and single-part drawings",
+          "Beam, column, bracing and secondary-steel detailing",
+          "Beam-to-column and beam-to-beam connection detailing",
+          "Base plates, end plates, gusset plates and stiffener details",
+          "Bolted and welded connection details to the approved engineering design",
+          "Structural plates, brackets, cleats and connection components",
+          "Platforms, walkways, stairs, ladders and handrails",
+          "Pipe rack and pipe bridge steel detailing",
+          "Equipment-support frames and structural skids",
+          "Cable tray supports and other secondary steelwork",
+          "Member identification, part marking and assembly numbering",
+          "Fabrication dimensions, cutting information and component schedules",
+          "Bolt lists and connection material lists",
+          "Bills of materials (BOMs) and material take-offs (MTOs)",
+          "NC / DSTV and other agreed machine outputs, subject to project requirements and software capability",
+          "Fabrication and erection coordination documentation",
+          "Incorporation of fabrication comments and approved revisions",
+          "Modification, replacement and additional-steel detailing",
+          "Rehabilitation and strengthening-related drawing updates from approved engineering information",
+        ],
+      },
+      {
+        heading: "Industrial Structures & Specialist Steelwork",
+        items: [
+          "Pipe racks, multilevel pipe racks, pipe bridges and crossovers",
+          "Equipment-support structures and equipment frames",
+          "Equipment, maintenance and industrial access platforms",
+          "Industrial sheds and steel-framed industrial buildings",
+          "Structural frames and secondary steelwork",
+          "Transformer and electrical equipment skids",
+          "Cladding and roofing support steelwork",
+          "Monorail and lifting-support steelwork, subject to specialist design criteria and approved information",
+          "Process-facility structural supports within the agreed civil and structural scope",
+          "Structural interfaces with equipment, piping and electrical installations",
+          "Replacement steelwork, additional supports and facility expansion structures",
+          "Rehabilitation and reinstatement drawing packages",
+        ],
+      },
+    ],
     subserviceGroups: [
       {
         heading: "Input Review & Detailing Model",
@@ -873,6 +996,29 @@ export const services: Service[] = [
       "Concrete and rebar quantities",
     ],
     deliverableType: "RCC drawings, rebar details and BBS",
+    coreScope: [
+      {
+        items: [
+          "Reinforced concrete (RCC) structural drawings",
+          "Concrete foundation plans, sections and details",
+          "Equipment foundations, bases and plinths",
+          "Column, beam and slab drawings from approved design information",
+          "Concrete structural arrangements for industrial facilities",
+          "Reinforcement detailing",
+          "Bar bending schedules (BBS)",
+          "Reinforcement and concrete quantity schedules",
+          "Foundation layouts, levels, dimensions and setting-out details",
+          "Substation foundations and equipment bases",
+          "Concrete support and base drawings",
+          "Steel-to-concrete interface details",
+          "Anchor-bolt and embedded-item layouts, where specified in approved design information",
+          "Existing concrete structure drawing updates",
+          "Concrete structural modification drawings",
+          "Concrete material take-offs and reinforcement quantity documentation",
+          "As-built concrete drawings based on verified site records",
+        ],
+      },
+    ],
     subserviceGroups: [
       {
         items: [
@@ -1097,6 +1243,29 @@ export const services: Service[] = [
       "As-built updates from verified records",
     ],
     deliverableType: "Modification package for existing plant",
+    coreScope: [
+      {
+        items: [
+          "Review and updating of existing structural drawings and models",
+          "Documentation of existing structures from supplied or verified information",
+          "Structural modification and replacement drawings",
+          "New members, secondary steel and structural supports",
+          "Equipment-support modification and replacement drawings",
+          "Cable tray support modification and replacement",
+          "Structural documentation for approved pipeline rerouting or relocation",
+          "Rehabilitation, reinstatement and strengthening-related drawing updates",
+          "Drawing revisions for operating and live facilities",
+          "Greenfield-to-existing-facility interface documentation",
+          "Existing-versus-proposed drawing comparisons",
+          "Redline and markup incorporation",
+          "Approved engineering change updates",
+          "Revised structural models and drawings",
+          "Updated material take-offs and component schedules",
+          "As-built drawing preparation based on verified site records",
+          "Removal or demolition-related structural drawings from approved engineering information",
+        ],
+      },
+    ],
     subserviceGroups: [
       {
         items: [
@@ -1328,6 +1497,51 @@ export const services: Service[] = [
       "Transmittals and handover packages",
     ],
     deliverableType: "Quantities, registers and controlled document packages",
+    coreScope: [
+      {
+        heading: "Material Take-Offs, BOMs & Quantities",
+        items: [
+          "Structural steel material take-offs",
+          "Member, plate, profile and component quantities",
+          "Bolts, connection components and associated material lists",
+          "Bills of materials (BOMs)",
+          "Part-mark and assembly schedules",
+          "Model-based quantity extraction",
+          "Concrete quantity take-offs",
+          "Reinforcement quantities and bar bending schedules",
+          "Material schedules for structural fabrication and procurement",
+          "Drawing-to-quantity cross-checks",
+          "MTO checking and reconciliation",
+          "Quantity updates following approved drawing or model revisions",
+          "Revised material lists for modifications and replacement steelwork",
+          "Quantity reports in agreed spreadsheet or model-report formats",
+        ],
+      },
+      {
+        heading: "Drawing Review, Production Checking & Document Control",
+        items: [
+          "Drawing completeness checks",
+          "Dimension, annotation, note and reference consistency checks",
+          "Drawing-to-model consistency checks",
+          "Cross-checks of drawings against material schedules",
+          "Drawing numbering and revision identification",
+          "Drawing register preparation and updating",
+          "Revision tracking and issue-status coordination",
+          "Incorporation and tracking of review comments and markups",
+          "Drawing comparisons to identify revisions",
+          "Drawing-package compilation",
+          "PDF markup and drawing review support",
+          "Title-block and client drafting-standard compliance checks",
+          "File naming and deliverable organisation",
+          "Technical document formatting",
+          "Transmittal preparation and issue-package coordination",
+          "Preparation of agreed PDF, CAD and model deliverables",
+          "Coordination of drawing, model and material-schedule revisions",
+        ],
+      },
+    ],
+    coreScopeNote:
+      "These are production-level checks and document-control services; they do not replace independent engineering verification, formal design approval or professional certification.",
     subserviceGroups: [
       {
         heading: "Structural Quantities & Material Documentation",

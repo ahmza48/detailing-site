@@ -9,6 +9,7 @@ import { CTASection } from "@/components/CTASection";
 import { Disclaimer } from "@/components/Disclaimer";
 import { Hero } from "@/components/Hero";
 import { ProjectCard } from "@/components/ProjectCard";
+import { ScopeChecklist } from "@/components/ScopeChecklist";
 import { SectionHeading } from "@/components/SectionHeading";
 import { StandardsSummary } from "@/components/StandardsSummary";
 import { industries, industryBySlug, industryPath, type Industry } from "@/lib/industries";
@@ -85,6 +86,14 @@ function IndustryLayout({ industry }: { industry: Industry }) {
               </ul>
             </div>
           </aside>
+          <div data-reveal className="border-t border-line pt-12 lg:col-span-12">
+            <h3 className="text-lg font-extrabold text-navy-900">Core Services in This Sector</h3>
+            <p className="mt-2 mb-6 max-w-3xl text-[0.9375rem] leading-7 text-ink">
+              Civil and structural production work commonly commissioned for these facilities. Each item is delivered
+              through one of our six services and scoped to the approved project inputs.
+            </p>
+            <ScopeChecklist groups={[{ items: industry.scope }]} columns={3} />
+          </div>
         </div>
       </section>
 
