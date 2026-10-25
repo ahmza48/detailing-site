@@ -10,7 +10,7 @@ import { site } from "./site";
  *
  * Required environment variables (server-side only, see .env.example):
  *   RESEND_API_KEY      API key
- *   CONTACT_TO_EMAIL    inbox that receives enquiries
+ *   CONTACT_TO_EMAIL    inbox(es) that receive enquiries; separate several with commas
  *   CONTACT_FROM_EMAIL  verified sender, e.g. "Website <enquiries@yourdomain.com>"
  */
 
@@ -21,7 +21,10 @@ const escapeHtml = (value: string) =>
 
 export async function deliverEnquiry(values: EnquiryValues, attachment?: File): Promise<DeliveryResult> {
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
+  const to = (process.env.CONTACT_TO_EMAIL ?? "")
+    .split(",")
+    .map((address) => address.trim())
+    .filter(Boolean);
   const from = process.env.CONTACT_FROM_EMAIL;
 
   // Every labelled field, in form order; blanks shown as a dash so the reader sees what was left empty.
@@ -29,7 +32,7 @@ export async function deliverEnquiry(values: EnquiryValues, attachment?: File): 
     (key): [string, string] => [enquiryLabels[key], values[key] || "—"],
   );
 
-  if (!apiKey || !to || !from) {
+  if (!apiKey || to.length === 0 || !from) {
     if (process.env.NODE_ENV !== "production") {
       // Local development without credentials: log instead of sending.
       console.info("[enquiry] Email delivery is not configured. Enquiry received:", {
@@ -54,7 +57,7 @@ export async function deliverEnquiry(values: EnquiryValues, attachment?: File): 
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from,
-        to: [to],
+        to,
         reply_to: values.email,
         subject: `Project enquiry: ${values.service} — ${values.company}`.replace(/[\r\n]+/g, " "),
         text: textBody,
