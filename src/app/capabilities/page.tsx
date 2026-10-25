@@ -13,41 +13,51 @@ import { software, softwareQualifier } from "@/lib/software";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Software, Deliverables & Technical Capabilities",
+  title: "Engineering Software & Technical Capabilities",
   description:
-    "Technical deliverables, software experience, file formats and workflow for structural drafting, modelling and detailing: Tekla Structures, AutoCAD, MicroStation, Navisworks and plant design environments.",
+    "Software experience, model formats, structural drawing deliverables, engineering specifications and package review processes.",
   path: "/capabilities",
   image: "/images/capabilities-overview.jpg",
 });
 
-/** Deliverable categories, each owned by one canonical service. */
+/** Capability areas (spec v2 §10.1), each owned by one canonical service. */
 const deliverables: { group: string; service: ServiceSlug; items: string[] }[] = [
   {
-    group: "Engineering drawings",
+    group: "Structural drawing production",
     service: "civil-structural-drafting",
-    items: ["General arrangement drawings", "Plans, elevations and sections", "Foundation and equipment-base layouts", "Drawing revisions and redrafting"],
+    items: ["General arrangements and framing", "Foundation and member arrangements", "Elevations and sections", "Revision details"],
   },
   {
-    group: "3D models",
+    group: "Model production and coordination",
     service: "plant-structural-3d-modelling",
-    items: ["Tekla Structures steel models", "Plant structural models, where supported", "Existing-model updates", "Coordination views and exchanges"],
+    items: ["Tekla Structures steel models", "Plant structural models, where supported", "Existing-model updates", "Supported model exchanges"],
   },
   {
-    group: "Fabrication & construction documentation",
+    group: "Fabrication documentation",
     service: "steel-detailing-fabrication",
-    items: ["Assembly and shop drawings", "Single-part drawings", "Erection drawings", "RCC details and bar bending schedules"],
+    items: ["Assembly and single-part drawings", "Erection drawings", "Bolt and material lists", "Model-linked reports"],
   },
   {
-    group: "Quantities & document sets",
+    group: "Concrete and reinforcement production",
+    service: "rcc-reinforcement-detailing",
+    items: ["RC geometry and details", "Equipment foundations", "Rebar placing details", "Bar bending schedules"],
+  },
+  {
+    group: "Brownfield information management",
+    service: "brownfield-structural-modifications",
+    items: ["Record drawings", "Field-information queries", "Model and document updates", "Revision history"],
+  },
+  {
+    group: "Quantities and technical documents",
     service: "material-takeoffs-documentation",
-    items: ["Material take-off and BOM", "Bolt and part lists", "Drawing registers and transmittals", "As-built records from verified sources"],
+    items: ["MTO and BOM", "Member and bolt schedules", "Drawing registers", "Issue and transmittal records"],
   },
 ];
 
 /** File exchange workflow (spec 7.6 item 4). Formats are confirmed per package; nothing here is universal. */
 const formatSteps = [
   { title: "Confirm platform and version", text: "The software and version the package must be delivered in, and whether that is available for the package." },
-  { title: "Agree native and exchange formats", text: "For example DWG or DGN drawings, PDF sets, native Tekla models, IFC and NC / DSTV files where supported." },
+  { title: "Agree native and exchange formats", text: "For example editable DWG or DGN, PDF, native Tekla files, IFC or other compatible model exchanges, XLSX / CSV material reports, and NC / DSTV machine files only where demonstrably producible for the package." },
   { title: "Test the exchange early", text: "A first file is exchanged and opened on both sides before production volume builds up." },
   { title: "Record it in the scope", text: "Formats, versions and naming are written into the scope of work and the deliverables list." },
 ];
@@ -111,9 +121,9 @@ export default function CapabilitiesPage() {
     <>
       <Hero
         eyebrow="Technical Capabilities"
-        title="Software, Deliverables"
-        accent="& Technical Capability"
-        intro="What we produce, the tools the team has used to produce it, how files are exchanged, and where standards and checking are described."
+        title="Civil & Structural Modelling,"
+        accent="Drafting and Detailing Capabilities"
+        intro="The capability an engineering package needs depends on more than a software name: compatibility with approved design information, coordinates, discipline references, fabrication practice, revisions and agreed formats."
         image="/images/capabilities-overview.jpg"
         imageAlt="Structural steel framing seen from below"
         crumbs={[{ name: "Technical Capabilities", path: "/capabilities" }]}
@@ -125,9 +135,9 @@ export default function CapabilitiesPage() {
           <SectionHeading
             slab
             title="Technical Deliverables"
-            intro="Four categories of deliverable. Each is owned by one service, so you know exactly which scope to request."
+            intro="Each assignment is evaluated against the expertise available for its drafting, modelling, steel detailing, concrete documentation or plant-model requirements. Each capability area is owned by one service, so you know exactly which scope to request."
           />
-          <div className="mt-14 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
             {deliverables.map((group, index) => {
               const service = serviceBySlug(group.service);
               return (
@@ -172,7 +182,7 @@ export default function CapabilitiesPage() {
                 <tr>
                   <th scope="col" className="px-5 py-3.5 font-bold">Software</th>
                   <th scope="col" className="px-5 py-3.5 font-bold">Supports</th>
-                  <th scope="col" className="px-5 py-3.5 font-bold">Basis</th>
+                  <th scope="col" className="px-5 py-3.5 font-bold">Basis and caution</th>
                 </tr>
               </thead>
               <tbody>
@@ -189,7 +199,10 @@ export default function CapabilitiesPage() {
                       </span>
                     </td>
                     <td className="px-5 py-3.5 text-haze">
-                      {tool.legacy ? "Prior project experience; availability confirmed per package" : "Senior team project experience"}
+                      <span className="block font-semibold text-white">
+                        {tool.legacy ? "Prior project experience; availability confirmed per package" : "Senior team project experience"}
+                      </span>
+                      <span className="mt-1 block">{tool.caution}</span>
                     </td>
                   </tr>
                 ))}
@@ -209,9 +222,22 @@ export default function CapabilitiesPage() {
           <div className="lg:col-span-5">
             <SectionHeading slab title="File Formats & Workflow" />
             <p data-reveal className="mt-5 text-base leading-7 text-ink">
-              Compatibility is agreed, not assumed. Platforms, versions and formats are confirmed during scope review and
-              recorded before production starts.
+              Compatibility is agreed, not assumed. We confirm the available software versions, model compatibility,
+              exchange formats and drawing requirements during technical scope review, then agree the deliverable formats
+              that can be supported.
             </p>
+            <p data-reveal className="mt-4 text-sm leading-6 text-slate">
+              Native file ownership, exchange and version compatibility and licensing restrictions are defined by the
+              contract. A 3D model is not a verified fabrication drawing set, and a model viewer is not complete design
+              coordination.
+            </p>
+            <div data-reveal className="mt-6 rounded-xl bg-paper p-5">
+              <p className="text-sm font-bold text-navy-900">Can you receive and hand over our native CAD or plant-model version?</p>
+              <p className="mt-2 text-sm leading-6 text-ink">
+                Share the software and version, a sample file, the expected outputs and your project exchange rules so
+                compatibility can be checked before the scope is agreed.
+              </p>
+            </div>
             <ArrowLink href="/quality-delivery" className="mt-6">
               Revision control & handover
             </ArrowLink>
@@ -243,7 +269,7 @@ export default function CapabilitiesPage() {
               href: "/capabilities/codes-standards",
               eyebrow: "Codes & standards",
               title: "Standards applied per project",
-              text: "How AISC, AWS, RCSC, ACI, BS, Eurocode and ISO references are identified for each package, and who is responsible for compliance.",
+              text: "How project requirements, specifications and applicable standards are identified for each package, and who is responsible for compliance and approval.",
             },
             {
               href: "/quality-delivery",
@@ -301,7 +327,7 @@ export default function CapabilitiesPage() {
               eyebrow="3D modelling"
               title="Modelling Inside the Project Environment"
               onDark
-              intro="Structural models built in Tekla Structures, with prior project experience in PDS and Frameworks Plus plant environments and exposure to PDMS. Positioned for energy and process plants, not architectural BIM."
+              intro="Structural models built in Tekla Structures, with prior project experience in PDS and FrameWorks Plus plant environments and exposure to PDMS. Positioned for energy and process plants, not architectural BIM."
             />
             <ul data-reveal className="mt-8 max-w-xl border-t border-white/15">
               {["Steel and concrete structures", "Underground facilities", "Existing model modification and brownfield updates", "Navisworks model review and coordination"].map((item) => (
@@ -312,7 +338,7 @@ export default function CapabilitiesPage() {
               ))}
             </ul>
             <ArrowLink href="/services/plant-structural-3d-modelling" onDark className="mt-8">
-              3D Structural & Plant Modelling
+              3D Structural Modelling & Plant Model Support
             </ArrowLink>
           </div>
           <div data-reveal="image" className="relative min-h-72 overflow-hidden bg-navy-950 lg:min-h-[36rem]">

@@ -9,6 +9,7 @@ import {
   designStatusOptions,
   industryOptions,
   initialEnquiryState,
+  mixedPackageOption,
   outsourcingOption,
   projectTypes,
   serviceOptions,
@@ -66,11 +67,16 @@ export function ContactForm() {
 
   // Pre-select the service when arriving from a service page (/contact?service=<slug>).
   // Older service slugs map to their successors; the matching technical line is ticked too.
+  // "engineering-outsourcing" and "mixed" select the two non-service options.
   useEffect(() => {
     const raw = new URLSearchParams(window.location.search).get("service") ?? "";
-    const slug = legacyServiceSlugs[raw] ?? raw;
+    const slug: string = legacyServiceSlugs[raw] ?? raw;
     const title =
-      slug === "engineering-outsourcing" ? outsourcingOption : services.find((service) => service.slug === slug)?.title;
+      slug === "engineering-outsourcing"
+        ? outsourcingOption
+        : slug === "mixed"
+          ? mixedPackageOption
+          : services.find((service) => service.slug === slug)?.title;
     if (!title || !serviceRef.current || serviceRef.current.value) return;
     serviceRef.current.value = title;
     const boxes = serviceRef.current.form?.querySelectorAll<HTMLInputElement>('input[name="technicalServices"]') ?? [];
@@ -272,8 +278,8 @@ export function ContactForm() {
       <label className="flex min-h-11 cursor-pointer items-start gap-3 text-sm text-ink sm:col-span-2">
         <input type="checkbox" name="nda" value="yes" defaultChecked={values.nda === "Yes"} className="mt-0.5 size-4 accent-energy-deep" />
         <span>
-          <span className="font-bold text-navy-900">Request an NDA before project files are exchanged</span>
-          <span className="block text-slate">We will send one for review before asking for drawings or models.</span>
+          <span className="font-bold text-navy-900">Please contact me about an NDA / secure file transfer before I send drawings</span>
+          <span className="block text-slate">We will discuss confidentiality arrangements with you before asking for drawings or models.</span>
         </span>
       </label>
 
@@ -294,7 +300,7 @@ export function ContactForm() {
             </>
           ) : (
             <>
-              Submit Quote Request
+              Submit Project Requirements
               <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
             </>
           )}

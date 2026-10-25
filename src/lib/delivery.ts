@@ -16,21 +16,36 @@ export const engagementSteps = [
   { title: "Handover", text: "Native and PDF deliverables issued with registers and revision status." },
 ];
 
-/** Quality & Delivery page process (spec 7.8). */
+/** Technical delivery sequence (spec v2 §11.1). */
 export const qualityProcess = [
-  { title: "RFQ and scope", text: "Scope, deliverables, exclusions and responsibilities agreed before work starts." },
-  { title: "Approved inputs and revision control", text: "Input documents logged with their revision and status; superseded inputs withdrawn." },
-  { title: "Model and drawing setup", text: "Templates, grids, numbering, title blocks and software version set up to the project requirements." },
-  { title: "Production and self-check", text: "The originator checks each drawing or model against the inputs and standards." },
   {
-    title: "Independent production check",
-    text: "A second detailer or checker reviews the deliverable where this is resourced and agreed in the scope.",
+    title: "Scope & deliverable definition",
+    text: "Output list, models, drawing types, package boundaries, interfaces, submission stages, design authority and exclusions confirmed.",
   },
-  { title: "Queries and coordination", text: "Technical queries raised in writing; interfaces with other disciplines coordinated." },
-  { title: "Client comments and approvals", text: "Your review comments incorporated; design approvals remain with the responsible engineer." },
-  { title: "Revision history", text: "Every re-issue carries its revision, description and the comments it closes." },
-  { title: "File and document handover", text: "Native files, PDFs, registers and transmittals issued in the agreed format." },
-  { title: "Close-out and records", text: "The issued package and its records retained for future revisions and as-builts." },
+  {
+    title: "Approved technical inputs & queries",
+    text: "Source drawings and models, issue status, specifications, applicable codes and editions and missing engineering decisions recorded; RFIs and technical queries raised for incomplete or contradictory data.",
+  },
+  {
+    title: "Production setup & coordination",
+    text: "Grids, model coordinates, templates, layer and part-mark conventions, fabrication preferences, reference models and file versions agreed.",
+  },
+  {
+    title: "Drafting, modelling & detailing",
+    text: "The commissioned output prepared from accepted source material, keeping related drawings, schedules and models linked as required.",
+  },
+  {
+    title: "Defined production checks",
+    text: "Scope-specific completeness, dimensions, references, revision tags, model-to-drawing consistency and material reconciliation checked under the agreed procedure.",
+  },
+  {
+    title: "Client review & technical changes",
+    text: "Submitted for the designated review; returned comments logged, approval sought for engineering changes, and contracted revisions distinguished from scope changes.",
+  },
+  {
+    title: "Controlled issue & handover",
+    text: "Agreed native, PDF, model and schedule files issued with registers and transmittal records. As-built updates only from verified final information, where included.",
+  },
 ];
 
 /** Records that can be set up for a package where the project requires them. */
@@ -45,26 +60,36 @@ export const qualityRecords = [
   "MTO reconciliation",
 ];
 
-/** Distinguishes checking activities (spec 7.8 / 9.1). */
+/** Quality terminology, kept technically precise (spec v2 §11.2). */
 export const checkTypes = [
   {
-    title: "Production checking",
+    title: "Self-check / production checking",
     included: "Included",
-    text: "Completeness, consistency and source/revision checks of drawings, models and schedules within the agreed production scope.",
+    text: "Whether the drafting or detailing output agrees with the approved input, dimensions, references, registers and scope. The extent depends on the agreed procedure.",
   },
   {
-    title: "Independent production check",
+    title: "Peer / senior checking",
     included: "Where resourced and agreed",
-    text: "A review of the deliverable by a detailer or checker other than the originator.",
+    text: "A second-person review, only where it is resourced and part of the accepted procedure for the package.",
   },
   {
-    title: "Independent engineering design verification",
-    included: "Not included",
-    text: "A separate professional engineering role that verifies design. It is not part of our production checking.",
+    title: "Interdisciplinary model review",
+    included: "Where included in scope",
+    text: "A geometric or information-interface check against supplied reference models. Not a guarantee of clash-free construction.",
   },
   {
-    title: "Statutory approvals and certification",
+    title: "Design verification / independent certification",
     included: "Not included",
-    text: "Approvals by authorities, certifying bodies or the engineer of record remain with those parties.",
+    text: "Engineering analysis and professional assessment, separate from drawing checking and provided only under a separately established scope.",
+  },
+  {
+    title: "Client acceptance",
+    included: "Client / contract role",
+    text: "An agreed submission status under the contract, not automatic legal approval or fitness for construction.",
+  },
+  {
+    title: "As-built verification",
+    included: "Requires verified source",
+    text: "The actual final field condition needs a reliable, authorised source, not inference from the last construction drawing.",
   },
 ];

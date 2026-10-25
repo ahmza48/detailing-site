@@ -12,9 +12,9 @@ import { pageMetadata } from "@/lib/seo";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Industries & Project Environments",
+  title: "Structural Detailing for Energy & Industrial Projects",
   description:
-    "Where our structural drafting, modelling and detailing services are applied: onshore oil & gas, gas processing and NGL, offshore energy, refining and petrochemicals, process plants, and power and industrial facilities.",
+    "Structural drafting, modelling and detailing for onshore, offshore, refineries, gas processing, petrochemical and industrial facility projects.",
   path: "/industries",
   image: "/images/industry-oil-gas.jpg",
 });
@@ -24,9 +24,9 @@ export default function IndustriesPage() {
     <>
       <Hero
         eyebrow="Industries"
-        title="Energy & Industrial"
-        accent="Project Applications"
-        intro="Industries are where our services are applied. Onshore, offshore, greenfield or brownfield, each environment links back to the technical service you need."
+        title="Civil & Structural Documentation"
+        accent="for Energy and Industrial Facilities"
+        intro="Structural drafting, modelling, detailing and material documentation for onshore and offshore facilities, gas processing plants, refineries, petrochemical installations and other industrial structures."
         image="/images/industry-oil-gas.jpg"
         imageAlt="Large oil and gas processing complex with pipes, tanks and structures"
         crumbs={[{ name: "Industries", path: "/industries" }]}
@@ -54,15 +54,16 @@ export default function IndustriesPage() {
           <div className="lg:col-span-6">
             <SectionHeading slab title="One Discipline," accent="Across the Energy Value Chain" />
             <p data-reveal className="mt-6 text-base leading-7 text-ink sm:text-[1.0625rem] sm:leading-8">
-              From onshore production facilities and offshore platforms to refineries, NGL plants and the electrical
-              infrastructure that serves them, the structural questions are consistent: pipe racks that carry the
-              process, platforms that give access, foundations that carry equipment, and modifications that have to fit
-              existing plant.
+              Industrial and energy projects need structural documentation that stays consistent with approved
+              engineering information, discipline interfaces and the project&rsquo;s fabrication and construction
+              requirements. Our services apply across these facilities depending on the assigned scope and the technical
+              resources available; the drawings, models and schedules are defined by the project&rsquo;s engineering
+              standards, plant interfaces and submission requirements.
             </p>
             <p data-reveal className="mt-4 text-base leading-7 text-ink sm:text-[1.0625rem] sm:leading-8">
-              Onshore and offshore are environments, not different methods of producing drawings. Each page below
-              explains the structures, inputs and standards typical of that environment, and links to the services that
-              deliver them.
+              Industry pages describe facility constraints; the work itself is defined by the six services. Exposure to
+              a refinery or offshore project does not imply process, marine or plant engineering capability: these
+              pages concern civil and structural drafting, modelling, detailing and documentation.
             </p>
           </div>
           <ul className="grid gap-4 self-center sm:grid-cols-2 lg:col-span-6">
@@ -95,7 +96,7 @@ export default function IndustriesPage() {
         <div className="container-site section-y">
           <SectionHeading
             centered
-            title="Find by Structure"
+            title="Structures & Applications"
             intro="Searching by structure type rather than sector? Each application shows which services produce its drawings, models and quantities."
           />
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

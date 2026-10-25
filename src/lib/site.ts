@@ -12,7 +12,15 @@ export const site = {
     "Civil & structural engineering support, modelling and detailing for energy and industrial projects",
   description:
     "Civil and structural CAD drafting, TEKLA Structures modelling, steel fabrication detailing, RCC reinforcement documentation and brownfield modification packages for EPC contractors, engineering consultancies and steel fabricators in the energy and industrial sectors.",
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com").replace(/\/$/, ""),
+  /**
+   * Canonical origin. NEXT_PUBLIC_SITE_URL should be set to the custom domain; until it is, Vercel's
+   * production domain (provided at build time) keeps canonicals, robots and the sitemap on a real host.
+   */
+  url: (
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
+    "https://www.example.com"
+  ).replace(/\/$/, ""),
   /** Shown publicly only when set. */
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || undefined,
   phone: {
@@ -65,7 +73,7 @@ export const capabilitiesMenu: NavLink[] = [
   { label: "File Formats & Workflow", href: "/capabilities#formats" },
 ];
 
-export const outsourcingLink: NavLink = { label: "Engineering Outsourcing", href: "/engineering-outsourcing" };
+export const outsourcingLink: NavLink = { label: "Engineering Outsourcing & Subcontract Support", href: "/engineering-outsourcing" };
 export const applicationsLink: NavLink = { label: "Structures & Applications", href: "/applications" };
 
 export const experienceDisclaimer =
@@ -74,16 +82,23 @@ export const experienceDisclaimer =
 export const portfolioNote =
   "Selected experience shown on this website includes projects undertaken by senior team members during previous employment or engagements with established EPC, engineering and construction organizations. Project and client names are presented solely to demonstrate relevant professional experience and do not imply direct contractual relationships with this company.";
 
-/** Organizations associated with projects in the senior team's prior experience. Text only, no logos. */
-export const associatedOrganizations = [
-  "ADNOC",
-  "Saudi Aramco",
-  "ADMA",
-  "Maersk Oil Qatar",
-  "Dolphin Energy / QOC",
-  "SABIC",
-  "BHP",
+/**
+ * Asset owners referenced in the senior team's prior project experience
+ * (spec v2 §12.4). Listed only where the owner is recorded against a project in
+ * src/lib/projects.ts, and always shown with that project: never as clients,
+ * partners or endorsements. TODO_VERIFY publication permission with the owner.
+ * Removed pending verification (no recorded project): Maersk Oil Qatar, SABIC, BHP.
+ */
+export const referencedAssetOwners: { name: string; projectIds: string[] }[] = [
+  { name: "ADNOC", projectIds: ["onshore-civil-structural"] },
+  { name: "ADMA", projectIds: ["offshore-structural"] },
+  { name: "Saudi Aramco", projectIds: ["rcc-detailing"] },
+  { name: "Dolphin Energy / QOC", projectIds: ["drawings-qaqc"] },
 ];
+
+/** Sitewide standards statement (spec v2 §9.1). */
+export const standardsStatement =
+  "Project-specific standards, specifications and client procedures are reviewed and incorporated into the agreed documentation and detailing scope. Applicability, editions, deviations and approval responsibilities are confirmed before work proceeds.";
 
 /** Prior employers and project environments of senior personnel. Not partnerships. */
 export const priorEnvironments = [

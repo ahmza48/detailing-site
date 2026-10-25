@@ -40,7 +40,7 @@ export type Industry = {
 export const industries: Industry[] = [
   {
     slug: "onshore-oil-gas",
-    name: "Onshore Oil & Gas",
+    name: "Onshore Oil & Gas Facilities",
     short: "Onshore Oil & Gas",
     legacyAnchors: ["oil-gas"],
     image: "/images/industry-oil-gas.jpg",
@@ -92,7 +92,7 @@ export const industries: Industry[] = [
   },
   {
     slug: "gas-processing-ngl",
-    name: "Gas Processing / NGL",
+    name: "Gas Processing & NGL Facilities",
     short: "Gas Processing / NGL",
     legacyAnchors: ["gas-processing-ngl"],
     image: "/images/industry-gas-processing.jpg",
@@ -111,6 +111,7 @@ export const industries: Industry[] = [
     ],
     packages: [
       { service: "civil-structural-drafting", note: "Concrete and foundation arrangement drawings and rack layouts." },
+      { service: "plant-structural-3d-modelling", note: "Structural models for racks and plant structures, where supported." },
       { service: "rcc-reinforcement-detailing", note: "Reinforcement detailing and bar bending schedules." },
       { service: "steel-detailing-fabrication", note: "Pipe rack and platform steel." },
       { service: "material-takeoffs-documentation", note: "Concrete, rebar and steel quantities." },
@@ -148,8 +149,8 @@ export const industries: Industry[] = [
     summary:
       "Offshore oil and gas platforms, where structural detailing and shop drawings are produced for yard fabrication and offshore modification.",
     intro: [
-      "Offshore structures are fabricated onshore, to tight tolerances, and installed where rework is expensive. The detailing has to be right before steel is cut.",
-      "Our senior team's offshore experience was gained within established offshore EPC and fabrication environments, producing detailed drawings, shop drawings and models for offshore platforms and their modifications.",
+      "Offshore facilities combine structural steelwork, access arrangements, equipment interfaces and modifications within demanding installation and operational environments. Documentation for a selected offshore work package may include steel framing and access drawings, specified connection and fabrication details, supported 3D model updates, material schedules and controlled revision records.",
+      "Assignments use the applicable project basis, owner specifications and approved offshore engineering inputs. They do not, by themselves, constitute offshore structural analysis, marine engineering or approval of platform integrity. Our senior team's offshore experience was gained within established offshore EPC and fabrication environments.",
     ],
     structures: [
       "Platform deck steelwork",
@@ -172,7 +173,7 @@ export const industries: Industry[] = [
     ],
     focus: {
       heading: "Detailing and modelling support for offshore steelwork",
-      body: "Our offshore scope is structural modelling, detailing and drawing production. We work from the design issued by the responsible engineering organization and convert it into fabrication-ready information.",
+      body: "Our offshore scope is structural modelling, detailing and drawing production. We work from the design issued by the responsible engineering organization and convert it into fabrication and erection information, with existing offshore records used when modifying facilities.",
       points: [
         "Detailing driven by issued design drawings and project specifications",
         "Existing structural models modified and kept current",
@@ -194,7 +195,7 @@ export const industries: Industry[] = [
   },
   {
     slug: "refining-petrochemicals",
-    name: "Refining & Petrochemicals",
+    name: "Refining & Petrochemical Facilities",
     short: "Refining & Petrochemicals",
     legacyAnchors: ["refineries", "petrochemical"],
     image: "/images/industry-refinery.jpg",
@@ -290,7 +291,7 @@ export const industries: Industry[] = [
   },
   {
     slug: "power-industrial",
-    name: "Power & Industrial Facilities",
+    name: "Power Generation & Industrial Facilities",
     short: "Power & Industrial",
     legacyAnchors: ["power-electrical", "industrial-energy"],
     image: "/images/industry-power.jpg",
@@ -312,6 +313,7 @@ export const industries: Industry[] = [
       { service: "civil-structural-drafting", note: "Arrangement drawings for bases, frames and supports." },
       { service: "steel-detailing-fabrication", note: "Shop drawings for supports, frames and racks." },
       { service: "rcc-reinforcement-detailing", note: "Substation and equipment bases." },
+      { service: "material-takeoffs-documentation", note: "Quantities and drawing registers for foundation and steel packages." },
     ],
     constraints: [
       "Electrical equipment layouts and vendor data",

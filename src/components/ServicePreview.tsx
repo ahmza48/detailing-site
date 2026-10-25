@@ -85,7 +85,7 @@ export function ServicePreview({ service, index }: { service: Service; index: nu
             ))}
           </ul>
           <ButtonLink href={servicePath(service.slug)} variant={dark ? "primary" : "light"} className="mt-8">
-            Learn more<span className="sr-only"> about {service.title}</span>
+            Explore Service<span className="sr-only">: {service.title}</span>
           </ButtonLink>
         </div>
       </div>

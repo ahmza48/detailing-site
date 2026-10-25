@@ -10,10 +10,16 @@ export const projectTypes = [
   "Not yet defined",
 ] as const;
 
-export const generalEnquiry = "General enquiry / not sure yet";
-export const outsourcingOption = "Engineering Outsourcing";
-/** Primary service on the RFQ: the six canonical services, outsourcing and a general option. */
-export const serviceOptions = [...services.map((service) => service.title), outsourcingOption, generalEnquiry];
+export const mixedPackageOption = "Not sure / Mixed work package";
+export const otherEnquiryOption = "Other related enquiry";
+export const outsourcingOption = "Engineering Outsourcing & Subcontract Support";
+/** Primary service on the RFQ: the six canonical services (S01–S06), outsourcing, and two open options. */
+export const serviceOptions = [
+  ...services.map((service) => service.title),
+  outsourcingOption,
+  mixedPackageOption,
+  otherEnquiryOption,
+];
 /** Technical service lines that can be ticked alongside the primary service. */
 export const technicalServiceOptions = services.map((service) => service.title);
 
@@ -84,7 +90,7 @@ export const enquiryLabels: Record<Exclude<EnquiryField, "attachment" | "message
   software: "Software and version",
   deliverables: "Required deliverables / quantity",
   targetDate: "Target start or milestone",
-  nda: "NDA requested before file exchange",
+  nda: "Contact about NDA / secure file transfer before drawings are sent",
 };
 
 export type EnquiryState = {

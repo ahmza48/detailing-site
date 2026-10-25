@@ -11,12 +11,13 @@ import { applications } from "@/lib/applications";
 import { industries, industryPath } from "@/lib/industries";
 import { pageMetadata } from "@/lib/seo";
 import { serviceGroups, services, servicesInGroup } from "@/lib/services";
+import { outsourcingLink } from "@/lib/site";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Civil & Structural Engineering Services",
+  title: "Structural Detailing, CAD Drafting & Modelling Services",
   description:
-    "Six civil and structural service lines for energy and industrial projects: CAD drafting, 3D modelling, steel detailing, RCC detailing, brownfield modifications, and MTO and documentation, plus engineering outsourcing.",
+    "Explore engineering production services: structural CAD drawings, plant modelling, fabrication detailing, rebar schedules, modifications and material take-offs.",
   path: "/services",
   image: "/images/services-overview.jpg",
 });
@@ -30,14 +31,24 @@ const flow = [
   { label: "Checks & controlled issue", note: "Review loop back to drawings and models" },
 ];
 
+/** What is agreed before a package starts (spec v2 §6, "How We Define a Work Package"). */
+const packageDefinition = [
+  { title: "Deliverables", text: "The drawings, models, schedules and reports to be issued, and what is excluded." },
+  { title: "Input status", text: "Which approved drawings, models and data the package is built from, with their revisions." },
+  { title: "Software & version", text: "Platforms, versions and native or exchange formats that can be supported for the package." },
+  { title: "Standards & procedures", text: "Project specifications, applicable editions, drawing conventions and client procedures." },
+  { title: "Interfaces", text: "Discipline, vendor and fabricator interfaces, and who resolves conflicts between them." },
+  { title: "Reviews & changes", text: "Milestone reviews, comment cycles, revision allowances and how scope changes are handled." },
+];
+
 export default function ServicesPage() {
   return (
     <>
       <Hero
         eyebrow="Services"
-        title="Civil & Structural"
-        accent="Engineering Services"
-        intro="Drafting, modelling and detailing services arranged by how engineering information is produced. Any one service can be engaged on its own."
+        title="Civil & Structural Drafting, 3D Modelling"
+        accent="and Structural Detailing Services"
+        intro="Engineering production and documentation support for energy and industrial projects. Each service can be commissioned on its own or combined into an agreed subcontract drawing or model package."
         image="/images/services-overview.jpg"
         imageAlt="Multi-level steel process structure with large-bore piping"
         crumbs={[{ name: "Services", path: "/services" }]}
@@ -53,8 +64,8 @@ export default function ServicesPage() {
         <div className="container-site section-y">
           <SectionHeading
             slab
-            title="Six Technical Service Lines"
-            intro="Grouped by production logic: drawings and models, then detailed fabrication and construction documentation, then modifications and the documentation that supports every package."
+            title="Six Technical Service Areas"
+            intro="Structural drawing development, 3D structural and plant model support, steel shop and erection detailing, reinforced concrete and rebar documentation, brownfield modifications, and material and engineering documentation. Each is developed from approved design information and aligned with the project's technical, file-format and revision requirements."
           />
           <div className="mt-12 grid gap-5 lg:grid-cols-3">
             {serviceGroups.map((group, g) => (
@@ -86,7 +97,7 @@ export default function ServicesPage() {
           >
             <span>
               <span className="block text-xs font-bold tracking-[0.14em] text-energy uppercase">Engagement route</span>
-              <span className="mt-1 block text-lg font-extrabold text-white">Engineering Outsourcing</span>
+              <span className="mt-1 block text-lg font-extrabold text-white">{outsourcingLink.label}</span>
               <span className="mt-1 block max-w-2xl text-sm leading-6 text-haze">
                 Subcontract a defined drawing, modelling, detailing or documentation package from any of the six service
                 lines, with inputs, review responsibilities and handover agreed up front.
@@ -106,7 +117,7 @@ export default function ServicesPage() {
           <SectionHeading
             centered
             title="How the Services Fit Together"
-            intro="A typical progression of engineering information. It is not a fixed sequence: you can engage any single service, starting from the inputs you already have."
+            intro="A typical assignment starts with approved engineering requirements and reference drawings. Arrangements and models establish the geometry, then steel fabrication details or concrete reinforcement packages are developed, with schedules, checks, comments and issue registers throughout. Not every project includes every service, and some stages run in parallel."
           />
           <ol data-reveal className="mt-12 grid gap-3 lg:grid-cols-5">
             {flow.map((step, i) => (
@@ -142,11 +153,44 @@ export default function ServicesPage() {
         </div>
       ))}
 
+      {/* How a work package is defined */}
+      <section className="bg-paper">
+        <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <SectionHeading
+              slab
+              title="How We Define a Work Package"
+              intro="Before work begins, each package is defined in writing so both teams know what will be produced, from what, and how changes are handled."
+            />
+            <ArrowLink href="/quality-delivery" className="mt-6">
+              Quality & Delivery
+            </ArrowLink>
+          </div>
+          <ul className="grid content-start gap-4 sm:grid-cols-2 lg:col-span-7">
+            {packageDefinition.map((item, i) => (
+              <li
+                key={item.title}
+                data-reveal
+                style={{ "--reveal-delay": `${(i % 2) * 70}ms` } as React.CSSProperties}
+                className="rounded-xl bg-white p-5 shadow-[0_4px_16px_rgb(0_36_56/0.06)]"
+              >
+                <h3 className="text-base font-extrabold text-navy-900">{tc(item.title)}</h3>
+                <p className="mt-2 text-sm leading-6 text-ink">{item.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* Applications + industries */}
       <section className="bg-white">
         <div className="container-site section-y grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <SectionHeading slab title="Find by Structure" intro="Start from the structure you are dealing with." />
+            <SectionHeading
+              slab
+              title="Structures We Document"
+              intro="Start from the structure you are dealing with. These are applications of the six services, not additional services."
+            />
             <ul data-reveal className="mt-6 border-t border-line">
               {applications.map((application) => (
                 <li key={application.id} className="border-b border-line">
@@ -177,7 +221,7 @@ export default function ServicesPage() {
               ))}
             </ul>
             <ArrowLink href="/capabilities/codes-standards" className="mt-6">
-              Codes & standards we work to
+              How project standards are applied
             </ArrowLink>
           </div>
         </div>
@@ -185,15 +229,23 @@ export default function ServicesPage() {
 
       {/* Not sure */}
       <ImageBand
-        title="Not Sure Which Service"
-        accent="You Need?"
+        title="Need Additional Capacity"
+        accent="or a Different Scope?"
         image="/images/drawings-qaqc.jpg"
         imageAlt="Engineering drawings on a desk with drafting pencils and a scale rule"
-        actions={<ButtonLink href="/contact">Describe Your Scope</ButtonLink>}
+        actions={
+          <>
+            <ButtonLink href="/contact?service=mixed">Describe Your Scope</ButtonLink>
+            <ArrowLink href="/engineering-outsourcing" onDark>
+              Engineering outsourcing
+            </ArrowLink>
+          </>
+        }
       >
         <p>
           Tell us what you have (sketches, approved drawings, a model or existing records) and what you need to receive.
-          We will recommend the right service, or combination, in the proposal.
+          We will recommend the right service or combination, or tell you plainly if the scope sits outside our civil and
+          structural focus.
         </p>
       </ImageBand>
 
