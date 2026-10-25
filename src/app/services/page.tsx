@@ -247,6 +247,10 @@ export default function ServicesPage() {
           We will recommend the right service or combination, or tell you plainly if the scope sits outside our civil and
           structural focus.
         </p>
+        <p>
+          Related requirements, such as specialist modelling, scanning-related drawing updates, BIM coordination or site
+          service drawings, are assessed individually where the expertise, software and inputs are available.
+        </p>
       </ImageBand>
 
       <CTASection />

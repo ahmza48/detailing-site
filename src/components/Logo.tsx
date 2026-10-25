@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 /**
  * Hormuz-Energy logo (owner-supplied artwork in /public/logo).
  * "light" is the recoloured version for the dark navbar and footer; "color" is the original
- * artwork for light backgrounds. Source: public/logo/HORMUZ Energy Structural Logo.png.
+ * artwork for light backgrounds. Source: public/logo/Emerald HORMUZ ENERGY Logo.png.
  */
 const sources = {
   light: "/logo/hormuz-energy-logo-light.png",
