@@ -25,7 +25,7 @@ export function Footer() {
     <footer className="bg-navy-900 text-mist">
       <div className="container-site grid gap-12 py-16 lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-3">
-          <Logo className="text-white" />
+          <Logo className="sm:h-11" />
           <p className="mt-6 max-w-xs text-sm leading-6">{site.tagline}.</p>
         </div>
 
