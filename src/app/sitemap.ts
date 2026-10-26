@@ -19,6 +19,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/quality-delivery", priority: 0.6 },
     { path: "/about", priority: 0.7 },
     { path: "/contact", priority: 0.7 },
+    { path: "/faq", priority: 0.6 },
+    { path: "/privacy-policy", priority: 0.3 },
+    { path: "/terms-of-use", priority: 0.3 },
   ];
 
   return pages.map(({ path, priority }) => ({

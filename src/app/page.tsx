@@ -6,6 +6,8 @@ import { ArrowLink, ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { Disclaimer } from "@/components/Disclaimer";
 import { ExperienceMetrics } from "@/components/ExperienceMetrics";
+import { ExperienceTicker } from "@/components/ExperienceTicker";
+import { FaqList } from "@/components/FaqList";
 import { Hero } from "@/components/Hero";
 import { ImageBand } from "@/components/ImageBand";
 import { ProcessSteps } from "@/components/ProcessSteps";
@@ -16,18 +18,19 @@ import { SoftwareCapabilities } from "@/components/SoftwareCapabilities";
 import { applications } from "@/lib/applications";
 import { engagementSteps } from "@/lib/delivery";
 import { industries, industryPath } from "@/lib/industries";
-import { featuredProjectIds, projectById, projectPath, projects } from "@/lib/projects";
+import { homeFaqs } from "@/lib/faqs";
+import { featuredProjectIds, projects } from "@/lib/projects";
 import { pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath, services, type ServiceSlug } from "@/lib/services";
 import { softwareQualifier } from "@/lib/software";
-import { referencedAssetOwners, site, standardsStatement, trustMetrics } from "@/lib/site";
+import { motto, purpose, site, standardsStatement, tickerDisclaimers, trustMetrics } from "@/lib/site";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = {
   ...pageMetadata({
     title: "Structural Detailing & Engineering Support for Energy and Industrial Projects",
     description:
-      "Civil and structural drafting, Tekla modelling, steel shop drawings, rebar detailing and brownfield documentation for EPC contractors and fabricators.",
+      "Structural steel detailing, Tekla modelling, CAD drafting and RCC documentation for EPC contractors and energy infrastructure projects. Request a quote.",
     path: "/",
     keywords: [
       "structural detailing services",
@@ -37,7 +40,7 @@ export const metadata: Metadata = {
       "Tekla modelling services",
     ],
   }),
-  title: { absolute: `Structural Detailing & Engineering Support | ${site.name}` },
+  title: { absolute: `Structural Steel Detailing & TEKLA Modelling | ${site.name}` },
 };
 
 /** Buyer-defined package examples (spec v2 §5.4). Descriptive scope examples, not claims of delivered projects. */
@@ -83,6 +86,26 @@ const workPackages: { title: string; provide: string; receive: string; clarify: 
   },
 ];
 
+/** Why EPC teams engage us (brief section C): evidence-led, not quality promises. */
+const engageReasons = [
+  {
+    title: "Defined Inputs",
+    text: "Work from approved drawings, project specifications, model references and vendor information; raise information gaps before detailing.",
+  },
+  {
+    title: "Fabrication-Focused Outputs",
+    text: "Produce scoped general arrangements, 3D models, shop, assembly and single-part drawings, reinforcement schedules and quantities.",
+  },
+  {
+    title: "Controlled Revisions",
+    text: "Track drawing and model revisions, incorporate consolidated review comments and identify superseded information.",
+  },
+  {
+    title: "Project-Specific Delivery",
+    text: "Confirm software and version, drawing standards, checking responsibilities, exchange formats and issue milestones for each package.",
+  },
+];
+
 /** When buyers need extra delivery capacity (spec v2 §5.5). */
 const capacityNeeds = [
   { q: "Drawing backlog or peak workload?", a: "Assign a defined CAD package or revision backlog against your standards and schedule." },
@@ -102,15 +125,16 @@ export default function HomePage() {
       {/* 1. Hero */}
       <Hero
         tall
-        title="Structural Detailing & Engineering Support"
-        accent="for Energy and Industrial Projects"
-        intro="We support EPC contractors, engineering consultancies and steel fabricators with civil and structural CAD drafting, Tekla Structures and 3D structural modelling, shop and erection drawings, reinforced concrete detailing, material take-offs and brownfield modification documentation, organised around your approved engineering inputs, project specifications and agreed deliverables."
+        eyebrow="Engineering production support for energy & industrial projects"
+        title="Structural Steel Detailing, 3D Modelling"
+        accent="& CAD Support for Energy Projects"
+        intro="We support EPC contractors, engineering consultancies and steel fabricators with civil and structural CAD drafting, Tekla Structures modelling, fabrication detailing, RCC reinforcement documentation and revision-controlled engineering packages, working from agreed design inputs and project requirements for onshore, offshore and industrial assignments."
         image="/images/hero-offshore.jpg"
         imageAlt="Offshore jack-up rig beside a crane vessel at sunset"
       >
         <ButtonLink href="/contact">Request a Project Quote</ButtonLink>
         <ArrowLink href="/services" onDark>
-          Explore Our Services
+          Explore Technical Services
         </ArrowLink>
       </Hero>
 
@@ -140,6 +164,32 @@ export default function HomePage() {
             </ButtonLink>
             <ArrowLink href="/engineering-outsourcing">Outsource a defined package</ArrowLink>
           </div>
+        </div>
+      </section>
+
+      {/* 3b. Why EPC teams engage us */}
+      <section className="bg-navy-800 text-white">
+        <div className="container-site section-y">
+          <SectionHeading
+            slab
+            onDark
+            title="Why EPC Teams Engage Us"
+            intro="Engineering production is most useful when inputs, drawing responsibilities, review cycles and issue status are clear. We structure each assignment around the information your project already controls and the deliverables your downstream teams need."
+          />
+          <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {engageReasons.map((reason, i) => (
+              <li
+                key={reason.title}
+                data-reveal
+                style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
+                className="rounded-xl bg-white/8 p-6"
+              >
+                <span className="text-xs font-bold text-energy tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-3 text-lg font-extrabold">{reason.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-haze">{reason.text}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -202,7 +252,7 @@ export default function HomePage() {
           <SectionHeading
             centered
             title="Industries & Project Environments"
-            intro="Onshore and offshore, new build and existing plant. Sector pages describe facility constraints; the work itself is defined by the service."
+            intro="Technical drawing and modelling support for oil & gas, offshore structures, refineries, gas processing, petrochemicals, chemical and fertiliser plants, power and industrial facilities, subject to agreed scope and resources."
           />
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((industry, index) => (
@@ -311,10 +361,11 @@ export default function HomePage() {
       <section className="grid bg-white lg:grid-cols-12">
         <div className="bg-navy-800 px-5 py-16 text-mist sm:px-8 lg:col-span-5 lg:px-12 lg:py-24 xl:pl-[max(3rem,calc((100vw-80rem)/2+3rem))]">
           <div className="lg:sticky lg:top-28">
-            <SectionHeading slab onDark title="Selected Professional Experience" />
+            <SectionHeading slab onDark title="Project Environments Our Senior Team Knows" />
             <p data-reveal className="mt-5 max-w-sm text-[0.9375rem] leading-7 font-normal">
-              Representative projects from the prior professional experience of our senior team, gained with established
-              EPC, engineering and construction organizations.
+              Selected examples from our senior professionals&rsquo; previous employment on onshore, offshore, refining
+              and gas-processing projects. These references demonstrate individual career experience, not contracts
+              awarded to Hormuz-Energy.
             </p>
             <Disclaimer
               onDark
@@ -340,34 +391,41 @@ export default function HomePage() {
 
       <section className="bg-paper">
         <div className="container-site section-y">
-          <SectionHeading
-            centered
-            title="Asset Owners Referenced in Prior Personnel Projects"
-            intro="Named only where the owner is recorded against a project in our senior team's prior experience, and shown with that project. These organisations are not Hormuz-Energy clients and do not endorse the company."
-          />
-          <ul data-reveal className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {referencedAssetOwners.map((owner) => (
-              <li key={owner.name} className="rounded-xl bg-white px-5 py-5 text-center shadow-[0_4px_16px_rgb(0_36_56/0.08)]">
-                <p className="text-base font-extrabold text-navy-900">{owner.name}</p>
-                <ul className="mt-2 space-y-1 text-sm leading-5">
-                  {owner.projectIds.map((id) => {
-                    const project = projectById(id);
-                    return project ? (
-                      <li key={id}>
-                        <Link href={projectPath(id)} className="text-ink underline-offset-4 hover:text-energy-ink hover:underline">
-                          {project.name}
-                        </Link>
-                      </li>
-                    ) : null;
-                  })}
-                </ul>
+          <SectionHeading slab title="Organisations Associated with Our Team's Prior Project Experience" />
+          <div data-reveal className="mt-8">
+            <ExperienceTicker
+              type="assetOwner"
+              label="Prior project exposure"
+              disclaimer={tickerDisclaimers.assetOwner}
+            />
+          </div>
+          <div data-reveal className="mt-6 flex flex-wrap items-center justify-between gap-4">
+            <ArrowLink href="/project-experience">Explore documented project experience</ArrowLink>
+            <Disclaimer className="max-w-2xl" />
+          </div>
+        </div>
+      </section>
+
+      {/* 8b. Mission, vision, commitment */}
+      <section className="bg-white">
+        <div className="container-site section-y">
+          <SectionHeading centered title="Mission, Vision & Delivery Commitment" />
+          <ul className="mt-12 grid gap-5 lg:grid-cols-3">
+            {purpose.map((item, i) => (
+              <li
+                key={item.title}
+                data-reveal
+                style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
+                className="rounded-xl border-t-4 border-energy-deep bg-paper p-7"
+              >
+                <h3 className="text-lg font-extrabold text-navy-900">{item.title}</h3>
+                <p className="mt-3 text-[0.9375rem] leading-7 text-ink">{item.text}</p>
               </li>
             ))}
           </ul>
-          <p data-reveal className="mx-auto mt-8 max-w-2xl text-center text-sm font-bold text-energy-ink">
-            Experience gained through prior engagements with EPC, engineering and construction organizations.
+          <p data-reveal className="mt-10 text-center text-sm font-bold tracking-[0.16em] text-energy-ink uppercase">
+            {motto}
           </p>
-          <Disclaimer className="mx-auto mt-4" />
         </div>
       </section>
 
@@ -387,8 +445,9 @@ export default function HomePage() {
         }
       >
         <p>
-          Subcontract a defined drawing, modelling, detailing or documentation package. Your engineers keep design
-          authority; we deliver the production work to your standards, formats and review cycle.
+          Outsource a defined CAD, modelling or detailing package while your project team retains the engineering
+          design and approval authority. We agree the inputs, outputs, exchange formats, responsibilities and review
+          cycle before production.
         </p>
         <dl className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
           {capacityNeeds.map((need) => (
@@ -413,11 +472,29 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 11. Final CTA */}
+      {/* 11. Common questions */}
+      <section className="bg-paper">
+        <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <SectionHeading slab title="Common Questions" />
+            <p data-reveal className="mt-5 text-base leading-7 text-ink">
+              What EPC contractors, consultancies and fabricators usually ask before commissioning a package.
+            </p>
+            <ArrowLink href="/faq" className="mt-6">
+              All frequently asked questions
+            </ArrowLink>
+          </div>
+          <div className="lg:col-span-7">
+            <FaqList faqs={homeFaqs} />
+          </div>
+        </div>
+      </section>
+
+      {/* 12. Final CTA */}
       <CTASection
-        title="Have a structural drawing, model or fabrication detailing package"
-        accent="to outsource?"
-        copy="Send the scope of work, available design inputs and target schedule."
+        title="Need structural drawings, TEKLA models"
+        accent="or fabrication details for your next project?"
+        copy="Share your scope, drawings and required deliverables. We can review the information available and clarify the proposed production package."
       />
     </>
   );

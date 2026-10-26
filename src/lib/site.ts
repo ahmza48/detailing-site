@@ -82,33 +82,12 @@ export const experienceDisclaimer =
 export const portfolioNote =
   "Selected experience shown on this website includes projects undertaken by senior team members during previous employment or engagements with established EPC, engineering and construction organizations. Project and client names are presented solely to demonstrate relevant professional experience and do not imply direct contractual relationships with this company.";
 
-/**
- * Asset owners referenced in the senior team's prior project experience
- * (spec v2 §12.4). Listed only where the owner is recorded against a project in
- * src/lib/projects.ts, and always shown with that project: never as clients,
- * partners or endorsements. TODO_VERIFY publication permission with the owner.
- * Removed pending verification (no recorded project): Maersk Oil Qatar, SABIC, BHP.
- */
-export const referencedAssetOwners: { name: string; projectIds: string[] }[] = [
-  { name: "ADNOC", projectIds: ["onshore-civil-structural"] },
-  { name: "ADMA", projectIds: ["offshore-structural"] },
-  { name: "Saudi Aramco", projectIds: ["rcc-detailing"] },
-  { name: "Dolphin Energy / QOC", projectIds: ["drawings-qaqc"] },
-];
+// Organisations from prior experience (asset owners, former employers) live in ./experience-orgs.ts.
 
 /** Sitewide standards statement (spec v2 §9.1). */
 export const standardsStatement =
   "Project-specific standards, specifications and client procedures are reviewed and incorporated into the agreed documentation and detailing scope. Applicability, editions, deviations and approval responsibilities are confirmed before work proceeds.";
 
-/** Prior employers and project environments of senior personnel. Not partnerships. */
-export const priorEnvironments = [
-  "NPCC",
-  "Penspen",
-  "CH2M Hill / VECO",
-  "Descon",
-  "JGC Descon",
-  "Dar Al Riyadh",
-];
 
 export type Metric = { value: string; label: string };
 
@@ -118,8 +97,34 @@ export type Metric = { value: string; label: string };
  */
 export const trustMetrics: Metric[] = [
   { value: "30+ Years", label: "Senior Professional Experience" },
-  { value: "Onshore + Offshore", label: "Project Exposure" },
-  { value: "GCC / MENA", label: "Energy Project Experience" },
-  { value: "Steel + RCC", label: "Structural Capability" },
-  { value: "Greenfield + Brownfield", label: "Project Experience" },
+  { value: "Onshore & Offshore", label: "Previous Project Exposure" },
+  { value: "Steel & RCC", label: "Structural Deliverables" },
+  { value: "GCC & International", label: "Prior Project Environments" },
+  { value: "Greenfield + Brownfield", label: "Prior Project Experience" },
 ];
+
+/** Mission, vision and delivery commitment (Home / About brief, section C). Shown on Home and About. */
+export const purpose = [
+  {
+    title: "Our Mission",
+    text: "To support engineering and fabrication teams with clear structural drawings, coordinated models and well-managed technical documentation, developed from agreed project inputs and requirements.",
+  },
+  {
+    title: "Our Vision",
+    text: "To become a trusted technical-production partner for energy and industrial infrastructure projects, recognised for dependable collaboration and precise engineering deliverables.",
+  },
+  {
+    title: "Our Delivery Commitment",
+    text: "We aim to establish deliverables and responsibilities early, raise technical queries promptly, follow agreed checking and review arrangements, and maintain traceable drawing revisions through issue.",
+  },
+];
+
+export const motto = "Engineering clarity. Detail by detail.";
+
+/** Visible disclaimers for the experience tickers. */
+export const tickerDisclaimers = {
+  assetOwner:
+    "Historical professional project exposure only. Names are shown for experience context; these organisations are not presented as clients, partners or endorsers of Hormuz-Energy.",
+  formerEmployer:
+    "Organisations where senior team members previously worked or were engaged. Shown as career background only; not current partnerships, clients or endorsements.",
+};

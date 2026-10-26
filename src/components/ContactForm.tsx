@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef } from "react";
 import { ArrowRight, ChevronDown, CircleAlert, CircleCheck, LoaderCircle } from "lucide-react";
 import { submitEnquiry } from "@/app/contact/actions";
@@ -306,8 +307,12 @@ export function ContactForm() {
           )}
         </button>
         <p className="mt-4 text-xs leading-relaxed text-slate">
-          Only name, organisation, work email, service and scope summary are required. Your details are used only to
-          respond to this enquiry.
+          Only name, organisation, work email, service and scope summary are required. Your details are used to respond to
+          this enquiry and prepare any quotation; see our{" "}
+          <Link href="/privacy-policy" className="font-semibold text-navy-900 underline underline-offset-2 hover:text-energy-ink">
+            Privacy Policy
+          </Link>
+          . Please do not send confidential drawings until an NDA or approved file exchange is agreed.
         </p>
       </div>
     </form>

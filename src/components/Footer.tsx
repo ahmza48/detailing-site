@@ -13,7 +13,14 @@ const company = [
   { label: "Technical Capabilities", href: "/capabilities" },
   { label: "Codes & Standards", href: "/capabilities/codes-standards" },
   { label: "Quality & Delivery", href: "/quality-delivery" },
+  { label: "FAQs", href: "/faq" },
   { label: "Request a Quote", href: "/contact" },
+];
+
+const legal = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms of Use", href: "/terms-of-use" },
+  { label: "FAQs", href: "/faq" },
 ];
 
 const linkClass = "inline-flex min-h-9 items-center text-sm transition-colors hover:text-energy";
@@ -98,9 +105,20 @@ export function Footer() {
       <div className="container-site">
         <div className="border-t border-white/20 py-8">
           <p className="max-w-4xl text-xs leading-5 text-haze">{experienceDisclaimer}</p>
-          <p className="mt-5 text-xs text-haze">
-            © Copyright. All rights reserved by {site.name}. Product names are trademarks of their respective owners.
-          </p>
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
+            <p className="text-xs text-haze">
+              © Copyright. All rights reserved by {site.name}. Product names are trademarks of their respective owners.
+            </p>
+            <ul className="flex flex-wrap gap-x-6 gap-y-1">
+              {legal.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="inline-flex min-h-9 items-center text-xs font-semibold text-mist transition-colors hover:text-energy">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </footer>
