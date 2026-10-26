@@ -105,5 +105,4 @@ export const faqGroups = [
   { title: "Services & Scope", ids: ["services", "outsource-tekla", "rcc-bbs", "brownfield", "onshore-offshore", "sectors-regions"] },
   { title: "Quotations & Working Together", ids: ["quotation", "remote", "confidentiality"] },
   { title: "Responsibility, Standards & Quality", ids: ["connection-design", "owner-standards", "quality", "software"] },
-  { title: "Experience", ids: ["prior-experience"] },
 ].map((group) => ({ title: group.title, faqs: pick(group.ids) }));

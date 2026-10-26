@@ -21,13 +21,14 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Chat with ${site.name} on WhatsApp (opens in a new tab)`}
-      className="wa-float group fixed right-4 bottom-4 z-40 flex items-center sm:right-6 sm:bottom-6"
+      className="wa-float group fixed right-4 bottom-4 z-40 flex items-center rounded-full sm:right-6 sm:bottom-6"
     >
-      <span className="pointer-events-none mr-3 hidden translate-x-2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold whitespace-nowrap text-navy-900 opacity-0 shadow-[0_8px_24px_rgb(0_36_56/0.18)] transition duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 sm:block">
+      {/* Absolutely positioned and non-interactive, so the hover area is only the round button. */}
+      <span className="pointer-events-none absolute top-1/2 right-full mr-3 hidden translate-x-2 -translate-y-1/2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold whitespace-nowrap text-navy-900 opacity-0 shadow-[0_8px_24px_rgb(0_36_56/0.18)] transition duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 sm:block">
         Chat with us on WhatsApp
       </span>
       <span className="relative grid size-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_10px_28px_rgb(37_211_102/0.45)] transition-transform duration-300 group-hover:scale-105 sm:size-[3.75rem]">
-        <span aria-hidden className="wa-pulse absolute inset-0 rounded-full bg-[#25D366]" />
+        <span aria-hidden className="wa-pulse pointer-events-none absolute inset-0 rounded-full bg-[#25D366]" />
         <WhatsAppIcon className="relative size-7 sm:size-8" />
       </span>
     </a>
