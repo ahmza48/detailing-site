@@ -475,3 +475,50 @@ body {
 dialog::backdrop {
   background: rgb(4 35 46 / 0.88);
 }
+
+/* Experience ticker: CSS-only marquee. The track holds two identical sets and moves by
+   exactly one set (-50%), so the loop is seamless. Pauses on hover and keyboard focus. */
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-mask {
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+.ticker-track {
+  animation: ticker-scroll var(--ticker-duration, 32s) linear infinite;
+}
+
+.ticker:hover .ticker-track,
+.ticker:focus-within .ticker-track,
+.ticker:focus .ticker-track {
+  animation-play-state: paused;
+}
+
+/* Reduced motion: no movement, a static wrapped list, duplicate set removed. */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-mask {
+    mask-image: none;
+  }
+
+  .ticker-track {
+    animation: none;
+    width: auto;
+  }
+
+  .ticker-set {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1rem;
+  }
+
+  .ticker-dup {
+    display: none;
+  }
+}
