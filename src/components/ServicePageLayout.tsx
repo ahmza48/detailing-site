@@ -1,10 +1,11 @@
 import Image from "next/image";
-import { site } from "@/lib/site";
+import { drawingSamplesNote, site } from "@/lib/site";
 import Link from "next/link";
 import { ArrowRight, Check, CircleSlash, Plus } from "lucide-react";
 import { applications } from "@/lib/applications";
 import { industries, industryPath } from "@/lib/industries";
 import { projectPath, projectsForService } from "@/lib/projects";
+import { drawingSamples, serviceDrawingIds } from "@/lib/proof-of-work";
 import { serviceJsonLd } from "@/lib/seo";
 import { resourcesForService } from "@/lib/resources";
 import { serviceBySlug, servicePath, type RelatedLink, type Service } from "@/lib/services";
@@ -12,6 +13,7 @@ import { software, softwareQualifier } from "@/lib/software";
 import { ArrowLink, ButtonLink } from "./ButtonLink";
 import { CTASection } from "./CTASection";
 import { Disclaimer } from "./Disclaimer";
+import { DrawingGallery } from "./DrawingGallery";
 import { Hero } from "./Hero";
 import { JsonLd } from "./JsonLd";
 import { ProjectCard } from "./ProjectCard";
@@ -380,6 +382,16 @@ export function ServicePageLayout({ service }: { service: Service }) {
             <p data-reveal className="mt-6 max-w-xl text-sm leading-6 text-haze">
               {service.boundaryNote} Work outside these limits can be discussed as a custom scope.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Evidence: confidential drawing excerpts */}
+      <section className="bg-white">
+        <div className="container-site section-y">
+          <SectionHeading slab title="Drawing Excerpts" intro={drawingSamplesNote} />
+          <div data-reveal className="mt-10">
+            <DrawingGallery samples={drawingSamples(serviceDrawingIds[service.slug])} />
           </div>
         </div>
       </section>

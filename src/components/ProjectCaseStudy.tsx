@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { industryBySlug, industryPath } from "@/lib/industries";
+import { drawingsForProject, similarWorkForProject } from "@/lib/proof-of-work";
 import type { Project } from "@/lib/projects";
 import { serviceBySlug, servicePath } from "@/lib/services";
 import { ArrowLink } from "./ButtonLink";
-import { DiagramViewer } from "./DiagramViewer";
+import { DrawingGallery } from "./DrawingGallery";
 import { tc } from "@/lib/text";
 
 function Meta({ label, children }: { label: string; children: React.ReactNode }) {
@@ -37,6 +38,9 @@ export function ProjectCaseStudy({ project, index }: { project: Project; index: 
   const relevant = project.serviceSlugs.map(serviceBySlug).filter((s) => s !== undefined);
   const sectors = project.industrySlugs.map(industryBySlug).filter((i) => i !== undefined);
   const primary = relevant[0];
+  const ownDrawings = drawingsForProject(project.id);
+  const isSimilarWork = ownDrawings.length === 0;
+  const drawings = isSimilarWork ? similarWorkForProject(project.id) : ownDrawings;
 
   return (
     <section
@@ -118,12 +122,20 @@ export function ProjectCaseStudy({ project, index }: { project: Project; index: 
           </div>
         </div>
 
-        <div data-reveal className="mt-14">
-          <h3 className="mb-5 text-[0.6875rem] font-bold tracking-[0.18em] text-teal-700 uppercase">
-            Drawings &amp; models <span className="font-semibold text-slate normal-case tracking-normal">(placeholder illustrations)</span>
-          </h3>
-          <DiagramViewer diagrams={project.diagrams} projectName={project.name} />
-        </div>
+        {drawings.length > 0 && (
+          <div data-reveal className="mt-14">
+            <h3 className="mb-5 text-[0.6875rem] font-bold tracking-[0.18em] text-teal-700 uppercase">
+              {isSimilarWork ? "Similar work" : "Drawing excerpts"}{" "}
+              <span className="font-semibold text-slate normal-case tracking-normal">(confidential)</span>
+            </h3>
+            {isSimilarWork && (
+              <p className="-mt-3 mb-5 text-xs leading-5 text-slate">
+                Drawings of comparable scope from other engagements, not drawings from this project.
+              </p>
+            )}
+            <DrawingGallery samples={drawings} showProject={false} />
+          </div>
+        )}
       </div>
     </section>
   );

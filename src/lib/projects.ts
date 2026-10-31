@@ -1,13 +1,6 @@
 import type { IndustrySlug } from "./industries";
 import type { ServiceSlug } from "./services";
 
-export type ProjectDiagram = {
-  src: string;
-  /** Drawing or model type the placeholder stands in for. */
-  type: string;
-  alt: string;
-};
-
 export type Project = {
   /** Anchor ID on /project-experience. */
   id: string;
@@ -36,14 +29,7 @@ export type Project = {
   description: string;
   image: string;
   imageAlt: string;
-  diagrams: ProjectDiagram[];
 };
-
-const placeholder = (id: string, n: number, type: string): ProjectDiagram => ({
-  src: `/images/projects/${id}-${n}.jpg`,
-  type,
-  alt: `Placeholder illustration representing a ${type.toLowerCase()}; not an actual project drawing`,
-});
 
 /**
  * Representative projects from the prior professional experience of senior
@@ -73,11 +59,6 @@ export const projects: Project[] = [
       "Senior team experience on the onshore facilities package included structural steel pipe bridges, platforms and crossover steel structures, with the associated drawings and material take-off.",
     image: "/images/project-hail-ghasha.jpg",
     imageAlt: "Steel pipe bridge carrying pipework between structures",
-    diagrams: [
-      placeholder("onshore-civil-structural", 1, "GA drawing"),
-      placeholder("onshore-civil-structural", 2, "Platform framing plan"),
-      placeholder("onshore-civil-structural", 3, "Structural drawing"),
-    ],
   },
   {
     id: "offshore-structural",
@@ -98,11 +79,6 @@ export const projects: Project[] = [
       "Senior team experience on this offshore development covered structural detailing for offshore steelwork, producing detailed drawings and shop drawings in AutoCAD and Tekla.",
     image: "/images/project-umm-lulu.jpg",
     imageAlt: "Offshore platform topsides at a fabrication yard",
-    diagrams: [
-      placeholder("offshore-structural", 1, "Structural drawing"),
-      placeholder("offshore-structural", 2, "Shop drawing"),
-      placeholder("offshore-structural", 3, "Tekla model"),
-    ],
   },
   {
     id: "brownfield-modifications",
@@ -133,11 +109,6 @@ export const projects: Project[] = [
       "Senior team experience on this rehabilitation and integrity reinstatement programme included structural checking, design and detail support, civil and steel structural drawings for structural modifications, MTO and model review in Navisworks.",
     image: "/images/project-bab-asab.jpg",
     imageAlt: "Existing process structure illuminated at night",
-    diagrams: [
-      placeholder("brownfield-modifications", 1, "Modification drawing"),
-      placeholder("brownfield-modifications", 2, "Structural detail drawing"),
-      placeholder("brownfield-modifications", 3, "Plant 3D model"),
-    ],
   },
   {
     id: "steel-detailing",
@@ -157,12 +128,6 @@ export const projects: Project[] = [
       "Senior team experience on this refinery expansion comprised detailed structural work carried out in Tekla Structures.",
     image: "/images/project-diwaniya.jpg",
     imageAlt: "Heavy structural steel trusses and bracing",
-    diagrams: [
-      placeholder("steel-detailing", 1, "Tekla model"),
-      placeholder("steel-detailing", 2, "Fabrication drawing"),
-      placeholder("steel-detailing", 3, "GA drawing"),
-      placeholder("steel-detailing", 4, "Pipe rack diagram"),
-    ],
   },
   {
     id: "rcc-detailing",
@@ -185,11 +150,6 @@ export const projects: Project[] = [
       "Senior team experience on this NGL recovery project included RCC structures and pipe rack layouts, with general arrangement drawings, isometric drawings and bar bending schedules.",
     image: "/images/project-hawiyah.jpg",
     imageAlt: "Stacked steel reinforcement bars",
-    diagrams: [
-      placeholder("rcc-detailing", 1, "RCC detail"),
-      placeholder("rcc-detailing", 2, "Pipe rack diagram"),
-      placeholder("rcc-detailing", 3, "GA drawing"),
-    ],
   },
   {
     id: "plant-3d-modelling",
@@ -215,12 +175,6 @@ export const projects: Project[] = [
       "Senior team experience on this refinery reconstruction covered FrameWorks Plus 3D modelling and steel structural arrangement drawings for concrete and steel buildings, platforms, pipe racks, stairs and ladders, together with PDS 3D modelling of underground facilities.",
     image: "/images/project-atyrau.jpg",
     imageAlt: "Refinery columns and steel structures at dusk",
-    diagrams: [
-      placeholder("plant-3d-modelling", 1, "Plant 3D model"),
-      placeholder("plant-3d-modelling", 2, "Arrangement drawing"),
-      placeholder("plant-3d-modelling", 3, "Plant 3D model"),
-      placeholder("plant-3d-modelling", 4, "Pipe rack diagram"),
-    ],
   },
   {
     id: "drawings-qaqc",
@@ -243,11 +197,6 @@ export const projects: Project[] = [
       "Senior team experience included detailed engineering drawings, PDS modelling with FrameWorks Plus, model review using Navigator and SPR, and material take-off.",
     image: "/images/project-dolphin.jpg",
     imageAlt: "Gas processing facility lit at night",
-    diagrams: [
-      placeholder("drawings-qaqc", 1, "Structural drawing"),
-      placeholder("drawings-qaqc", 2, "Plant 3D model"),
-      placeholder("drawings-qaqc", 3, "Detail drawing & material list"),
-    ],
   },
 ];
 

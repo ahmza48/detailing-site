@@ -50,7 +50,7 @@ export default function ProjectExperiencePage() {
             <Disclaimer text={experienceDisclaimer} className="mt-4" />
             <p className="mt-4 max-w-4xl pl-7 text-xs leading-relaxed text-slate sm:text-[0.8125rem]">
               Photographs on this website are representative industry images, not photographs of the named projects.
-              Drawing and model images are placeholder illustrations and do not reproduce project documentation.
+              Drawing excerpts are shown reduced and watermarked. Where a project is marked &ldquo;Similar work&rdquo;, the drawings come from other engagements of comparable scope.
             </p>
           </div>
           <nav aria-label="Projects on this page" data-reveal className="lg:col-span-6">
@@ -89,16 +89,16 @@ export default function ProjectExperiencePage() {
       <section id="work-samples" className="bg-navy-900 text-white">
         <div className="container-site section-y grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-6">
-            <SectionHeading slab eyebrow="Technical work samples" title="Company Work and Demonstration Samples" onDark />
+            <SectionHeading slab eyebrow="Technical work samples" title="Confidential Drawing Excerpts" onDark />
           </div>
           <div data-reveal className="space-y-4 text-base leading-7 text-white/85 lg:col-span-6">
             <p>
-              This collection is for authorised {site.name} deliverables and clearly labelled demonstration samples, each
-              with its project type, software, source information and limits stated.
+              The excerpts on this page and on each service page come from prior professional engagements of senior team
+              members. They show the standard of our drawings and are not complete deliverables.
             </p>
             <p>
-              Until those are published, the drawing and model views above are placeholder illustrations. They do not
-              reproduce any project&rsquo;s documentation and are not presented as delivered work.
+              These drawings are confidential, so they are reduced, watermarked and cannot be enlarged or downloaded here.
+              Full views are for clients only.
             </p>
             <ArrowLink href="/contact" onDark>
               Ask about samples relevant to your scope

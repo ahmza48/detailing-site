@@ -22,6 +22,21 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  async headers() {
+    return [
+      {
+        source: "/proof-of-work/:path*",
+        headers: [
+          // Filenames are content hashes, so a changed drawing always gets a new URL.
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          // Cached copies must not answer the direct requests src/proxy.ts refuses.
+          { key: "Vary", value: "Sec-Fetch-Dest, Sec-Fetch-Site" },
+          { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
+          { key: "X-Robots-Tag", value: "noindex, noimageindex" },
+        ],
+      },
+    ];
+  },
   /**
    * Service-taxonomy restructure (website restructure spec, section 6).
    * Single-hop permanent (308) redirects from retired service URLs to their closest
@@ -51,6 +66,8 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ["image/avif", "image/webp"],
+    // Deliberately omits /proof-of-work: the optimizer must not offer a route around src/proxy.ts.
+    localPatterns: [{ pathname: "/images/**" }, { pathname: "/logo/**" }, { pathname: "/_next/static/media/**" }],
   },
   experimental: {
     serverActions: {

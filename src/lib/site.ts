@@ -87,6 +87,9 @@ export const portfolioNote =
 
 // Organisations from prior experience (asset owners, former employers) live in ./experience-orgs.ts.
 
+export const drawingSamplesNote =
+  "Excerpts from drawings produced by our senior team during previous professional engagements. They are confidential, so they are reduced, watermarked and shown without title blocks. Full drawings are for clients only.";
+
 /** Sitewide standards statement (spec v2 §9.1). */
 export const standardsStatement =
   "Project-specific standards, specifications and client procedures are reviewed and incorporated into the agreed documentation and detailing scope. Applicability, editions, deviations and approval responsibilities are confirmed before work proceeds.";
