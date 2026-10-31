@@ -53,15 +53,16 @@ export const whatsappHref = `https://wa.me/${site.whatsapp.number}?text=${encode
 
 export type NavLink = { label: string; href: string };
 export type NavMenuId = "services" | "industries" | "capabilities";
-export type NavItem = NavLink & { menu?: NavMenuId };
+/** `short` is the desktop-header label, so the full menu, logo and CTA fit on one line from 1280px. */
+export type NavItem = NavLink & { menu?: NavMenuId; short?: string };
 
 /** Desktop and mobile navigation (spec 3.2). "Request a Quote" is rendered separately as the CTA. */
 export const primaryNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services", menu: "services" },
   { label: "Industries", href: "/industries", menu: "industries" },
-  { label: "Projects & Work Samples", href: "/project-experience" },
-  { label: "Technical Capabilities", href: "/capabilities", menu: "capabilities" },
+  { label: "Projects & Work Samples", short: "Projects", href: "/project-experience" },
+  { label: "Technical Capabilities", short: "Capabilities", href: "/capabilities", menu: "capabilities" },
   { label: "Resources", href: "/resources" },
   { label: "About Us", href: "/about" },
 ];
