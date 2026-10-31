@@ -1,4 +1,5 @@
 import type { ServiceSlug } from "./services";
+import { site } from "@/lib/site";
 
 /**
  * Standards register used by the Codes & Standards page and service pages.
@@ -178,7 +179,7 @@ export const standards: StandardReference[] = [
     context: "Organisational quality-management framework some clients reference in their supplier requirements.",
     relevantServices: [],
     responsibility: "Certifying body (where a certificate is held)",
-    caution: "Hormuz-Energy does not claim ISO 9001 certification.",
+    caution: `${site.name} does not claim ISO 9001 certification.`,
   },
 ];
 

@@ -5,6 +5,7 @@ import { ArrowLink, ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { Hero } from "@/components/Hero";
 import { ProcessSteps } from "@/components/ProcessSteps";
+import { RelatedGuides } from "@/components/RelatedGuides";
 import { ScopeChecklist } from "@/components/ScopeChecklist";
 import { SectionHeading } from "@/components/SectionHeading";
 import { pageMetadata } from "@/lib/seo";
@@ -318,6 +319,12 @@ export default function OutsourcingPage() {
             <p data-reveal className="mt-5 text-base leading-7 text-ink">
               What buyers usually ask before subcontracting a drawing, model or detailing package.
             </p>
+            <div className="mt-8">
+              <RelatedGuides
+                surface="paper"
+                slugs={["outsourcing-structural-steel-detailing-guide", "how-to-write-an-rfq-for-structural-detailing"]}
+              />
+            </div>
           </div>
           <div className="space-y-3 lg:col-span-7">
             {faqs.map((faq, i) => (

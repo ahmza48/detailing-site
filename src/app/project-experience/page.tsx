@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { site } from "@/lib/site";
 import { ArrowLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { Disclaimer } from "@/components/Disclaimer";
@@ -29,7 +30,7 @@ export default function ProjectExperiencePage() {
         eyebrow="Project experience"
         title="Relevant Professional Experience"
         accent="& Technical Work Samples"
-        intro="Representative projects from the prior professional experience of our senior team members, mapped to the services they relate to today. None of these are projects contracted to Hormuz-Energy."
+        intro={`Representative projects from the prior professional experience of our senior team members, mapped to the services they relate to today. None of these are projects contracted to ${site.name}.`}
         image="/images/project-umm-lulu.jpg"
         imageAlt="Offshore platform topsides at a fabrication yard"
         crumbs={[{ name: "Project Experience", path: "/project-experience" }]}
@@ -92,7 +93,7 @@ export default function ProjectExperiencePage() {
           </div>
           <div data-reveal className="space-y-4 text-base leading-7 text-white/85 lg:col-span-6">
             <p>
-              This collection is for authorised Hormuz-Energy deliverables and clearly labelled demonstration samples, each
+              This collection is for authorised {site.name} deliverables and clearly labelled demonstration samples, each
               with its project type, software, source information and limits stated.
             </p>
             <p>

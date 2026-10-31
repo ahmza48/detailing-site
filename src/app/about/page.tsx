@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   ...pageMetadata({
     title: `About ${site.name}`,
     description:
-      "Learn about Hormuz-Energy's structural detailing, TEKLA modelling and CAD production services, delivery approach and senior team's prior energy-sector project experience.",
+      `Learn about ${site.name}'s structural detailing, TEKLA modelling and CAD production services, delivery approach and senior team's prior energy-sector project experience.`,
     path: "/about",
     image: "/images/about-experience.jpg",
   }),

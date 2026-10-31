@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { site } from "@/lib/site";
 import { industryBySlug, industryPath } from "@/lib/industries";
 import type { Project } from "@/lib/projects";
 import { serviceBySlug, servicePath } from "@/lib/services";
@@ -58,7 +59,7 @@ export function ProjectCaseStudy({ project, index }: { project: Project; index: 
           </div>
           <p className="rounded-lg bg-white/60 text-xs leading-relaxed font-semibold text-slate lg:col-span-3 lg:text-right">
             Prior professional engagement of a senior team member.
-            <br className="hidden lg:block" /> Not a project contracted to Hormuz-Energy.
+            <br className="hidden lg:block" /> Not a project contracted to {site.name}.
           </p>
         </header>
 

@@ -14,7 +14,7 @@ export type Project = {
   /**
    * All experience on this site is prior personnel experience (spec 7.5):
    * work by senior team members during previous employment, not projects
-   * contracted to Hormuz-Energy. TODO_VERIFY: confirm names, roles, software
+   * contracted to the company. TODO_VERIFY: confirm names, roles, software
    * and deliverables against the source CV before adding new detail.
    */
   classification: "prior-personnel-experience";

@@ -125,9 +125,10 @@ export default function HomePage() {
       {/* 1. Hero */}
       <Hero
         tall
+        compactTitle
         eyebrow="Engineering production support for energy & industrial projects"
-        title="Structural Steel Detailing, 3D Modelling"
-        accent="& CAD Support for Energy Projects"
+        title="Steel & Concrete Structural Designing, Detailing, 3D Modelling, Drafting "
+        accent="& Complete CAD Support for Complex Projects"
         intro="We support EPC contractors, engineering consultancies and steel fabricators with civil and structural CAD drafting, Tekla Structures modelling, fabrication detailing, RCC reinforcement documentation and revision-controlled engineering packages, working from agreed design inputs and project requirements for onshore, offshore and industrial assignments."
         image="/images/hero-offshore.jpg"
         imageAlt="Offshore jack-up rig beside a crane vessel at sunset"
@@ -365,12 +366,12 @@ export default function HomePage() {
             <p data-reveal className="mt-5 max-w-sm text-[0.9375rem] leading-7 font-normal">
               Selected examples from our senior professionals&rsquo; previous employment on onshore, offshore, refining
               and gas-processing projects. These references demonstrate individual career experience, not contracts
-              awarded to Hormuz-Energy.
+              awarded to {site.name}.
             </p>
             <Disclaimer
               onDark
               className="mt-5 max-w-sm"
-              text="These are prior engagements of individual team members, not projects contracted to Hormuz-Energy."
+              text={`These are prior engagements of individual team members, not projects contracted to ${site.name}.`}
             />
             <div data-reveal className="mt-8">
               <ButtonLink href="/project-experience" variant="light">

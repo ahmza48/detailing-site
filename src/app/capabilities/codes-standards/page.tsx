@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { site } from "@/lib/site";
 import Link from "next/link";
 import { ArrowUpRight, Check, ChevronDown, Info, Plus } from "lucide-react";
 import { ArrowLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { Hero } from "@/components/Hero";
 import { ProcessSteps } from "@/components/ProcessSteps";
+import { RelatedGuides } from "@/components/RelatedGuides";
 import { SectionHeading } from "@/components/SectionHeading";
 import { pageMetadata } from "@/lib/seo";
 import { standardsStatement } from "@/lib/site";
@@ -69,11 +71,11 @@ const requirementsWorkflow = [
 const responsibilities = [
   ["Design basis, structural calculations and member sizing", "Client's engineer or appointed design authority, unless a qualified design scope is separately assigned"],
   ["Approved connection design or delegated connection engineering", "Responsible engineer or a contractually appointed qualified designer"],
-  ["Drafting, detailing and model production", "Hormuz-Energy, within the agreed production scope"],
+  ["Drafting, detailing and model production", `${site.name}, within the agreed production scope`],
   ["Project-specific drawing and model consistency checks", "Assigned production checker under the agreed procedure"],
   ["Technical queries and resolution of missing data", "Clarified by the named engineering or client authorities"],
   ["Client review, acceptance and statutory approval", "Assigned client, engineer or authority according to the project contract"],
-  ["Final record and as-built verification", "Responsible field, survey or construction authority supplying verified records; Hormuz-Energy documents the agreed updates"],
+  ["Final record and as-built verification", `Responsible field, survey or construction authority supplying verified records; ${site.name} documents the agreed updates`],
 ];
 
 /** Information typically agreed for each package. */
@@ -340,6 +342,9 @@ export default function CodesStandardsPage() {
             <p data-reveal className="mt-5 text-base leading-7 text-ink">
               How project standards, codes and approvals relate to drafting, modelling and detailing work.
             </p>
+            <div className="mt-8">
+              <RelatedGuides slugs={["structural-design-vs-detailing-responsibilities", "structural-detailing-input-checklist"]} />
+            </div>
           </div>
           <div className="space-y-3 lg:col-span-7">
             {faqs.map((faq, i) => (

@@ -1,4 +1,4 @@
-# Hormuz-Energy — Civil & Structural Detailing for Energy Projects
+# PetroHill — Civil & Structural Detailing for Energy Projects
 
 Corporate website for a civil & structural design, detailing and 3D modelling company serving onshore and offshore energy projects.
 

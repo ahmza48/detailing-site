@@ -68,9 +68,11 @@ export const organizationJsonLd = () => ({
       "@type": "Organization",
       "@id": organizationId,
       name: site.name,
+      // Former working name, so anyone who knew it can still identify the company. Nowhere else on the site.
+      alternateName: "Hormuz-Energy",
       url: site.url,
       description: site.description,
-      logo: absoluteUrl("/logo/hormuz-energy-emerald.png"),
+      logo: absoluteUrl("/logo/petrohill-stacked.png"),
       telephone: site.phone.e164,
       address: postalAddress,
       contactPoint: {
@@ -129,3 +131,33 @@ export const serviceJsonLd = (service: Service) => ({
     name: "EPC contractors, engineering consultancies and steel fabricators in the energy sector",
   },
 });
+
+/**
+ * BlogPosting for /resources articles. Author and publisher reference the PetroHill Organization
+ * node emitted on every page. No FAQPage schema: FAQs stay as visible content only.
+ */
+export const blogPostingJsonLd = (article: {
+  path: string;
+  headline: string;
+  description: string;
+  image: string;
+  datePublished: string;
+  dateModified: string;
+  keyword?: string;
+}) => {
+  const organization = { "@type": "Organization", "@id": `${site.url}/#organization`, name: site.name };
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.headline,
+    description: article.description,
+    image: absoluteUrl(article.image),
+    datePublished: article.datePublished,
+    dateModified: article.dateModified,
+    inLanguage: "en",
+    ...(article.keyword ? { keywords: article.keyword } : {}),
+    author: organization,
+    publisher: organization,
+    mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(article.path) },
+  };
+};

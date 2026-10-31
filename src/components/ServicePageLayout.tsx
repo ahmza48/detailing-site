@@ -1,10 +1,12 @@
 import Image from "next/image";
+import { site } from "@/lib/site";
 import Link from "next/link";
 import { ArrowRight, Check, CircleSlash, Plus } from "lucide-react";
 import { applications } from "@/lib/applications";
 import { industries, industryPath } from "@/lib/industries";
 import { projectPath, projectsForService } from "@/lib/projects";
 import { serviceJsonLd } from "@/lib/seo";
+import { resourcesForService } from "@/lib/resources";
 import { serviceBySlug, servicePath, type RelatedLink, type Service } from "@/lib/services";
 import { software, softwareQualifier } from "@/lib/software";
 import { ArrowLink, ButtonLink } from "./ButtonLink";
@@ -14,6 +16,7 @@ import { Hero } from "./Hero";
 import { JsonLd } from "./JsonLd";
 import { ProjectCard } from "./ProjectCard";
 import { ProcessSteps } from "./ProcessSteps";
+import { RelatedGuides } from "./RelatedGuides";
 import { ScopeChecklist } from "./ScopeChecklist";
 import { SectionHeading } from "./SectionHeading";
 import { StandardsSummary } from "./StandardsSummary";
@@ -394,7 +397,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
               <Disclaimer
                 onDark
                 className="mt-5"
-                text="Prior professional engagement of a senior team member, not a project contracted to Hormuz-Energy."
+                text={`Prior professional engagement of a senior team member, not a project contracted to ${site.name}.`}
               />
               <p data-reveal className="mt-5 max-w-xl text-base leading-7 text-haze">
                 {lead.description}
@@ -451,6 +454,9 @@ export function ServicePageLayout({ service }: { service: Service }) {
             <ArrowLink href={quoteHref} className="mt-6">
               Ask about your scope
             </ArrowLink>
+            <div className="mt-8">
+              <RelatedGuides guides={resourcesForService(service.slug).slice(0, 3)} />
+            </div>
           </div>
           <div className="space-y-3 lg:col-span-7">
             {service.faqs.map((faq, i) => (

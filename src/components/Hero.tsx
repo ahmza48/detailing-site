@@ -15,6 +15,8 @@ type Props = {
   crumbs?: Crumb[];
   /** Taller banner for the homepage. */
   tall?: boolean;
+  /** Smaller, wider headline for long titles (same font, weight and case). */
+  compactTitle?: boolean;
   /** CSS object-position for the photograph. */
   focus?: string;
   children?: ReactNode;
@@ -23,7 +25,19 @@ type Props = {
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as React.CSSProperties;
 
 /** Page banner: a full-width photograph relevant to the page, under a navy wash. */
-export function Hero({ eyebrow, title, accent, intro, image, imageAlt, crumbs, tall = false, focus = "center", children }: Props) {
+export function Hero({
+  eyebrow,
+  title,
+  accent,
+  intro,
+  image,
+  imageAlt,
+  crumbs,
+  tall = false,
+  compactTitle = false,
+  focus = "center",
+  children,
+}: Props) {
   return (
     <section className="relative isolate overflow-hidden bg-navy-900 text-mist">
       <Image
@@ -56,7 +70,10 @@ export function Hero({ eyebrow, title, accent, intro, image, imageAlt, crumbs, t
             {eyebrow}
           </p>
         )}
-        <h1 className={`${tall ? "display-xl" : "display-lg"} max-w-3xl text-balance text-mist`}>
+        <h1
+          className={`${compactTitle
+              ? "max-w-4xl text-[clamp(1.5rem,2.7vw,2.375rem)] leading-[1.08] font-extrabold uppercase [overflow-wrap:break-word]" : `${tall ? "display-xl" : "display-lg"} max-w-3xl`} text-balance text-mist`}
+        >
           <span className="line-mask">
             <span style={delay(120)}>{title}</span>
           </span>

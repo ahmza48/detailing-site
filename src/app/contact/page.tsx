@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { Hero } from "@/components/Hero";
+import { RelatedGuides } from "@/components/RelatedGuides";
 import { SectionHeading } from "@/components/SectionHeading";
 import { pageMetadata } from "@/lib/seo";
 import { Mail, MapPin, Phone, Plus } from "lucide-react";
@@ -168,6 +169,12 @@ export default function ContactPage() {
               Quick answers to the questions most enquiries start with. No fixed turnaround is promised; we respond
               once the request has been reviewed.
             </p>
+            <div className="mt-8">
+              <RelatedGuides
+                title="How to Prepare Your RFQ"
+                slugs={["how-to-write-an-rfq-for-structural-detailing", "structural-detailing-input-checklist"]}
+              />
+            </div>
           </div>
           <div className="space-y-3 lg:col-span-7">
             {faqs.map((faq, i) => (

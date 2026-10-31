@@ -1,3 +1,4 @@
+import { site } from "@/lib/site";
 /**
  * Central FAQ registry (Home / About / FAQ brief, section F). The /faq hub shows every entry;
  * Home and About show small, non-repeating subsets. Answers are visible HTML only — no FAQPage
@@ -8,7 +9,7 @@ export type Faq = { id: string; q: string; a: string; links?: { href: string; la
 export const faqs: Faq[] = [
   {
     id: "services",
-    q: "What engineering services does Hormuz-Energy provide?",
+    q: `What engineering services does ${site.name} provide?`,
     a: "We provide civil and structural CAD drafting, 3D structural and plant modelling, structural steel detailing and fabrication documentation, RCC and reinforcement detailing, brownfield drawing updates, material take-offs and engineering documentation. Each package is defined against the available design inputs and required outputs.",
     links: [{ href: "/services", label: "All services" }],
   },
@@ -82,8 +83,8 @@ export const faqs: Faq[] = [
   },
   {
     id: "prior-experience",
-    q: "Does the prior project experience on this website belong to Hormuz-Energy?",
-    a: "No. Selected projects and organisations are cited as previous professional experience of senior personnel through earlier employment or engagements. They are not presented as direct Hormuz-Energy contracts or endorsements.",
+    q: `Does the prior project experience on this website belong to ${site.name}?`,
+    a: `No. Selected projects and organisations are cited as previous professional experience of senior personnel through earlier employment or engagements. They are not presented as direct ${site.name} contracts or endorsements.`,
     links: [{ href: "/project-experience", label: "Project experience" }],
   },
   {
