@@ -288,7 +288,7 @@ export function Navbar() {
           <ul className="flex items-center">
             {primaryNav.map((item) => {
               const active = sectionActive(item.href, item.menu);
-              const linkClass = `nav-link relative inline-flex h-11 items-center px-2 text-xs font-semibold tracking-[0.05em] whitespace-nowrap uppercase 2xl:px-3.5 2xl:text-[0.8125rem] transition-colors duration-300 hover:text-white ${
+              const linkClass = `nav-link relative inline-flex h-11 items-center px-2 text-xs font-semibold tracking-[0.05em] whitespace-nowrap uppercase 2xl:px-2 2xl:text-[0.78rem] transition-colors duration-300 hover:text-white ${
                 active ? "text-white" : "text-mist/85"
               }`;
 
@@ -301,7 +301,7 @@ export function Navbar() {
                       data-active={active || undefined}
                       className={linkClass}
                     >
-                      {item.label}
+                      {item.short ?? item.label}
                     </Link>
                   </li>
                 );
@@ -330,7 +330,7 @@ export function Navbar() {
                     data-active={active || undefined}
                     className={`${linkClass} pr-0.5`}
                   >
-                    {item.label}
+                    {item.short ?? item.label}
                   </Link>
                   <button
                     type="button"
@@ -400,7 +400,7 @@ export function Navbar() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <Link
             href={quoteCta.href}
             className="group hidden h-11 items-center gap-2.5 rounded-lg bg-energy-deep px-5 text-sm font-semibold whitespace-nowrap text-white transition-[background-color,box-shadow] duration-300 hover:bg-energy-ink hover:shadow-[0_8px_20px_rgb(0_179_80/0.35)] sm:inline-flex"

@@ -5,8 +5,8 @@
  * block reads from here.
  */
 export const site = {
-  name: process.env.NEXT_PUBLIC_COMPANY_NAME || "Hormuz-Energy",
-  shortName: process.env.NEXT_PUBLIC_COMPANY_SHORT_NAME || "Hormuz",
+  name: process.env.NEXT_PUBLIC_COMPANY_NAME || "PetroHill",
+  shortName: process.env.NEXT_PUBLIC_COMPANY_SHORT_NAME || "PetroHill",
   descriptor: "Civil & Structural Engineering Support, Modelling & Detailing",
   tagline:
     "Civil & structural engineering support, modelling and detailing for energy and industrial projects",
@@ -19,7 +19,8 @@ export const site = {
   url: (
     process.env.NEXT_PUBLIC_SITE_URL ||
     (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
-    "https://www.example.com"
+    // Local development only; production reads NEXT_PUBLIC_SITE_URL (set to https://petrohill.com once live).
+    "https://petrohill.com"
   ).replace(/\/$/, ""),
   /** Shown publicly only when set. */
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || undefined,
@@ -32,7 +33,7 @@ export const site = {
   /** wa.me takes the number in international format without "+" or spaces. */
   whatsapp: {
     number: "923374954695",
-    message: "Hello Hormuz-Energy, I would like to discuss a structural detailing / modelling scope.",
+    message: "Hello PetroHill, I would like to discuss a structural detailing / modelling scope.",
   },
   address: {
     lines: ["IVY, Phase XI", "DHA, Lahore", "Pakistan"],
@@ -52,15 +53,17 @@ export const whatsappHref = `https://wa.me/${site.whatsapp.number}?text=${encode
 
 export type NavLink = { label: string; href: string };
 export type NavMenuId = "services" | "industries" | "capabilities";
-export type NavItem = NavLink & { menu?: NavMenuId };
+/** `short` is the desktop-header label, so the full menu, logo and CTA fit on one line from 1280px. */
+export type NavItem = NavLink & { menu?: NavMenuId; short?: string };
 
 /** Desktop and mobile navigation (spec 3.2). "Request a Quote" is rendered separately as the CTA. */
 export const primaryNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services", menu: "services" },
   { label: "Industries", href: "/industries", menu: "industries" },
-  { label: "Projects & Work Samples", href: "/project-experience" },
-  { label: "Technical Capabilities", href: "/capabilities", menu: "capabilities" },
+  { label: "Projects & Work Samples", short: "Projects", href: "/project-experience" },
+  { label: "Technical Capabilities", short: "Capabilities", href: "/capabilities", menu: "capabilities" },
+  { label: "Resources", href: "/resources" },
   { label: "About Us", href: "/about" },
 ];
 
@@ -83,6 +86,9 @@ export const portfolioNote =
   "Selected experience shown on this website includes projects undertaken by senior team members during previous employment or engagements with established EPC, engineering and construction organizations. Project and client names are presented solely to demonstrate relevant professional experience and do not imply direct contractual relationships with this company.";
 
 // Organisations from prior experience (asset owners, former employers) live in ./experience-orgs.ts.
+
+export const drawingSamplesNote =
+  "Excerpts from drawings produced by our senior team during previous professional engagements. They are confidential, so they are reduced, watermarked and shown without title blocks. Full drawings are for clients only.";
 
 /** Sitewide standards statement (spec v2 §9.1). */
 export const standardsStatement =
@@ -124,7 +130,7 @@ export const motto = "Engineering clarity. Detail by detail.";
 /** Visible disclaimers for the experience tickers. */
 export const tickerDisclaimers = {
   assetOwner:
-    "Historical professional project exposure only. Names are shown for experience context; these organisations are not presented as clients, partners or endorsers of Hormuz-Energy.",
+    `Historical professional project exposure only. Names are shown for experience context; these organisations are not presented as clients, partners or endorsers of ${site.name}.`,
   formerEmployer:
     "Organisations where senior team members previously worked or were engaged. Shown as career background only; not current partnerships, clients or endorsements.",
 };

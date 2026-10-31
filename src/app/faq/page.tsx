@@ -3,6 +3,7 @@ import { ArrowLink, ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { FaqList } from "@/components/FaqList";
 import { Hero } from "@/components/Hero";
+import { RelatedGuides } from "@/components/RelatedGuides";
 import { SectionHeading } from "@/components/SectionHeading";
 import { faqGroups } from "@/lib/faqs";
 import { pageMetadata } from "@/lib/seo";
@@ -63,6 +64,13 @@ export default function FaqPage() {
             Service-specific questions are answered on each service page, alongside its scope, inputs and deliverables.
           </p>
           <ArrowLink href="/services">Explore technical services</ArrowLink>
+        </div>
+        <div className="container-site pb-14">
+          <RelatedGuides
+            surface="paper"
+            title="Guides for Buyers"
+            slugs={["how-to-write-an-rfq-for-structural-detailing", "structural-detailing-input-checklist", "outsourcing-structural-steel-detailing-guide"]}
+          />
         </div>
       </section>
 

@@ -33,4 +33,3 @@ Generic industry photography from Unsplash (Unsplash License). These are not pho
 | project-atyrau.jpg | Yanping Ma | https://images.unsplash.com/photo-1781364486016-d83c39eb87f2 |
 | project-dolphin.jpg | Tasos Mansour | https://images.unsplash.com/photo-1602056820935-316884c035f8 |
 
-Files in `projects/` are generated placeholder drawings (`npm run images`).

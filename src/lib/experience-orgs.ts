@@ -7,7 +7,7 @@
  *   "Confirmed" here means recorded against a project in src/lib/projects.ts; the owner should still
  *   verify each one against employment / CV evidence (TODO_VERIFY).
  * - Asset owners and former employers are separate groups and are never mixed in one row.
- * - These are never clients, partners or endorsers of Hormuz-Energy; every ticker keeps a visible disclaimer.
+ * - These are never clients, partners or endorsers of the company; every ticker keeps a visible disclaimer.
  * - Logos are third-party trademarks. Typography only, unless `approvedLogoSrc` is set AND
  *   `logoPermissionConfirmed` is true (no logo assets are approved at present).
  */

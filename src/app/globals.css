@@ -522,3 +522,34 @@ dialog::backdrop {
     display: none;
   }
 }
+
+/* Confidential drawing excerpts (see DrawingProtection). */
+[data-drawing-frame] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html[data-drawings-obscured] [data-drawing-frame] img {
+  visibility: hidden;
+}
+
+html[data-drawings-obscured] [data-drawing-frame]::after {
+  content: "Confidential";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--color-navy-900);
+  color: var(--color-white, #fff);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@media print {
+  [data-drawing-frame] img {
+    display: none;
+  }
+}

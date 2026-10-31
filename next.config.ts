@@ -1,16 +1,50 @@
 import type { NextConfig } from "next";
 
+/**
+ * Old hosts that should permanently redirect to the same path on the primary domain.
+ * Off until PRIMARY_DOMAIN_REDIRECT=1 is set in Vercel, which should only happen once
+ * petrohill.com is connected and serving (otherwise the live site would redirect to a dead host).
+ * www -> apex is configured in Vercel's domain settings. localhost and preview URLs never match.
+ */
+const PRIMARY_ORIGIN = "https://petrohill.com";
+const LEGACY_HOSTS = ["detailing-site-liart.vercel.app", "www.petrohill.com"];
+const hostRedirects =
+  process.env.PRIMARY_DOMAIN_REDIRECT === "1"
+    ? LEGACY_HOSTS.map((host) => ({
+        source: "/:path*",
+        has: [{ type: "host" as const, value: host }],
+        destination: `${PRIMARY_ORIGIN}/:path*`,
+        permanent: true,
+      }))
+    : [];
+
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  async headers() {
+    return [
+      {
+        source: "/proof-of-work/:path*",
+        headers: [
+          // Filenames are content hashes, so a changed drawing always gets a new URL.
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          // Cached copies must not answer the direct requests src/proxy.ts refuses.
+          { key: "Vary", value: "Sec-Fetch-Dest, Sec-Fetch-Site" },
+          { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
+          { key: "X-Robots-Tag", value: "noindex, noimageindex" },
+        ],
+      },
+    ];
+  },
   /**
-   * Service-taxonomy restructure (Hormuz_Energy_Copilot_Website_Restructure_Spec.md, section 6).
+   * Service-taxonomy restructure (website restructure spec, section 6).
    * Single-hop permanent (308) redirects from retired service URLs to their closest
    * intent match. All other service URLs were kept unchanged.
    */
   async redirects() {
     return [
+      ...hostRedirects,
       {
         // Onshore was an environment, not a service: it is now an industry page.
         source: "/services/onshore-civil-structural-design-detailing",
@@ -32,6 +66,8 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ["image/avif", "image/webp"],
+    // Deliberately omits /proof-of-work: the optimizer must not offer a route around src/proxy.ts.
+    localPatterns: [{ pathname: "/images/**" }, { pathname: "/logo/**" }, { pathname: "/_next/static/media/**" }],
   },
   experimental: {
     serverActions: {

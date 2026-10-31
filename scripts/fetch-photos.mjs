@@ -60,6 +60,6 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const hero = photos["hero-offshore.jpg"][0];
   const og = await fetch(`https://images.unsplash.com/photo-${hero}?w=1200&h=630&fit=crop&q=80&fm=jpg`);
   await writeFile(path.join(OUT, "og-default.jpg"), Buffer.from(await og.arrayBuffer()));
-  credits.push("", "Files in `projects/` are generated placeholder drawings (`npm run images`).", "");
+  credits.push("");
   await writeFile(path.join(OUT, "CREDITS.md"), credits.join("\n"));
 }

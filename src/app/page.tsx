@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { ArrowLink, ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
+import { DrawingGallery } from "@/components/DrawingGallery";
 import { Disclaimer } from "@/components/Disclaimer";
 import { ExperienceMetrics } from "@/components/ExperienceMetrics";
 import { ExperienceTicker } from "@/components/ExperienceTicker";
@@ -20,10 +21,11 @@ import { engagementSteps } from "@/lib/delivery";
 import { industries, industryPath } from "@/lib/industries";
 import { homeFaqs } from "@/lib/faqs";
 import { featuredProjectIds, projects } from "@/lib/projects";
+import { drawingSamples, homeDrawingIds } from "@/lib/proof-of-work";
 import { pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath, services, type ServiceSlug } from "@/lib/services";
 import { softwareQualifier } from "@/lib/software";
-import { motto, purpose, site, standardsStatement, tickerDisclaimers, trustMetrics } from "@/lib/site";
+import { drawingSamplesNote, motto, purpose, site, standardsStatement, tickerDisclaimers, trustMetrics } from "@/lib/site";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = {
@@ -118,16 +120,16 @@ export default function HomePage() {
   const [lead, ...rest] = featuredProjectIds
     .map((id) => projects.find((project) => project.id === id))
     .filter((project) => project !== undefined);
-  const evidence = projects.slice(0, 3).map((project) => ({ project, diagram: project.diagrams[0] }));
 
   return (
     <>
       {/* 1. Hero */}
       <Hero
         tall
+        compactTitle
         eyebrow="Engineering production support for energy & industrial projects"
-        title="Structural Steel Detailing, 3D Modelling"
-        accent="& CAD Support for Energy Projects"
+        title="Steel & Concrete Structural Designing, Detailing, 3D Modelling, Drafting "
+        accent="& Complete CAD Support for Complex Projects"
         intro="We support EPC contractors, engineering consultancies and steel fabricators with civil and structural CAD drafting, Tekla Structures modelling, fabrication detailing, RCC reinforcement documentation and revision-controlled engineering packages, working from agreed design inputs and project requirements for onshore, offshore and industrial assignments."
         image="/images/hero-offshore.jpg"
         imageAlt="Offshore jack-up rig beside a crane vessel at sunset"
@@ -302,35 +304,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. Technical evidence: transparently labelled placeholders */}
+      {/* 6. Technical evidence: confidential drawing excerpts */}
       <section className="bg-white">
         <div className="container-site section-y">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading
               slab
               title="Technical Work Samples"
-              intro="Authorised company work and labelled demonstration samples will be published here. Until then, the drawing views below are placeholder illustrations, not project deliverables."
+              intro={drawingSamplesNote}
             />
             <ArrowLink href="/project-experience#work-samples">About work samples</ArrowLink>
           </div>
-          <ul className="mt-10 grid gap-5 sm:grid-cols-3">
-            {evidence.map(({ project, diagram }, i) => (
-              <li key={diagram.src} data-reveal style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}>
-                <figure>
-                  <div className="relative aspect-[8/5] overflow-hidden rounded-xl border border-line bg-paper">
-                    <Image src={diagram.src} alt={diagram.alt} fill sizes="(min-width: 640px) 30vw, 100vw" className="object-cover" />
-                    <span className="absolute top-3 left-3 rounded-full bg-navy-900/85 px-3 py-1 text-[0.6875rem] font-bold tracking-[0.08em] text-white uppercase">
-                      Placeholder illustration
-                    </span>
-                  </div>
-                  <figcaption className="mt-3 text-sm">
-                    <span className="font-bold text-navy-900">{diagram.type}</span>
-                    <span className="text-slate"> · {serviceBySlug(project.serviceSlugs[0])?.title}</span>
-                  </figcaption>
-                </figure>
-              </li>
-            ))}
-          </ul>
+          <div data-reveal className="mt-10">
+            <DrawingGallery samples={drawingSamples(homeDrawingIds)} />
+          </div>
         </div>
       </section>
 
@@ -365,12 +352,12 @@ export default function HomePage() {
             <p data-reveal className="mt-5 max-w-sm text-[0.9375rem] leading-7 font-normal">
               Selected examples from our senior professionals&rsquo; previous employment on onshore, offshore, refining
               and gas-processing projects. These references demonstrate individual career experience, not contracts
-              awarded to Hormuz-Energy.
+              awarded to {site.name}.
             </p>
             <Disclaimer
               onDark
               className="mt-5 max-w-sm"
-              text="These are prior engagements of individual team members, not projects contracted to Hormuz-Energy."
+              text={`These are prior engagements of individual team members, not projects contracted to ${site.name}.`}
             />
             <div data-reveal className="mt-8">
               <ButtonLink href="/project-experience" variant="light">

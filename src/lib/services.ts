@@ -1,7 +1,7 @@
 /**
  * Canonical service catalogue (S01–S06): the publishing source of truth.
  *
- * Rules (see Hormuz_Energy_Copilot_Deep_Research_Implementation_v2.md, sections 3–4):
+ * Rules (see the v2 deep-research implementation spec, sections 3–4):
  * - Every marketed deliverable has one primary service. Other pages may
  *   reference it, never re-sell it as a separate service line.
  * - Onshore / offshore are industries (src/lib/industries.ts), not services.

@@ -1,19 +1,24 @@
 import Image from "next/image";
+import { drawingSamplesNote, site } from "@/lib/site";
 import Link from "next/link";
 import { ArrowRight, Check, CircleSlash, Plus } from "lucide-react";
 import { applications } from "@/lib/applications";
 import { industries, industryPath } from "@/lib/industries";
 import { projectPath, projectsForService } from "@/lib/projects";
+import { drawingSamples, serviceDrawingIds } from "@/lib/proof-of-work";
 import { serviceJsonLd } from "@/lib/seo";
+import { resourcesForService } from "@/lib/resources";
 import { serviceBySlug, servicePath, type RelatedLink, type Service } from "@/lib/services";
 import { software, softwareQualifier } from "@/lib/software";
 import { ArrowLink, ButtonLink } from "./ButtonLink";
 import { CTASection } from "./CTASection";
 import { Disclaimer } from "./Disclaimer";
+import { DrawingGallery } from "./DrawingGallery";
 import { Hero } from "./Hero";
 import { JsonLd } from "./JsonLd";
 import { ProjectCard } from "./ProjectCard";
 import { ProcessSteps } from "./ProcessSteps";
+import { RelatedGuides } from "./RelatedGuides";
 import { ScopeChecklist } from "./ScopeChecklist";
 import { SectionHeading } from "./SectionHeading";
 import { StandardsSummary } from "./StandardsSummary";
@@ -381,6 +386,16 @@ export function ServicePageLayout({ service }: { service: Service }) {
         </div>
       </section>
 
+      {/* Evidence: confidential drawing excerpts */}
+      <section className="bg-white">
+        <div className="container-site section-y">
+          <SectionHeading slab title="Drawing Excerpts" intro={drawingSamplesNote} />
+          <div data-reveal className="mt-10">
+            <DrawingGallery samples={drawingSamples(serviceDrawingIds[service.slug])} />
+          </div>
+        </div>
+      </section>
+
       {/* Evidence: prior professional experience */}
       {lead && (
         <section className="bg-navy-950 text-white">
@@ -394,7 +409,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
               <Disclaimer
                 onDark
                 className="mt-5"
-                text="Prior professional engagement of a senior team member, not a project contracted to Hormuz-Energy."
+                text={`Prior professional engagement of a senior team member, not a project contracted to ${site.name}.`}
               />
               <p data-reveal className="mt-5 max-w-xl text-base leading-7 text-haze">
                 {lead.description}
@@ -451,6 +466,9 @@ export function ServicePageLayout({ service }: { service: Service }) {
             <ArrowLink href={quoteHref} className="mt-6">
               Ask about your scope
             </ArrowLink>
+            <div className="mt-8">
+              <RelatedGuides guides={resourcesForService(service.slug).slice(0, 3)} />
+            </div>
           </div>
           <div className="space-y-3 lg:col-span-7">
             {service.faqs.map((faq, i) => (

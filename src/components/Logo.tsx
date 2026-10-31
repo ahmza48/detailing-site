@@ -2,13 +2,14 @@ import Image from "next/image";
 import { site } from "@/lib/site";
 
 /**
- * Hormuz-Energy logo (owner-supplied artwork in /public/logo).
- * "light" is the recoloured version for the dark navbar and footer; "color" is the original
- * artwork for light backgrounds. Source: public/logo/Emerald HORMUZ ENERGY Logo.png.
+ * PetroHill logo: concept 1 from public/logo/PetroHill Structural Logo Concepts.png,
+ * recomposed horizontally (P mark + wordmark) so the wordmark stays legible at header height.
+ * "light" turns the navy parts white for the navy header and footer; "color" is for light backgrounds.
+ * TODO_VERIFY: replace with vector (SVG) artwork from the designer when available.
  */
 const sources = {
-  light: "/logo/hormuz-energy-emerald-light.png",
-  color: "/logo/hormuz-energy-emerald.png",
+  light: "/logo/petrohill-logo-light.png",
+  color: "/logo/petrohill-logo.png",
 } as const;
 
 export function Logo({ variant = "light", className = "" }: { variant?: keyof typeof sources; className?: string }) {
@@ -16,11 +17,11 @@ export function Logo({ variant = "light", className = "" }: { variant?: keyof ty
     <Image
       src={sources[variant]}
       alt={site.name}
-      width={640}
-      height={169}
+      width={781}
+      height={136}
       priority
-      sizes="180px"
-      className={`h-9 w-auto sm:h-10 ${className}`}
+      sizes="240px"
+      className={`h-8 w-auto sm:h-9 ${className}`}
     />
   );
 }

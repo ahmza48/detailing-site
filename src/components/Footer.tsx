@@ -13,6 +13,7 @@ const company = [
   { label: "Technical Capabilities", href: "/capabilities" },
   { label: "Codes & Standards", href: "/capabilities/codes-standards" },
   { label: "Quality & Delivery", href: "/quality-delivery" },
+  { label: "Resources", href: "/resources" },
   { label: "FAQs", href: "/faq" },
   { label: "Request a Quote", href: "/contact" },
 ];
@@ -32,7 +33,10 @@ export function Footer() {
     <footer className="bg-navy-900 text-mist">
       <div className="container-site grid gap-12 py-16 lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-3">
-          <Logo className="sm:h-11" />
+          <Logo className="sm:h-10" />
+          <p className="mt-3 text-[0.6875rem] font-semibold tracking-[0.16em] text-haze uppercase">
+            Structural Detailing &amp; Engineering Support
+          </p>
           <p className="mt-6 max-w-xs text-sm leading-6">{site.tagline}.</p>
         </div>
 

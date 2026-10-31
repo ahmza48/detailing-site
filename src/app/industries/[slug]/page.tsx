@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { site } from "@/lib/site";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -214,7 +215,7 @@ function IndustryLayout({ industry }: { industry: Industry }) {
             </div>
             <Disclaimer
               className="mt-6"
-              text="Prior professional engagements of senior team members during previous employment, not projects contracted to Hormuz-Energy. Photographs are representative industry images."
+              text={`Prior professional engagements of senior team members during previous employment, not projects contracted to ${site.name}. Photographs are representative industry images.`}
             />
             <div className={`mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 ${projects.length > 2 ? "lg:grid-cols-4" : "max-w-3xl"}`}>
               {projects.map((project, index) => (
