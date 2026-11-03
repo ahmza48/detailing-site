@@ -17,6 +17,8 @@ type Props = {
   tall?: boolean;
   /** Smaller, wider headline for long titles (same font, weight and case). */
   compactTitle?: boolean;
+  /** Render `intro` as a short company statement: set like the navbar links (semibold, uppercase, tracked), for one-sentence intros. */
+  statement?: boolean;
   /** CSS object-position for the photograph. */
   focus?: string;
   children?: ReactNode;
@@ -35,6 +37,7 @@ export function Hero({
   crumbs,
   tall = false,
   compactTitle = false,
+  statement = false,
   focus = "center",
   children,
 }: Props) {
@@ -86,7 +89,14 @@ export function Hero({
           )}
         </h1>
         {intro && (
-          <p className="hero-rise mt-6 max-w-xl text-base leading-7 font-normal text-mist sm:text-[1.0625rem]" style={delay(420)}>
+          <p
+            className={`hero-rise text-mist ${
+              statement
+                ? "mt-6 max-w-2xl border-l-4 border-energy pl-4 text-base leading-7 font-semibold tracking-[0.05em] text-pretty uppercase sm:pl-5 sm:text-lg sm:leading-8"
+                : "mt-6 max-w-xl text-base leading-7 font-normal sm:text-[1.0625rem]"
+            }`}
+            style={delay(420)}
+          >
             {intro}
           </p>
         )}

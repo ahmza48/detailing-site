@@ -1,22 +1,18 @@
 import type { NextConfig } from "next";
 
 /**
- * Old hosts that should permanently redirect to the same path on the primary domain.
- * Off until PRIMARY_DOMAIN_REDIRECT=1 is set in Vercel, which should only happen once
- * petrohill.com is connected and serving (otherwise the live site would redirect to a dead host).
- * www -> apex is configured in Vercel's domain settings. localhost and preview URLs never match.
+ * The primary domain is www.petrohill.com; petrohill.com -> www is configured in Vercel's domain
+ * settings. Only the old Vercel host redirects here: redirecting www to the apex as well would loop
+ * against that setting. localhost and preview URLs never match.
  */
-const PRIMARY_ORIGIN = "https://petrohill.com";
-const LEGACY_HOSTS = ["detailing-site-liart.vercel.app", "www.petrohill.com"];
-const hostRedirects =
-  process.env.PRIMARY_DOMAIN_REDIRECT === "1"
-    ? LEGACY_HOSTS.map((host) => ({
-        source: "/:path*",
-        has: [{ type: "host" as const, value: host }],
-        destination: `${PRIMARY_ORIGIN}/:path*`,
-        permanent: true,
-      }))
-    : [];
+const PRIMARY_ORIGIN = "https://www.petrohill.com";
+const LEGACY_HOSTS = ["detailing-site-liart.vercel.app"];
+const hostRedirects = LEGACY_HOSTS.map((host) => ({
+  source: "/:path*",
+  has: [{ type: "host" as const, value: host }],
+  destination: `${PRIMARY_ORIGIN}/:path*`,
+  permanent: true,
+}));
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
@@ -24,6 +20,15 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   async headers() {
     return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+        ],
+      },
       {
         source: "/proof-of-work/:path*",
         headers: [

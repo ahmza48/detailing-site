@@ -4,6 +4,9 @@ import { RESOURCES_MODIFIED, resourcePath, resources } from "@/lib/resources";
 import { absoluteUrl } from "@/lib/seo";
 import { servicePath, services } from "@/lib/services";
 
+/** Date of the last real content change, sent as lastmod. Bump it with content edits, never at build time. */
+const SITE_MODIFIED = "2026-11-01";
+
 /** Canonical, indexable URLs only. Redirected legacy URLs are deliberately absent. */
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: { path: string; priority: number; lastModified?: string }[] = [
@@ -31,6 +34,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: absoluteUrl(path),
     changeFrequency: "monthly",
     priority,
-    ...(lastModified ? { lastModified } : {}),
+    lastModified: lastModified ?? SITE_MODIFIED,
   }));
 }

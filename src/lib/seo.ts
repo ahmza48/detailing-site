@@ -68,8 +68,6 @@ export const organizationJsonLd = () => ({
       "@type": "Organization",
       "@id": organizationId,
       name: site.name,
-      // Former working name, so anyone who knew it can still identify the company. Nowhere else on the site.
-      alternateName: "Hormuz-Energy",
       url: site.url,
       description: site.description,
       logo: absoluteUrl("/logo/petrohill-stacked.png"),
