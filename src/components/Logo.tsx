@@ -2,7 +2,7 @@ import Image from "next/image";
 import { site } from "@/lib/site";
 
 /**
- * PetroHill logo: concept 1 from public/logo/PetroHill Structural Logo Concepts.png,
+ * PetroHill logo: concept 1 from docs/brand/PetroHill Structural Logo Concepts.png,
  * recomposed horizontally (P mark + wordmark) so the wordmark stays legible at header height.
  * "light" turns the navy parts white for the navy header and footer; "color" is for light backgrounds.
  * TODO_VERIFY: replace with vector (SVG) artwork from the designer when available.

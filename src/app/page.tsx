@@ -108,6 +108,16 @@ const engageReasons = [
   },
 ];
 
+/** Deliverables named elsewhere on the site, listed beside the engineering introduction. */
+const introDeliverables = [
+  "General arrangement drawings",
+  "Tekla Structures and 3D structural models",
+  "Shop, assembly and single-part drawings",
+  "Erection drawings, member and bolt schedules",
+  "Reinforcement placing sheets, schedules and BBS",
+  "Material take-offs and quantities",
+];
+
 /** When buyers need extra delivery capacity (spec v2 §5.5). */
 const capacityNeeds = [
   { q: "Drawing backlog or peak workload?", a: "Assign a defined CAD package or revision backlog against your standards and schedule." },
@@ -128,9 +138,10 @@ export default function HomePage() {
         tall
         compactTitle
         eyebrow="Engineering production support for energy & industrial projects"
-        title="Steel & Concrete Structural Designing, Detailing, 3D Modelling, Drafting "
+        title="Concrete & Steel Structural Designing, Detailing, 3D Modelling, Drafting "
         accent="& Complete CAD Support for Complex Projects"
-        intro="We support EPC contractors, engineering consultancies and steel fabricators with civil and structural CAD drafting, Tekla Structures modelling, fabrication detailing, RCC reinforcement documentation and revision-controlled engineering packages, working from agreed design inputs and project requirements for onshore, offshore and industrial assignments."
+        statement
+        intro="PetroHill delivers precision structural detailing and engineering production support for energy and industrial infrastructure worldwide."
         image="/images/hero-offshore.jpg"
         imageAlt="Offshore jack-up rig beside a crane vessel at sunset"
       >
@@ -144,6 +155,43 @@ export default function HomePage() {
       <section id="experience" aria-label="Experience at a glance" className="bg-navy-900 text-mist">
         <div className="container-site py-8 lg:py-10">
           <ExperienceMetrics metrics={trustMetrics.slice(0, 4)} />
+        </div>
+      </section>
+
+      {/* 2b. Engineering introduction: the descriptive copy that used to sit under the H1 */}
+      <section aria-labelledby="engineering-intro" className="bg-white">
+        <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div data-reveal className="lg:col-span-7">
+            <span aria-hidden className="slab mb-6" />
+            <p className="eyebrow mb-3 text-teal-700">Engineering production capabilities</p>
+            <h2 id="engineering-intro" className="display-lg text-balance text-navy-900">
+              Engineering Production Support for EPC Contractors &amp; Steel Fabricators
+            </h2>
+            <div className="mt-6 max-w-2xl space-y-4 text-base leading-7 text-ink sm:text-lg sm:leading-8">
+              <p>
+                We support EPC contractors, engineering consultancies and steel fabricators with civil and structural CAD
+                drafting, Tekla Structures modelling, fabrication detailing, RCC reinforcement documentation and
+                revision-controlled engineering packages.
+              </p>
+              <p>
+                We work from agreed design inputs and project requirements for onshore, offshore and industrial assignments.
+              </p>
+            </div>
+            <ArrowLink href="/services" className="mt-6">
+              View all technical services
+            </ArrowLink>
+          </div>
+          <div data-reveal className="lg:col-span-5 lg:pt-14" style={{ "--reveal-delay": "70ms" } as React.CSSProperties}>
+            <h3 className="mb-3 text-xs font-bold tracking-[0.16em] text-teal-700 uppercase">Typical deliverables</h3>
+            <ul className="border-t border-line">
+              {introDeliverables.map((item) => (
+                <li key={item} className="flex gap-3 border-b border-line py-2.5 text-[0.9375rem] leading-6 font-medium text-navy-900">
+                  <Check aria-hidden strokeWidth={3} className="mt-1 size-4 shrink-0 text-energy-deep" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 

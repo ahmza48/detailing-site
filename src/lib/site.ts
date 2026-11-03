@@ -13,14 +13,13 @@ export const site = {
   description:
     "Civil and structural CAD drafting, TEKLA Structures modelling, steel fabrication detailing, RCC reinforcement documentation and brownfield modification packages for EPC contractors, engineering consultancies and steel fabricators in the energy and industrial sectors.",
   /**
-   * Canonical origin. NEXT_PUBLIC_SITE_URL should be set to the custom domain; until it is, Vercel's
-   * production domain (provided at build time) keeps canonicals, robots and the sitemap on a real host.
+   * Canonical origin, www.petrohill.com. Vercel's production domain (provided at build time) is the
+   * fallback when NEXT_PUBLIC_SITE_URL is unset, so canonicals, robots and the sitemap stay on a real host.
    */
   url: (
     process.env.NEXT_PUBLIC_SITE_URL ||
     (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
-    // Local development only; production reads NEXT_PUBLIC_SITE_URL (set to https://petrohill.com once live).
-    "https://petrohill.com"
+    "https://www.petrohill.com"
   ).replace(/\/$/, ""),
   /** Shown publicly only when set. */
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || undefined,
