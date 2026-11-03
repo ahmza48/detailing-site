@@ -11,19 +11,19 @@ Each steel drawing type answers a different question. A general arrangement (GA)
 | Anchor bolt / embedment plan | What must be cast into concrete? | Anchor and embed locations, projections, levels | Civil contractor |
 | Multi-drawing | Can several small parts share a sheet? | Several single-part or assembly views on one sheet | Shop (efficiency) |
 
-## General arrangement drawings
+## What is a general arrangement drawing?
 
 On a steel detailing package, a GA drawing shows the structure as a whole: plans at key levels, elevations along grid lines, and sections through bays. It locates members by grid and level and identifies them by size or mark. On many projects the engineer's design GA is an input, and the detailer's erection GA is an output. Clarify which one your RFQ means.
 
-## Assembly drawings
+## What is an assembly drawing?
 
 An assembly drawing (often what people mean by "shop drawing") shows a single shipping piece. That is usually a main beam, column or brace with all its shop-welded or shop-bolted fittings: cleats, stiffeners, base plates, end plates. It gives overall and hole dimensions, weld symbols, part marks and a bill of material for that assembly. Trimble describes assembly drawings as "typically workshop drawings showing fabrication information for one assembly", made up of a main part and secondary parts.
 
-## Single-part drawings
+## What is a single-part drawing?
 
 A single-part drawing describes one part only: a plate with its outline, holes and bevels, or a profile with its cut length, end preparations and holes. Shops that cut and drill parts before assembly rely on them, as do shops sending plate work to a separate cutting facility. Where the shop uses CNC equipment, single-part information may also be delivered as NC files.
 
-## Erection drawings
+## What is an erection drawing?
 
 Erection drawings show where each assembly mark sits in the structure, which bolts are installed in the field, any erection sequence notes, and levels or setting-out information. ANSI/AISC 303-22 treats shop drawings and erection drawings as separate approval documents. Temporary erection bracing drawings are a separate item again, prepared by the erector. Under European execution standards, temporary works responsibilities are similarly defined in the execution specification and contract.
 

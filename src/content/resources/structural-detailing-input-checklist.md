@@ -53,7 +53,7 @@ Under ANSI/AISC 303-22, the owner's designated representative for design must in
 - [ ] Issue milestones and priority areas
 - [ ] Point of contact for technical queries
 
-## What happens when inputs are missing
+## What happens when detailing inputs are missing?
 
 | Missing input | Typical consequence |
 |---|---|
@@ -63,7 +63,7 @@ Under ANSI/AISC 303-22, the owner's designated representative for design must in
 | Piping supports | Secondary steel missing from the shop package; added later as site work |
 | Drawing standard | Full re-dressing of sheets after the first issue |
 
-## Starting with partial information
+## Can detailing start with partial information?
 
 Real projects rarely provide everything on day one. A practical approach:
 

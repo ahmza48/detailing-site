@@ -38,7 +38,7 @@ export const resourceHubs: { id: ResourceHub; title: string; text: string }[] = 
 
 /** First published on the site; update dateModified when an article changes. */
 export const RESOURCES_PUBLISHED = "2026-11-01";
-export const RESOURCES_MODIFIED = "2026-11-01";
+export const RESOURCES_MODIFIED = "2026-11-04";
 
 export const resources: Resource[] = [
   {
@@ -47,7 +47,7 @@ export const resources: Resource[] = [
     hub: "A",
     title: "What Is Structural Steel Detailing? Scope & Deliverables",
     h1: "What Is Structural Steel Detailing?",
-    description: "A clear explanation of structural steel detailing: what detailers produce, the design inputs they need, how it differs from design, and how packages are reviewed.",
+    description: "Structural steel detailing explained: what detailers produce, the design inputs they need, how it differs from design, and how packages are reviewed.",
     ogTitle: "Structural Steel Detailing, Explained",
     ogDescription: "Inputs, outputs and responsibilities in plain engineering language.",
     primaryKeyword: "what is structural steel detailing",
@@ -77,7 +77,7 @@ export const resources: Resource[] = [
       { title: "Quick start to Tekla Structures drawings (2026)", url: "https://support.tekla.com/doc/tekla-structures/2026/dra_quick_start_to_ts_drawings", publisher: "Trimble" },
       { title: "Drawings in Tekla Structures (2024)", url: "https://support.tekla.com/doc/tekla-structures/2024/dra_drawing_contents", publisher: "Trimble" },
       { title: "Assembly drawings (2021)", url: "https://support.tekla.com/doc/tekla-structures/2021/dra_assembly_drawings", publisher: "Trimble" },
-      { title: "ANSI/AISC 303-22", url: "(as Article 1)", publisher: "AISC" },
+      { title: "ANSI/AISC 303-22", url: "https://www.aisc.org/aisc/publications/current-standards/aisc-303/", publisher: "AISC" },
     ],
   },
   {
@@ -94,8 +94,8 @@ export const resources: Resource[] = [
     relatedServices: ["steel-detailing-fabrication"],
     relatedPages: [],
     sources: [
-      { title: "ANSI/AISC 303-22", url: "(as Article 1)", publisher: "AISC" },
-      { title: "BS EN 1090 and Execution Classes, Explained", url: "https://www.koyda.com/guides/bs-en-1090-execution-classes/", publisher: "Koyda" },
+      { title: "ANSI/AISC 303-22", url: "https://www.aisc.org/aisc/publications/current-standards/aisc-303/", publisher: "AISC" },
+      { title: "Specifying the right Execution Class", url: "https://www.newsteelconstruction.com/wp/specifying-the-right-execution-class/", publisher: "New Steel Construction" },
       { title: "Execution of Steel Structures (SN32)", url: "https://bcsa.org.uk/upload/Resources/Fabrication%20Technical%20and%20Design/Signs/SIGNS-SN32.pdf", publisher: "BCSA" },
     ],
   },
@@ -105,7 +105,7 @@ export const resources: Resource[] = [
     hub: "B",
     title: "Outsourcing Steel Detailing: A Guide for EPC Teams",
     h1: "Outsourcing Structural Steel Detailing: A Practical Guide for EPC Teams",
-    description: "How EPC contractors and fabricators define, evaluate and manage an outsourced steel detailing package: scope, responsibilities, reviews, data security and handover.",
+    description: "How EPC contractors and fabricators define, evaluate and manage outsourced steel detailing: scope, responsibilities, reviews, data security, handover.",
     ogTitle: "Outsourcing Steel Detailing: A Guide for EPC Teams",
     ogDescription: "How EPC contractors and fabricators define, evaluate and manage an outsourced steel detailing package: scope, responsibilities, reviews, data security and handover.",
     primaryKeyword: "",
@@ -133,7 +133,7 @@ export const resources: Resource[] = [
       { title: "Tekla Structures data exchange formats (2026)", url: "https://support.tekla.com/doc/tekla-structures/2026/int_compatible_software", publisher: "Trimble" },
       { title: "NC files (2026)", url: "https://support.tekla.com/doc/tekla-structures/2026/int_create_nc_files", publisher: "Trimble" },
       { title: "Quick start to Tekla Structures drawings (2026)", url: "https://support.tekla.com/doc/tekla-structures/2026/dra_quick_start_to_ts_drawings", publisher: "Trimble" },
-      { title: "Save a model (2026)", url: "Trimble Tekla Structures 2026 user documentation (\"Save a model\")", publisher: "Trimble" },
+      { title: "Save a model (2026)", url: "https://support.tekla.com/doc/tekla-structures/2026/mod_saving_model_with_different_name_or_location", publisher: "Trimble" },
     ],
   },
   {
@@ -171,7 +171,6 @@ export const resources: Resource[] = [
     sources: [
       { title: "Takeoff (construction)", url: "https://en.wikipedia.org/wiki/Takeoff_(construction)", publisher: "Wikipedia" },
       { title: "Q&A: Difference between BOM and MTO", url: "https://www.researchgate.net/post/Whats_the_difference_between_bill_of_materials_BOM_and_material_take_off_MTO", publisher: "ResearchGate (practitioner discussion)" },
-      { title: "What Is a Material Takeoff", url: "https://www.meltplan.com/glossary/what-is-material-takeoff", publisher: "Meltplan" },
     ],
   },
   {
@@ -180,16 +179,15 @@ export const resources: Resource[] = [
     hub: "D",
     title: "Brownfield Structural Modification Drawings",
     h1: "Brownfield Structural Modifications: Drawings, Verification and As-Builts",
-    description: "How structural modification drawings are prepared on operating plants: verifying existing conditions, existing/removed/new work drawings, tie-ins and as-built updates.",
+    description: "How structural modification drawings are prepared on operating plants: verifying existing conditions, existing/removed/new work, tie-ins and as-builts.",
     ogTitle: "Brownfield Structural Modification Drawings",
-    ogDescription: "How structural modification drawings are prepared on operating plants: verifying existing conditions, existing/removed/new work drawings, tie-ins and as-built updates.",
+    ogDescription: "How structural modification drawings are prepared on operating plants: verifying existing conditions, existing/removed/new work, tie-ins and as-builts.",
     primaryKeyword: "",
     readingMinutes: 4,
     relatedServices: ["brownfield-structural-modifications"],
     relatedPages: [],
     sources: [
       { title: "Laser scanning and 3D modelling in brownfield offshore facilities: Case studies", url: "https://www.researchgate.net/publication/325687504_Laser_scanning_and_3D_modelling_in_brownfield_offshore_facilities_Case_studies", publisher: "ResearchGate (paper abstract)" },
-      { title: "Brownfield Modifications", url: "https://nbsurveys.com/where/brownfield-modifications", publisher: "NB Group" },
     ],
   },
   {
@@ -198,16 +196,15 @@ export const resources: Resource[] = [
     hub: "A",
     title: "Design vs Detailing: Who Is Responsible for What?",
     h1: "Structural Design vs Detailing: Who Is Responsible for What?",
-    description: "How responsibility is split between structural design, modelling, detailing and drafting, with AISC 303-22 connection options and BS EN 1090-2 execution specifications.",
+    description: "How responsibility splits between structural design, modelling, detailing and drafting, with AISC 303-22 connection options and BS EN 1090-2.",
     ogTitle: "Design vs Detailing: Who Is Responsible for What?",
-    ogDescription: "How responsibility is split between structural design, modelling, detailing and drafting, with AISC 303-22 connection options and BS EN 1090-2 execution specifications.",
+    ogDescription: "How responsibility splits between structural design, modelling, detailing and drafting, with AISC 303-22 connection options and BS EN 1090-2.",
     primaryKeyword: "",
     readingMinutes: 4,
     relatedServices: ["steel-detailing-fabrication"],
     relatedPages: [{ href: "/capabilities/codes-standards", label: "Project-Specific Engineering Standards" }],
     sources: [
       { title: "ANSI/AISC 303-22", url: "https://welovesteelconstruction.ssi-steel.com/wp-content/uploads/2024/08/Specification-AISC-303-22_Code-of-Standard-Practice-for-Steel-Buildings-and-Bridges.pdf", publisher: "AISC" },
-      { title: "Structural Steel Shop Drawings: AISC 303 Rules", url: "https://techdrawai.com/blog/structural-steel-shop-drawings", publisher: "TechDraw AI (secondary)" },
       { title: "BS EN 1090-2 preview", url: "https://webstore.ansi.org/preview-pages/bsi/preview_30320417.pdf", publisher: "BSI via ANSI" },
       { title: "EN 1090-2:2018+A1:2024", url: "https://standards.iteh.ai/catalog/standards/cen/0ca58a93-b883-40b6-8830-1b959bd16637/en-1090-2-2018a1-2024", publisher: "iTeh (CEN catalogue)" },
       { title: "Specifying the right Execution Class", url: "https://www.newsteelconstruction.com/wp/specifying-the-right-execution-class/", publisher: "New Steel Construction" },
@@ -219,15 +216,15 @@ export const resources: Resource[] = [
     hub: "B",
     title: "How to Write an RFQ for Structural Detailing",
     h1: "How to Write an RFQ for a Structural Detailing Package",
-    description: "What to include in a request for quotation for steel or RCC detailing so suppliers can price accurately: scope, inputs, deliverables, standards, schedule and review terms.",
+    description: "What to include in an RFQ for steel or RCC detailing so suppliers can price accurately: scope, inputs, deliverables, standards, schedule and reviews.",
     ogTitle: "How to Write an RFQ for Structural Detailing",
-    ogDescription: "What to include in a request for quotation for steel or RCC detailing so suppliers can price accurately: scope, inputs, deliverables, standards, schedule and review terms.",
+    ogDescription: "What to include in an RFQ for steel or RCC detailing so suppliers can price accurately: scope, inputs, deliverables, standards, schedule and reviews.",
     primaryKeyword: "",
     readingMinutes: 4,
     relatedServices: [],
     relatedPages: [{ href: "/engineering-outsourcing", label: "Engineering Outsourcing & Subcontract Support" }, { href: "/quality-delivery", label: "Quality & Delivery" }],
     sources: [
-      { title: "PetroHill homepage FAQ (staging)", url: "https://detailing-site-liart.vercel.app/", publisher: "PetroHill" },
+      { title: "PetroHill FAQs", url: `${site.url}/faq`, publisher: "PetroHill" },
       { title: "Tekla data exchange formats", url: "https://support.tekla.com/doc/tekla-structures/2026/int_compatible_software", publisher: "Trimble" },
     ],
   },

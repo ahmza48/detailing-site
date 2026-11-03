@@ -292,7 +292,7 @@ body {
 }
 
 .hero-rise {
-  animation: hero-rise 0.9s var(--ease-out-quart) both;
+  animation: hero-rise 0.6s var(--ease-out-quart) both;
   animation-delay: var(--delay, 0ms);
 }
 
@@ -328,9 +328,10 @@ body {
 /* ---------- Sleek motion layer ---------- */
 
 /* Hero headings: each line rises out of a mask */
+/* Starts partly in view, not fully masked, so the hero heading paints on the first frame (LCP) */
 @keyframes line-up {
   from {
-    transform: translateY(105%);
+    transform: translateY(40%);
   }
   to {
     transform: none;

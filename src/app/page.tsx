@@ -136,10 +136,9 @@ export default function HomePage() {
       {/* 1. Hero */}
       <Hero
         tall
-        compactTitle
-        eyebrow="Engineering production support for energy & industrial projects"
-        title="Concrete & Steel Structural Designing, Detailing, 3D Modelling, Drafting "
-        accent="& Complete CAD Support for Complex Projects"
+        eyebrow="Steel & RCC detailing, 3D modelling and CAD drafting"
+        title="Structural Steel Detailing & Tekla Modelling"
+        accent="for Energy & Industrial Projects"
         statement
         intro="PetroHill delivers precision structural detailing and engineering production support for energy and industrial infrastructure worldwide."
         image="/images/hero-offshore.jpg"

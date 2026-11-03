@@ -1,6 +1,6 @@
 A good request for quotation (RFQ) for structural detailing tells suppliers six things: what is in scope, what information they will receive, what they must deliver, which standards and conventions apply, when you need it, and how reviews and changes will work. With that, you get quotes you can actually compare. Without it, each supplier prices a different assumption, and the cheapest quote is often just the one that assumed least. If you are preparing an [outsourced package](/engineering-outsourcing) for the first time, this structure also becomes your statement of work.
 
-## RFQ contents
+## What should an RFQ for structural detailing contain?
 
 ### 1. Project summary
 
@@ -51,7 +51,7 @@ The number of review cycles included in the price, the comment format, and how d
 
 Pricing basis requested (lump sum, per drawing, per tonne or hourly), payment milestones, validity and currency.
 
-## Sizing information that helps pricing
+## What information helps suppliers price a detailing package?
 
 Suppliers estimate effort from complexity, not just size. Useful information includes:
 
@@ -63,7 +63,9 @@ Suppliers estimate effort from complexity, not just size. Useful information inc
 
 If you have only partial information, say so. A supplier can then state assumptions instead of guessing.
 
-## Requesting responses you can compare
+## How do you make detailing quotes comparable?
+
+Quotes become comparable when every supplier prices the same deliverables against the same inputs and states what it assumed. Ask each supplier to return the items below in a fixed format, then compare assumptions and exclusions before comparing prices.
 
 Ask every supplier to return:
 

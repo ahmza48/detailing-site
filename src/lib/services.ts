@@ -89,6 +89,8 @@ export type Service = {
   /** How this service relates to neighbouring services. */
   boundaryNote: string;
   faqs: { q: string; a: string }[];
+  /** Self-contained 134–167 word answer to the page's main question, shown under the overview. */
+  answer: { q: string; a: string };
   /** Project shown first as evidence (keeps the anchor each service used before the restructure). */
   leadProject: string;
   /** 2–4 closely related next steps. */
@@ -359,6 +361,10 @@ export const services: Service[] = [
       },
     ],
     cta: "Need a civil or structural CAD drawing package? Share your drawing register, approved design inputs, required formats and target submission dates for a technical and commercial review.",
+    answer: {
+      q: "What does a civil and structural drafting package include?",
+      a: "A civil and structural drafting package turns approved design information into controlled CAD drawings for coordination, review and construction. It typically includes structural general arrangements, framing plans, sections and elevations, foundation and equipment-base drawings, and the interface details other disciplines need. Inputs are the approved structural and civil design drawings or sketches, layouts with reference grids and coordinates, vendor equipment data, current revisions and approved redlines, and the client's CAD standards, title blocks and numbering. Outputs are issued in native DWG or DGN and PDF with a drawing register that records revision status. An assignment can be a new package, development of marked-up documentation, revisions to existing drawings or record-drawing updates from verified information. Drafting does not include independent analysis, foundation design, connection calculations, site survey or statutory certification: design and approval stay with the client's responsible engineer, and the drafter works to the issued design.",
+    },
     seo: {
       title: "Civil & Structural CAD Drafting Services",
       description:
@@ -645,6 +651,10 @@ export const services: Service[] = [
       },
     ],
     cta: "Share your existing model or approved structural drawings, required modelling platform and version, reference coordinates and expected outputs to discuss a 3D modelling package.",
+    answer: {
+      q: "What should a 3D structural modelling package specify?",
+      a: "A 3D structural modelling package should state the model's purpose and level of development before production starts, because a coordination model, a detailed steel model, a fabrication-oriented model and an existing-plant update need different inputs and outputs. The specification covers the model origin and coordinate basis, grids, member identification and naming rules, software version, templates and libraries, and the native and exchange formats to be delivered, such as IFC. Inputs are approved structural layouts and steel schedules, connection requirements where components are modelled, discipline reference models and client review mark-ups. Typical outputs are the model at the agreed detail level, coordinated model views, native or IFC exchange files, revision notes, an issue and coordination register, and model-derived quantity reports where included. Drawing packages are a separate deliverable, not implied by a model, and structural analysis, design adequacy and clash-resolution authority remain with the parties defined in the contract.",
+    },
     seo: {
       title: "Tekla Structures & 3D Structural Modelling",
       description:
@@ -948,6 +958,10 @@ export const services: Service[] = [
       },
     ],
     cta: "Request a steel detailing proposal. Send approved structural drawings, connection information, project or fabricator standards, approximate tonnage or drawing volume, and the required issue programme.",
+    answer: {
+      q: "What does a structural steel detailing package include?",
+      a: "A structural steel detailing package turns an approved structural design into the information a fabricator and an erector need. It typically contains a detailing model such as Tekla Structures, general arrangement and erection drawings, assembly drawings for each shipping piece, single-part drawings for plates and profiles, member and part marks, bolt lists and material take-offs, and NC or DSTV machine files where contracted. The detailer works from the approved structural GA and member design, the connection design or criteria with its design authority confirmed, material grades, bolting and welding requirements, and the project and fabricator shop standards. Detail level, approval stages, connection-design responsibility and file formats are agreed in writing before work starts, and every issue carries a revision record. The structural or connection designer stays responsible for engineering decisions and calculations, and the detailer's production checks do not replace the engineer's or the fabricator's own contractual reviews.",
+    },
     seo: {
       title: "Structural Steel Detailing & Shop Drawings",
       description:
@@ -1198,6 +1212,10 @@ export const services: Service[] = [
       },
     ],
     cta: "Need reinforced concrete details or BBS for foundations, equipment bases or structural members? Send the approved concrete and reinforcement design, project detailing rules and expected deliverables.",
+    answer: {
+      q: "What is included in reinforced concrete and rebar detailing?",
+      a: "Reinforced concrete and rebar detailing turns the engineer's approved concrete design into drawings that show where every bar goes and schedules that tell the supplier what to cut and bend. A package typically includes concrete arrangement and detail drawings for foundations, equipment bases, pedestals, beams, columns and slabs, rebar placing plans, elevations and sections, embedded-item and anchor interface details, and bar bending schedules listing each bar mark with its shape, dimensions and quantity. Inputs are the approved concrete drawings or reinforcement design, the rebar specification with cover, lap and anchorage requirements, the owner's or EPC's detailing standards, the required BBS format and scheduling convention, and vendor anchor and embedment drawings. Bar marks, schedules and sections are revised together so that drawings and BBS always match. Reinforcement design, foundation design and structural adequacy stay with the responsible designer, whose design information remains distinct from the placing documents.",
+    },
     seo: {
       title: "Reinforced Concrete & Rebar Detailing",
       description:
@@ -1452,6 +1470,10 @@ export const services: Service[] = [
       },
     ],
     cta: "Have an existing pipe rack, platform or equipment-support modification? Send existing drawings, verified site data, approved modification information and the target issue sequence for scope review.",
+    answer: {
+      q: "What does a brownfield structural modification package include?",
+      a: "A brownfield structural modification package documents approved changes to an operating facility so they can be fabricated and installed safely around existing plant. It typically includes existing-condition, removal and proposed-work plans and sections, replacement and modification steel details, tie-in details to existing members, updated structural models, revised material take-offs and interface notes, and as-built record updates where contracted. The drawings clearly separate existing, removed and new work. Inputs are existing GA and as-built drawings or models, verified survey data, photographs and site mark-ups, any discrepancies register, the approved modification or repair design, and shutdown and tie-in constraints. The key discipline is distinguishing documented, observed and approved conditions: discrepancies between records and site information are identified for the client to resolve rather than assumed. Site verification, structural integrity assessment and fitness-for-service decisions are separate scopes, and modification drawings are not an integrity certification of the existing structure.",
+    },
     seo: {
       title: "Brownfield Structural Modifications & As-Builts",
       description:
@@ -1763,6 +1785,10 @@ export const services: Service[] = [
       },
     ],
     cta: "Share your drawing or model package, current revision, required material categories and reporting format to request structural MTO, BOM or documentation support.",
+    answer: {
+      q: "What makes a structural material take-off reliable?",
+      a: "A structural material take-off is reliable when its source, basis and limits are stated with the numbers. Each MTO should name the governing drawing or model revision it was taken from, the units and measurement basis, what is included and excluded, and how later changes will be reflected. Typical outputs are steel MTOs with member, profile and plate lists, bolt schedules, bills of materials where the source data allows, concrete quantities and reinforcement schedules, together with drawing registers, revision logs, comment logs and native and PDF issue packages. Inputs are the approved drawing or model issue, the agreed quantity basis, material grades and unit conventions, and the client's numbering, review and transmittal requirements. Quantities taken from an early or superseded revision are the most common source of error, so each report is tied to an issue. Production checks support consistency, but procurement quantities, commercial certification and engineering verification stay with the client's responsible parties.",
+    },
     seo: {
       title: "Structural MTO, BOM & Engineering Documentation",
       description:

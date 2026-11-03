@@ -5,7 +5,7 @@ import { absoluteUrl } from "@/lib/seo";
 import { servicePath, services } from "@/lib/services";
 
 /** Date of the last real content change, sent as lastmod. Bump it with content edits, never at build time. */
-const SITE_MODIFIED = "2026-11-01";
+const SITE_MODIFIED = "2026-11-04";
 
 /** Canonical, indexable URLs only. Redirected legacy URLs are deliberately absent. */
 export default function sitemap(): MetadataRoute.Sitemap {

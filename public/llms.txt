@@ -1,0 +1,42 @@
+# PetroHill
+
+> Civil and structural CAD drafting, Tekla Structures modelling, structural steel detailing, RCC and rebar detailing (placing drawings and bar bending schedules), brownfield modification drawings and material take-offs for EPC contractors, engineering consultancies and steel fabricators in the energy and industrial sectors. Based in Lahore, Pakistan. Work is produced from approved design information; structural design and approvals stay with the responsible engineer.
+
+## Services
+
+- [Civil & structural CAD drafting](https://www.petrohill.com/services/civil-structural-drafting): general arrangements, framing plans, sections, foundation and equipment-base drawings
+- [Tekla Structures & 3D structural modelling](https://www.petrohill.com/services/plant-structural-3d-modelling): structural and plant model support, coordination views and exchange files
+- [Structural steel detailing & shop drawings](https://www.petrohill.com/services/steel-detailing-fabrication): assembly, single-part and erection drawings, bolt and material lists
+- [Reinforced concrete & rebar detailing](https://www.petrohill.com/services/rcc-reinforcement-detailing): placing drawings and bar bending schedules
+- [Brownfield structural modifications & as-builts](https://www.petrohill.com/services/brownfield-structural-modifications): existing, removed and new work drawings for operating facilities
+- [Material take-offs & documentation](https://www.petrohill.com/services/material-takeoffs-documentation): structural MTO, BOM and drawing registers
+- [Engineering outsourcing](https://www.petrohill.com/engineering-outsourcing): subcontract drafting, modelling and detailing support
+
+## Industries
+
+- [Onshore oil & gas](https://www.petrohill.com/industries/onshore-oil-gas)
+- [Gas processing & NGL](https://www.petrohill.com/industries/gas-processing-ngl)
+- [Offshore energy](https://www.petrohill.com/industries/offshore-energy)
+- [Refining & petrochemicals](https://www.petrohill.com/industries/refining-petrochemicals)
+- [Fertiliser, chemical & process plants](https://www.petrohill.com/industries/process-plants)
+- [Power & industrial](https://www.petrohill.com/industries/power-industrial)
+
+## Guides
+
+- [What is structural steel detailing?](https://www.petrohill.com/resources/what-is-structural-steel-detailing)
+- [Steel drawing types explained](https://www.petrohill.com/resources/steel-drawing-types-explained)
+- [Structural detailing input checklist](https://www.petrohill.com/resources/structural-detailing-input-checklist)
+- [Outsourcing structural steel detailing](https://www.petrohill.com/resources/outsourcing-structural-steel-detailing-guide)
+- [Tekla model deliverables](https://www.petrohill.com/resources/tekla-model-deliverables-guide)
+- [Rebar placing drawings and bar bending schedules](https://www.petrohill.com/resources/rebar-placing-drawings-and-bar-bending-schedules)
+- [Structural steel material take-off](https://www.petrohill.com/resources/structural-steel-material-take-off-guide)
+- [Brownfield structural modification drawings](https://www.petrohill.com/resources/brownfield-structural-modification-drawings)
+- [Structural design vs detailing responsibilities](https://www.petrohill.com/resources/structural-design-vs-detailing-responsibilities)
+- [How to write an RFQ for structural detailing](https://www.petrohill.com/resources/how-to-write-an-rfq-for-structural-detailing)
+
+## Company
+
+- [About](https://www.petrohill.com/about)
+- [Codes & standards](https://www.petrohill.com/capabilities/codes-standards)
+- [FAQs](https://www.petrohill.com/faq)
+- [Request a quote](https://www.petrohill.com/contact)

@@ -1,6 +1,6 @@
 A reinforcement (rebar) detailing package turns the engineer's concrete design into drawings that show exactly where every bar goes, plus a bar bending schedule (BBS) that tells the fabricator how many bars of each mark to cut and bend, to what shape and dimensions. The engineer decides how much reinforcement is needed. The detailer shows it buildably, in the format the project's scheduling standard requires.
 
-## Structural drawings vs placing drawings
+## How do placing drawings differ from structural drawings?
 
 The American Concrete Institute's detailing standard (ACI 315, part of the ACI Detailing Manual SP-66) separates the responsibilities of the engineer from those of the detailer. The engineer's structural drawings define the design requirements: concrete dimensions, bar sizes and spacing, cover, laps and special details. Placing drawings, in ACI's words, "are working drawings that show the number, size, length, and location of the reinforcing steel necessary for the placement and fabrication of the material". UK and Eurocode projects follow the same principle through the design drawings, the specification and BS 8666 scheduling.
 
@@ -10,7 +10,7 @@ The American Concrete Institute's detailing standard (ACI 315, part of the ACI D
 | Shows | Required reinforcement, cover, laps, details | Every bar mark, location, quantity, shape |
 | Responsibility | Structural adequacy | Accurate representation of the design |
 
-## What a BBS contains
+## What does a bar bending schedule contain?
 
 A bar bending schedule typically lists, for each bar mark:
 
@@ -66,6 +66,9 @@ Yes. Tools such as Tekla Structures can model reinforcement and generate schedul
 
 **What is shape code 99?**
 In BS 8666, shape code 99 covers shapes that cannot be described by a standard code. They are scheduled with a fully dimensioned sketch.
+
+**Who sets the concrete cover shown on placing drawings?**
+The designer, through the governing code and the project specification. For example, ACI 318 requires at least 3 in (75 mm) of cover for concrete cast against and permanently in contact with the ground. The detailer shows the specified cover and positions bars to it, and raises a query where cover, bar size and spacing cannot all be achieved.
 
 ## Next step
 

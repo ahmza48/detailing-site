@@ -1,3 +1,4 @@
+import type { Faq } from "./faqs";
 import type { ServiceSlug } from "./services";
 
 /**
@@ -36,6 +37,8 @@ export type Industry = {
   standardsNote: string;
   /** What is not implied for this environment. */
   boundaries?: string[];
+  /** Sector-specific questions, shown on the industry page. */
+  faqs: Faq[];
   seo: { title: string; description: string };
 };
 
@@ -100,10 +103,27 @@ export const industries: Industry[] = [
     },
     standardsRefs: ["client-project", "aisc-360", "aci-318"],
     standardsNote: "Owner and EPC specifications generally govern, with steel and concrete design codes as specified by the responsible designer.",
+    faqs: [
+      {
+        id: "onshore-pipe-rack-drawings",
+        q: "What drawings does an onshore pipe rack package usually need?",
+        a: "General arrangement and framing plans, sections and elevations showing tiers, bents and longitudinal bracing, plus anchor-bolt and foundation layouts. Once connections are approved, the detailing stage adds assembly, single-part and erection drawings with member and bolt lists. Pipe-support attachments, cable-tray brackets and access platforms are usually listed separately so their revisions can be tracked against the piping layout.",
+      },
+      {
+        id: "onshore-vendor-data",
+        q: "How are late vendor-data changes handled on equipment foundations?",
+        a: "Foundation and pedestal drawings note the vendor-data revision they are based on. When certified vendor data arrives, anchor-bolt patterns, pocket sizes and grout levels are checked against it, and the affected drawings, bar bending schedules and MTO are reissued together under the next revision with clouded changes.",
+      },
+      {
+        id: "onshore-producing-field",
+        q: "Can modification drawings be prepared for a producing field without site access?",
+        a: "Yes, where verified site information is supplied: survey records, laser-scan point clouds, photographs and existing drawings marked up by the site team. Existing conditions that cannot be confirmed from those records are flagged on the drawings as hold points for site verification rather than assumed.",
+      },
+    ],
     seo: {
       title: "Onshore Oil & Gas Structural Detailing",
       description:
-        "Structural drafting, modelling, steel and RCC detailing and brownfield modification packages for onshore oil and gas facilities: pipe racks, platforms, supports and foundations.",
+        "Structural drafting, modelling, steel and RCC detailing and brownfield packages for onshore oil and gas: pipe racks, platforms, supports and foundations.",
     },
   },
   {
@@ -159,6 +179,23 @@ export const industries: Industry[] = [
     },
     standardsRefs: ["client-project", "aci-318", "bs-8666"],
     standardsNote: "Concrete and bar-scheduling standards follow the project specification, for example ACI or BS practice.",
+    faqs: [
+      {
+        id: "gas-typical-structures",
+        q: "What structures are typical in a gas processing or NGL plant?",
+        a: "Pipe racks between process units, compressor and pump shelters, platforms around columns, exchangers and vessels, and supports for cold-service piping. The concrete scope is often heavy: compressor blocks, ring walls and large mats with dense reinforcement and many embedded items.",
+      },
+      {
+        id: "gas-compressor-foundations",
+        q: "Can you detail compressor and rotating-equipment foundations?",
+        a: "We prepare concrete outline and reinforcement drawings and bar bending schedules from the foundation design issued by the responsible engineer, including anchor-bolt sleeves, embedded plates and grout pockets taken from certified vendor data. Dynamic analysis and foundation sizing stay with the designer.",
+      },
+      {
+        id: "gas-cold-service",
+        q: "How are cold-service pipe supports shown in the structural package?",
+        a: "Support locations and loads come from the piping and stress team. The structural package shows the support steel, attachment details and any insulation or shoe clearances they specify. Steel grades for low-temperature service follow the project specification and are carried through to the MTO.",
+      },
+    ],
     seo: {
       title: "Gas Processing & NGL Structural Detailing",
       description:
@@ -223,10 +260,27 @@ export const industries: Industry[] = [
       "Primary structure design and lifting design",
       "Independent verification of topsides structures",
     ],
+    faqs: [
+      {
+        id: "offshore-topsides-mods",
+        q: "Which drawings does an offshore topsides modification need?",
+        a: "Existing, removed and new structural drawings, tie-in details to the existing deck framing, and shop drawings with pieces sized for transport, lifting and access offshore. Weld and inspection categories are shown as specified by the designer, typically to AWS D1.1 or the project's own offshore structural specification.",
+      },
+      {
+        id: "offshore-vs-onshore",
+        q: "How does offshore structural detailing differ from onshore work?",
+        a: "Weight and space are tighter, so weight reports and the MTO matter more; most connections are welded rather than bolted; pieces must suit lifting and access limits; and coating and inspection requirements are usually more demanding. Weld categories and NDT extents are taken from the design and specification, not chosen at the detailing stage.",
+      },
+      {
+        id: "offshore-laser-scans",
+        q: "Can existing platform steel be modelled from laser scans?",
+        a: "Yes. Point clouds or scan-derived models can be used to model existing steel and route new members around it. The drawings record which dimensions come from scans and which still need site verification before fabrication.",
+      },
+    ],
     seo: {
       title: "Offshore Structural Detailing & Modelling",
       description:
-        "Offshore structural detailing, offshore steel detailing and modelling support: detailed drawings, shop drawings, MTO and modification packages for offshore platforms.",
+        "Offshore structural and steel detailing and modelling support: detailed drawings, shop drawings, MTO and modification packages for offshore platforms.",
     },
   },
   {
@@ -282,6 +336,23 @@ export const industries: Industry[] = [
     },
     standardsRefs: ["client-project", "aisc-360", "aws-d11"],
     standardsNote: "Owner and licensor specifications typically govern, with structural codes as specified by the responsible designer.",
+    faqs: [
+      {
+        id: "refinery-turnaround",
+        q: "What does a turnaround structural package usually include?",
+        a: "Modification drawings for platforms, pipe supports and equipment access that must be installed during a shutdown, with pieces sized for the available access and lifting, a clear existing/removed/new presentation, and material take-offs issued early enough for procurement before the shutdown window.",
+      },
+      {
+        id: "refinery-hot-work",
+        q: "How is structural work near live plant reflected in the drawings?",
+        a: "Connection types that reduce hot work on site, such as bolted or clamped attachments, are shown where the responsible engineer has specified them. Locations where site conditions may affect fit-up are flagged on the drawings for verification.",
+      },
+      {
+        id: "refinery-standards",
+        q: "Which standards apply on refinery and petrochemical structural packages?",
+        a: "The owner's engineering standards and the project specification normally govern. They typically reference codes such as AISC 360 and AWS D1.1 for steel and ACI 318 for concrete, or their Eurocode and BS equivalents. Applicable editions are confirmed at scope review.",
+      },
+    ],
     seo: {
       title: "Refinery & Petrochemical Structural Detailing",
       description:
@@ -339,6 +410,23 @@ export const industries: Industry[] = [
     },
     standardsRefs: ["client-project", "aisc-360", "aci-318"],
     standardsNote: "Project specifications govern, with design codes as specified by the responsible designer.",
+    faqs: [
+      {
+        id: "process-typical-structures",
+        q: "What structures are common in fertiliser and chemical plants?",
+        a: "Multi-level process structures, prilling or granulation tower steelwork, conveyor galleries and transfer towers, pipe racks, and concrete bunds, sumps and equipment bases. Corrosive environments often bring specific coating systems or concrete cover requirements, which are taken from the project specification.",
+      },
+      {
+        id: "process-conveyors",
+        q: "Can you detail conveyor galleries and transfer towers?",
+        a: "Yes, from the approved structural design: gallery trusses and stringers, transfer-tower framing, walkways, handrails and support bents, with erection marks and a material take-off.",
+      },
+      {
+        id: "process-corrosion",
+        q: "How are corrosion-protection requirements shown in the drawings?",
+        a: "Coating systems, galvanizing, drain holes, vent holes for hot-dip galvanizing and concrete cover are shown as specified. Where the specification is silent on a detail, it is raised as a technical query before detailing continues.",
+      },
+    ],
     seo: {
       title: "Fertiliser & Process Plant Structural Detailing",
       description:
@@ -397,6 +485,23 @@ export const industries: Industry[] = [
     },
     standardsRefs: ["client-project", "aci-318", "aisc-360"],
     standardsNote: "Project specifications govern, with design codes as specified by the responsible designer.",
+    faqs: [
+      {
+        id: "power-typical-packages",
+        q: "What structural packages are typical for power and industrial facilities?",
+        a: "Boiler and HRSG access steelwork, turbine-hall and industrial building framing, transformer and switchyard foundations, cable-tray supports, pipe racks, and crane girders and runway beams in industrial buildings.",
+      },
+      {
+        id: "power-crane-runways",
+        q: "Can you detail crane runway beams and building steelwork?",
+        a: "Yes, from the approved design: runway girders, rail and end-stop details as specified, column brackets, bracing and cladding supports. Crane loads and fatigue design remain with the responsible engineer.",
+      },
+      {
+        id: "power-transformer-foundations",
+        q: "Can you prepare transformer and substation foundation drawings?",
+        a: "Yes: concrete outlines, reinforcement drawings and bar bending schedules for transformer bases, oil-containment bunds, cable trenches and equipment plinths, with embedded items taken from the electrical vendor's data.",
+      },
+    ],
     seo: {
       title: "Power & Industrial Facility Structural Detailing",
       description:
