@@ -8,6 +8,7 @@ import { ArrowRight, Check, CircleSlash } from "lucide-react";
 import { ArrowLink, ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { Disclaimer } from "@/components/Disclaimer";
+import { FaqList } from "@/components/FaqList";
 import { Hero } from "@/components/Hero";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ScopeChecklist } from "@/components/ScopeChecklist";
@@ -46,7 +47,8 @@ function IndustryLayout({ industry }: { industry: Industry }) {
     <>
       <Hero
         eyebrow="Industry"
-        title={industry.name}
+        title="Structural Detailing for"
+        accent={industry.name}
         intro={industry.summary}
         image={industry.image}
         imageAlt={industry.imageAlt}
@@ -194,6 +196,18 @@ function IndustryLayout({ industry }: { industry: Industry }) {
                 </ul>
               </>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* Sector questions */}
+      <section className="bg-white">
+        <div className="container-site section-y grid gap-12 border-t border-line lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-4">
+            <SectionHeading slab title={`${industry.short} Questions`} />
+          </div>
+          <div className="lg:col-span-8">
+            <FaqList faqs={industry.faqs} surface="paper" openFirst={false} />
           </div>
         </div>
       </section>

@@ -81,6 +81,15 @@ export const organizationJsonLd = () => ({
         availableLanguage: ["English"],
       },
       ...(site.contactEmail ? { email: site.contactEmail } : {}),
+      ...(site.sameAs.length > 0 ? { sameAs: site.sameAs } : {}),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      name: site.name,
+      url: site.url,
+      inLanguage: "en",
+      publisher: { "@id": organizationId },
     },
     {
       "@type": "ProfessionalService",

@@ -10,7 +10,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Structural Detailing Resources",
   description:
-    "Practical guides on structural steel detailing, drawing types, detailing inputs, outsourcing, Tekla deliverables, rebar and BBS, material take-offs, brownfield drawings and RFQs.",
+    "Practical guides on steel detailing, drawing types, detailing inputs, outsourcing, Tekla deliverables, rebar and BBS, MTOs, brownfield drawings and RFQs.",
   path: "/resources",
   image: "/images/drawings-qaqc.jpg",
 });

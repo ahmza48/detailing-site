@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Engineering Detailing & Outsourcing FAQs",
   description:
-    "Answers on structural drafting, Tekla modelling, steel detailing, RCC and BBS, brownfield work, quotations, standards, responsibilities, software and confidentiality.",
+    "Answers on structural drafting, Tekla modelling, steel and RCC detailing, brownfield work, quotations, standards, software and confidentiality.",
   path: "/faq",
   image: "/images/drawings-qaqc.jpg",
 });

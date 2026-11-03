@@ -27,6 +27,11 @@ const nextConfig: NextConfig = {
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          // Directives that need no nonce; script-src is left open because Next.js inlines its bootstrap scripts.
+          {
+            key: "Content-Security-Policy",
+            value: "base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'; upgrade-insecure-requests",
+          },
         ],
       },
       {

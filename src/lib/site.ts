@@ -43,6 +43,11 @@ export const site = {
     countryName: "Pakistan",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=IVY%20Phase%20XI%20DHA%20Lahore",
   },
+  /**
+   * Official profiles (LinkedIn company page, directory listings), emitted as Organization sameAs.
+   * TODO (owner): add the LinkedIn company page URL once it exists.
+   */
+  sameAs: [] as string[],
   ogImage: "/images/og-default.jpg",
   locale: "en",
 } as const;

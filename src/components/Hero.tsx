@@ -69,7 +69,7 @@ export function Hero({
           </div>
         )}
         {eyebrow && (
-          <p className="eyebrow hero-rise mb-3 text-energy" style={delay(60)}>
+          <p className="eyebrow hero-rise mb-3 text-energy" style={delay(0)}>
             {eyebrow}
           </p>
         )}
@@ -78,11 +78,11 @@ export function Hero({
               ? "max-w-4xl text-[clamp(1.5rem,2.7vw,2.375rem)] leading-[1.08] font-extrabold uppercase [overflow-wrap:break-word]" : `${tall ? "display-xl" : "display-lg"} max-w-3xl`} text-balance text-mist`}
         >
           <span className="line-mask">
-            <span style={delay(120)}>{title}</span>
+            <span style={delay(0)}>{title}</span>
           </span>
           {accent && (
             <span className="line-mask">
-              <span className="text-energy" style={delay(260)}>
+              <span className="text-energy" style={delay(80)}>
                 {accent}
               </span>
             </span>
@@ -95,13 +95,13 @@ export function Hero({
                 ? "mt-6 max-w-2xl border-l-4 border-energy pl-4 text-base leading-7 font-semibold tracking-[0.05em] text-pretty uppercase sm:pl-5 sm:text-lg sm:leading-8"
                 : "mt-6 max-w-xl text-base leading-7 font-normal sm:text-[1.0625rem]"
             }`}
-            style={delay(420)}
+            style={delay(150)}
           >
             {intro}
           </p>
         )}
         {children && (
-          <div className="hero-rise mt-8 flex flex-wrap items-center gap-x-4 gap-y-3" style={delay(520)}>
+          <div className="hero-rise mt-8 flex flex-wrap items-center gap-x-4 gap-y-3" style={delay(220)}>
             {children}
           </div>
         )}
