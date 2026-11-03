@@ -1,6 +1,6 @@
 Outsourcing structural steel detailing works best when you hand over a defined package: agreed inputs, a deliverables list, a stated responsibility split, a review cycle and a handover format. Your team keeps design authority and approval, and the subcontractor supplies production capacity. Most outsourcing problems trace back to undefined scope, not to distance or time zones.
 
-## When outsourcing detailing makes sense
+## When does outsourcing steel detailing make sense?
 
 Outsourcing tends to work well when:
 
@@ -32,7 +32,7 @@ Before requesting quotations, write a one-page package definition:
 
 This definition becomes the basis of your RFQ (see our guide on [writing an RFQ for a detailing package](/resources/how-to-write-an-rfq-for-structural-detailing)) and later the statement of work.
 
-## How to evaluate a detailing subcontractor
+## How do you evaluate a detailing subcontractor?
 
 Price matters, but it is a poor predictor of fabrication outcomes on its own. A simple weighted scorecard helps:
 
@@ -61,7 +61,7 @@ Be cautious about claims that cannot be checked: "error-free", "100% accuracy", 
 
 Energy project drawings are often confidential. Agree an NDA where needed, define which platforms are used for file transfer, limit access to named personnel, and agree what happens to files at project close. {brand} can work under a client NDA and agreed transfer arrangements. Raise this when you contact us.
 
-## Handover and close-out
+## What should you receive at handover?
 
 At completion, expect native model files (if contracted), PDFs, DWGs, reports, NC data, a final drawing register and a list of open items or assumptions. Confirm model ownership and licence compatibility in advance.
 

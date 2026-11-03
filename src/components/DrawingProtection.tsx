@@ -114,6 +114,8 @@ export function DrawingProtection() {
     <dialog
       ref={dialogRef}
       aria-labelledby="clients-only-title"
+      // Kept out of snippets and the heading outline: this notice is in the HTML of every page, ahead of the H1.
+      data-nosnippet
       onClick={(event) => {
         if (event.target === event.currentTarget) close();
       }}
@@ -132,9 +134,9 @@ export function DrawingProtection() {
         <span className="grid size-12 place-items-center rounded-lg bg-navy-900 text-energy">
           <Lock aria-hidden className="size-5" />
         </span>
-        <h2 id="clients-only-title" className="mt-5 text-xl font-extrabold text-navy-900">
+        <p id="clients-only-title" className="mt-5 text-xl font-extrabold text-navy-900">
           For Clients Only
-        </h2>
+        </p>
         <p className="mt-3 text-[0.9375rem] leading-7 text-ink">
           Our project drawings are confidential. Full views, downloads and copies are available to clients only. Contact
           us to discuss samples relevant to your scope.

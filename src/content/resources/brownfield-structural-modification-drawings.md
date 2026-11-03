@@ -1,13 +1,13 @@
 On an operating plant, structural modification drawings must show three things clearly: what exists, what will be removed, and what will be added. All of it has to rest on existing-condition information that someone has verified. The detailing itself resembles new-build work. What makes brownfield different is the uncertainty of existing records, limited site access and the cost of rework during a shutdown.
 
-## Why brownfield drawing work is different
+## Why is brownfield drawing work different?
 
 - **Records drift.** Original drawings rarely reflect every later change, and maintenance modifications may never have been recorded.
 - **Access is restricted.** Permits, live process areas, offshore logistics and shutdown windows limit how often anyone can go and measure.
 - **Rework is expensive.** Steel that does not fit during a shutdown can extend the outage. Research on offshore brownfield work notes that where accessibility is restricted and rework is expensive, accurate front-end design matters, and that laser scanning with 3D modelling can improve modification work.
 - **Interfaces are live.** Existing piping, cable trays and equipment cannot simply be moved to suit new steel. This is typical of [onshore oil and gas facilities](/industries/onshore-oil-gas) and offshore installations alike.
 
-## Establishing existing conditions
+## How are existing conditions established?
 
 Existing-condition information comes from several sources of differing reliability:
 

@@ -16,6 +16,7 @@ import {
 } from "@/lib/resources";
 import { blogPostingJsonLd } from "@/lib/seo";
 import { serviceBySlug, servicePath } from "@/lib/services";
+import { site } from "@/lib/site";
 
 /** Representative banner image per article (industry photographs, not project images). */
 export const resourceImage = (resource: Resource) =>
@@ -73,6 +74,19 @@ export function ResourceArticle({ resource }: { resource: Resource }) {
                   {resource.readingMinutes} min read
                 </span>
                 <time dateTime={RESOURCES_MODIFIED}>Updated {formatDate(RESOURCES_MODIFIED)}</time>
+                {site.articleAuthor && (
+                  <span className="w-full">
+                    By{" "}
+                    {site.articleAuthor.url ? (
+                      <Link href={site.articleAuthor.url} className="font-semibold text-navy-900 hover:text-energy-ink">
+                        {site.articleAuthor.name}
+                      </Link>
+                    ) : (
+                      <span className="font-semibold text-navy-900">{site.articleAuthor.name}</span>
+                    )}
+                    , {site.articleAuthor.jobTitle}
+                  </span>
+                )}
               </p>
               {toc.length > 0 && (
                 <nav aria-label="On this page" className="hidden lg:block">

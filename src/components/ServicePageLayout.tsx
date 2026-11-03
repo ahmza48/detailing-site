@@ -145,6 +145,12 @@ export function ServicePageLayout({ service }: { service: Service }) {
           </aside>
         </div>
 
+        {/* Lift-ready answer to the page's main question */}
+        <div data-reveal className="mt-14 max-w-4xl border-t border-line pt-14">
+          <h2 className="text-2xl leading-tight font-extrabold text-navy-900 sm:text-[1.75rem]">{service.answer.q}</h2>
+          <p className="mt-5 text-base leading-7 text-ink sm:text-[1.0625rem] sm:leading-8">{service.answer.a}</p>
+        </div>
+
         {/* Where it fits (left) + full core-services checklist (right) */}
         <div className="mt-14 grid gap-10 border-t border-line pt-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">

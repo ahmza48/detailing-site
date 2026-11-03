@@ -2,7 +2,7 @@ Structural steel detailing is the work of turning an approved structural design 
 
 Detailing sits between engineering design and fabrication. It does not replace either of them.
 
-## What a detailer produces
+## What does a steel detailer produce?
 
 The exact package depends on the contract, but most steel detailing scopes draw from the deliverables below.
 
@@ -18,7 +18,7 @@ The exact package depends on the contract, but most steel detailing scopes draw 
 
 The AISC Code of Standard Practice (ANSI/AISC 303-22) defines shop drawings narrowly, as "drawings of the individual structural steel shipping pieces that are to be produced in the fabrication shop". That definition is useful because it separates piece-level fabrication information from the overall arrangement shown on design drawings.
 
-## What detailing is not
+## Is steel detailing the same as structural design?
 
 Detailing is not structural design. The structural engineer, often called the engineer of record or, in AISC terminology, the owner's designated representative for design, decides member sizes, loads, connection forces and code compliance. The detailer represents that design accurately and buildably.
 

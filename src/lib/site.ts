@@ -48,9 +48,24 @@ export const site = {
    * TODO (owner): add the LinkedIn company page URL once it exists.
    */
   sameAs: [] as string[],
+  /**
+   * Named author and technical reviewer of the /resources articles, shown as a byline and emitted
+   * as a schema.org Person. TODO (owner): fill in from the real CV; until then articles stay
+   * attributed to the organisation.
+   */
+  articleAuthor: undefined as ArticleAuthor | undefined,
   ogImage: "/images/og-default.jpg",
   locale: "en",
 } as const;
+
+export type ArticleAuthor = {
+  name: string;
+  jobTitle: string;
+  /** Profile page on this site, e.g. /about#team. */
+  url?: string;
+  /** LinkedIn and other profiles. */
+  sameAs?: string[];
+};
 
 export const telHref = `tel:${site.phone.e164}`;
 export const whatsappHref = `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(site.whatsapp.message)}`;

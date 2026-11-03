@@ -1,6 +1,6 @@
 A structural steel material take-off (MTO) is a quantified list of the steel profiles, plates, bolts and other materials required for a structure, taken from the drawings or the model at a stated revision and measured on a stated basis. Procurement teams use it to order mill material and bolts. Planners use it to measure progress. Estimators use it to check costs. An MTO is only as reliable as two things printed on it: the source revision and the measurement basis.
 
-## MTO vs BOM vs BOQ
+## What is the difference between an MTO, a BOM and a BOQ?
 
 The terms overlap, and organisations use them differently. A common working distinction is:
 
@@ -21,7 +21,7 @@ Practitioners commonly note that the terms are used interchangeably on some EPC 
 
 Taking off long-lead structural steel early lets mill orders be placed ahead of fabrication. That only works if the early MTO is clearly labelled with its assumptions.
 
-## What a structural MTO lists
+## What does a structural MTO list?
 
 | Item | Typical fields |
 |---|---|

@@ -140,8 +140,8 @@ export const serviceJsonLd = (service: Service) => ({
 });
 
 /**
- * BlogPosting for /resources articles. Author and publisher reference the PetroHill Organization
- * node emitted on every page. No FAQPage schema: FAQs stay as visible content only.
+ * BlogPosting for /resources articles. The author is site.articleAuthor as a Person when set, otherwise
+ * the PetroHill Organization node emitted on every page. No FAQPage schema: FAQs stay as visible content only.
  */
 export const blogPostingJsonLd = (article: {
   path: string;
@@ -153,6 +153,14 @@ export const blogPostingJsonLd = (article: {
   keyword?: string;
 }) => {
   const organization = { "@type": "Organization", "@id": `${site.url}/#organization`, name: site.name };
+  const person = site.articleAuthor && {
+    "@type": "Person",
+    name: site.articleAuthor.name,
+    jobTitle: site.articleAuthor.jobTitle,
+    ...(site.articleAuthor.url ? { url: absoluteUrl(site.articleAuthor.url) } : {}),
+    ...(site.articleAuthor.sameAs?.length ? { sameAs: site.articleAuthor.sameAs } : {}),
+    worksFor: { "@id": organizationId },
+  };
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -163,7 +171,7 @@ export const blogPostingJsonLd = (article: {
     dateModified: article.dateModified,
     inLanguage: "en",
     ...(article.keyword ? { keywords: article.keyword } : {}),
-    author: organization,
+    author: person ?? organization,
     publisher: organization,
     mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(article.path) },
   };

@@ -31,7 +31,7 @@ ANSI/AISC 303-22, the US Code of Standard Practice, requires the owner's designa
 
 The same standard's commentary discourages requiring the shop and erection drawings to be signed and sealed sheet by sheet, because that "may serve to confuse the design responsibility". It is a practical reminder that the drawings and the design are different things.
 
-## What shop drawing review does and does not do
+## What does shop drawing review cover?
 
 When the design engineer reviews shop drawings, the review is normally a check that the detailing conforms with design intent. It is not a re-check of every dimension. Responsibility for dimensional accuracy and fit-up generally remains with the fabricator and its detailer. Contract wording and the governing standard decide the exact split, so read the review stamp wording and the specification carefully.
 
@@ -41,7 +41,7 @@ On projects using BS EN 1090-2 (Execution of steel structures, Part 2: technical
 
 GCC owner specifications may reference American, European or client standards, sometimes in combination. The responsibility split has to be read from each project's documents.
 
-## How to write it into your contract
+## How should responsibilities be written into the contract?
 
 - State the connection option or arrangement for each connection type.
 - Name who approves, who reviews and who checks, and what each review means.
@@ -61,6 +61,9 @@ Under AISC Option 2, an experienced detailer may select connections from permitt
 
 **Which standard applies in the GCC?**
 Whichever the project specification names. Confirm it for each project.
+
+**What are execution classes in EN 1090-2?**
+EN 1090-2 defines four execution classes, EXC1 to EXC4, with requirements becoming stricter from EXC1 to EXC4. The designer selects the class and states it in the execution specification. The detailer and fabricator work to that class; they do not choose it.
 
 ## Next step
 

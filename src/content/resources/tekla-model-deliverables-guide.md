@@ -1,6 +1,8 @@
 A Tekla Structures package should state what is modelled and to what level of detail, which Tekla version and environment the native model must open in, which exchange files are required (IFC, DWG/DXF, PDF, DSTV NC), how numbering and phasing are set up, and whether fabrication drawings are part of the scope. "Tekla model" on its own means very different things to different suppliers.
 
-## Model-only vs model-plus-drawings
+## What is the difference between a model-only and a model-plus-drawings package?
+
+A model-only package delivers a Tekla model at an agreed level of detail. A model-plus-drawings package adds the assembly, single-part and erection drawings a fabricator works from, along with the drawing checking and revision control they need. That difference changes price and schedule, so state which of the four scope types below you are buying.
 
 | Scope type | Typical content | Typical use |
 |---|---|---|
@@ -21,11 +23,13 @@ Write down:
 - **Non-steel items:** concrete foundations as reference objects, equipment as reference models.
 - **Level of detail:** if you use LOD/LOI terminology, attach a definition. LOD labels are interpreted differently between organisations.
 
-## Version and licence compatibility
+## Which Tekla version should the model be in?
 
 Tekla Structures is released in yearly versions; Trimble's documentation currently covers Tekla Structures 2026. Trimble's documentation states that Tekla Structures versions "are not backwards compatible": a saved model cannot be opened in older versions because of database differences. If your fabricator or EPC team uses a specific version, the supplier must model in that version or one you can open. Also confirm the environment (region and role settings), any firm folder, and the custom components or profiles your project uses. Mismatched environments produce different profiles, materials and drawing styles.
 
-## Exchange formats
+## Which exchange formats should a Tekla package include?
+
+Most industrial steel packages need the native model for future revisions, IFC for coordination with plant design tools, PDF for review and issue, DWG or DXF for CAD users and plate nesting, report files for quantities, and DSTV NC files only where the fabricator's machines use them. Agree each format, its version and its export template before modelling starts.
 
 Trimble lists the formats Tekla Structures can import and export. The common ones for industrial steel packages are:
 
