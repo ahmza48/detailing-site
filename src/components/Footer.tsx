@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { experienceDisclaimer, outsourcingLink, site, telHref, whatsappHref } from "@/lib/site";
 import { services, servicePath } from "@/lib/services";
 import { Logo } from "./Logo";
@@ -98,11 +98,16 @@ export function Footer() {
             <WhatsAppIcon className="size-4 shrink-0 text-energy" />
             WhatsApp us
           </a>
-          {site.contactEmail && (
-            <a href={`mailto:${site.contactEmail}`} className="block font-bold break-all text-energy">
-              {site.contactEmail}
+          {[site.email.projects, site.email.info].map((address) => (
+            <a
+              key={address}
+              href={`mailto:${address}`}
+              className="flex items-center gap-3 font-bold break-all transition-colors hover:text-energy"
+            >
+              <Mail aria-hidden className="size-4 shrink-0 text-energy" />
+              {address}
             </a>
-          )}
+          ))}
         </address>
       </div>
 

@@ -27,7 +27,8 @@ const sections: LegalSection[] = [
       <>
         <p>
           This website is operated by the business trading as {site.name}, {site.address.lines.join(", ")}. You can
-          contact us about privacy through the <Link href="/contact">enquiry form</Link>, by phone on{" "}
+          contact us about privacy by email at <a href={`mailto:${site.email.info}`}>{site.email.info}</a>, through the{" "}
+          <Link href="/contact">enquiry form</Link>, by phone on{" "}
           <a href={telHref}>{site.phone.display}</a> or on{" "}
           <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
             WhatsApp

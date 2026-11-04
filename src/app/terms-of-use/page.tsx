@@ -123,7 +123,8 @@ const sections: LegalSection[] = [
     body: (
       <p>
         We may update these terms; the date of the current version is shown at the top of this page. Questions can be sent
-        through our <Link href="/contact">enquiry form</Link> or by phone on <a href={telHref}>{site.phone.display}</a>.
+        to <a href={`mailto:${site.email.info}`}>{site.email.info}</a>, through our <Link href="/contact">enquiry form</Link> or
+        by phone on <a href={telHref}>{site.phone.display}</a>.
       </p>
     ),
   },
