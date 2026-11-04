@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import { Suspense } from "react";
 import { DrawingProtection } from "@/components/DrawingProtection";
 import { Footer } from "@/components/Footer";
@@ -15,6 +16,17 @@ import "./globals.css";
  * from src/app/fonts (SIL Open Font License, see OFL.txt). No request leaves
  * the site to load it, at build time or at runtime.
  */
+/**
+ * Google tag for the Google Tag Manager container (snippet as supplied by Google). next/script with
+ * beforeInteractive puts it in the server HTML <head>, ahead of the Next.js bundles.
+ * Loaded only on the production deployment so local and preview traffic stay out of the reports.
+ */
+const GTM_ID = "GTM-NHFF8PJW";
+const loadGoogleTag = process.env.VERCEL_ENV === "production";
+const googleTagInit = `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());`;
+
 const montserrat = localFont({
   src: "./fonts/Montserrat-Variable.woff2",
   variable: "--font-montserrat",
@@ -44,6 +56,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${montserrat.variable} antialiased`}>
       <body className="flex min-h-dvh flex-col">
+        {loadGoogleTag && (
+          <>
+            <Script id="google-tag-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: googleTagInit }} />
+            <Script id="google-tag" strategy="beforeInteractive" src={`https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`} />
+          </>
+        )}
         <a
           href="#main"
           className="sr-only z-[60] rounded-lg bg-energy-deep px-5 py-3 text-sm font-bold text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
