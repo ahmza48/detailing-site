@@ -28,21 +28,16 @@ import { softwareQualifier } from "@/lib/software";
 import { drawingSamplesNote, motto, purpose, site, standardsStatement, tickerDisclaimers, trustMetrics } from "@/lib/site";
 import { tc } from "@/lib/text";
 
+/** One title and description for search results and social shares. */
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: "Structural Detailing & Engineering Support for Energy and Industrial Projects",
+    title: "Structural Steel Detailing & Tekla Modelling",
     description:
-      "Structural steel detailing, Tekla modelling, CAD drafting and RCC documentation for EPC contractors and energy infrastructure projects. Request a quote.",
+      "Structural steel detailing, Tekla modelling and CAD drafting for EPC contractors and steel fabricators on energy and industrial projects across the GCC.",
     path: "/",
-    keywords: [
-      "structural detailing services",
-      "structural engineering support",
-      "steel detailing outsourcing",
-      "oil and gas structural detailing",
-      "Tekla modelling services",
-    ],
   }),
-  title: { absolute: `Structural Steel Detailing & TEKLA Modelling | ${site.name}` },
+  // The layout's title template does not apply to a page in the root segment.
+  title: { absolute: `Structural Steel Detailing & Tekla Modelling | ${site.name}` },
 };
 
 /** Buyer-defined package examples (spec v2 §5.4). Descriptive scope examples, not claims of delivered projects. */
