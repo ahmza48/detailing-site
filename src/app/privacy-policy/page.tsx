@@ -15,8 +15,8 @@ export const metadata: Metadata = pageMetadata({
 
 /**
  * Describes the website as actually built (checked Oct 2026): quote form delivered by email
- * (Gmail via GMAIL_* settings, or Resend), hosting on Vercel, no cookies, no analytics, fonts and
- * images self-hosted. Update this page whenever any of that changes.
+ * (Gmail via GMAIL_* settings, or Resend), hosting on Vercel, Google Tag Manager (GTM-NHFF8PJW) on
+ * production for measurement, fonts and images self-hosted. Update this page whenever any of that changes.
  * TODO_VERIFY with the owner and counsel: registered legal entity, retention period, privacy contact.
  */
 const sections: LegalSection[] = [
@@ -79,9 +79,15 @@ const sections: LegalSection[] = [
     title: "Cookies & Analytics",
     body: (
       <p>
-        This website does not set cookies and does not use analytics, advertising or tracking tools. Fonts and images are
-        served from the website itself rather than from third-party services. If this changes, we will update this page
-        before the change takes effect.
+        This website uses Google Tag Manager to load Google measurement tags. These tags may set cookies and collect
+        information about your visit, such as the pages you view, your device and browser type, an approximate location
+        derived from your IP address and how you reached the site. We use this information only to understand how the
+        website is used and to improve it; we do not use it for advertising. You can block or delete cookies in your
+        browser settings, or install Google&rsquo;s{" "}
+        <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">
+          Analytics opt-out browser add-on
+        </a>
+        . Fonts and images are served from the website itself rather than from third-party services.
       </p>
     ),
   },
@@ -98,6 +104,10 @@ const sections: LegalSection[] = [
           <li>
             <strong>Google (Gmail)</strong> delivers form submissions to our team&rsquo;s inboxes, where they are stored as
             email. The website itself does not keep form submissions in a database.
+          </li>
+          <li>
+            <strong>Google (Tag Manager and measurement tags)</strong> collects website usage information as described
+            under Cookies &amp; Analytics, under Google&rsquo;s own privacy policy.
           </li>
           <li>
             <strong>WhatsApp</strong> (Meta) handles any conversation you start through the WhatsApp link, under its own
@@ -183,7 +193,7 @@ export default function PrivacyPolicyPage() {
         crumbs={[{ name: "Privacy Policy", path: "/privacy-policy" }]}
       />
       <LegalDocument
-        updated="27 October 2026"
+        updated="5 November 2026"
         notice={
           <>This notice describes how the website currently works. It is being reviewed with legal advisers and may be updated.</>
         }
