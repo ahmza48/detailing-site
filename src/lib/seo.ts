@@ -77,10 +77,11 @@ export const organizationJsonLd = () => ({
         "@type": "ContactPoint",
         telephone: site.phone.e164,
         contactType: "sales",
+        email: site.email.projects,
         areaServed: ["PK", "AE", "SA", "QA", "OM"],
         availableLanguage: ["English"],
       },
-      ...(site.contactEmail ? { email: site.contactEmail } : {}),
+      email: site.email.info,
       ...(site.sameAs.length > 0 ? { sameAs: site.sameAs } : {}),
     },
     {

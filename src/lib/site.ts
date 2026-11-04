@@ -21,8 +21,11 @@ export const site = {
     (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
     "https://www.petrohill.com"
   ).replace(/\/$/, ""),
-  /** Shown publicly only when set. */
-  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || undefined,
+  /** Public mailboxes: projects@ for quotes and project scopes, info@ for everything else. */
+  email: {
+    projects: "projects@petrohill.com",
+    info: "info@petrohill.com",
+  },
   phone: {
     display: "+92 337 4954695",
     local: "0337 4954695",

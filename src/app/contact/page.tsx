@@ -129,22 +129,34 @@ export default function ContactPage() {
                   </address>
                 </a>
               </li>
-              {site.contactEmail && (
                 <li>
                   <a
-                    href={`mailto:${site.contactEmail}`}
+                    href={`mailto:${site.email.projects}`}
                     className="lift flex items-center gap-4 rounded-xl bg-paper p-4 hover:shadow-[0_8px_24px_rgb(0_36_56/0.1)]"
                   >
                     <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-navy-900 text-energy">
                       <Mail aria-hidden className="size-5" />
                     </span>
                     <span>
-                      <span className="block text-xs font-semibold text-slate uppercase">Email</span>
-                      <span className="block font-bold break-all text-navy-900">{site.contactEmail}</span>
+                      <span className="block text-xs font-semibold text-slate uppercase">Projects & quotations</span>
+                      <span className="block font-bold break-all text-navy-900">{site.email.projects}</span>
                     </span>
                   </a>
                 </li>
-              )}
+                <li>
+                  <a
+                    href={`mailto:${site.email.info}`}
+                    className="lift flex items-center gap-4 rounded-xl bg-paper p-4 hover:shadow-[0_8px_24px_rgb(0_36_56/0.1)]"
+                  >
+                    <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-navy-900 text-energy">
+                      <Mail aria-hidden className="size-5" />
+                    </span>
+                    <span>
+                      <span className="block text-xs font-semibold text-slate uppercase">General enquiries</span>
+                      <span className="block font-bold break-all text-navy-900">{site.email.info}</span>
+                    </span>
+                  </a>
+                </li>
             </ul>
           </aside>
 
