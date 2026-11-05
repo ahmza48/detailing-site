@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { landingPath, marketPages, specialistPages } from "@/lib/landing-pages";
 import { outsourcingLink, site, telHref, whatsappHref } from "@/lib/site";
 import { services, servicePath } from "@/lib/services";
 import { Logo } from "./Logo";
@@ -38,6 +39,29 @@ export function Footer() {
             Structural Detailing &amp; Engineering Support
           </p>
           <p className="mt-6 max-w-xs text-sm leading-6">{site.tagline}.</p>
+          <nav aria-label="Specialist detailing and markets" className="mt-6">
+            <ul>
+              {specialistPages.map((page) => (
+                <li key={page.slug}>
+                  <Link href={landingPath(page.slug)} className={linkClass}>
+                    {page.nav.label}
+                  </Link>
+                </li>
+              ))}
+              {marketPages.map((page) => (
+                <li key={page.slug}>
+                  <Link href={landingPath(page.slug)} className={linkClass}>
+                    Steel Detailing {page.nav.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/pilot" className={`${linkClass} font-bold text-energy`}>
+                  Fixed-Price Pilot
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </div>
 
         <nav aria-label="Footer" className={`lg:col-span-3 ${columnClass}`}>

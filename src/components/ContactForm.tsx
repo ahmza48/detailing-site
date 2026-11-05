@@ -62,10 +62,22 @@ function Field({ name, label, error, optional, hint, className = "", children }:
 }
 
 /**
- * `formLocation` and `countryPage` are reported with the GTM `rfq_submit` event so leads can be
- * attributed to the page that produced them (country landing pages pass their market).
+ * `formLocation` and `countryPage` are reported with the GTM `rfq_submit` event and in the
+ * enquiry email, so leads can be attributed to the page that produced them. Landing pages also
+ * prefill the country and the service.
  */
-export function ContactForm({ formLocation = "contact_page", countryPage = "" }: { formLocation?: string; countryPage?: string }) {
+export function ContactForm({
+  formLocation = "contact_page",
+  countryPage = "",
+  defaultCountry = "",
+  defaultService = "",
+}: {
+  formLocation?: string;
+  countryPage?: string;
+  defaultCountry?: string;
+  /** Service slug used when the URL has no ?service= parameter. */
+  defaultService?: string;
+}) {
   const [state, formAction, pending] = useActionState(submitEnquiry, initialEnquiryState);
   const serviceRef = useRef<HTMLSelectElement>(null);
   const statusRef = useRef<HTMLDivElement>(null);
@@ -76,7 +88,7 @@ export function ContactForm({ formLocation = "contact_page", countryPage = "" }:
   // Older service slugs map to their successors; the matching technical line is ticked too.
   // "engineering-outsourcing" and "mixed" select the two non-service options.
   useEffect(() => {
-    const raw = new URLSearchParams(window.location.search).get("service") ?? "";
+    const raw = new URLSearchParams(window.location.search).get("service") || defaultService;
     const slug: string = legacyServiceSlugs[raw] ?? raw;
     const title =
       slug === "engineering-outsourcing"
@@ -90,7 +102,7 @@ export function ContactForm({ formLocation = "contact_page", countryPage = "" }:
     boxes.forEach((box) => {
       if (box.value === title) box.checked = true;
     });
-  }, []);
+  }, [defaultService]);
 
   // Move focus to the outcome so keyboard and screen-reader users are not left at the button.
   useEffect(() => {
@@ -227,7 +239,7 @@ export function ContactForm({ formLocation = "contact_page", countryPage = "" }:
         </summary>
         <div className="grid gap-x-6 gap-y-6 border-t border-line p-5 sm:grid-cols-2">
           <Field name="country" label="Country / project location" optional error={errors.country}>
-            {(props) => <input {...props} type="text" autoComplete="country-name" defaultValue={values.country} className={controlClass} />}
+            {(props) => <input {...props} type="text" autoComplete="country-name" defaultValue={values.country ?? defaultCountry} className={controlClass} />}
           </Field>
           <Field name="industry" label="Industry" optional>
             {(props) => (
@@ -302,6 +314,8 @@ export function ContactForm({ formLocation = "contact_page", countryPage = "" }:
           <span className="block text-slate">We will discuss confidentiality arrangements with you before asking for drawings or models.</span>
         </span>
       </label>
+
+      <input type="hidden" name="sourcePage" value={countryPage ? `${formLocation} (${countryPage})` : formLocation} />
 
       {/* Honeypot: hidden from people and assistive technology */}
       <div aria-hidden className="hidden">

@@ -163,6 +163,24 @@ export const serviceJsonLd = (service: Service) => ({
   },
 });
 
+/** Service schema for a market or specialism landing page (fix prompt 3.2 / phase 4). */
+export const landingServiceJsonLd = (page: {
+  slug: string;
+  seo: { title: string; description: string };
+  hero: { image: string };
+  schema: { serviceType: string; areaServed: string[] };
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: page.seo.title,
+  serviceType: page.schema.serviceType,
+  description: page.seo.description,
+  url: absoluteUrl(`/${page.slug}`),
+  image: absoluteUrl(page.hero.image),
+  provider: { "@id": organizationId },
+  areaServed: page.schema.areaServed.map((code) => ({ "@type": "Country", name: code })),
+});
+
 /**
  * BlogPosting for /resources articles. The author is site.articleAuthor as a Person when set, otherwise
  * the PetroHill Organization node emitted on every page. No FAQPage schema: FAQs stay as visible content only.

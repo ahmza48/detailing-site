@@ -68,6 +68,7 @@ export type EnquiryField =
   | "deliverables"
   | "targetDate"
   | "nda"
+  | "sourcePage"
   | "message"
   | "attachment";
 
@@ -91,6 +92,7 @@ export const enquiryLabels: Record<Exclude<EnquiryField, "attachment" | "message
   deliverables: "Required deliverables / quantity",
   targetDate: "Target start or milestone",
   nda: "Contact about NDA / secure file transfer before drawings are sent",
+  sourcePage: "Submitted from",
 };
 
 export type EnquiryState = {
@@ -141,6 +143,7 @@ export function parseEnquiry(form: FormData): ParsedEnquiry {
     deliverables: text(form, "deliverables", 600),
     targetDate: text(form, "targetDate", 120),
     nda: form.get("nda") === "yes" ? "Yes" : "",
+    sourcePage: text(form, "sourcePage", 120),
     message: text(form, "message", 6000),
   };
   const errors: Partial<Record<EnquiryField, string>> = {};

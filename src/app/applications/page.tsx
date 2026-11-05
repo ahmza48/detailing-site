@@ -105,6 +105,16 @@ export default function ApplicationsPage() {
               <p data-reveal className="mt-5 text-base leading-7 text-ink">
                 {application.description}
               </p>
+              {application.guide && (
+                <Link
+                  href={application.guide.href}
+                  data-reveal
+                  className="group mt-4 inline-flex items-center gap-2 text-[0.9375rem] font-bold text-navy-900 hover:text-energy-ink"
+                >
+                  <ArrowRight aria-hidden className="size-4 text-energy-deep transition-transform group-hover:translate-x-1" />
+                  {application.guide.label}
+                </Link>
+              )}
               <ul data-reveal className="mt-5 flex flex-wrap gap-2.5">
                 {application.examples.map((example) => (
                   <li key={example} className="rounded-full border border-line bg-white px-4 py-2 text-sm font-semibold text-navy-900">

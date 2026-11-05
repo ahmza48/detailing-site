@@ -4,8 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import {
+  Anchor,
   ArrowRight,
   BookOpen,
+  Boxes,
+  Columns3,
+  Globe,
   Box,
   ChevronDown,
   ClipboardList,
@@ -31,6 +35,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { industries, industryPath } from "@/lib/industries";
+import { landingPath, marketPages, specialistPages, type LandingSlug } from "@/lib/landing-pages";
 import { serviceGroups, servicePath, servicesInGroup, type ServiceSlug } from "@/lib/services";
 import type { IndustrySlug } from "@/lib/industries";
 import {
@@ -89,6 +94,12 @@ const industryIcons: Record<IndustrySlug, LucideIcon> = {
   "power-industrial": Zap,
 };
 
+const landingIcons: Partial<Record<LandingSlug, LucideIcon>> = {
+  "pipe-rack-detailing": Columns3,
+  "tekla-detailing-outsourcing": Boxes,
+  "offshore-structural-detailing": Anchor,
+};
+
 const capabilityMeta: Record<string, { icon: LucideIcon; text: string }> = {
   "/capabilities": { icon: MonitorCog, text: "Deliverables and software experience" },
   "/capabilities/codes-standards": { icon: BookOpen, text: "How project standards are applied" },
@@ -114,8 +125,17 @@ const menus: Record<NavMenuId, MenuContent> = {
         })),
       })),
       {
-        heading: "Engagement route",
-        links: [{ ...outsourcingLink, text: "Subcontract a defined drawing, modelling or detailing package", icon: Handshake }],
+        // One section for both keeps the panel inside a 1280×800 viewport.
+        heading: "Specialist detailing & outsourcing",
+        links: [
+          ...specialistPages.map((page) => ({
+            label: page.nav.label,
+            href: landingPath(page.slug),
+            text: page.nav.text,
+            icon: landingIcons[page.slug] ?? Construction,
+          })),
+          { ...outsourcingLink, text: "Subcontract a defined drawing, modelling or detailing package", icon: Handshake },
+        ],
       },
     ],
   },
@@ -130,6 +150,15 @@ const menus: Record<NavMenuId, MenuContent> = {
           label: industry.short,
           href: industryPath(industry.slug),
           icon: industryIcons[industry.slug],
+        })),
+      },
+      {
+        heading: "Markets we serve",
+        links: marketPages.map((page) => ({
+          label: `Steel Detailing ${page.nav.label}`,
+          href: landingPath(page.slug),
+          text: page.nav.text,
+          icon: Globe,
         })),
       },
       {
