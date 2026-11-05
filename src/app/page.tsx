@@ -10,6 +10,9 @@ import { ExperienceMetrics } from "@/components/ExperienceMetrics";
 import { ExperienceTicker } from "@/components/ExperienceTicker";
 import { FaqList } from "@/components/FaqList";
 import { Hero } from "@/components/Hero";
+import { PilotOffer } from "@/components/PilotOffer";
+import { TimeZoneBlock } from "@/components/TimeZoneBlock";
+import { WhatsAppCta } from "@/components/WhatsAppButton";
 import { ImageBand } from "@/components/ImageBand";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { FeaturedProject, ProjectCard } from "@/components/ProjectCard";
@@ -22,10 +25,11 @@ import { industries, industryPath } from "@/lib/industries";
 import { homeFaqs } from "@/lib/faqs";
 import { featuredProjectIds, projects } from "@/lib/projects";
 import { drawingSamples, homeDrawingIds } from "@/lib/proof-of-work";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { faqPageJsonLd, pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath, services, type ServiceSlug } from "@/lib/services";
 import { softwareQualifier } from "@/lib/software";
-import { drawingSamplesNote, motto, purpose, site, standardsStatement, tickerDisclaimers, trustMetrics } from "@/lib/site";
+import { drawingSamplesNote, motto, offer, purpose, site, standardsStatement, trustMetrics } from "@/lib/site";
 import { tc } from "@/lib/text";
 
 /** One title and description for search results and social shares. */
@@ -40,7 +44,7 @@ export const metadata: Metadata = {
   title: { absolute: `Structural Steel Detailing & Tekla Modelling | ${site.name}` },
 };
 
-/** Buyer-defined package examples (spec v2 §5.4). Descriptive scope examples, not claims of delivered projects. */
+/** Buyer-defined package examples (spec v2 §5.4): how typical packages are scoped. */
 const workPackages: { title: string; provide: string; receive: string; clarify: string; services: ServiceSlug[] }[] = [
   {
     title: "Pipe rack steel detailing package",
@@ -133,16 +137,23 @@ export default function HomePage() {
         tall
         eyebrow="Steel & RCC detailing, 3D modelling and CAD drafting"
         title="Structural Steel Detailing & Tekla Modelling"
-        accent="for Energy & Industrial Projects"
-        statement
-        intro="PetroHill delivers precision structural detailing and engineering production support for energy and industrial infrastructure worldwide."
+        accent="for Oil & Gas EPC Projects"
+        intro="A senior team with 30+ years of experience, including ADNOC, Saudi Aramco and Dolphin Energy projects, working GCC hours from Lahore. Shop, erection and pipe-rack packages to AISC, BS EN and client specifications."
         image="/images/hero-offshore.jpg"
         imageAlt="Offshore jack-up rig beside a crane vessel at sunset"
+        footer={
+          <div className="space-y-2 text-sm leading-6">
+            <p className="text-white">
+              <span className="font-bold text-energy">Team experience:</span> {offer.proofProjects.join(" · ")}
+            </p>
+            <p className="text-haze">
+              Fixed-price pilot · {offer.nda} · {offer.formats.join(", ")}
+            </p>
+          </div>
+        }
       >
-        <ButtonLink href="/contact">Request a Project Quote</ButtonLink>
-        <ArrowLink href="/services" onDark>
-          Explore Technical Services
-        </ArrowLink>
+        <ButtonLink href="/contact">Send Drawings for a {offer.quoteResponseShort} Quote</ButtonLink>
+        <WhatsAppCta />
       </Hero>
 
       {/* 2. Trust strip: personnel experience, not company tenure */}
@@ -243,7 +254,7 @@ export default function HomePage() {
           <SectionHeading
             slab
             title="Engineering Packages We Can Support"
-            intro="Typical packages and how they are defined: what you provide, what you receive and what is clarified before work starts. These are scope examples, not a record of delivered projects."
+            intro="Typical packages and how they are defined: what you provide, what you receive and what is clarified before work starts."
           />
           <ul className="mt-12 grid gap-5 md:grid-cols-2">
             {workPackages.map((pkg, i) => (
@@ -290,13 +301,17 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 4b. Time zones and 4c. pilot offer */}
+      <TimeZoneBlock />
+      <PilotOffer />
+
       {/* 5. Industries & applications */}
       <section className="bg-paper">
         <div className="container-site section-y">
           <SectionHeading
             centered
             title="Industries & Project Environments"
-            intro="Technical drawing and modelling support for oil & gas, offshore structures, refineries, gas processing, petrochemicals, chemical and fertiliser plants, power and industrial facilities, subject to agreed scope and resources."
+            intro="Technical drawing and modelling support for oil & gas, offshore structures, refineries, gas processing, petrochemicals, chemical and fertiliser plants, power and industrial facilities."
           />
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((industry, index) => (
@@ -392,15 +407,10 @@ export default function HomePage() {
           <div className="lg:sticky lg:top-28">
             <SectionHeading slab onDark title="Project Environments Our Senior Team Knows" />
             <p data-reveal className="mt-5 max-w-sm text-[0.9375rem] leading-7 font-normal">
-              Selected examples from our senior professionals&rsquo; previous employment on onshore, offshore, refining
-              and gas-processing projects. These references demonstrate individual career experience, not contracts
-              awarded to {site.name}.
+              Onshore, offshore, refining and gas-processing projects our senior engineers and detailers worked on in
+              previous roles, and the services they relate to today.
             </p>
-            <Disclaimer
-              onDark
-              className="mt-5 max-w-sm"
-              text={`These are prior engagements of individual team members, not projects contracted to ${site.name}.`}
-            />
+            <Disclaimer onDark className="mt-5 max-w-sm" />
             <div data-reveal className="mt-8">
               <ButtonLink href="/project-experience" variant="light">
                 All Professional Experience
@@ -424,13 +434,11 @@ export default function HomePage() {
           <div data-reveal className="mt-8">
             <ExperienceTicker
               type="assetOwner"
-              label="Prior project exposure"
-              disclaimer={tickerDisclaimers.assetOwner}
+              label="Asset owners on our team's past projects"
             />
           </div>
           <div data-reveal className="mt-6 flex flex-wrap items-center justify-between gap-4">
             <ArrowLink href="/project-experience">Explore documented project experience</ArrowLink>
-            <Disclaimer className="max-w-2xl" />
           </div>
         </div>
       </section>
@@ -515,6 +523,7 @@ export default function HomePage() {
           </div>
           <div className="lg:col-span-7">
             <FaqList faqs={homeFaqs} />
+            <JsonLd data={faqPageJsonLd(homeFaqs)} />
           </div>
         </div>
       </section>

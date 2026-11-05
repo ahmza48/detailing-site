@@ -11,18 +11,22 @@ export function ScopeChecklist({
   groups,
   columns = 2,
   note,
+  headingLevel = "h4",
 }: {
   groups: ScopeGroup[];
   /** Columns at large widths (always one column on phones, two from small tablets). */
   columns?: 2 | 3;
   note?: string;
+  /** Group heading element; use h3 directly under a section's h2. */
+  headingLevel?: "h3" | "h4";
 }) {
+  const Heading = headingLevel;
   return (
     <div className="space-y-8">
       {groups.map((group, g) => (
         <div key={group.heading ?? g}>
           {group.heading && (
-            <h4 className="mb-3 text-xs font-bold tracking-[0.16em] text-teal-700 uppercase">{group.heading}</h4>
+            <Heading className="mb-3 text-xs font-bold tracking-[0.16em] text-teal-700 uppercase">{group.heading}</Heading>
           )}
           <ul className={`grid gap-x-8 sm:grid-cols-2 ${columns === 3 ? "lg:grid-cols-3" : ""}`}>
             {group.items.map((item) => (

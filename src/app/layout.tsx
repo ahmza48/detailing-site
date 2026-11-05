@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { Suspense } from "react";
+import { ClickTracking } from "@/components/ClickTracking";
 import { DrawingProtection } from "@/components/DrawingProtection";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <WhatsAppButton />
         <DrawingProtection />
+        <ClickTracking />
         <JsonLd data={organizationJsonLd()} />
       </body>
     </html>

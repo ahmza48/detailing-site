@@ -4,6 +4,8 @@
  * Company identity and contact details. Every page, metadata tag and JSON-LD
  * block reads from here.
  */
+import { publishedOrgs } from "./experience-orgs";
+
 export const site = {
   name: process.env.NEXT_PUBLIC_COMPANY_NAME || "PetroHill",
   shortName: process.env.NEXT_PUBLIC_COMPANY_SHORT_NAME || "PetroHill",
@@ -101,11 +103,18 @@ export const capabilitiesMenu: NavLink[] = [
 export const outsourcingLink: NavLink = { label: "Engineering Outsourcing & Subcontract Support", href: "/engineering-outsourcing" };
 export const applicationsLink: NavLink = { label: "Structures & Applications", href: "/applications" };
 
-export const experienceDisclaimer =
-  "Selected project experience reflects work undertaken by senior team members during previous employment and professional engagements with established EPC, engineering and construction organizations. Project/client references are provided to demonstrate relevant experience and do not imply that the present company directly contracted with the named asset owners.";
+const listNames = (names: string[]) =>
+  names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names.at(-1)}` : (names[0] ?? "");
 
-export const portfolioNote =
-  "Selected experience shown on this website includes projects undertaken by senior team members during previous employment or engagements with established EPC, engineering and construction organizations. Project and client names are presented solely to demonstrate relevant professional experience and do not imply direct contractual relationships with this company.";
+/**
+ * The single statement about project references, shown once near the projects on Home and
+ * Project Experience. It attributes the work to the team's prior roles without a negative
+ * disclaimer (owner decision). Employers are the confirmed, approved former employers in
+ * ./experience-orgs.ts.
+ */
+export const experienceNote = `Project references reflect our senior team's experience in prior roles at ${listNames(
+  publishedOrgs("formerEmployer").map((org) => org.name),
+)}.`;
 
 // Organisations from prior experience (asset owners, former employers) live in ./experience-orgs.ts.
 
@@ -149,10 +158,36 @@ export const purpose = [
 
 export const motto = "Engineering clarity. Detail by detail.";
 
-/** Visible disclaimers for the experience tickers. */
-export const tickerDisclaimers = {
-  assetOwner:
-    `Historical professional project exposure only. Names are shown for experience context; these organisations are not presented as clients, partners or endorsers of ${site.name}.`,
-  formerEmployer:
-    "Organisations where senior team members previously worked or were engaged. Shown as career background only; not current partnerships, clients or endorsements.",
-};
+/**
+ * Commercial terms confirmed by the owner (6 Nov 2026). Every page that states a response time,
+ * pilot offer, NDA or delivery format reads from here, so a change is made once.
+ */
+export const offer = {
+  /** Quote reply promise. */
+  quoteResponse: "within 24 hours (GCC working day)",
+  quoteResponseShort: "24-hour",
+  pilot: {
+    scope: "one assembly or a 5–10 t package",
+    price: "fixed price",
+    delivery: "5 working days",
+    summary: "One assembly or a 5–10 t package, fixed price, delivered in 5 working days.",
+  },
+  nda: "NDA on request",
+  /** Formats already listed on the service pages; machine files only where contracted. */
+  formats: ["Tekla model", "DWG", "PDF", "IFC", "NC / DSTV"],
+  /** Project names from the team's prior roles (see ./projects.ts). */
+  proofProjects: ["Hail & Ghasha", "Umm Lulu", "Hawiyah NGL", "Dolphin Energy"],
+} as const;
+
+/** Lahore (UTC+5) against the markets served; the US entry is approved for agreed packages. */
+export const timeZoneStory = {
+  heading: "Working Your Hours",
+  gcc: "Lahore is UTC+5: one hour ahead of the UAE and two ahead of Saudi Arabia, so we work your full business day.",
+  us: "For US clients, we work while you sleep and deliver agreed packages by your morning.",
+  zones: [
+    { place: "Lahore", offset: "UTC+5", note: "Our office" },
+    { place: "UAE", offset: "UTC+4", note: "1 hour behind Lahore" },
+    { place: "Saudi Arabia", offset: "UTC+3", note: "2 hours behind Lahore" },
+    { place: "US Gulf Coast", offset: "UTC−6 / −5", note: "Overnight working" },
+  ],
+} as const;

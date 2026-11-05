@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
 import { industryBySlug, industryPath } from "@/lib/industries";
 import { drawingsForProject, similarWorkForProject } from "@/lib/proof-of-work";
 import type { Project } from "@/lib/projects";
@@ -62,8 +61,7 @@ export function ProjectCaseStudy({ project, index }: { project: Project; index: 
             {project.subtitle && <p className="mt-3 text-lg font-bold text-teal-700 sm:text-xl">{project.subtitle}</p>}
           </div>
           <p className="rounded-lg bg-white/60 text-xs leading-relaxed font-semibold text-slate lg:col-span-3 lg:text-right">
-            Prior professional engagement of a senior team member.
-            <br className="hidden lg:block" /> Not a project contracted to {site.name}.
+            Senior team experience
           </p>
         </header>
 

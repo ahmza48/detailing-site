@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { experienceDisclaimer, outsourcingLink, site, telHref, whatsappHref } from "@/lib/site";
+import { landingPath, marketPages, specialistPages } from "@/lib/landing-pages";
+import { outsourcingLink, site, telHref, whatsappHref } from "@/lib/site";
 import { services, servicePath } from "@/lib/services";
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./WhatsAppButton";
@@ -38,6 +39,29 @@ export function Footer() {
             Structural Detailing &amp; Engineering Support
           </p>
           <p className="mt-6 max-w-xs text-sm leading-6">{site.tagline}.</p>
+          <nav aria-label="Specialist detailing and markets" className="mt-6">
+            <ul>
+              {specialistPages.map((page) => (
+                <li key={page.slug}>
+                  <Link href={landingPath(page.slug)} className={linkClass}>
+                    {page.nav.label}
+                  </Link>
+                </li>
+              ))}
+              {marketPages.map((page) => (
+                <li key={page.slug}>
+                  <Link href={landingPath(page.slug)} className={linkClass}>
+                    Steel Detailing {page.nav.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/pilot" className={`${linkClass} font-bold text-energy`}>
+                  Fixed-Price Pilot
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </div>
 
         <nav aria-label="Footer" className={`lg:col-span-3 ${columnClass}`}>
@@ -113,8 +137,7 @@ export function Footer() {
 
       <div className="container-site">
         <div className="border-t border-white/20 py-8">
-          <p className="max-w-4xl text-xs leading-5 text-haze">{experienceDisclaimer}</p>
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
             <p className="text-xs text-haze">
               © Copyright. All rights reserved by {site.name}. Product names are trademarks of their respective owners.
             </p>

@@ -22,7 +22,7 @@ export function pageMetadata({ title, description, path, keywords, image }: Page
     openGraph: {
       type: "website",
       siteName: site.name,
-      locale: "en_US",
+      locale: "en_GB",
       url: path,
       title: `${title} | ${site.name}`,
       description,
@@ -52,6 +52,24 @@ export const breadcrumbJsonLd = (crumbs: Crumb[]) => ({
 
 const organizationId = `${site.url}/#organization`;
 
+/** Markets served (fix prompt 3.1): ISO 3166 codes, as Country nodes where a Place is expected. */
+export const areaServedCodes = ["AE", "SA", "QA", "KW", "OM", "US", "GB"] as const;
+const areaServed = areaServedCodes.map((code) => ({ "@type": "Country", name: code }));
+
+/**
+ * FAQPage for questions that are visible on the page (fix prompt 3.4). Emit once per page,
+ * with exactly the questions rendered there.
+ */
+export const faqPageJsonLd = (faqs: { q: string; a: string }[]) => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: { "@type": "Answer", text: faq.a },
+  })),
+});
+
 const postalAddress = {
   "@type": "PostalAddress",
   streetAddress: site.address.street,
@@ -78,7 +96,7 @@ export const organizationJsonLd = () => ({
         telephone: site.phone.e164,
         contactType: "sales",
         email: site.email.projects,
-        areaServed: ["PK", "AE", "SA", "QA", "OM"],
+        areaServed: [...areaServedCodes],
         availableLanguage: ["English"],
       },
       email: site.email.info,
@@ -101,13 +119,17 @@ export const organizationJsonLd = () => ({
       description: site.tagline,
       parentOrganization: { "@id": organizationId },
       telephone: site.phone.e164,
+      email: site.email.projects,
       address: postalAddress,
+      areaServed,
       knowsAbout: [
         "Structural steel detailing",
-        "RCC and reinforcement detailing",
-        "Plant structural 3D modelling",
+        "Tekla modelling",
+        "Pipe rack detailing",
         "Offshore structural detailing",
-        "Brownfield structural modifications",
+        "Rebar detailing",
+        "Brownfield as-built documentation",
+        "Plant structural 3D modelling",
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -134,10 +156,29 @@ export const serviceJsonLd = (service: Service) => ({
   url: absoluteUrl(servicePath(service.slug)),
   image: absoluteUrl(service.image),
   provider: { "@id": organizationId },
+  areaServed,
   audience: {
     "@type": "BusinessAudience",
     name: "EPC contractors, engineering consultancies and steel fabricators in the energy sector",
   },
+});
+
+/** Service schema for a market or specialism landing page (fix prompt 3.2 / phase 4). */
+export const landingServiceJsonLd = (page: {
+  slug: string;
+  seo: { title: string; description: string };
+  hero: { image: string };
+  schema: { serviceType: string; areaServed: string[] };
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: page.seo.title,
+  serviceType: page.schema.serviceType,
+  description: page.seo.description,
+  url: absoluteUrl(`/${page.slug}`),
+  image: absoluteUrl(page.hero.image),
+  provider: { "@id": organizationId },
+  areaServed: page.schema.areaServed.map((code) => ({ "@type": "Country", name: code })),
 });
 
 /**

@@ -57,7 +57,7 @@ export function ResourceArticle({ resource }: { resource: Resource }) {
         title={resource.h1}
         intro={resource.description}
         image={image}
-        imageAlt="Representative industrial structure; not a project of the company"
+        imageAlt="Representative industrial steel structure"
         crumbs={[
           { name: "Resources", path: "/resources" },
           { name: resource.h1, path: resourcePath(resource.slug) },

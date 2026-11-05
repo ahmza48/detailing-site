@@ -1,15 +1,22 @@
 import type { NextConfig } from "next";
 
 /**
- * The primary domain is www.petrohill.com; petrohill.com -> www is configured in Vercel's domain
- * settings. Only the old Vercel host redirects here: redirecting www to the apex as well would loop
- * against that setting. localhost and preview URLs never match.
+ * Host canonicalisation. www.petrohill.com is canonical.
+ * - petrohill.com -> www: Vercel's domain settings (edge, before this app runs); repeated here as a
+ *   backstop in case that setting is ever removed. Never redirect www itself: it would loop.
+ * - *.vercel.app -> www: production builds only, so preview deployments stay reachable for review.
+ * - Any other host (previews, localhost) is sent X-Robots-Tag: noindex as a backstop.
  */
-const PRIMARY_ORIGIN = "https://www.petrohill.com";
-const LEGACY_HOSTS = ["detailing-site-liart.vercel.app"];
-const hostRedirects = LEGACY_HOSTS.map((host) => ({
+const PRIMARY_HOST = "www.petrohill.com";
+const PRIMARY_ORIGIN = `https://${PRIMARY_HOST}`;
+const isProductionBuild = process.env.VERCEL_ENV === "production";
+// Host values in has/missing are anchored regular expressions, so dots are escaped.
+const hostRedirects = [
+  { type: "host" as const, value: "petrohill\\.com" },
+  ...(isProductionBuild ? [{ type: "host" as const, value: ".+\\.vercel\\.app" }] : []),
+].map((host) => ({
   source: "/:path*",
-  has: [{ type: "host" as const, value: host }],
+  has: [host],
   destination: `${PRIMARY_ORIGIN}/:path*`,
   permanent: true,
 }));
@@ -33,6 +40,11 @@ const nextConfig: NextConfig = {
             value: "base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'; upgrade-insecure-requests",
           },
         ],
+      },
+      {
+        source: "/:path*",
+        missing: [{ type: "host", value: "www\\.petrohill\\.com" }],
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
       },
       {
         source: "/proof-of-work/:path*",
