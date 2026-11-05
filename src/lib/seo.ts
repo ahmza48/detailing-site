@@ -22,7 +22,7 @@ export function pageMetadata({ title, description, path, keywords, image }: Page
     openGraph: {
       type: "website",
       siteName: site.name,
-      locale: "en_US",
+      locale: "en_GB",
       url: path,
       title: `${title} | ${site.name}`,
       description,

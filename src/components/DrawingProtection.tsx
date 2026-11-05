@@ -31,8 +31,9 @@ const isScreenshotChord = (event: KeyboardEvent) =>
  * does nothing on pages without drawings.
  *
  * A browser cannot stop a screenshot or a determined visitor. These measures
- * deter casual copying: on a shortcut or loss of focus the drawings are swapped
- * for a solid cover, so a capture taken then shows nothing. Print Screen is the
+ * deter casual copying: on a screenshot shortcut, while printing or while the tab is
+ * hidden the drawings are swapped for a solid cover. Switching to another window does
+ * not blank them, so visitors comparing drawings side by side are not interrupted. Print Screen is the
  * gap, as the browser only hears it after the capture. What is actually protected
  * is that the site only ever serves cropped, reduced, watermarked excerpts (see
  * scripts/build-proof-of-work.mjs).
@@ -75,12 +76,9 @@ export function DrawingProtection() {
       }
       if (root.hasAttribute(OBSCURED) && (event.key === "Meta" || event.key === "Shift")) {
         clearTimeout(release);
-        release = setTimeout(() => obscure(!document.hasFocus()), COVER_HOLD_MS);
+        release = setTimeout(() => obscure(document.hidden), COVER_HOLD_MS);
       }
     };
-    // Snipping tools and other apps take focus; drawings stay covered until the page has it back.
-    const onBlur = () => obscure(true);
-    const onFocus = () => obscure(false);
     const onVisibility = () => obscure(document.hidden);
     const onBeforePrint = () => obscure(true);
     const onAfterPrint = () => obscure(false);
@@ -90,8 +88,6 @@ export function DrawingProtection() {
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("keyup", onKeyUp);
     document.addEventListener("visibilitychange", onVisibility);
-    window.addEventListener("blur", onBlur);
-    window.addEventListener("focus", onFocus);
     window.addEventListener("beforeprint", onBeforePrint);
     window.addEventListener("afterprint", onAfterPrint);
     return () => {
@@ -100,8 +96,6 @@ export function DrawingProtection() {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("keyup", onKeyUp);
       document.removeEventListener("visibilitychange", onVisibility);
-      window.removeEventListener("blur", onBlur);
-      window.removeEventListener("focus", onFocus);
       window.removeEventListener("beforeprint", onBeforePrint);
       window.removeEventListener("afterprint", onAfterPrint);
       obscure(false);

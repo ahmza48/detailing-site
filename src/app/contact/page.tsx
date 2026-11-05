@@ -82,7 +82,7 @@ export default function ContactPage() {
             <h2 data-reveal className="mt-10 text-xs font-bold tracking-[0.18em] text-teal-700 uppercase">
               Reach us directly
             </h2>
-            <ul data-reveal className="mt-4 space-y-3">
+            <ul data-reveal data-track-location="contact_details" className="mt-4 space-y-3">
               <li>
                 <a
                   href={telHref}

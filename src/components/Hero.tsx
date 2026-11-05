@@ -80,6 +80,7 @@ export function Hero({
           <span className="line-mask">
             <span style={delay(0)}>{title}</span>
           </span>
+          {accent && " "}
           {accent && (
             <span className="line-mask">
               <span className="text-energy" style={delay(80)}>

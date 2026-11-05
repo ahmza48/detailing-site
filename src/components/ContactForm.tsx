@@ -4,6 +4,8 @@ import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef } from "react";
 import { ArrowRight, ChevronDown, CircleAlert, CircleCheck, LoaderCircle } from "lucide-react";
 import { submitEnquiry } from "@/app/contact/actions";
+import { trackEvent } from "@/lib/analytics";
+import { site, whatsappHref } from "@/lib/site";
 import {
   ACCEPTED_FILE_EXTENSIONS,
   clientTypes,
@@ -59,7 +61,11 @@ function Field({ name, label, error, optional, hint, className = "", children }:
   );
 }
 
-export function ContactForm() {
+/**
+ * `formLocation` and `countryPage` are reported with the GTM `rfq_submit` event so leads can be
+ * attributed to the page that produced them (country landing pages pass their market).
+ */
+export function ContactForm({ formLocation = "contact_page", countryPage = "" }: { formLocation?: string; countryPage?: string }) {
   const [state, formAction, pending] = useActionState(submitEnquiry, initialEnquiryState);
   const serviceRef = useRef<HTMLSelectElement>(null);
   const statusRef = useRef<HTMLDivElement>(null);
@@ -89,7 +95,8 @@ export function ContactForm() {
   // Move focus to the outcome so keyboard and screen-reader users are not left at the button.
   useEffect(() => {
     if (state.status !== "idle") statusRef.current?.focus();
-  }, [state]);
+    if (state.status === "success") trackEvent("rfq_submit", { form_location: formLocation, country_page: countryPage });
+  }, [state, formLocation, countryPage]);
 
   if (state.status === "success") {
     return (
@@ -120,7 +127,19 @@ export function ContactForm() {
           className="flex gap-3 rounded-lg border-l-4 border-red-700 bg-red-50 p-5 text-sm font-semibold text-red-800 outline-none sm:col-span-2"
         >
           <CircleAlert aria-hidden className="mt-0.5 size-5 shrink-0" />
-          {state.message}
+          <div>
+            <p>{state.message}</p>
+            {state.deliveryFailed && (
+              <p className="mt-3 flex flex-wrap gap-x-6 gap-y-2" data-track-location="form_fallback">
+                <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-red-900">
+                  WhatsApp {site.phone.display}
+                </a>
+                <a href={`mailto:${site.email.projects}`} className="underline underline-offset-2 hover:text-red-900">
+                  {site.email.projects}
+                </a>
+              </p>
+            )}
+          </div>
         </div>
       )}
 

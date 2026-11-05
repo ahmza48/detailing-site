@@ -99,6 +99,8 @@ export type EnquiryState = {
   errors?: Partial<Record<EnquiryField, string>>;
   /** Echoed back so the form keeps what was typed when validation fails. */
   values?: Partial<EnquiryValues>;
+  /** Delivery failed (not configured or provider error): show WhatsApp and email routes so the lead is not lost. */
+  deliveryFailed?: boolean;
 };
 
 export const initialEnquiryState: EnquiryState = { status: "idle" };
