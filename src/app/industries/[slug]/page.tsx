@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { site } from "@/lib/site";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -7,7 +6,6 @@ import { Suspense } from "react";
 import { ArrowRight, Check, CircleSlash } from "lucide-react";
 import { ArrowLink, ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
-import { Disclaimer } from "@/components/Disclaimer";
 import { FaqList } from "@/components/FaqList";
 import { Hero } from "@/components/Hero";
 import { ProjectCard } from "@/components/ProjectCard";
@@ -227,10 +225,7 @@ function IndustryLayout({ industry }: { industry: Industry }) {
               <SectionHeading slab title="Selected Professional Experience" />
               <ArrowLink href="/project-experience">All professional experience</ArrowLink>
             </div>
-            <Disclaimer
-              className="mt-6"
-              text={`Prior professional engagements of senior team members during previous employment, not projects contracted to ${site.name}. Photographs are representative industry images.`}
-            />
+            <p className="mt-6 text-xs leading-5 text-slate">Senior team experience. Photographs are representative industry images.</p>
             <div className={`mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 ${projects.length > 2 ? "lg:grid-cols-4" : "max-w-3xl"}`}>
               {projects.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} />

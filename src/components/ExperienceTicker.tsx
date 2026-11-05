@@ -8,7 +8,7 @@ import { projectById } from "@/lib/projects";
  * Compliance rules (do not relax without owner approval):
  * - Only organisations marked confirmed AND approved in src/lib/experience-orgs.ts render.
  * - Asset owners and former employers are separate rows; never titled "Clients" or "Trusted by".
- * - The disclaimer is visible text above the row, not a tooltip, so it stays when names scroll.
+ * - The section around the ticker states that these are the team's prior roles (lib/site.ts experienceNote).
  * - Names are not links (no decorative links to company homepages).
  * - Logos render only with `approvedLogoSrc` + `logoPermissionConfirmed`; otherwise text.
  * - The duplicate set exists purely for the seamless loop and is aria-hidden; reduced-motion
@@ -22,7 +22,7 @@ export function ExperienceTicker({
 }: {
   type: ExperienceOrg["type"];
   label: string;
-  disclaimer: string;
+  disclaimer?: string;
   onDark?: boolean;
 }) {
   const orgs = publishedOrgs(type);
@@ -58,7 +58,7 @@ export function ExperienceTicker({
   return (
     <div>
       <p className={`text-xs font-bold tracking-[0.16em] uppercase ${onDark ? "text-energy" : "text-teal-700"}`}>{label}</p>
-      <p className={`mt-2 max-w-3xl text-sm leading-6 ${onDark ? "text-haze" : "text-ink"}`}>{disclaimer}</p>
+      {disclaimer && <p className={`mt-2 max-w-3xl text-sm leading-6 ${onDark ? "text-haze" : "text-ink"}`}>{disclaimer}</p>}
       <div
         role="region"
         aria-label={label}

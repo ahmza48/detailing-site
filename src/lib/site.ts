@@ -4,6 +4,8 @@
  * Company identity and contact details. Every page, metadata tag and JSON-LD
  * block reads from here.
  */
+import { publishedOrgs } from "./experience-orgs";
+
 export const site = {
   name: process.env.NEXT_PUBLIC_COMPANY_NAME || "PetroHill",
   shortName: process.env.NEXT_PUBLIC_COMPANY_SHORT_NAME || "PetroHill",
@@ -101,11 +103,18 @@ export const capabilitiesMenu: NavLink[] = [
 export const outsourcingLink: NavLink = { label: "Engineering Outsourcing & Subcontract Support", href: "/engineering-outsourcing" };
 export const applicationsLink: NavLink = { label: "Structures & Applications", href: "/applications" };
 
-export const experienceDisclaimer =
-  "Selected project experience reflects work undertaken by senior team members during previous employment and professional engagements with established EPC, engineering and construction organizations. Project/client references are provided to demonstrate relevant experience and do not imply that the present company directly contracted with the named asset owners.";
+const listNames = (names: string[]) =>
+  names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names.at(-1)}` : (names[0] ?? "");
 
-export const portfolioNote =
-  "Selected experience shown on this website includes projects undertaken by senior team members during previous employment or engagements with established EPC, engineering and construction organizations. Project and client names are presented solely to demonstrate relevant professional experience and do not imply direct contractual relationships with this company.";
+/**
+ * The single statement about project references (fix prompt, phase 2.2). Shown once near the
+ * projects on Home and Project Experience; the footer carries the short form. Employers are the
+ * confirmed, approved former employers in ./experience-orgs.ts.
+ */
+export const experienceNote = `Project references reflect our senior team's experience in prior roles at ${listNames(
+  publishedOrgs("formerEmployer").map((org) => org.name),
+)}; they are not ${site.name} contracts.`;
+export const experienceNoteShort = `Project references reflect our senior team's experience in prior roles; they are not ${site.name} contracts.`;
 
 // Organisations from prior experience (asset owners, former employers) live in ./experience-orgs.ts.
 
@@ -148,11 +157,3 @@ export const purpose = [
 ];
 
 export const motto = "Engineering clarity. Detail by detail.";
-
-/** Visible disclaimers for the experience tickers. */
-export const tickerDisclaimers = {
-  assetOwner:
-    `Historical professional project exposure only. Names are shown for experience context; these organisations are not presented as clients, partners or endorsers of ${site.name}.`,
-  formerEmployer:
-    "Organisations where senior team members previously worked or were engaged. Shown as career background only; not current partnerships, clients or endorsements.",
-};

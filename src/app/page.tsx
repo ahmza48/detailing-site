@@ -25,7 +25,7 @@ import { drawingSamples, homeDrawingIds } from "@/lib/proof-of-work";
 import { pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath, services, type ServiceSlug } from "@/lib/services";
 import { softwareQualifier } from "@/lib/software";
-import { drawingSamplesNote, motto, purpose, site, standardsStatement, tickerDisclaimers, trustMetrics } from "@/lib/site";
+import { drawingSamplesNote, motto, purpose, site, standardsStatement, trustMetrics } from "@/lib/site";
 import { tc } from "@/lib/text";
 
 /** One title and description for search results and social shares. */
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   title: { absolute: `Structural Steel Detailing & Tekla Modelling | ${site.name}` },
 };
 
-/** Buyer-defined package examples (spec v2 §5.4). Descriptive scope examples, not claims of delivered projects. */
+/** Buyer-defined package examples (spec v2 §5.4): how typical packages are scoped. */
 const workPackages: { title: string; provide: string; receive: string; clarify: string; services: ServiceSlug[] }[] = [
   {
     title: "Pipe rack steel detailing package",
@@ -243,7 +243,7 @@ export default function HomePage() {
           <SectionHeading
             slab
             title="Engineering Packages We Can Support"
-            intro="Typical packages and how they are defined: what you provide, what you receive and what is clarified before work starts. These are scope examples, not a record of delivered projects."
+            intro="Typical packages and how they are defined: what you provide, what you receive and what is clarified before work starts."
           />
           <ul className="mt-12 grid gap-5 md:grid-cols-2">
             {workPackages.map((pkg, i) => (
@@ -296,7 +296,7 @@ export default function HomePage() {
           <SectionHeading
             centered
             title="Industries & Project Environments"
-            intro="Technical drawing and modelling support for oil & gas, offshore structures, refineries, gas processing, petrochemicals, chemical and fertiliser plants, power and industrial facilities, subject to agreed scope and resources."
+            intro="Technical drawing and modelling support for oil & gas, offshore structures, refineries, gas processing, petrochemicals, chemical and fertiliser plants, power and industrial facilities."
           />
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((industry, index) => (
@@ -392,15 +392,10 @@ export default function HomePage() {
           <div className="lg:sticky lg:top-28">
             <SectionHeading slab onDark title="Project Environments Our Senior Team Knows" />
             <p data-reveal className="mt-5 max-w-sm text-[0.9375rem] leading-7 font-normal">
-              Selected examples from our senior professionals&rsquo; previous employment on onshore, offshore, refining
-              and gas-processing projects. These references demonstrate individual career experience, not contracts
-              awarded to {site.name}.
+              Onshore, offshore, refining and gas-processing projects our senior engineers and detailers worked on in
+              previous roles, and the services they relate to today.
             </p>
-            <Disclaimer
-              onDark
-              className="mt-5 max-w-sm"
-              text={`These are prior engagements of individual team members, not projects contracted to ${site.name}.`}
-            />
+            <Disclaimer onDark className="mt-5 max-w-sm" />
             <div data-reveal className="mt-8">
               <ButtonLink href="/project-experience" variant="light">
                 All Professional Experience
@@ -424,13 +419,11 @@ export default function HomePage() {
           <div data-reveal className="mt-8">
             <ExperienceTicker
               type="assetOwner"
-              label="Prior project exposure"
-              disclaimer={tickerDisclaimers.assetOwner}
+              label="Asset owners on our team's past projects"
             />
           </div>
           <div data-reveal className="mt-6 flex flex-wrap items-center justify-between gap-4">
             <ArrowLink href="/project-experience">Explore documented project experience</ArrowLink>
-            <Disclaimer className="max-w-2xl" />
           </div>
         </div>
       </section>

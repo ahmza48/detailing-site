@@ -31,7 +31,7 @@ export const faqs: Faq[] = [
   {
     id: "connection-design",
     q: "Do you undertake connection design or certify structural calculations?",
-    a: "Our standard offer is modelling, drafting and detailing support using the engineering information provided by the responsible design team. Connection engineering, structural calculations, certification and approval responsibilities are not included unless separately agreed with appropriately authorised professionals.",
+    a: "We produce models, drawings and detailing from the engineering information supplied by your design team. Connection design, structural calculations, certification and approvals stay with your engineer of record unless a separate scope is agreed.",
     links: [{ href: "/capabilities/codes-standards#responsibility", label: "Responsibility matrix" }],
   },
   {
@@ -82,15 +82,9 @@ export const faqs: Faq[] = [
     links: [{ href: "/privacy-policy", label: "Privacy policy" }],
   },
   {
-    id: "prior-experience",
-    q: `Does the prior project experience on this website belong to ${site.name}?`,
-    a: `No. Selected projects and organisations are cited as previous professional experience of senior personnel through earlier employment or engagements. They are not presented as direct ${site.name} contracts or endorsements.`,
-    links: [{ href: "/project-experience", label: "Project experience" }],
-  },
-  {
     id: "sectors-regions",
     q: "Which sectors and regions do you serve?",
-    a: "Our services are relevant to oil and gas, gas processing, refining, petrochemicals, offshore facilities, power and industrial infrastructure. We are based in Pakistan and seek to support GCC and international engineering organisations, subject to project requirements and capacity.",
+    a: "Our services are relevant to oil and gas, gas processing, refining, petrochemicals, offshore facilities, power and industrial infrastructure. We are based in Lahore, Pakistan and work with engineering organisations in the GCC and internationally.",
     links: [{ href: "/industries", label: "Industries" }],
   },
 ];
@@ -98,8 +92,8 @@ export const faqs: Faq[] = [
 export const faqById = (id: string) => faqs.find((faq) => faq.id === id);
 const pick = (ids: string[]) => ids.map(faqById).filter((faq): faq is Faq => faq !== undefined);
 
-export const homeFaqs = pick(["services", "outsource-tekla", "quotation", "connection-design", "quality"]);
-export const aboutFaqs = pick(["onshore-offshore", "prior-experience", "confidentiality"]);
+export const homeFaqs = pick(["services", "outsource-tekla", "quotation", "remote", "quality"]);
+export const aboutFaqs = pick(["onshore-offshore", "remote", "confidentiality"]);
 
 /** Groups for the /faq hub. */
 export const faqGroups = [

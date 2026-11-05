@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { drawingSamplesNote, site } from "@/lib/site";
+import { drawingSamplesNote } from "@/lib/site";
 import Link from "next/link";
 import { ArrowRight, Check, CircleSlash, Plus } from "lucide-react";
 import { applications } from "@/lib/applications";
@@ -12,7 +12,6 @@ import { serviceBySlug, servicePath, type RelatedLink, type Service } from "@/li
 import { software, softwareQualifier } from "@/lib/software";
 import { ArrowLink, ButtonLink } from "./ButtonLink";
 import { CTASection } from "./CTASection";
-import { Disclaimer } from "./Disclaimer";
 import { DrawingGallery } from "./DrawingGallery";
 import { Hero } from "./Hero";
 import { JsonLd } from "./JsonLd";
@@ -410,13 +409,8 @@ export function ServicePageLayout({ service }: { service: Service }) {
               <Image src={lead.image} alt={lead.imageAlt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
             </div>
             <div className="flex flex-col justify-center px-5 py-16 sm:px-8 lg:px-16 lg:py-24">
-              <SectionHeading eyebrow="Selected professional experience" title={lead.name} onDark />
+              <SectionHeading eyebrow="Senior team experience" title={lead.name} onDark />
               {lead.subtitle && <p className="mt-2 font-bold text-energy">{lead.subtitle}</p>}
-              <Disclaimer
-                onDark
-                className="mt-5"
-                text={`Prior professional engagement of a senior team member, not a project contracted to ${site.name}.`}
-              />
               <p data-reveal className="mt-5 max-w-xl text-base leading-7 text-haze">
                 {lead.description}
               </p>
@@ -454,7 +448,7 @@ export function ServicePageLayout({ service }: { service: Service }) {
               ))}
             </div>
             <p data-reveal className="mt-8 text-xs leading-5 text-slate">
-              Prior professional engagements of senior team members. Photographs are representative industry images.
+              Senior team experience. Photographs are representative industry images.
             </p>
           </div>
         </section>
