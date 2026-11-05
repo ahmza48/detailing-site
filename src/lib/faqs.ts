@@ -1,4 +1,4 @@
-import { site } from "@/lib/site";
+import { offer, site } from "@/lib/site";
 /**
  * Central FAQ registry (Home / About / FAQ brief, section F). The /faq hub shows every entry;
  * Home and About show small, non-repeating subsets. Answers are visible HTML only — no FAQPage
@@ -25,7 +25,7 @@ export const faqs: Faq[] = [
   {
     id: "quotation",
     q: "What information should we send for a quotation?",
-    a: "Share a scope of work or deliverable list, available approved drawings or models, structural specifications, project location, desired output formats, the approximate drawing or tonnage scope where known, and target dates. Where inputs are incomplete, tell us what is available so we can identify assumptions and questions.",
+    a: `Share a scope of work or deliverable list, available approved drawings or models, structural specifications, project location, desired output formats, the approximate drawing or tonnage scope where known, and target dates. Where inputs are incomplete, tell us what is available so we can identify assumptions and questions. We reply to quote requests ${offer.quoteResponse}.`,
     links: [{ href: "/contact", label: "Request a quote" }],
   },
   {

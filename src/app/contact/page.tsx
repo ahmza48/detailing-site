@@ -4,9 +4,9 @@ import { Hero } from "@/components/Hero";
 import { RelatedGuides } from "@/components/RelatedGuides";
 import { SectionHeading } from "@/components/SectionHeading";
 import { pageMetadata } from "@/lib/seo";
-import { Mail, MapPin, Phone, Plus } from "lucide-react";
+import { Clock, Mail, MapPin, Phone, Plus } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
-import { site, telHref, whatsappHref } from "@/lib/site";
+import { offer, site, telHref, whatsappHref } from "@/lib/site";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = pageMetadata({
@@ -65,6 +65,13 @@ export default function ContactPage() {
             <p data-reveal className="text-xl leading-relaxed font-semibold text-navy-900">
               We welcome enquiries from EPC contractors, engineering consultancies, steel fabricators, industrial
               contractors and energy-sector project teams.
+            </p>
+            <p data-reveal className="mt-6 flex items-start gap-3 rounded-xl border-l-4 border-energy-deep bg-paper p-4 text-[0.9375rem] leading-6 text-ink">
+              <Clock aria-hidden className="mt-0.5 size-5 shrink-0 text-energy-deep" />
+              <span>
+                <strong className="block text-navy-900">Quote reply {offer.quoteResponse}</strong>
+                Send drawings or a scope summary; a fixed-price pilot and {offer.nda} are available.
+              </span>
             </p>
 
             <h2 data-reveal className="mt-10 text-xs font-bold tracking-[0.18em] text-teal-700 uppercase">
@@ -178,8 +185,8 @@ export default function ContactPage() {
           <div className="lg:col-span-5">
             <SectionHeading slab title="Before You Send" />
             <p data-reveal className="mt-5 text-base leading-7 text-ink">
-              Quick answers to the questions most enquiries start with. No fixed turnaround is promised; we respond
-              once the request has been reviewed.
+              Quick answers to the questions most enquiries start with. We reply to every quote request
+              {" "}{offer.quoteResponse}; delivery dates are agreed for each package.
             </p>
             <div className="mt-8">
               <RelatedGuides

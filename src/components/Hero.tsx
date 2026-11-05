@@ -19,6 +19,8 @@ type Props = {
   compactTitle?: boolean;
   /** Render `intro` as a short company statement: set like the navbar links (semibold, uppercase, tracked), for one-sentence intros. */
   statement?: boolean;
+  /** Small print under the actions, e.g. a proof bar or trust line. */
+  footer?: ReactNode;
   /** CSS object-position for the photograph. */
   focus?: string;
   children?: ReactNode;
@@ -40,6 +42,7 @@ export function Hero({
   statement = false,
   focus = "center",
   children,
+  footer,
 }: Props) {
   return (
     <section className="relative isolate overflow-hidden bg-navy-900 text-mist">
@@ -104,6 +107,11 @@ export function Hero({
         {children && (
           <div className="hero-rise mt-8 flex flex-wrap items-center gap-x-4 gap-y-3" style={delay(220)}>
             {children}
+          </div>
+        )}
+        {footer && (
+          <div className="hero-rise mt-7" style={delay(300)}>
+            {footer}
           </div>
         )}
       </div>

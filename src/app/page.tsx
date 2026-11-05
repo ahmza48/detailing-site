@@ -10,6 +10,9 @@ import { ExperienceMetrics } from "@/components/ExperienceMetrics";
 import { ExperienceTicker } from "@/components/ExperienceTicker";
 import { FaqList } from "@/components/FaqList";
 import { Hero } from "@/components/Hero";
+import { PilotOffer } from "@/components/PilotOffer";
+import { TimeZoneBlock } from "@/components/TimeZoneBlock";
+import { WhatsAppCta } from "@/components/WhatsAppButton";
 import { ImageBand } from "@/components/ImageBand";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { FeaturedProject, ProjectCard } from "@/components/ProjectCard";
@@ -25,7 +28,7 @@ import { drawingSamples, homeDrawingIds } from "@/lib/proof-of-work";
 import { pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath, services, type ServiceSlug } from "@/lib/services";
 import { softwareQualifier } from "@/lib/software";
-import { drawingSamplesNote, motto, purpose, site, standardsStatement, trustMetrics } from "@/lib/site";
+import { drawingSamplesNote, motto, offer, purpose, site, standardsStatement, trustMetrics } from "@/lib/site";
 import { tc } from "@/lib/text";
 
 /** One title and description for search results and social shares. */
@@ -133,16 +136,23 @@ export default function HomePage() {
         tall
         eyebrow="Steel & RCC detailing, 3D modelling and CAD drafting"
         title="Structural Steel Detailing & Tekla Modelling"
-        accent="for Energy & Industrial Projects"
-        statement
-        intro="PetroHill delivers precision structural detailing and engineering production support for energy and industrial infrastructure worldwide."
+        accent="for Oil & Gas EPC Projects"
+        intro="A senior team with 30+ years of experience, including ADNOC, Saudi Aramco and Dolphin Energy projects, working GCC hours from Lahore. Shop, erection and pipe-rack packages to AISC, BS EN and client specifications."
         image="/images/hero-offshore.jpg"
         imageAlt="Offshore jack-up rig beside a crane vessel at sunset"
+        footer={
+          <div className="space-y-2 text-sm leading-6">
+            <p className="text-white">
+              <span className="font-bold text-energy">Team experience:</span> {offer.proofProjects.join(" · ")}
+            </p>
+            <p className="text-haze">
+              Fixed-price pilot · {offer.nda} · {offer.formats.join(", ")}
+            </p>
+          </div>
+        }
       >
-        <ButtonLink href="/contact">Request a Project Quote</ButtonLink>
-        <ArrowLink href="/services" onDark>
-          Explore Technical Services
-        </ArrowLink>
+        <ButtonLink href="/contact">Send Drawings for a {offer.quoteResponseShort} Quote</ButtonLink>
+        <WhatsAppCta />
       </Hero>
 
       {/* 2. Trust strip: personnel experience, not company tenure */}
@@ -289,6 +299,10 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
+
+      {/* 4b. Time zones and 4c. pilot offer */}
+      <TimeZoneBlock />
+      <PilotOffer />
 
       {/* 5. Industries & applications */}
       <section className="bg-paper">
