@@ -66,7 +66,8 @@ const sectionAlso: Partial<Record<NavMenuId, string[]>> = {
 const stagger = (index: number) => ({ "--i": index }) as React.CSSProperties;
 
 type MenuLink = NavLink & { text?: string; icon: LucideIcon };
-type MenuSection = { heading?: string; links: MenuLink[] };
+/** `compact` renders single-line links (small icon, no description) so secondary groups stay short. */
+type MenuSection = { heading?: string; links: MenuLink[]; compact?: boolean };
 type MenuContent = {
   title: string;
   text: string;
@@ -127,6 +128,7 @@ const menus: Record<NavMenuId, MenuContent> = {
       {
         // One section for both keeps the panel inside a 1280×800 viewport.
         heading: "Specialist detailing & outsourcing",
+        compact: true,
         links: [
           ...specialistPages.map((page) => ({
             label: page.nav.label,
@@ -153,17 +155,16 @@ const menus: Record<NavMenuId, MenuContent> = {
         })),
       },
       {
-        heading: "Markets we serve",
-        links: marketPages.map((page) => ({
-          label: `Steel Detailing ${page.nav.label}`,
-          href: landingPath(page.slug),
-          text: page.nav.text,
-          icon: Globe,
-        })),
-      },
-      {
-        heading: "Find by structure",
-        links: [{ ...applicationsLink, text: "Pipe racks, platforms, supports, foundations", icon: Layers }],
+        heading: "Markets & structure types",
+        compact: true,
+        links: [
+          ...marketPages.map((page) => ({
+            label: `Steel Detailing ${page.nav.label}`,
+            href: landingPath(page.slug),
+            icon: Globe,
+          })),
+          { ...applicationsLink, label: "Find by Structure Type", icon: Layers },
+        ],
       },
     ],
   },
@@ -181,26 +182,28 @@ const menus: Record<NavMenuId, MenuContent> = {
 };
 
 /** One menu entry: tinted icon tile, label and optional one-line description. */
-function MenuItem({ link, current }: { link: MenuLink; current: boolean }) {
+function MenuItem({ link, current, compact = false }: { link: MenuLink; current: boolean; compact?: boolean }) {
   const Icon = link.icon;
   return (
     <Link
       href={link.href}
       aria-current={current ? "page" : undefined}
-      className={`group flex items-start gap-3.5 rounded-lg p-3 transition-colors duration-200 hover:bg-paper ${current ? "bg-paper" : ""}`}
+      className={`group flex gap-3 rounded-lg px-3 transition-colors duration-200 hover:bg-paper ${compact ? "items-center py-2" : "items-start py-2.5"} ${
+        current ? "bg-paper" : ""
+      }`}
     >
       <span
-        className={`grid size-10 shrink-0 place-items-center rounded-lg transition-colors duration-200 group-hover:bg-energy-deep group-hover:text-white ${
-          current ? "bg-energy-deep text-white" : "bg-energy-deep/10 text-energy-ink"
-        }`}
+        className={`grid shrink-0 place-items-center rounded-lg transition-colors duration-200 group-hover:bg-energy-deep group-hover:text-white ${
+          compact ? "size-8" : "size-10"
+        } ${current ? "bg-energy-deep text-white" : "bg-energy-deep/10 text-energy-ink"}`}
       >
-        <Icon aria-hidden className="size-5" strokeWidth={1.75} />
+        <Icon aria-hidden className={compact ? "size-4" : "size-5"} strokeWidth={1.75} />
       </span>
-      <span className="min-w-0 flex-1 pt-0.5">
+      <span className={`min-w-0 flex-1 ${compact ? "" : "pt-0.5"}`}>
         <span className={`block text-sm leading-5 font-bold ${current ? "text-energy-ink" : "text-navy-900"} group-hover:text-energy-ink`}>
           {link.label}
         </span>
-        {link.text && <span className="mt-0.5 block text-xs leading-4 text-slate">{link.text}</span>}
+        {link.text && !compact && <span className="mt-0.5 block text-xs leading-4 text-slate">{link.text}</span>}
       </span>
     </Link>
   );
@@ -380,12 +383,12 @@ export function Navbar() {
                     <div
                       id={panelId}
                       className={`absolute top-full pt-4 ${
-                        wide ? "left-1/2 w-[54rem] -translate-x-[40%]" : "left-1/2 w-[44rem] -translate-x-1/2"
+                        wide ? "left-1/2 w-[58rem] -translate-x-[40%]" : "left-1/2 w-[44rem] -translate-x-1/2"
                       }`}
                     >
                       <div
                         className={`menu-in grid overflow-hidden rounded-xl bg-white shadow-[0_24px_60px_rgb(0_26_41/0.35)] ${
-                          wide ? "grid-cols-[15rem_1fr]" : "grid-cols-[13rem_1fr]"
+                          wide ? "grid-cols-[13rem_1fr]" : "grid-cols-[13rem_1fr]"
                         }`}
                       >
                         <div className="flex flex-col justify-between bg-navy-800 p-7 text-mist">
@@ -402,18 +405,18 @@ export function Navbar() {
                             {menu.all.label}
                           </Link>
                         </div>
-                        <div className="p-4">
+                        <div className="max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain p-4">
                           {menu.sections.map((section, s) => (
-                            <div key={section.heading ?? s} className={s > 0 ? "mt-2 border-t border-line pt-3" : ""}>
+                            <div key={section.heading ?? s} className={s > 0 ? "mt-1.5 border-t border-line pt-2.5" : ""}>
                               {section.heading && (
-                                <p className="px-3 pt-1 pb-1.5 text-[0.6875rem] font-bold tracking-[0.12em] text-energy-ink uppercase">
+                                <p className="px-3 pt-0.5 pb-1 text-[0.6875rem] font-bold tracking-[0.12em] text-energy-ink uppercase">
                                   {section.heading}
                                 </p>
                               )}
                               <ul className={`grid gap-1 ${menu.columns === 2 && section.links.length > 1 ? "grid-cols-2" : ""}`}>
                                 {section.links.map((link, index) => (
                                   <li key={link.href} className="menu-item" style={stagger(s * 2 + index)}>
-                                    <MenuItem link={link} current={pathname === link.href} />
+                                    <MenuItem link={link} current={pathname === link.href} compact={section.compact} />
                                   </li>
                                 ))}
                               </ul>
