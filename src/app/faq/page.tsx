@@ -6,7 +6,8 @@ import { Hero } from "@/components/Hero";
 import { RelatedGuides } from "@/components/RelatedGuides";
 import { SectionHeading } from "@/components/SectionHeading";
 import { faqGroups } from "@/lib/faqs";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { faqPageJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Engineering Detailing & Outsourcing FAQs",
@@ -32,6 +33,8 @@ export default function FaqPage() {
       >
         <ButtonLink href="/contact">Request a Quote</ButtonLink>
       </Hero>
+
+      <JsonLd data={faqPageJsonLd(faqGroups.flatMap((group) => group.faqs))} />
 
       <nav aria-label="FAQ topics" className="border-b border-line bg-white">
         <ul className="container-site flex gap-x-6 overflow-x-auto py-2 text-xs font-bold tracking-[0.1em] whitespace-nowrap text-navy-900 uppercase">

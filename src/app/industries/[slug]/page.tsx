@@ -14,7 +14,8 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { StandardsSummary } from "@/components/StandardsSummary";
 import { industries, industryBySlug, industryPath, type Industry } from "@/lib/industries";
 import { projectsForIndustry } from "@/lib/projects";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { faqPageJsonLd, pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath } from "@/lib/services";
 import { tc } from "@/lib/text";
 
@@ -206,6 +207,7 @@ function IndustryLayout({ industry }: { industry: Industry }) {
           </div>
           <div className="lg:col-span-8">
             <FaqList faqs={industry.faqs} surface="paper" openFirst={false} />
+            <JsonLd data={faqPageJsonLd(industry.faqs)} />
           </div>
         </div>
       </section>

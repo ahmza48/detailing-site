@@ -13,7 +13,8 @@ import { SoftwareCapabilities } from "@/components/SoftwareCapabilities";
 import { aboutFaqs } from "@/lib/faqs";
 import { softwareQualifier } from "@/lib/software";
 import { servicePath, services } from "@/lib/services";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { faqPageJsonLd, pageMetadata } from "@/lib/seo";
 import { motto, purpose, site } from "@/lib/site";
 import { tc } from "@/lib/text";
 
@@ -343,6 +344,7 @@ export default function AboutPage() {
           </div>
           <div className="lg:col-span-7">
             <FaqList faqs={aboutFaqs} />
+            <JsonLd data={faqPageJsonLd(aboutFaqs)} />
           </div>
         </div>
       </section>

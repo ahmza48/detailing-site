@@ -6,7 +6,7 @@ import { applications } from "@/lib/applications";
 import { industries, industryPath } from "@/lib/industries";
 import { projectPath, projectsForService } from "@/lib/projects";
 import { drawingSamples, serviceDrawingIds } from "@/lib/proof-of-work";
-import { serviceJsonLd } from "@/lib/seo";
+import { faqPageJsonLd, serviceJsonLd } from "@/lib/seo";
 import { resourcesForService } from "@/lib/resources";
 import { serviceBySlug, servicePath, type RelatedLink, type Service } from "@/lib/services";
 import { software, softwareQualifier } from "@/lib/software";
@@ -66,6 +66,8 @@ export function ServicePageLayout({ service }: { service: Service }) {
   return (
     <>
       <JsonLd data={serviceJsonLd(service)} />
+      {/* The overview answer and the FAQ list are both visible on the page. */}
+      <JsonLd data={faqPageJsonLd([service.answer, ...service.faqs])} />
 
       {/* Hero */}
       <Hero

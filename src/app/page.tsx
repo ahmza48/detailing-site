@@ -25,7 +25,8 @@ import { industries, industryPath } from "@/lib/industries";
 import { homeFaqs } from "@/lib/faqs";
 import { featuredProjectIds, projects } from "@/lib/projects";
 import { drawingSamples, homeDrawingIds } from "@/lib/proof-of-work";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { faqPageJsonLd, pageMetadata } from "@/lib/seo";
 import { serviceBySlug, servicePath, services, type ServiceSlug } from "@/lib/services";
 import { softwareQualifier } from "@/lib/software";
 import { drawingSamplesNote, motto, offer, purpose, site, standardsStatement, trustMetrics } from "@/lib/site";
@@ -522,6 +523,7 @@ export default function HomePage() {
           </div>
           <div className="lg:col-span-7">
             <FaqList faqs={homeFaqs} />
+            <JsonLd data={faqPageJsonLd(homeFaqs)} />
           </div>
         </div>
       </section>
