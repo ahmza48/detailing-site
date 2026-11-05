@@ -107,14 +107,14 @@ const listNames = (names: string[]) =>
   names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names.at(-1)}` : (names[0] ?? "");
 
 /**
- * The single statement about project references (fix prompt, phase 2.2). Shown once near the
- * projects on Home and Project Experience; the footer carries the short form. Employers are the
- * confirmed, approved former employers in ./experience-orgs.ts.
+ * The single statement about project references, shown once near the projects on Home and
+ * Project Experience. It attributes the work to the team's prior roles without a negative
+ * disclaimer (owner decision). Employers are the confirmed, approved former employers in
+ * ./experience-orgs.ts.
  */
 export const experienceNote = `Project references reflect our senior team's experience in prior roles at ${listNames(
   publishedOrgs("formerEmployer").map((org) => org.name),
-)}; they are not ${site.name} contracts.`;
-export const experienceNoteShort = `Project references reflect our senior team's experience in prior roles; they are not ${site.name} contracts.`;
+)}.`;
 
 // Organisations from prior experience (asset owners, former employers) live in ./experience-orgs.ts.
 

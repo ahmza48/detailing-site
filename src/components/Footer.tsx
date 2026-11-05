@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { experienceNoteShort, outsourcingLink, site, telHref, whatsappHref } from "@/lib/site";
+import { outsourcingLink, site, telHref, whatsappHref } from "@/lib/site";
 import { services, servicePath } from "@/lib/services";
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./WhatsAppButton";
@@ -113,8 +113,7 @@ export function Footer() {
 
       <div className="container-site">
         <div className="border-t border-white/20 py-8">
-          <p className="max-w-4xl text-xs leading-5 text-haze">{experienceNoteShort}</p>
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
             <p className="text-xs text-haze">
               © Copyright. All rights reserved by {site.name}. Product names are trademarks of their respective owners.
             </p>
