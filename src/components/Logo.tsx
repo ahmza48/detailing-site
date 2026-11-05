@@ -12,14 +12,23 @@ const sources = {
   color: "/logo/petrohill-logo.png",
 } as const;
 
-export function Logo({ variant = "light", className = "" }: { variant?: keyof typeof sources; className?: string }) {
+/** `eager` for the header copy only; the footer copy loads lazily. Not preloaded: it is never the LCP element. */
+export function Logo({
+  variant = "light",
+  className = "",
+  eager = false,
+}: {
+  variant?: keyof typeof sources;
+  className?: string;
+  eager?: boolean;
+}) {
   return (
     <Image
       src={sources[variant]}
       alt={site.name}
       width={781}
       height={136}
-      priority
+      loading={eager ? "eager" : "lazy"}
       sizes="240px"
       className={`h-8 w-auto sm:h-9 ${className}`}
     />

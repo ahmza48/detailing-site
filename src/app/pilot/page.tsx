@@ -183,6 +183,7 @@ export default function PilotPage() {
           <SectionHeading slab title="What to Send, What You Receive" />
           <div data-reveal className="mt-10">
             <ScopeChecklist
+              headingLevel="h3"
               groups={[
                 {
                   heading: "Send us",

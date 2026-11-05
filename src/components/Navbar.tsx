@@ -310,7 +310,7 @@ export function Navbar() {
         }`}
       >
         <Link href="/" aria-label={`${site.name} home`} className="shrink-0 text-white">
-          <Logo />
+          <Logo eager />
         </Link>
 
         <nav aria-label="Primary" className="hidden xl:block">

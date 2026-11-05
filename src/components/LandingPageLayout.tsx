@@ -86,7 +86,7 @@ export function LandingPageLayout({ page }: { page: LandingPage }) {
         <div className="container-site section-y">
           <SectionHeading slab title="Scope & Deliverables" />
           <div data-reveal className="mt-10">
-            <ScopeChecklist groups={page.scope} />
+            <ScopeChecklist groups={page.scope} headingLevel="h3" />
           </div>
         </div>
       </section>
