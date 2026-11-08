@@ -23,6 +23,7 @@ import {
   Grid3x3,
   Handshake,
   Layers,
+  Mail,
   MapPin,
   Menu,
   MonitorCog,
@@ -35,7 +36,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { industries, industryPath } from "@/lib/industries";
-import { landingPath, marketPages, specialistPages, type LandingSlug } from "@/lib/landing-pages";
+import { landingPath, specialistPages, type LandingPage, type LandingSlug } from "@/lib/landing-pages";
+import { marketPaths, marketRegions, marketsPath, regionPages } from "@/lib/markets";
 import { serviceGroups, servicePath, servicesInGroup, type ServiceSlug } from "@/lib/services";
 import type { IndustrySlug } from "@/lib/industries";
 import {
@@ -60,6 +62,7 @@ const isActive = (pathname: string, href: string) =>
 const sectionAlso: Partial<Record<NavMenuId, string[]>> = {
   services: ["/engineering-outsourcing"],
   industries: ["/applications"],
+  markets: marketPaths,
   capabilities: ["/quality-delivery"],
 };
 
@@ -75,6 +78,8 @@ type MenuContent = {
   sections: MenuSection[];
   /** Columns for the links grid in the desktop panel. */
   columns: 1 | 2;
+  /** "side-by-side" puts each section in its own column instead of stacking them. */
+  layout?: "stacked" | "side-by-side";
 };
 
 const serviceIcons: Record<ServiceSlug, LucideIcon> = {
@@ -107,6 +112,13 @@ const capabilityMeta: Record<string, { icon: LucideIcon; text: string }> = {
   "/quality-delivery": { icon: ShieldCheck, text: "Checking, revisions and handover" },
   "/capabilities#formats": { icon: FileStack, text: "Platforms, versions and exchange" },
 };
+
+const marketLink = (page: LandingPage, hub?: LandingSlug): MenuLink => ({
+  label: page.slug === hub ? `${page.nav.label} overview` : page.nav.label,
+  href: landingPath(page.slug),
+  text: page.nav.text,
+  icon: page.slug === hub ? Globe : MapPin,
+});
 
 /** Dropdown contents. Built once; the same data drives the mobile accordions. */
 const menus: Record<NavMenuId, MenuContent> = {
@@ -155,16 +167,25 @@ const menus: Record<NavMenuId, MenuContent> = {
         })),
       },
       {
-        heading: "Markets & structure types",
-        compact: true,
-        links: [
-          ...marketPages.map((page) => ({
-            label: `Steel Detailing ${page.nav.label}`,
-            href: landingPath(page.slug),
-            icon: Globe,
-          })),
-          { ...applicationsLink, label: "Find by Structure Type", icon: Layers },
-        ],
+        heading: "Find by structure",
+        links: [{ ...applicationsLink, text: "Pipe racks, platforms, supports, foundations", icon: Layers }],
+      },
+    ],
+  },
+  markets: {
+    title: "Markets We Serve",
+    text: "Steel detailing for fabricators and EPC contractors in five regions, to local standards and in hours that suit them.",
+    all: { label: "All markets", href: marketsPath },
+    columns: 1,
+    layout: "side-by-side",
+    // Two balanced columns: the GCC region with its country pages, then the single-page regions.
+    sections: [
+      ...marketRegions
+        .filter((region) => region.hub)
+        .map((region) => ({ heading: region.label, links: regionPages(region).map((page) => marketLink(page, region.hub)) })),
+      {
+        heading: "Americas, Europe & Australia",
+        links: marketRegions.filter((region) => !region.hub).flatMap(regionPages).map((page) => marketLink(page)),
       },
     ],
   },
@@ -308,19 +329,21 @@ export function Navbar() {
       }`}
     >
       <div
-        className={`container-site flex items-center justify-between gap-6 transition-[height] duration-500 ${
+        // From xl the header is a little wider than the page container, with tighter side padding, so the
+        // logo, nine menu items and the CTA keep even spacing on 1280px screens.
+        className={`mx-auto flex w-full max-w-[80rem] items-center justify-between gap-4 px-5 transition-[height] duration-500 sm:px-8 lg:px-12 xl:max-w-[84rem] xl:px-6 ${
           scrolled ? "h-[4.5rem]" : "h-[4.5rem] xl:h-20"
         }`}
       >
         <Link href="/" aria-label={`${site.name} home`} className="shrink-0 text-white">
-          <Logo eager />
+          <Logo eager className="h-12 w-auto sm:h-14 xl:h-[50px]" />
         </Link>
 
         <nav aria-label="Primary" className="hidden xl:block">
           <ul className="flex items-center">
             {primaryNav.map((item) => {
               const active = sectionActive(item.href, item.menu);
-              const linkClass = `nav-link relative inline-flex h-11 items-center px-2 text-xs font-semibold tracking-[0.05em] whitespace-nowrap uppercase 2xl:px-2 2xl:text-[0.78rem] transition-colors duration-300 hover:text-white ${
+              const linkClass = `nav-link relative inline-flex h-11 items-center px-1.5 text-xs font-semibold tracking-[0.05em] xl:tracking-[0.03em] whitespace-nowrap min-[1360px]:px-2 uppercase transition-colors duration-300 hover:text-white ${
                 active ? "text-white" : "text-mist/85"
               }`;
 
@@ -344,6 +367,7 @@ export function Navbar() {
               const panelId = `${idBase}-${menuId}`;
               const open = openMenu === menuId;
               const wide = menuId === "services";
+              const sideBySide = menu.layout === "side-by-side";
 
               return (
                 <li
@@ -383,7 +407,7 @@ export function Navbar() {
                     <div
                       id={panelId}
                       className={`absolute top-full pt-4 ${
-                        wide ? "left-1/2 w-[58rem] -translate-x-[40%]" : "left-1/2 w-[44rem] -translate-x-1/2"
+                        wide ? "left-1/2 w-[58rem] -translate-x-[40%]" : sideBySide ? "left-1/2 w-[52rem] -translate-x-1/2" : "left-1/2 w-[44rem] -translate-x-1/2"
                       }`}
                     >
                       <div
@@ -405,9 +429,16 @@ export function Navbar() {
                             {menu.all.label}
                           </Link>
                         </div>
-                        <div className="max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain p-4">
+                        <div
+                          className={`max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain p-4 ${
+                            sideBySide ? "grid grid-cols-2 gap-4" : ""
+                          }`}
+                        >
                           {menu.sections.map((section, s) => (
-                            <div key={section.heading ?? s} className={s > 0 ? "mt-1.5 border-t border-line pt-2.5" : ""}>
+                            <div
+                              key={section.heading ?? s}
+                              className={s === 0 ? "" : sideBySide ? "border-l border-line pl-4" : "mt-1.5 border-t border-line pt-2.5"}
+                            >
                               {section.heading && (
                                 <p className="px-3 pt-0.5 pb-1 text-[0.6875rem] font-bold tracking-[0.12em] text-energy-ink uppercase">
                                   {section.heading}
@@ -435,7 +466,7 @@ export function Navbar() {
         <div className="flex shrink-0 items-center gap-2">
           <Link
             href={quoteCta.href}
-            className="group hidden h-11 items-center gap-2.5 rounded-lg bg-energy-deep px-5 text-sm font-semibold whitespace-nowrap text-white transition-[background-color,box-shadow] duration-300 hover:bg-energy-ink hover:shadow-[0_8px_20px_rgb(0_179_80/0.35)] sm:inline-flex"
+            className="group hidden h-11 items-center gap-2 rounded-lg bg-energy-deep px-4 text-sm font-semibold whitespace-nowrap text-white transition-[background-color,box-shadow] duration-300 hover:bg-energy-ink hover:shadow-[0_8px_20px_rgb(0_179_80/0.35)] sm:inline-flex"
           >
             {quoteCta.label}
             <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -557,6 +588,10 @@ export function Navbar() {
               <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-3">
                 <WhatsAppIcon className="size-4 text-energy" />
                 Chat on WhatsApp
+              </a>
+              <a href={`mailto:${site.email.projects}`} className="inline-flex min-h-11 items-center gap-3 break-all">
+                <Mail aria-hidden className="size-4 shrink-0 text-energy" />
+                {site.email.projects}
               </a>
               <p className="flex items-start gap-3">
                 <MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-energy" />

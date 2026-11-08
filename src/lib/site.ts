@@ -76,7 +76,7 @@ export const telHref = `tel:${site.phone.e164}`;
 export const whatsappHref = `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(site.whatsapp.message)}`;
 
 export type NavLink = { label: string; href: string };
-export type NavMenuId = "services" | "industries" | "capabilities";
+export type NavMenuId = "services" | "industries" | "markets" | "capabilities";
 /** `short` is the desktop-header label, so the full menu, logo and CTA fit on one line from 1280px. */
 export type NavItem = NavLink & { menu?: NavMenuId; short?: string };
 
@@ -85,6 +85,7 @@ export const primaryNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services", menu: "services" },
   { label: "Industries", href: "/industries", menu: "industries" },
+  { label: "Markets We Serve", short: "Markets", href: "/markets", menu: "markets" },
   { label: "Projects & Work Samples", short: "Projects", href: "/project-experience" },
   { label: "Technical Capabilities", short: "Capabilities", href: "/capabilities", menu: "capabilities" },
   { label: "Resources", href: "/resources" },
@@ -179,15 +180,42 @@ export const offer = {
   proofProjects: ["Hail & Ghasha", "Umm Lulu", "Hawiyah NGL", "Dolphin Energy"],
 } as const;
 
-/** Lahore (UTC+5) against the markets served; the US entry is approved for agreed packages. */
+export type TimeZoneFocus = "gcc" | "us" | "uk" | "europe" | "australia";
+
+const lahore = { place: "Lahore", offset: "UTC+5", note: "Our office (no daylight saving)" };
+const uae = { place: "UAE", offset: "UTC+4", note: "1 hour behind Lahore" };
+const ksa = { place: "Saudi Arabia", offset: "UTC+3", note: "2 hours behind Lahore" };
+const usGulf = { place: "US Gulf Coast", offset: "UTC−6 / −5", note: "Overnight working" };
+
+/**
+ * Lahore (UTC+5) against the markets served; the US entry is approved for agreed packages.
+ * Each market page shows its own message first and its own clocks; the homepage shows GCC and US.
+ */
 export const timeZoneStory = {
   heading: "Working Your Hours",
-  gcc: "Lahore is UTC+5: one hour ahead of the UAE and two ahead of Saudi Arabia, so we work your full business day.",
-  us: "For US clients, we work while you sleep and deliver agreed packages by your morning.",
-  zones: [
-    { place: "Lahore", offset: "UTC+5", note: "Our office" },
-    { place: "UAE", offset: "UTC+4", note: "1 hour behind Lahore" },
-    { place: "Saudi Arabia", offset: "UTC+3", note: "2 hours behind Lahore" },
-    { place: "US Gulf Coast", offset: "UTC−6 / −5", note: "Overnight working" },
-  ],
-} as const;
+  lines: {
+    gcc: "Lahore is UTC+5: one hour ahead of the UAE and two ahead of Saudi Arabia and Qatar, so we work your full business day.",
+    us: "For US clients, we work while you sleep and deliver agreed packages by your morning.",
+    uk: "The UK is four to five hours behind Lahore. Your morning overlaps our afternoon for calls and queries, and comments sent in your afternoon are picked up at the start of our next day.",
+    europe: "Central Europe is three to four hours behind Lahore. Your morning overlaps our afternoon for calls and queries, and comments sent in your afternoon are picked up at the start of our next day.",
+    australia: "Australia's east coast is five to six hours ahead of Lahore, and Perth three. Our morning overlaps your afternoon for calls, and drawings issued at the end of our day are waiting when you start the next morning.",
+  } satisfies Record<TimeZoneFocus, string>,
+  zones: {
+    both: [lahore, uae, ksa, usGulf],
+    gcc: [lahore, uae, ksa, { place: "Qatar", offset: "UTC+3", note: "2 hours behind Lahore" }],
+    us: [lahore, usGulf, { place: "US East Coast", offset: "UTC−5 / −4", note: "Overnight working" }, uae],
+    uk: [lahore, { place: "United Kingdom", offset: "UTC+0 / +1", note: "4–5 hours behind Lahore" }],
+    europe: [
+      lahore,
+      { place: "Central Europe", offset: "UTC+1 / +2", note: "3–4 hours behind Lahore" },
+      { place: "UK & Portugal", offset: "UTC+0 / +1", note: "4–5 hours behind Lahore" },
+      { place: "Eastern Europe", offset: "UTC+2 / +3", note: "2–3 hours behind Lahore" },
+    ],
+    australia: [
+      lahore,
+      { place: "Perth", offset: "UTC+8", note: "3 hours ahead of Lahore" },
+      { place: "Brisbane", offset: "UTC+10", note: "5 hours ahead of Lahore" },
+      { place: "Sydney & Melbourne", offset: "UTC+10 / +11", note: "5–6 hours ahead of Lahore" },
+    ],
+  },
+};

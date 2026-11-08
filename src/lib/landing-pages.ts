@@ -1,9 +1,10 @@
 import type { Faq } from "./faqs";
 import type { ServiceSlug } from "./services";
-import { offer } from "./site";
+import { offer, type TimeZoneFocus } from "./site";
 
 /**
- * Rankable landing pages (fix prompt, phase 4): three markets and three specialisms.
+ * Rankable landing pages (fix prompt, phase 4): market pages (grouped into regions in ./markets.ts)
+ * and three specialisms.
  * /pilot is a separate conversion page (src/app/pilot/page.tsx).
  *
  * Content rules: facts come from what the site already documents (projects.ts, standards.ts,
@@ -14,6 +15,11 @@ export type LandingSlug =
   | "steel-detailing-uae"
   | "steel-detailing-saudi-arabia"
   | "steel-detailing-usa"
+  | "steel-detailing-middle-east"
+  | "steel-detailing-qatar"
+  | "steel-detailing-uk"
+  | "steel-detailing-europe"
+  | "steel-detailing-australia"
   | "pipe-rack-detailing"
   | "tekla-detailing-outsourcing"
   | "offshore-structural-detailing";
@@ -29,7 +35,7 @@ export type LandingPage = {
   glance: string[];
   scope: { heading: string; items: string[] }[];
   standards: { refs: string[]; note: string };
-  timezone: "gcc" | "us";
+  timezone: TimeZoneFocus;
   process: { title: string; text: string }[];
   experience: { intro: string; projectIds: string[] };
   faqs: Faq[];
@@ -152,7 +158,7 @@ export const landingPages: LandingPage[] = [
     related: {
       services: ["steel-detailing-fabrication", "plant-structural-3d-modelling", "brownfield-structural-modifications"],
       guides: ["outsourcing-structural-steel-detailing-guide", "structural-detailing-input-checklist", "how-to-write-an-rfq-for-structural-detailing"],
-      pages: ["steel-detailing-saudi-arabia", "pipe-rack-detailing", "offshore-structural-detailing"],
+      pages: ["steel-detailing-middle-east", "steel-detailing-saudi-arabia", "pipe-rack-detailing", "offshore-structural-detailing"],
     },
     form: { countryPage: "uae", defaultCountry: "United Arab Emirates", defaultService: "steel-detailing-fabrication" },
     schema: { serviceType: "Structural steel detailing", areaServed: ["AE"] },
@@ -254,7 +260,7 @@ export const landingPages: LandingPage[] = [
     related: {
       services: ["steel-detailing-fabrication", "rcc-reinforcement-detailing", "material-takeoffs-documentation"],
       guides: ["rebar-placing-drawings-and-bar-bending-schedules", "structural-detailing-input-checklist", "structural-design-vs-detailing-responsibilities"],
-      pages: ["steel-detailing-uae", "pipe-rack-detailing", "tekla-detailing-outsourcing"],
+      pages: ["steel-detailing-middle-east", "steel-detailing-uae", "pipe-rack-detailing", "tekla-detailing-outsourcing"],
     },
     form: { countryPage: "saudi-arabia", defaultCountry: "Saudi Arabia", defaultService: "steel-detailing-fabrication" },
     schema: { serviceType: "Structural steel detailing", areaServed: ["SA"] },
@@ -360,6 +366,516 @@ export const landingPages: LandingPage[] = [
     },
     form: { countryPage: "usa", defaultCountry: "United States", defaultService: "steel-detailing-fabrication" },
     schema: { serviceType: "Structural steel detailing", areaServed: ["US"] },
+  },
+  {
+    slug: "steel-detailing-middle-east",
+    kind: "market",
+    nav: { label: "GCC & MENA", text: "UAE, Saudi Arabia, Qatar, Kuwait, Oman, Bahrain and Iraq" },
+    seo: {
+      title: "Steel Detailing for GCC & Middle East Projects",
+      description:
+        "Steel detailing, Tekla modelling and rebar documentation for GCC and Middle East energy projects, from a senior team with regional experience. Gulf hours.",
+      keyword: "steel detailing Middle East",
+    },
+    hero: {
+      eyebrow: "GCC & MENA",
+      title: "Steel Detailing for",
+      accent: "GCC & Middle East Projects",
+      intro:
+        "Tekla models, fabrication drawings and reinforcement documentation for oil, gas, petrochemical and industrial projects across the Gulf, from a senior team whose experience was built on the region's energy facilities.",
+      image: "/images/onshore-pipe-rack.jpg",
+      imageAlt: "Steel pipe rack and process structures at an onshore plant",
+    },
+    overview: {
+      heading: "One Team for the Region's Energy Projects",
+      paragraphs: [
+        "PetroHill provides structural steel detailing, Tekla modelling, RCC and rebar documentation and brownfield modification drawings for fabricators and EPC contractors working across the Gulf Cooperation Council and the wider Middle East. From Lahore we are one to two hours ahead of every Gulf capital, so our working day covers yours from the first call to the last transmittal.",
+        "The region is where our senior team's experience was formed. In prior roles they worked on the Hail & Ghasha onshore facilities, the Umm Lulu offshore development and BAB and ASAB modifications in Abu Dhabi, the Hawiyah NGL Recovery Project in Saudi Arabia, the Dolphin Energy gas project linking Qatar and the UAE, and the Diwaniya refinery expansion in Iraq. That range covers greenfield and brownfield, onshore and offshore, steel and concrete.",
+        "Gulf projects share a pattern: operator standards sit above the international codes, specifications are long, and fabricators are inspected against all of them. ADNOC-group projects refer to AGES and project specifications, Saudi Aramco projects to SAES and SAMSS, and QatarEnergy and Kuwait Oil Company projects to their own engineering standards. We detail to the documents issued with each package, record which one governs each requirement and raise conflicts as formal queries. We do not claim approval or registration with any operator.",
+        "Each country has its own page with the packages, specifications and questions that matter there. If your project sits elsewhere in the region, such as Kuwait, Oman, Bahrain or Iraq, the same scope review applies: we confirm the governing documents, drawing standard, numbering and issue dates before modelling begins.",
+      ],
+    },
+    glance: [
+      `Quote reply ${offer.quoteResponse}`,
+      "1–2 hours ahead of every Gulf capital",
+      `Pilot: ${offer.pilot.summary}`,
+      offer.nda,
+      `Formats: ${formats}`,
+    ],
+    scope: [
+      {
+        heading: "Typical regional packages",
+        items: [
+          "Pipe racks and pipe bridges for process and utility areas",
+          "Platforms, stairs, ladders and access steel around equipment",
+          "Equipment supports, skids, shelters and compressor houses",
+          "Offshore topsides secondary steel and modification steel",
+          "Foundations, pedestals and rebar placing drawings with BBS",
+          "Brownfield tie-ins and as-built records from verified survey data",
+        ],
+      },
+      {
+        heading: "Deliverables",
+        items: [
+          "Tekla Structures detailing model",
+          "GA, erection, assembly and single-part drawings",
+          "Anchor bolt plans and embed details",
+          "Bar bending schedules to BS 8666 or the specified convention",
+          "MTO, bolt lists, drawing registers and transmittals",
+          "NC / DSTV files and IFC exports where contracted",
+        ],
+      },
+    ],
+    standards: {
+      refs: ["client-project", "aisc-303", "aisc-360", "eurocodes", "aci-318", "bs-8666", "aws-d11", "iso-19902"],
+      note: "Operator standards (ADNOC AGES, Saudi Aramco SAES and SAMSS, QatarEnergy and KOC standards) and the project specification govern where they apply, with AISC, Eurocode or ACI design bases as your engineer specifies. We detail to them as issued. Working to a standard is not a claim of approval or certification.",
+    },
+    timezone: "gcc",
+    process: [
+      { title: "Inputs", text: "Design, operator standards, project specifications and vendor data reviewed; the governing hierarchy recorded." },
+      { title: "Model", text: "Tekla model or RCC drawings set up to the project numbering, phasing and drawing standard." },
+      { title: "Checks", text: "Model and drawings checked against the design, the specifications and the query log." },
+      { title: "Drawings", text: "Fabrication, erection and reinforcement documents issued through your document control." },
+      { title: "Revisions", text: "Client and inspection comments clouded, re-issued and tracked to closure in the register." },
+    ],
+    experience: {
+      intro: "Regional projects from our senior team's prior roles, beyond the UAE examples on the UAE page.",
+      projectIds: ["rcc-detailing", "drawings-qaqc", "steel-detailing"],
+    },
+    faqs: [
+      {
+        id: "mena-countries",
+        q: "Which countries in the Middle East do you support?",
+        a: "We have dedicated pages for the UAE, Saudi Arabia and Qatar, and we take packages for Kuwait, Oman, Bahrain and Iraq on the same basis. The country matters less than the governing documents: we confirm the operator standards and project specification for each package before modelling begins.",
+      },
+      {
+        id: "mena-operators",
+        q: "Are you an approved vendor with ADNOC, Saudi Aramco or QatarEnergy?",
+        a: "No, and we do not claim to be. Our senior team worked on projects for these operators in prior roles, and we detail to the standards and specifications issued with each package. Vendor approval and qualification sit with the EPC contractor and the fabricator.",
+      },
+      {
+        id: "mena-week",
+        q: "How do you handle the Gulf working week and Ramadan hours?",
+        a: "Lahore is one to two hours ahead of the Gulf, so our day covers yours. Issues and progress meetings are planned around your working week, and during Ramadan we agree adjusted call times and issue dates at the start of the month rather than assume them.",
+      },
+      quoteFaq("mena"),
+      pilotFaq("mena"),
+    ],
+    related: {
+      services: ["steel-detailing-fabrication", "rcc-reinforcement-detailing", "brownfield-structural-modifications"],
+      guides: ["structural-detailing-input-checklist", "how-to-write-an-rfq-for-structural-detailing", "brownfield-structural-modification-drawings"],
+      pages: ["steel-detailing-uae", "steel-detailing-saudi-arabia", "steel-detailing-qatar"],
+    },
+    form: { countryPage: "middle-east", defaultCountry: "", defaultService: "steel-detailing-fabrication" },
+    schema: { serviceType: "Structural steel detailing", areaServed: ["AE", "SA", "QA", "KW", "OM", "BH", "IQ"] },
+  },
+  {
+    slug: "steel-detailing-qatar",
+    kind: "market",
+    nav: { label: "Qatar", text: "Doha and Ras Laffan fabricators and EPC teams" },
+    seo: {
+      title: "Steel Detailing Services for Qatar Projects",
+      description:
+        "Steel detailing, Tekla modelling and MTO for Qatar gas, LNG and industrial projects: Doha and Ras Laffan fabricators and EPC teams, in Qatar working hours.",
+      keyword: "steel detailing Qatar",
+    },
+    hero: {
+      eyebrow: "Doha · Ras Laffan · Mesaieed",
+      title: "Steel Detailing for",
+      accent: "Qatar Gas & Industrial Projects",
+      intro:
+        "Tekla models, fabrication drawings and material take-offs for Qatar's gas, LNG and industrial steelwork, from a senior team with Dolphin Energy project experience, two hours ahead of Qatar time.",
+      image: "/images/industry-petrochemical.jpg",
+      imageAlt: "Process plant structures, platforms and equipment lit at night",
+    },
+    overview: {
+      heading: "Detailing Support for Qatar's Gas Sector",
+      paragraphs: [
+        "PetroHill supports fabricators and EPC contractors delivering steel and concrete structures for Qatar's gas, LNG, petrochemical and industrial projects. We work from Lahore, two hours ahead of Arabia Standard Time, so our working day covers the whole Qatar business day.",
+        "Qatar's energy work is concentrated in a few large industrial cities, Ras Laffan and Mesaieed above all, where expansion trains, utilities and brownfield tie-ins generate large volumes of pipe rack, platform, shelter and equipment-support steel. Fabricators in Doha's industrial areas and the yards serving these sites need detailing capacity that can follow a long, specification-driven document hierarchy without slowing down.",
+        "Our senior team's Qatar experience comes from the Dolphin Energy project, which processes Qatari gas for export to the UAE. In prior engagements they produced detailed engineering drawings, PDS and FrameWorks Plus models, model reviews and material take-offs. We apply that model-based discipline to Tekla packages today: coordinated models, consistent numbering and quantities that reconcile with the drawings at every revision.",
+        "On QatarEnergy-operated and affiliated projects, the operator's engineering standards and the project specification govern. We detail to them as issued, alongside the AISC or Eurocode design basis your engineer has specified, and we do not claim operator approval; vendor qualification stays with the EPC and the fabricator.",
+      ],
+    },
+    glance: [
+      `Quote reply ${offer.quoteResponse}`,
+      "Covers the full Qatar working day",
+      `Pilot: ${offer.pilot.summary}`,
+      offer.nda,
+      `Formats: ${formats}`,
+    ],
+    scope: [
+      {
+        heading: "Typical Qatar packages",
+        items: [
+          "Pipe racks and pipe bridges for LNG and gas-processing trains",
+          "Equipment platforms, access steel and maintenance structures",
+          "Shelters, compressor houses and industrial buildings",
+          "Pipe support and cable tray support steel",
+          "Brownfield tie-in and modification steel on operating plants",
+          "Foundations and pedestals (RCC drawings and BBS)",
+        ],
+      },
+      {
+        heading: "Deliverables",
+        items: [
+          "Tekla Structures detailing model",
+          "GA, erection, assembly and single-part drawings",
+          "Anchor bolt plans and embed details",
+          "MTO and bolt lists reconciled to each revision",
+          "Drawing registers, transmittals and revision records",
+          "NC / DSTV files and IFC exports where contracted",
+        ],
+      },
+    ],
+    standards: {
+      refs: ["client-project", "aisc-303", "aisc-360", "eurocodes", "aws-d11", "bs-8666"],
+      note: "QatarEnergy engineering standards, EPC procedures and the project specification govern where they apply; we detail to them as supplied and flag conflicts with the general codes for the engineer to resolve. Working to a standard is not a claim of approval or certification.",
+    },
+    timezone: "gcc",
+    process: [
+      { title: "Inputs", text: "Design drawings, operator standards, project specifications and vendor data reviewed and logged." },
+      { title: "Model", text: "Tekla model set up to the project numbering, area codes and phasing." },
+      { title: "Checks", text: "Model, drawings and MTO checked against the design and the query log." },
+      { title: "Drawings", text: "Fabrication and erection documents issued through your document control system." },
+      { title: "Revisions", text: "Comments and design changes clouded, re-issued and tracked to closure." },
+    ],
+    experience: {
+      intro: "Qatar and regional gas experience from our senior team's prior roles.",
+      projectIds: ["drawings-qaqc", "rcc-detailing", "onshore-civil-structural"],
+    },
+    faqs: [
+      {
+        id: "qatar-office",
+        q: "Do you have an office in Qatar?",
+        a: "No. We work remotely from our office in Lahore, two hours ahead of Qatar. Models, drawings and comments move through your document control system or an agreed transfer method, and calls are held in Qatar working hours.",
+      },
+      {
+        id: "qatar-standards",
+        q: "Can you work to QatarEnergy standards and project specifications?",
+        a: "Yes. We detail to the operator standards, EPC procedures and project specifications issued with each package, and record which document governs each requirement. We do not claim QatarEnergy approval; vendor qualification remains with the EPC and the fabricator.",
+      },
+      {
+        id: "qatar-mto",
+        q: "Can you produce material take-offs for procurement?",
+        a: "Yes. Take-offs come from the detailing model and are tied to the drawing revision they were taken from, with units, inclusions and exclusions stated, so procurement quantities can be reconciled as the design develops.",
+      },
+      quoteFaq("qatar"),
+      pilotFaq("qatar"),
+    ],
+    related: {
+      services: ["steel-detailing-fabrication", "material-takeoffs-documentation", "brownfield-structural-modifications"],
+      guides: ["structural-steel-material-take-off-guide", "structural-detailing-input-checklist", "steel-drawing-types-explained"],
+      pages: ["steel-detailing-middle-east", "steel-detailing-uae", "pipe-rack-detailing"],
+    },
+    form: { countryPage: "qatar", defaultCountry: "Qatar", defaultService: "steel-detailing-fabrication" },
+    schema: { serviceType: "Structural steel detailing", areaServed: ["QA"] },
+  },
+  {
+    slug: "steel-detailing-uk",
+    kind: "market",
+    nav: { label: "United Kingdom", text: "Detailing capacity for UK fabricators and contractors" },
+    seo: {
+      title: "Steel Detailing Services for UK Fabricators",
+      description:
+        "Outsourced steel detailing and Tekla modelling for UK fabricators: BS EN 1090-2 execution classes, Eurocode design bases and BS 8666 rebar schedules.",
+      keyword: "steel detailing services UK",
+    },
+    hero: {
+      eyebrow: "Overflow capacity for UK steelwork",
+      title: "Steel Detailing Services",
+      accent: "for UK Fabricators",
+      intro:
+        "Tekla models, fabrication drawings and rebar schedules for UK industrial, energy and infrastructure steelwork, prepared to your execution specification, with your morning overlapping our afternoon.",
+      image: "/images/industry-power.jpg",
+      imageAlt: "Steel gantry structures in an electrical substation",
+    },
+    overview: {
+      heading: "Detailing Capacity for UK Steelwork Contractors",
+      paragraphs: [
+        "PetroHill gives UK steelwork contractors, detailing practices and engineering contractors extra Tekla detailing capacity for peaks, tight programmes and packages that would otherwise wait for in-house resource. We work from Lahore, four to five hours ahead of the UK: your morning overlaps our afternoon, and comments you send in your afternoon are picked up at the start of our next day.",
+        "UK steelwork is built to an execution specification. The designer states the execution class under BS EN 1090-2, often with the National Structural Steelwork Specification adopted alongside it, and the steelwork contractor carries the UKCA or CE marking. Our part is to make the drawings carry everything the shop and site need for that class: weld and bolt information, preparation details, tolerances flagged where specified and traceable revision control.",
+        "Our senior team brings more than thirty years of heavy industrial and energy steel experience, gained mainly on oil and gas projects in the Middle East and Central Asia rather than UK jobs. For UK work we therefore start with a scope review that confirms your drawing standards, connection conventions, marking system and shop preferences, and we run a pilot package when you want to see our drawings before committing more.",
+        "Industrial and energy work suits our background best: substations and power plant steel, process and water-treatment structures, pipe racks, platforms and access steel, and modification steel for operating sites. Building frames are taken on where the scope and connection design responsibility are clearly defined.",
+      ],
+    },
+    glance: [
+      `Quote reply ${offer.quoteResponse}`,
+      "UK morning overlaps our afternoon",
+      `Pilot: ${offer.pilot.summary}`,
+      offer.nda,
+      `Formats: ${formats}`,
+    ],
+    scope: [
+      {
+        heading: "Typical UK packages",
+        items: [
+          "Power, substation and energy-from-waste structural steel",
+          "Process, water and industrial plant structures",
+          "Pipe racks, platforms, stairs, ladders and handrails",
+          "Equipment supports and secondary steel",
+          "Modification steel for operating sites from verified survey data",
+          "Rebar placing drawings and BS 8666 bar schedules",
+        ],
+      },
+      {
+        heading: "Deliverables",
+        items: [
+          "Tekla Structures detailing model",
+          "GA, erection, assembly and single-part drawings",
+          "Holding-down bolt and embed plans",
+          "Bar schedules to BS 8666 shape codes",
+          "Member, bolt and material lists",
+          "NC / DSTV files and IFC exports where contracted",
+        ],
+      },
+    ],
+    standards: {
+      refs: ["eurocodes", "en-1090-2", "nsss", "bs-8666", "client-project", "iso-19650"],
+      note: "The execution class and execution specification come from the designer; we detail to them and do not select the class or certify conformity. UKCA or CE marking under BS EN 1090-1 is the steelwork contractor's. Working to a standard is not a claim of certification.",
+    },
+    timezone: "uk",
+    process: [
+      { title: "Inputs", text: "Design drawings, execution specification and class, connection responsibility and your drawing standard confirmed." },
+      { title: "Model", text: "Tekla model built to your numbering, phasing and assembly conventions." },
+      { title: "Checks", text: "Model and drawings checked against the design, the execution specification and the query log." },
+      { title: "Drawings", text: "GA, erection, assembly and part drawings with reports, issued per your transmittal." },
+      { title: "Revisions", text: "Comments and design changes clouded, re-issued and tracked in the revision register." },
+    ],
+    experience: {
+      intro: "Heavy industrial steel experience from our senior team's prior roles, which we apply to UK specifications.",
+      projectIds: ["steel-detailing", "offshore-structural", "plant-3d-modelling"],
+    },
+    faqs: [
+      {
+        id: "uk-exc",
+        q: "Can you detail to BS EN 1090-2 execution classes?",
+        a: "Yes. The designer states the execution class and specification, typically EXC2 for most building and industrial steel, and we make sure the drawings carry the weld, bolting, preparation and tolerance information that class requires. Selecting the class and certifying conformity are not part of detailing.",
+      },
+      {
+        id: "uk-projects",
+        q: "Have you worked on UK projects?",
+        a: "Our senior team's experience comes mainly from oil and gas projects in the Middle East and Central Asia, not the UK. That is why every UK package starts with a scope review of your standards and conventions, and why we offer a fixed-price pilot so you can check our drawings on your own job first.",
+      },
+      {
+        id: "uk-rebar",
+        q: "Do you produce bar schedules to BS 8666?",
+        a: "Yes, where the reinforcement design is complete. We prepare placing drawings and bar schedules using BS 8666 shape codes, and raise queries on laps, cover and congestion for the designer to resolve.",
+      },
+      quoteFaq("uk"),
+      pilotFaq("uk"),
+    ],
+    related: {
+      services: ["steel-detailing-fabrication", "rcc-reinforcement-detailing", "plant-structural-3d-modelling"],
+      guides: ["structural-design-vs-detailing-responsibilities", "rebar-placing-drawings-and-bar-bending-schedules", "outsourcing-structural-steel-detailing-guide"],
+      pages: ["steel-detailing-europe", "tekla-detailing-outsourcing", "pipe-rack-detailing"],
+    },
+    form: { countryPage: "uk", defaultCountry: "United Kingdom", defaultService: "steel-detailing-fabrication" },
+    schema: { serviceType: "Structural steel detailing", areaServed: ["GB"] },
+  },
+  {
+    slug: "steel-detailing-europe",
+    kind: "market",
+    nav: { label: "Europe", text: "EN 1090 detailing for European fabricators and EPCs" },
+    seo: {
+      title: "Steel Detailing Services for European Projects",
+      description:
+        "Tekla steel detailing for European fabricators and EPC teams: EN 1090-2 execution classes, Eurocodes with National Annexes and NORSOK where specified.",
+      keyword: "steel detailing services Europe",
+    },
+    hero: {
+      eyebrow: "EN 1090 · Eurocodes · NORSOK",
+      title: "Steel Detailing Services",
+      accent: "for European Projects",
+      intro:
+        "Tekla models and fabrication drawings for European industrial, energy and offshore steelwork, prepared to your execution specification, three to four hours ahead of Central European time.",
+      image: "/images/industry-industrial-energy.jpg",
+      imageAlt: "Dense network of industrial pipes and valves",
+    },
+    overview: {
+      heading: "Detailing to European Execution Specifications",
+      paragraphs: [
+        "PetroHill provides Tekla detailing capacity to steel fabricators, detailing offices and EPC contractors across Europe working on industrial, energy and offshore projects. From Lahore we are three to four hours ahead of Central European time: your morning overlaps our afternoon for calls and queries, and comments sent in your afternoon are picked up at the start of our next day.",
+        "European steelwork follows a common framework with national detail. Design is to the Eurocodes with the National Annex of the country where the structure is built, and execution to EN 1090-2 at the execution class the designer specifies, with the fabricator responsible for CE marking under EN 1090-1. On North Sea offshore and some onshore energy work, the operator may add NORSOK requirements such as M-101 for structural steel fabrication. We confirm which documents apply, in what order, before any modelling starts.",
+        "Our senior team's background is heavy industrial and energy steel: refinery expansions, gas-processing units, offshore topsides and brownfield modifications, mainly in the Middle East and Central Asia. For European packages we pair that experience with a scope review of your drawing standard, marking system, language requirements for drawing text and shop conventions, and we offer a fixed-price pilot so you can check our output on your own project.",
+        "We work in English. Where drawings must carry another language, we agree the title block, standard notes and terminology list with you at the start so that every sheet is consistent.",
+      ],
+    },
+    glance: [
+      `Quote reply ${offer.quoteResponse}`,
+      "European morning overlaps our afternoon",
+      `Pilot: ${offer.pilot.summary}`,
+      offer.nda,
+      `Formats: ${formats}`,
+    ],
+    scope: [
+      {
+        heading: "Typical European packages",
+        items: [
+          "Process, chemical and energy plant structures",
+          "Pipe racks, platforms and access steel",
+          "Offshore topsides secondary steel and modules where specified",
+          "Equipment supports and skid frames",
+          "Modification steel for operating sites",
+          "Rebar placing drawings and bar schedules",
+        ],
+      },
+      {
+        heading: "Deliverables",
+        items: [
+          "Tekla Structures detailing model",
+          "GA, erection, assembly and single-part drawings",
+          "Anchor and embed plans",
+          "Member, bolt and material lists",
+          "IFC exports for coordination with plant design tools",
+          "NC / DSTV files where contracted",
+        ],
+      },
+    ],
+    standards: {
+      refs: ["eurocodes", "en-1090-2", "norsok-m101", "client-project", "iso-19650", "iso-19902"],
+      note: "The execution class, execution specification and any operator requirements come from the designer and the contract; we detail to them and do not select the class or certify conformity. CE marking under EN 1090-1 is the fabricator's. Working to a standard is not a claim of certification.",
+    },
+    timezone: "europe",
+    process: [
+      { title: "Inputs", text: "Design, National Annex, execution specification and class, operator requirements and drawing standard confirmed." },
+      { title: "Model", text: "Tekla model built to your numbering, phasing and assembly rules." },
+      { title: "Checks", text: "Model and drawings checked against the design, the execution specification and the query log." },
+      { title: "Drawings", text: "Fabrication and erection documents issued in the agreed language and format." },
+      { title: "Revisions", text: "Comments and design changes clouded, re-issued and tracked in the revision register." },
+    ],
+    experience: {
+      intro: "Industrial, refinery and offshore experience from our senior team's prior roles.",
+      projectIds: ["steel-detailing", "offshore-structural", "plant-3d-modelling"],
+    },
+    faqs: [
+      {
+        id: "europe-exc",
+        q: "Who decides the EN 1090 execution class?",
+        a: "The designer, in the execution specification. EN 1090-2 sets four execution classes, EXC1 to EXC4, with stricter requirements as the class rises. We detail to the class stated and make sure the drawings carry the information it requires; we do not choose the class.",
+      },
+      {
+        id: "europe-norsok",
+        q: "Can you work to NORSOK requirements on offshore packages?",
+        a: "Yes, where the operator specifies them. We detail to NORSOK M-101 and the project's own offshore specifications as issued, with weld and inspection categories taken from the design. Offshore structural design and analysis stay with the responsible engineer.",
+      },
+      {
+        id: "europe-language",
+        q: "Can drawings be issued in languages other than English?",
+        a: "We work in English. Where your project needs another language on drawings, we agree the title block, standard notes and a terminology list at the start, so that every sheet uses the same approved wording.",
+      },
+      quoteFaq("europe"),
+      pilotFaq("europe"),
+    ],
+    related: {
+      services: ["steel-detailing-fabrication", "plant-structural-3d-modelling", "brownfield-structural-modifications"],
+      guides: ["structural-design-vs-detailing-responsibilities", "tekla-model-deliverables-guide", "outsourcing-structural-steel-detailing-guide"],
+      pages: ["steel-detailing-uk", "offshore-structural-detailing", "tekla-detailing-outsourcing"],
+    },
+    form: { countryPage: "europe", defaultCountry: "", defaultService: "steel-detailing-fabrication" },
+    schema: { serviceType: "Structural steel detailing", areaServed: ["Europe"] },
+  },
+  {
+    slug: "steel-detailing-australia",
+    kind: "market",
+    nav: { label: "Australia", text: "AS/NZS 5131 detailing for Australian fabricators" },
+    seo: {
+      title: "Steel Detailing Services for Australia",
+      description:
+        "Tekla steel detailing for Australian fabricators and EPCs: AS 4100 design bases, AS/NZS 5131 construction categories and drawings ready by your morning.",
+      keyword: "steel detailing services Australia",
+    },
+    hero: {
+      eyebrow: "Perth · Brisbane · Sydney · Melbourne",
+      title: "Steel Detailing Services",
+      accent: "for Australian Fabricators",
+      intro:
+        "Tekla models, shop drawings and rebar documentation for Australian resources, energy and industrial steelwork. Our morning overlaps your afternoon, and drawings issued at our close are waiting by your next morning.",
+      image: "/images/industry-fertilizer.jpg",
+      imageAlt: "Process plant complex at dusk",
+    },
+    overview: {
+      heading: "Detailing Capacity for Australian Steelwork",
+      paragraphs: [
+        "PetroHill provides Tekla detailing capacity to Australian steel fabricators, detailing firms and EPC contractors on resources, energy and industrial projects. Lahore is three hours behind Perth and five to six hours behind the east coast, so our morning overlaps your afternoon for calls and queries, and drawings issued at the end of our day are with you before you start the next morning.",
+        "Australian steelwork is detailed to the designer's AS 4100 design and fabricated to AS/NZS 5131, where the designer assigns a construction category (CC1 to CC4) that sets the fabrication, welding and inspection requirements. Our drawings carry what the shop needs for that category, with the coatings, marking and bolting specified in the contract documents. Concrete placing drawings follow the AS 3600 design and the project's scheduling convention.",
+        "Our senior team brings more than thirty years of heavy industrial and energy steel experience, gained mainly on oil and gas projects in the Middle East and Central Asia rather than in Australia. For Australian work we confirm your drawing standards, marking, connection conventions and shop preferences in a scope review before modelling, and we offer a fixed-price pilot so you can judge our drawings on your own job.",
+        "Process and resources structures suit our background best: conveyor support steel and transfer structures, pipe racks, platforms and access steel, equipment supports, and modification steel for operating plants, where member counts are high and fabricators need consistent drawings and accurate material lists.",
+      ],
+    },
+    glance: [
+      `Quote reply ${offer.quoteResponse}`,
+      "Drawings ready by your next morning",
+      `Pilot: ${offer.pilot.summary}`,
+      offer.nda,
+      `Formats: ${formats}`,
+    ],
+    scope: [
+      {
+        heading: "Typical Australian packages",
+        items: [
+          "Process and resources plant structures",
+          "Conveyor support steel and transfer structures",
+          "Pipe racks, platforms, stairs, ladders and handrails",
+          "Equipment supports and skid frames",
+          "Modification steel for operating plants",
+          "Rebar placing drawings and bar schedules",
+        ],
+      },
+      {
+        heading: "Deliverables",
+        items: [
+          "Tekla Structures detailing model",
+          "GA, erection, assembly and single-part drawings",
+          "Holding-down bolt and embed plans",
+          "Member, bolt and material lists",
+          "Drawing registers and revision records",
+          "NC / DSTV files and IFC exports where contracted",
+        ],
+      },
+    ],
+    standards: {
+      refs: ["as-4100", "as-nzs-5131", "as-3600", "client-project", "iso-19650"],
+      note: "The construction category and design basis come from the designer; we detail to them and do not select the category or certify compliance. Fabrication and erection compliance under AS/NZS 5131 is the fabricator's and erector's. Working to a standard is not a claim of certification.",
+    },
+    timezone: "australia",
+    process: [
+      { title: "Inputs", text: "Design, construction category, connection responsibility, coatings and drawing standard confirmed." },
+      { title: "Model", text: "Tekla model built to your numbering, phasing and assembly conventions." },
+      { title: "Checks", text: "Model and drawings checked against the design, specification and the query log." },
+      { title: "Drawings", text: "Shop and erection drawings with reports, issued at the end of our day for your morning." },
+      { title: "Revisions", text: "Comments and design changes clouded, re-issued and tracked in the revision register." },
+    ],
+    experience: {
+      intro: "Heavy industrial and process-plant experience from our senior team's prior roles, which we apply to Australian specifications.",
+      projectIds: ["steel-detailing", "rcc-detailing", "plant-3d-modelling"],
+    },
+    faqs: [
+      {
+        id: "australia-cc",
+        q: "Can you detail to AS/NZS 5131 construction categories?",
+        a: "Yes. The designer assigns the construction category, CC1 to CC4, and we make sure the drawings carry the welding, bolting, preparation and inspection information it requires. Selecting the category and certifying compliance are not part of detailing.",
+      },
+      {
+        id: "australia-projects",
+        q: "Have you worked on Australian projects?",
+        a: "Our senior team's experience comes mainly from oil and gas projects in the Middle East and Central Asia, not Australia. Every Australian package therefore starts with a scope review of your standards and conventions, and our fixed-price pilot lets you check our drawings on your own job first.",
+      },
+      {
+        id: "australia-hours",
+        q: "How does the time difference work for Australian teams?",
+        a: "Our morning overlaps your afternoon, which is when calls and queries happen. Work then continues through the rest of our day, and agreed drawings are issued at our close, which is before the start of your next working day on the east coast and in Perth.",
+      },
+      quoteFaq("australia"),
+      pilotFaq("australia"),
+    ],
+    related: {
+      services: ["steel-detailing-fabrication", "rcc-reinforcement-detailing", "material-takeoffs-documentation"],
+      guides: ["outsourcing-structural-steel-detailing-guide", "structural-design-vs-detailing-responsibilities", "steel-drawing-types-explained"],
+      pages: ["tekla-detailing-outsourcing", "pipe-rack-detailing", "steel-detailing-uk"],
+    },
+    form: { countryPage: "australia", defaultCountry: "Australia", defaultService: "steel-detailing-fabrication" },
+    schema: { serviceType: "Structural steel detailing", areaServed: ["AU"] },
   },
   {
     slug: "pipe-rack-detailing",

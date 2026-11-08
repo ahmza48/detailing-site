@@ -53,7 +53,7 @@ export const breadcrumbJsonLd = (crumbs: Crumb[]) => ({
 const organizationId = `${site.url}/#organization`;
 
 /** Markets served (fix prompt 3.1): ISO 3166 codes, as Country nodes where a Place is expected. */
-export const areaServedCodes = ["AE", "SA", "QA", "KW", "OM", "US", "GB"] as const;
+export const areaServedCodes = ["AE", "SA", "QA", "KW", "OM", "US", "GB", "AU"] as const;
 const areaServed = areaServedCodes.map((code) => ({ "@type": "Country", name: code }));
 
 /**
@@ -88,7 +88,7 @@ export const organizationJsonLd = () => ({
       name: site.name,
       url: site.url,
       description: site.description,
-      logo: absoluteUrl("/logo/petrohill-stacked.png"),
+      logo: absoluteUrl("/logo/petrohill-energy-logo.png"),
       telephone: site.phone.e164,
       address: postalAddress,
       contactPoint: {
@@ -178,7 +178,8 @@ export const landingServiceJsonLd = (page: {
   url: absoluteUrl(`/${page.slug}`),
   image: absoluteUrl(page.hero.image),
   provider: { "@id": organizationId },
-  areaServed: page.schema.areaServed.map((code) => ({ "@type": "Country", name: code })),
+  // ISO country codes become Country nodes; a region name such as "Europe" becomes a Place.
+  areaServed: page.schema.areaServed.map((area) => ({ "@type": area.length === 2 ? "Country" : "Place", name: area })),
 });
 
 /**

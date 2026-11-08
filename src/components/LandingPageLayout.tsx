@@ -14,10 +14,21 @@ import { StandardsSummary } from "./StandardsSummary";
 import { TimeZoneBlock } from "./TimeZoneBlock";
 import { WhatsAppCta } from "./WhatsAppButton";
 import { landingBySlug, landingPath, type LandingPage } from "@/lib/landing-pages";
+import { marketsPath, regionOf } from "@/lib/markets";
 import { projectById } from "@/lib/projects";
-import { faqPageJsonLd, landingServiceJsonLd } from "@/lib/seo";
+import { faqPageJsonLd, landingServiceJsonLd, type Crumb } from "@/lib/seo";
 import { serviceBySlug, servicePath } from "@/lib/services";
 import { offer } from "@/lib/site";
+
+/** Market pages sit under Markets and their region; specialism pages stand alone. */
+function landingCrumbs(page: LandingPage): Crumb[] {
+  const self = { name: page.nav.label, path: landingPath(page.slug) };
+  const region = page.kind === "market" ? regionOf(page.slug) : undefined;
+  if (!region) return [self];
+  const markets = { name: "Markets", path: marketsPath };
+  if (region.hub === page.slug) return [markets, { name: region.label, path: landingPath(page.slug) }];
+  return region.hub ? [markets, { name: region.label, path: landingPath(region.hub) }, self] : [markets, self];
+}
 
 /**
  * Market and specialism landing page (fix prompt, phase 4): overview, scope and deliverables,
@@ -28,6 +39,8 @@ export function LandingPageLayout({ page }: { page: LandingPage }) {
   const projects = page.experience.projectIds.map(projectById).filter((p) => p !== undefined);
   const services = page.related.services.map(serviceBySlug).filter((s) => s !== undefined);
   const otherPages = page.related.pages.map(landingBySlug);
+  const region = page.kind === "market" ? regionOf(page.slug) : undefined;
+  const countries = region?.hub === page.slug ? region.countries.map(landingBySlug) : [];
 
   return (
     <>
@@ -41,7 +54,7 @@ export function LandingPageLayout({ page }: { page: LandingPage }) {
         intro={page.hero.intro}
         image={page.hero.image}
         imageAlt={page.hero.imageAlt}
-        crumbs={[{ name: page.nav.label, path: landingPath(page.slug) }]}
+        crumbs={landingCrumbs(page)}
       >
         <ButtonLink href="#rfq">Send Drawings for a {offer.quoteResponseShort} Quote</ButtonLink>
         <WhatsAppCta />
@@ -80,6 +93,32 @@ export function LandingPageLayout({ page }: { page: LandingPage }) {
           </aside>
         </div>
       </section>
+
+      {/* Region page: its country pages */}
+      {countries.length > 0 && (
+        <section className="bg-white">
+          <div className="container-site pb-16 lg:pb-20">
+            <h2 className="text-xs font-bold tracking-[0.16em] text-teal-700 uppercase">Country pages</h2>
+            <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {countries.map((country) => (
+                <li key={country.slug}>
+                  <Link
+                    href={landingPath(country.slug)}
+                    className="lift group flex h-full flex-col rounded-xl border border-line bg-paper p-6 transition-colors hover:border-energy-deep"
+                  >
+                    <span className="text-lg font-extrabold text-navy-900 group-hover:text-energy-ink">Steel detailing for {country.nav.label}</span>
+                    <span className="mt-2 flex-1 text-[0.9375rem] leading-6 text-ink">{country.nav.text}</span>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-navy-900">
+                      <ArrowRight aria-hidden className="size-4 text-energy-deep transition-transform group-hover:translate-x-1" />
+                      View page
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* Scope and deliverables */}
       <section className="bg-paper">

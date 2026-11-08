@@ -1,14 +1,15 @@
 import { Clock } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
-import { timeZoneStory } from "@/lib/site";
+import { timeZoneStory, type TimeZoneFocus } from "@/lib/site";
 
 /**
- * The time-zone story: GCC business-day overlap and US overnight working.
- * `focus` puts the relevant market first on the country landing pages.
+ * The time-zone story. `focus` shows a market page's own message and clocks; "both" (the homepage)
+ * shows the GCC business-day overlap and US overnight working.
  */
-export function TimeZoneBlock({ focus = "both", id }: { focus?: "gcc" | "us" | "both"; id?: string }) {
-  const lines =
-    focus === "gcc" ? [timeZoneStory.gcc] : focus === "us" ? [timeZoneStory.us, timeZoneStory.gcc] : [timeZoneStory.gcc, timeZoneStory.us];
+export function TimeZoneBlock({ focus = "both", id }: { focus?: TimeZoneFocus | "both"; id?: string }) {
+  const story = timeZoneStory.lines;
+  const lines = focus === "both" ? [story.gcc, story.us] : focus === "us" ? [story.us, story.gcc] : [story[focus]];
+  const zones = timeZoneStory.zones[focus];
 
   return (
     <section id={id} aria-labelledby="time-zones" className="bg-navy-900 text-white">
@@ -22,7 +23,7 @@ export function TimeZoneBlock({ focus = "both", id }: { focus?: "gcc" | "us" | "
           </div>
         </div>
         <ul className="grid content-start gap-3 sm:grid-cols-2 lg:col-span-6 lg:pt-2">
-          {timeZoneStory.zones.map((zone, i) => (
+          {zones.map((zone, i) => (
             <li
               key={zone.place}
               data-reveal
