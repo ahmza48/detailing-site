@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { CTASection } from "@/components/CTASection";
 import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
+import { StickySectionNav } from "@/components/StickySectionNav";
 import { applications } from "@/lib/applications";
 import { industryBySlug, industryPath } from "@/lib/industries";
 import { pageMetadata } from "@/lib/seo";
@@ -35,17 +36,10 @@ export default function ApplicationsPage() {
         ]}
       />
 
-      <nav aria-label="Structure types" className="border-b border-line bg-white">
-        <ul className="container-site flex gap-x-6 overflow-x-auto py-2 text-xs font-bold tracking-[0.1em] whitespace-nowrap text-navy-900 uppercase">
-          {applications.map((application) => (
-            <li key={application.id}>
-              <a href={`#${application.id}`} className="inline-flex min-h-11 items-center transition-colors hover:text-teal-700">
-                {tc(application.title)}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <StickySectionNav
+        label="Structure types"
+        items={applications.map((application) => ({ id: application.id, title: tc(application.title) }))}
+      />
 
       <section className="bg-white">
         <div className="container-site section-y">
@@ -92,7 +86,8 @@ export default function ApplicationsPage() {
           key={application.id}
           id={application.id}
           aria-labelledby={`${application.id}-title`}
-          className={index % 2 === 0 ? "bg-paper" : "bg-white"}
+          // html scroll-padding clears the header; this clears the sticky structure-type bar.
+          className={`scroll-mt-14 ${index % 2 === 0 ? "bg-paper" : "bg-white"}`}
         >
           <div className="container-site section-y grid items-start gap-10 lg:grid-cols-12 lg:gap-14">
             <div data-reveal="image" className="relative aspect-[4/3] overflow-hidden rounded-xl bg-navy-900 shadow-[0_12px_34px_rgb(0_26_41/0.18)] lg:col-span-5">
