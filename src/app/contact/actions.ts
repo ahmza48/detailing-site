@@ -22,11 +22,12 @@ export async function submitEnquiry(_previous: EnquiryState, formData: FormData)
 
   const result = await deliverEnquiry(parsed.values, parsed.attachment);
   if (!result.ok) {
-    const fallback = ` Please try again shortly, email your scope to ${site.email.projects}, or call or WhatsApp us on ${site.phone.display}.`;
+    // deliverEnquiry has already logged the cause (missing settings or provider error) on the server.
     return {
       status: "error",
-      message: `We could not send your enquiry at this time.${fallback}`,
+      message: `We could not send your enquiry just now. Your details are still in the form below. Please try again shortly, or send your scope straight to an engineer by WhatsApp or email at ${site.email.projects}.`,
       values: parsed.values,
+      deliveryFailed: true,
     };
   }
 

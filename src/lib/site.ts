@@ -4,6 +4,8 @@
  * Company identity and contact details. Every page, metadata tag and JSON-LD
  * block reads from here.
  */
+import { publishedOrgs } from "./experience-orgs";
+
 export const site = {
   name: process.env.NEXT_PUBLIC_COMPANY_NAME || "PetroHill",
   shortName: process.env.NEXT_PUBLIC_COMPANY_SHORT_NAME || "PetroHill",
@@ -74,7 +76,7 @@ export const telHref = `tel:${site.phone.e164}`;
 export const whatsappHref = `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(site.whatsapp.message)}`;
 
 export type NavLink = { label: string; href: string };
-export type NavMenuId = "services" | "industries" | "capabilities";
+export type NavMenuId = "services" | "industries" | "markets" | "capabilities";
 /** `short` is the desktop-header label, so the full menu, logo and CTA fit on one line from 1280px. */
 export type NavItem = NavLink & { menu?: NavMenuId; short?: string };
 
@@ -83,6 +85,7 @@ export const primaryNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services", menu: "services" },
   { label: "Industries", href: "/industries", menu: "industries" },
+  { label: "Markets We Serve", short: "Markets", href: "/markets", menu: "markets" },
   { label: "Projects & Work Samples", short: "Projects", href: "/project-experience" },
   { label: "Technical Capabilities", short: "Capabilities", href: "/capabilities", menu: "capabilities" },
   { label: "Resources", href: "/resources" },
@@ -101,11 +104,18 @@ export const capabilitiesMenu: NavLink[] = [
 export const outsourcingLink: NavLink = { label: "Engineering Outsourcing & Subcontract Support", href: "/engineering-outsourcing" };
 export const applicationsLink: NavLink = { label: "Structures & Applications", href: "/applications" };
 
-export const experienceDisclaimer =
-  "Selected project experience reflects work undertaken by senior team members during previous employment and professional engagements with established EPC, engineering and construction organizations. Project/client references are provided to demonstrate relevant experience and do not imply that the present company directly contracted with the named asset owners.";
+const listNames = (names: string[]) =>
+  names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names.at(-1)}` : (names[0] ?? "");
 
-export const portfolioNote =
-  "Selected experience shown on this website includes projects undertaken by senior team members during previous employment or engagements with established EPC, engineering and construction organizations. Project and client names are presented solely to demonstrate relevant professional experience and do not imply direct contractual relationships with this company.";
+/**
+ * The single statement about project references, shown once near the projects on Home and
+ * Project Experience. It attributes the work to the team's prior roles without a negative
+ * disclaimer (owner decision). Employers are the confirmed, approved former employers in
+ * ./experience-orgs.ts.
+ */
+export const experienceNote = `Project references reflect our senior team's experience in prior roles at ${listNames(
+  publishedOrgs("formerEmployer").map((org) => org.name),
+)}.`;
 
 // Organisations from prior experience (asset owners, former employers) live in ./experience-orgs.ts.
 
@@ -149,10 +159,63 @@ export const purpose = [
 
 export const motto = "Engineering clarity. Detail by detail.";
 
-/** Visible disclaimers for the experience tickers. */
-export const tickerDisclaimers = {
-  assetOwner:
-    `Historical professional project exposure only. Names are shown for experience context; these organisations are not presented as clients, partners or endorsers of ${site.name}.`,
-  formerEmployer:
-    "Organisations where senior team members previously worked or were engaged. Shown as career background only; not current partnerships, clients or endorsements.",
+/**
+ * Commercial terms confirmed by the owner (6 Nov 2026). Every page that states a response time,
+ * pilot offer, NDA or delivery format reads from here, so a change is made once.
+ */
+export const offer = {
+  /** Quote reply promise. */
+  quoteResponse: "within 24 hours (GCC working day)",
+  quoteResponseShort: "24-hour",
+  pilot: {
+    scope: "one assembly or a 5–10 t package",
+    price: "fixed price",
+    delivery: "5 working days",
+    summary: "One assembly or a 5–10 t package, fixed price, delivered in 5 working days.",
+  },
+  nda: "NDA on request",
+  /** Formats already listed on the service pages; machine files only where contracted. */
+  formats: ["Tekla model", "DWG", "PDF", "IFC", "NC / DSTV"],
+  /** Project names from the team's prior roles (see ./projects.ts). */
+  proofProjects: ["Hail & Ghasha", "Umm Lulu", "Hawiyah NGL", "Dolphin Energy"],
+} as const;
+
+export type TimeZoneFocus = "gcc" | "us" | "uk" | "europe" | "australia";
+
+const lahore = { place: "Lahore", offset: "UTC+5", note: "Our office (no daylight saving)" };
+const uae = { place: "UAE", offset: "UTC+4", note: "1 hour behind Lahore" };
+const ksa = { place: "Saudi Arabia", offset: "UTC+3", note: "2 hours behind Lahore" };
+const usGulf = { place: "US Gulf Coast", offset: "UTC−6 / −5", note: "Overnight working" };
+
+/**
+ * Lahore (UTC+5) against the markets served; the US entry is approved for agreed packages.
+ * Each market page shows its own message first and its own clocks; the homepage shows GCC and US.
+ */
+export const timeZoneStory = {
+  heading: "Working Your Hours",
+  lines: {
+    gcc: "Lahore is UTC+5: one hour ahead of the UAE and two ahead of Saudi Arabia and Qatar, so we work your full business day.",
+    us: "For US clients, we work while you sleep and deliver agreed packages by your morning.",
+    uk: "The UK is four to five hours behind Lahore. Your morning overlaps our afternoon for calls and queries, and comments sent in your afternoon are picked up at the start of our next day.",
+    europe: "Central Europe is three to four hours behind Lahore. Your morning overlaps our afternoon for calls and queries, and comments sent in your afternoon are picked up at the start of our next day.",
+    australia: "Australia's east coast is five to six hours ahead of Lahore, and Perth three. Our morning overlaps your afternoon for calls, and drawings issued at the end of our day are waiting when you start the next morning.",
+  } satisfies Record<TimeZoneFocus, string>,
+  zones: {
+    both: [lahore, uae, ksa, usGulf],
+    gcc: [lahore, uae, ksa, { place: "Qatar", offset: "UTC+3", note: "2 hours behind Lahore" }],
+    us: [lahore, usGulf, { place: "US East Coast", offset: "UTC−5 / −4", note: "Overnight working" }, uae],
+    uk: [lahore, { place: "United Kingdom", offset: "UTC+0 / +1", note: "4–5 hours behind Lahore" }],
+    europe: [
+      lahore,
+      { place: "Central Europe", offset: "UTC+1 / +2", note: "3–4 hours behind Lahore" },
+      { place: "UK & Portugal", offset: "UTC+0 / +1", note: "4–5 hours behind Lahore" },
+      { place: "Eastern Europe", offset: "UTC+2 / +3", note: "2–3 hours behind Lahore" },
+    ],
+    australia: [
+      lahore,
+      { place: "Perth", offset: "UTC+8", note: "3 hours ahead of Lahore" },
+      { place: "Brisbane", offset: "UTC+10", note: "5 hours ahead of Lahore" },
+      { place: "Sydney & Melbourne", offset: "UTC+10 / +11", note: "5–6 hours ahead of Lahore" },
+    ],
+  },
 };

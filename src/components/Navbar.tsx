@@ -4,8 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import {
+  Anchor,
   ArrowRight,
   BookOpen,
+  Boxes,
+  Columns3,
+  Globe,
   Box,
   ChevronDown,
   ClipboardList,
@@ -19,6 +23,7 @@ import {
   Grid3x3,
   Handshake,
   Layers,
+  Mail,
   MapPin,
   Menu,
   MonitorCog,
@@ -31,6 +36,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { industries, industryPath } from "@/lib/industries";
+import { landingPath, specialistPages, type LandingPage, type LandingSlug } from "@/lib/landing-pages";
+import { marketPaths, marketRegions, marketsPath, regionPages } from "@/lib/markets";
 import { serviceGroups, servicePath, servicesInGroup, type ServiceSlug } from "@/lib/services";
 import type { IndustrySlug } from "@/lib/industries";
 import {
@@ -55,13 +62,15 @@ const isActive = (pathname: string, href: string) =>
 const sectionAlso: Partial<Record<NavMenuId, string[]>> = {
   services: ["/engineering-outsourcing"],
   industries: ["/applications"],
+  markets: marketPaths,
   capabilities: ["/quality-delivery"],
 };
 
 const stagger = (index: number) => ({ "--i": index }) as React.CSSProperties;
 
 type MenuLink = NavLink & { text?: string; icon: LucideIcon };
-type MenuSection = { heading?: string; links: MenuLink[] };
+/** `compact` renders single-line links (small icon, no description) so secondary groups stay short. */
+type MenuSection = { heading?: string; links: MenuLink[]; compact?: boolean };
 type MenuContent = {
   title: string;
   text: string;
@@ -69,6 +78,8 @@ type MenuContent = {
   sections: MenuSection[];
   /** Columns for the links grid in the desktop panel. */
   columns: 1 | 2;
+  /** "side-by-side" puts each section in its own column instead of stacking them. */
+  layout?: "stacked" | "side-by-side";
 };
 
 const serviceIcons: Record<ServiceSlug, LucideIcon> = {
@@ -89,12 +100,25 @@ const industryIcons: Record<IndustrySlug, LucideIcon> = {
   "power-industrial": Zap,
 };
 
+const landingIcons: Partial<Record<LandingSlug, LucideIcon>> = {
+  "pipe-rack-detailing": Columns3,
+  "tekla-detailing-outsourcing": Boxes,
+  "offshore-structural-detailing": Anchor,
+};
+
 const capabilityMeta: Record<string, { icon: LucideIcon; text: string }> = {
   "/capabilities": { icon: MonitorCog, text: "Deliverables and software experience" },
   "/capabilities/codes-standards": { icon: BookOpen, text: "How project standards are applied" },
   "/quality-delivery": { icon: ShieldCheck, text: "Checking, revisions and handover" },
   "/capabilities#formats": { icon: FileStack, text: "Platforms, versions and exchange" },
 };
+
+const marketLink = (page: LandingPage, hub?: LandingSlug): MenuLink => ({
+  label: page.slug === hub ? `${page.nav.label} overview` : page.nav.label,
+  href: landingPath(page.slug),
+  text: page.nav.text,
+  icon: page.slug === hub ? Globe : MapPin,
+});
 
 /** Dropdown contents. Built once; the same data drives the mobile accordions. */
 const menus: Record<NavMenuId, MenuContent> = {
@@ -114,8 +138,18 @@ const menus: Record<NavMenuId, MenuContent> = {
         })),
       })),
       {
-        heading: "Engagement route",
-        links: [{ ...outsourcingLink, text: "Subcontract a defined drawing, modelling or detailing package", icon: Handshake }],
+        // One section for both keeps the panel inside a 1280×800 viewport.
+        heading: "Specialist detailing & outsourcing",
+        compact: true,
+        links: [
+          ...specialistPages.map((page) => ({
+            label: page.nav.label,
+            href: landingPath(page.slug),
+            text: page.nav.text,
+            icon: landingIcons[page.slug] ?? Construction,
+          })),
+          { ...outsourcingLink, text: "Subcontract a defined drawing, modelling or detailing package", icon: Handshake },
+        ],
       },
     ],
   },
@@ -138,6 +172,23 @@ const menus: Record<NavMenuId, MenuContent> = {
       },
     ],
   },
+  markets: {
+    title: "Markets We Serve",
+    text: "Steel detailing for fabricators and EPC contractors in five regions, to local standards and in hours that suit them.",
+    all: { label: "All markets", href: marketsPath },
+    columns: 1,
+    layout: "side-by-side",
+    // Two balanced columns: the GCC region with its country pages, then the single-page regions.
+    sections: [
+      ...marketRegions
+        .filter((region) => region.hub)
+        .map((region) => ({ heading: region.label, links: regionPages(region).map((page) => marketLink(page, region.hub)) })),
+      {
+        heading: "Americas, Europe & Australia",
+        links: marketRegions.filter((region) => !region.hub).flatMap(regionPages).map((page) => marketLink(page)),
+      },
+    ],
+  },
   capabilities: {
     title: "Technical Capabilities",
     text: "Software, deliverables, standards and how every package is checked and handed over.",
@@ -152,26 +203,28 @@ const menus: Record<NavMenuId, MenuContent> = {
 };
 
 /** One menu entry: tinted icon tile, label and optional one-line description. */
-function MenuItem({ link, current }: { link: MenuLink; current: boolean }) {
+function MenuItem({ link, current, compact = false }: { link: MenuLink; current: boolean; compact?: boolean }) {
   const Icon = link.icon;
   return (
     <Link
       href={link.href}
       aria-current={current ? "page" : undefined}
-      className={`group flex items-start gap-3.5 rounded-lg p-3 transition-colors duration-200 hover:bg-paper ${current ? "bg-paper" : ""}`}
+      className={`group flex gap-3 rounded-lg px-3 transition-colors duration-200 hover:bg-paper ${compact ? "items-center py-2" : "items-start py-2.5"} ${
+        current ? "bg-paper" : ""
+      }`}
     >
       <span
-        className={`grid size-10 shrink-0 place-items-center rounded-lg transition-colors duration-200 group-hover:bg-energy-deep group-hover:text-white ${
-          current ? "bg-energy-deep text-white" : "bg-energy-deep/10 text-energy-ink"
-        }`}
+        className={`grid shrink-0 place-items-center rounded-lg transition-colors duration-200 group-hover:bg-energy-deep group-hover:text-white ${
+          compact ? "size-8" : "size-10"
+        } ${current ? "bg-energy-deep text-white" : "bg-energy-deep/10 text-energy-ink"}`}
       >
-        <Icon aria-hidden className="size-5" strokeWidth={1.75} />
+        <Icon aria-hidden className={compact ? "size-4" : "size-5"} strokeWidth={1.75} />
       </span>
-      <span className="min-w-0 flex-1 pt-0.5">
+      <span className={`min-w-0 flex-1 ${compact ? "" : "pt-0.5"}`}>
         <span className={`block text-sm leading-5 font-bold ${current ? "text-energy-ink" : "text-navy-900"} group-hover:text-energy-ink`}>
           {link.label}
         </span>
-        {link.text && <span className="mt-0.5 block text-xs leading-4 text-slate">{link.text}</span>}
+        {link.text && !compact && <span className="mt-0.5 block text-xs leading-4 text-slate">{link.text}</span>}
       </span>
     </Link>
   );
@@ -276,19 +329,21 @@ export function Navbar() {
       }`}
     >
       <div
-        className={`container-site flex items-center justify-between gap-6 transition-[height] duration-500 ${
+        // From xl the header is a little wider than the page container, with tighter side padding, so the
+        // logo, nine menu items and the CTA keep even spacing on 1280px screens.
+        className={`mx-auto flex w-full max-w-[80rem] items-center justify-between gap-4 px-5 transition-[height] duration-500 sm:px-8 lg:px-12 xl:max-w-[84rem] xl:px-6 ${
           scrolled ? "h-[4.5rem]" : "h-[4.5rem] xl:h-20"
         }`}
       >
         <Link href="/" aria-label={`${site.name} home`} className="shrink-0 text-white">
-          <Logo />
+          <Logo eager className="h-12 w-auto sm:h-14 xl:h-[50px]" />
         </Link>
 
         <nav aria-label="Primary" className="hidden xl:block">
           <ul className="flex items-center">
             {primaryNav.map((item) => {
               const active = sectionActive(item.href, item.menu);
-              const linkClass = `nav-link relative inline-flex h-11 items-center px-2 text-xs font-semibold tracking-[0.05em] whitespace-nowrap uppercase 2xl:px-2 2xl:text-[0.78rem] transition-colors duration-300 hover:text-white ${
+              const linkClass = `nav-link relative inline-flex h-11 items-center px-1.5 text-xs font-semibold tracking-[0.05em] xl:tracking-[0.03em] whitespace-nowrap min-[1360px]:px-2 uppercase transition-colors duration-300 hover:text-white ${
                 active ? "text-white" : "text-mist/85"
               }`;
 
@@ -312,6 +367,7 @@ export function Navbar() {
               const panelId = `${idBase}-${menuId}`;
               const open = openMenu === menuId;
               const wide = menuId === "services";
+              const sideBySide = menu.layout === "side-by-side";
 
               return (
                 <li
@@ -351,12 +407,12 @@ export function Navbar() {
                     <div
                       id={panelId}
                       className={`absolute top-full pt-4 ${
-                        wide ? "left-1/2 w-[54rem] -translate-x-[40%]" : "left-1/2 w-[44rem] -translate-x-1/2"
+                        wide ? "left-1/2 w-[58rem] -translate-x-[40%]" : sideBySide ? "left-1/2 w-[52rem] -translate-x-1/2" : "left-1/2 w-[44rem] -translate-x-1/2"
                       }`}
                     >
                       <div
                         className={`menu-in grid overflow-hidden rounded-xl bg-white shadow-[0_24px_60px_rgb(0_26_41/0.35)] ${
-                          wide ? "grid-cols-[15rem_1fr]" : "grid-cols-[13rem_1fr]"
+                          wide ? "grid-cols-[13rem_1fr]" : "grid-cols-[13rem_1fr]"
                         }`}
                       >
                         <div className="flex flex-col justify-between bg-navy-800 p-7 text-mist">
@@ -373,18 +429,25 @@ export function Navbar() {
                             {menu.all.label}
                           </Link>
                         </div>
-                        <div className="p-4">
+                        <div
+                          className={`max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain p-4 ${
+                            sideBySide ? "grid grid-cols-2 gap-4" : ""
+                          }`}
+                        >
                           {menu.sections.map((section, s) => (
-                            <div key={section.heading ?? s} className={s > 0 ? "mt-2 border-t border-line pt-3" : ""}>
+                            <div
+                              key={section.heading ?? s}
+                              className={s === 0 ? "" : sideBySide ? "border-l border-line pl-4" : "mt-1.5 border-t border-line pt-2.5"}
+                            >
                               {section.heading && (
-                                <p className="px-3 pt-1 pb-1.5 text-[0.6875rem] font-bold tracking-[0.12em] text-energy-ink uppercase">
+                                <p className="px-3 pt-0.5 pb-1 text-[0.6875rem] font-bold tracking-[0.12em] text-energy-ink uppercase">
                                   {section.heading}
                                 </p>
                               )}
                               <ul className={`grid gap-1 ${menu.columns === 2 && section.links.length > 1 ? "grid-cols-2" : ""}`}>
                                 {section.links.map((link, index) => (
                                   <li key={link.href} className="menu-item" style={stagger(s * 2 + index)}>
-                                    <MenuItem link={link} current={pathname === link.href} />
+                                    <MenuItem link={link} current={pathname === link.href} compact={section.compact} />
                                   </li>
                                 ))}
                               </ul>
@@ -403,7 +466,7 @@ export function Navbar() {
         <div className="flex shrink-0 items-center gap-2">
           <Link
             href={quoteCta.href}
-            className="group hidden h-11 items-center gap-2.5 rounded-lg bg-energy-deep px-5 text-sm font-semibold whitespace-nowrap text-white transition-[background-color,box-shadow] duration-300 hover:bg-energy-ink hover:shadow-[0_8px_20px_rgb(0_179_80/0.35)] sm:inline-flex"
+            className="group hidden h-11 items-center gap-2 rounded-lg bg-energy-deep px-4 text-sm font-semibold whitespace-nowrap text-white transition-[background-color,box-shadow] duration-300 hover:bg-energy-ink hover:shadow-[0_8px_20px_rgb(0_179_80/0.35)] sm:inline-flex"
           >
             {quoteCta.label}
             <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -525,6 +588,10 @@ export function Navbar() {
               <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-3">
                 <WhatsAppIcon className="size-4 text-energy" />
                 Chat on WhatsApp
+              </a>
+              <a href={`mailto:${site.email.projects}`} className="inline-flex min-h-11 items-center gap-3 break-all">
+                <Mail aria-hidden className="size-4 shrink-0 text-energy" />
+                {site.email.projects}
               </a>
               <p className="flex items-start gap-3">
                 <MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-energy" />

@@ -2,26 +2,25 @@ import Image from "next/image";
 import { site } from "@/lib/site";
 
 /**
- * PetroHill logo: concept 1 from docs/brand/PetroHill Structural Logo Concepts.png,
- * recomposed horizontally (P mark + wordmark) so the wordmark stays legible at header height.
- * "light" turns the navy parts white for the navy header and footer; "color" is for light backgrounds.
- * TODO_VERIFY: replace with vector (SVG) artwork from the designer when available.
+ * PetroHill Energy logo (owner's artwork, Nov 2026): the P+H mark, the PetroHill wordmark and the
+ * "Energy & Industrial Support" tagline, with the tagline lightened for the navy header and footer
+ * (built by scripts/build-logos.py from public/logo/PetroHill Energy Logo Update.png).
+ * The tagline is about a ninth of the logo's height, so the logo is never shown under ~48px tall.
+ * TODO: replace with vector (SVG) artwork when available.
  */
-const sources = {
-  light: "/logo/petrohill-logo-light.png",
-  color: "/logo/petrohill-logo.png",
-} as const;
+const logo = { src: "/logo/petrohill-energy-logo-on-dark.png", width: 1485, height: 300 } as const;
 
-export function Logo({ variant = "light", className = "" }: { variant?: keyof typeof sources; className?: string }) {
+/** `eager` for the header copy only; the footer copy loads lazily. Not preloaded: it is never the LCP element. */
+export function Logo({ className = "h-12 w-auto", eager = false }: { className?: string; eager?: boolean }) {
   return (
     <Image
-      src={sources[variant]}
-      alt={site.name}
-      width={781}
-      height={136}
-      priority
-      sizes="240px"
-      className={`h-8 w-auto sm:h-9 ${className}`}
+      src={logo.src}
+      alt={`${site.name}: Energy & Industrial Support`}
+      width={logo.width}
+      height={logo.height}
+      loading={eager ? "eager" : "lazy"}
+      sizes="300px"
+      className={className}
     />
   );
 }

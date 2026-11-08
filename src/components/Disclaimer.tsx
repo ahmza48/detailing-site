@@ -1,9 +1,9 @@
 import { Info } from "lucide-react";
-import { experienceDisclaimer } from "@/lib/site";
+import { experienceNote } from "@/lib/site";
 
 /** Discreet professional-experience note shown near any project or organization references. */
 export function Disclaimer({
-  text = experienceDisclaimer,
+  text = experienceNote,
   onDark = false,
   className = "",
 }: {

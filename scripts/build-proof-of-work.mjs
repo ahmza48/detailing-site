@@ -41,7 +41,7 @@ const WIDTH = 1000;
 const HEIGHT = 625;
 const RENDER_LONG_EDGE = 3000;
 const WEBP_QUALITY = 62;
-const WATERMARK_LOGO = path.join(root, "public/logo/petrohill-logo.png");
+const WATERMARK_LOGO = path.join(root, "public/logo/petrohill-energy-logo.png");
 const WATERMARK_WIDTH = 560;
 const WATERMARK_OPACITY = 0.17;
 

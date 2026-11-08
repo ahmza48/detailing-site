@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowRight, Building2, Factory, HardHat, Ruler, Scale } from "lucide-react";
 import { ArrowLink, ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
-import { Disclaimer } from "@/components/Disclaimer";
 import { ExperienceMetrics } from "@/components/ExperienceMetrics";
 import { ExperienceTicker } from "@/components/ExperienceTicker";
 import { FaqList } from "@/components/FaqList";
@@ -14,8 +13,9 @@ import { SoftwareCapabilities } from "@/components/SoftwareCapabilities";
 import { aboutFaqs } from "@/lib/faqs";
 import { softwareQualifier } from "@/lib/software";
 import { servicePath, services } from "@/lib/services";
-import { pageMetadata } from "@/lib/seo";
-import { motto, purpose, site, tickerDisclaimers } from "@/lib/site";
+import { JsonLd } from "@/components/JsonLd";
+import { faqPageJsonLd, pageMetadata } from "@/lib/seo";
+import { motto, purpose, site } from "@/lib/site";
 import { tc } from "@/lib/text";
 
 export const metadata: Metadata = {
@@ -114,8 +114,7 @@ export default function AboutPage() {
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate sm:text-lg">
               Our approach draws on the prior professional experience of senior personnel who have worked on onshore and
               offshore energy developments, refinery and gas-processing facilities, industrial structures and brownfield
-              modifications. That experience belongs to the people involved; it is not a claim that {site.name} itself
-              executed their former employers&rsquo; projects.
+              modifications.
             </p>
           </div>
         </div>
@@ -133,7 +132,7 @@ export default function AboutPage() {
                 Our senior team&rsquo;s prior professional backgrounds include assignments within established EPC and
                 engineering organisations and exposure to oil and gas, petrochemical, offshore and industrial plant
                 projects. Selected engagements are documented in our Project Experience section, identifying previous
-                employment contexts where available. These were not contracts performed by the present company.
+                employment contexts where available.
               </p>
               <ArrowLink href="/project-experience" onDark className="mt-7">
                 View project experience
@@ -148,12 +147,10 @@ export default function AboutPage() {
           <div data-reveal className="mt-14">
             <ExperienceTicker
               type="formerEmployer"
-              label="Organisations where senior team members previously worked"
-              disclaimer={tickerDisclaimers.formerEmployer}
+              label="Organisations where our senior team previously worked"
               onDark
             />
           </div>
-          <Disclaimer onDark className="mt-10" />
         </div>
       </section>
 
@@ -347,6 +344,7 @@ export default function AboutPage() {
           </div>
           <div className="lg:col-span-7">
             <FaqList faqs={aboutFaqs} />
+            <JsonLd data={faqPageJsonLd(aboutFaqs)} />
           </div>
         </div>
       </section>

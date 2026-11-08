@@ -16,6 +16,8 @@ export type Application = {
   path: { service?: ServiceSlug; industry?: IndustrySlug; role: string }[];
   image: string;
   imageAlt: string;
+  /** Dedicated landing page for this structure type, when one exists. */
+  guide?: { href: string; label: string };
 };
 
 export const applications: Application[] = [
@@ -34,6 +36,7 @@ export const applications: Application[] = [
     ],
     image: "/images/onshore-pipe-rack.jpg",
     imageAlt: "Steel pipe rack and process structures at an onshore plant",
+    guide: { href: "/pipe-rack-detailing", label: "Pipe rack detailing & shop drawings" },
   },
   {
     id: "platforms",
@@ -134,5 +137,6 @@ export const applications: Application[] = [
     ],
     image: "/images/industry-offshore.jpg",
     imageAlt: "Offshore platforms on the horizon above breaking waves",
+    guide: { href: "/offshore-structural-detailing", label: "Offshore structural detailing" },
   },
 ];

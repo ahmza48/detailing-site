@@ -53,7 +53,7 @@ export const resources: Resource[] = [
     primaryKeyword: "what is structural steel detailing",
     readingMinutes: 5,
     relatedServices: ["steel-detailing-fabrication"],
-    relatedPages: [],
+    relatedPages: [{ href: "/steel-detailing-uae", label: "Steel Detailing for the UAE" }, { href: "/pipe-rack-detailing", label: "Pipe Rack Detailing" }],
     sources: [
       { title: "ANSI/AISC 303-22 Code of Standard Practice", url: "https://welovesteelconstruction.ssi-steel.com/wp-content/uploads/2024/08/Specification-AISC-303-22_Code-of-Standard-Practice-for-Steel-Buildings-and-Bridges.pdf", publisher: "AISC (copy hosted by SSI)" },
       { title: "Structural Steel Detailing Practices—Good and Bad", url: "https://ej.aisc.org/index.php/engj/article/download/831/830/830", publisher: "AISC Engineering Journal" },
@@ -72,7 +72,7 @@ export const resources: Resource[] = [
     primaryKeyword: "",
     readingMinutes: 4,
     relatedServices: ["steel-detailing-fabrication","civil-structural-drafting"],
-    relatedPages: [],
+    relatedPages: [{ href: "/steel-detailing-usa", label: "Outsource Steel Detailing (USA)" }],
     sources: [
       { title: "Quick start to Tekla Structures drawings (2026)", url: "https://support.tekla.com/doc/tekla-structures/2026/dra_quick_start_to_ts_drawings", publisher: "Trimble" },
       { title: "Drawings in Tekla Structures (2024)", url: "https://support.tekla.com/doc/tekla-structures/2024/dra_drawing_contents", publisher: "Trimble" },
@@ -92,7 +92,7 @@ export const resources: Resource[] = [
     primaryKeyword: "",
     readingMinutes: 4,
     relatedServices: ["steel-detailing-fabrication"],
-    relatedPages: [],
+    relatedPages: [{ href: "/pilot", label: "Fixed-Price Detailing Pilot" }],
     sources: [
       { title: "ANSI/AISC 303-22", url: "https://www.aisc.org/aisc/publications/current-standards/aisc-303/", publisher: "AISC" },
       { title: "Specifying the right Execution Class", url: "https://www.newsteelconstruction.com/wp/specifying-the-right-execution-class/", publisher: "New Steel Construction" },
@@ -111,7 +111,7 @@ export const resources: Resource[] = [
     primaryKeyword: "",
     readingMinutes: 4,
     relatedServices: ["steel-detailing-fabrication"],
-    relatedPages: [{ href: "/engineering-outsourcing", label: "Engineering Outsourcing & Subcontract Support" }],
+    relatedPages: [{ href: "/engineering-outsourcing", label: "Engineering Outsourcing & Subcontract Support" }, { href: "/steel-detailing-usa", label: "Outsource Steel Detailing (USA)" }, { href: "/tekla-detailing-outsourcing", label: "Tekla Detailing Outsourcing" }],
     sources: [
       { title: "Structural Steel Detailing Practices—Good and Bad", url: "https://ej.aisc.org/index.php/engj/article/download/831/830/830", publisher: "AISC EJ" },
     ],
@@ -128,7 +128,7 @@ export const resources: Resource[] = [
     primaryKeyword: "",
     readingMinutes: 3,
     relatedServices: ["plant-structural-3d-modelling"],
-    relatedPages: [],
+    relatedPages: [{ href: "/tekla-detailing-outsourcing", label: "Tekla Detailing Outsourcing" }],
     sources: [
       { title: "Tekla Structures data exchange formats (2026)", url: "https://support.tekla.com/doc/tekla-structures/2026/int_compatible_software", publisher: "Trimble" },
       { title: "NC files (2026)", url: "https://support.tekla.com/doc/tekla-structures/2026/int_create_nc_files", publisher: "Trimble" },
@@ -148,7 +148,7 @@ export const resources: Resource[] = [
     primaryKeyword: "",
     readingMinutes: 4,
     relatedServices: ["rcc-reinforcement-detailing"],
-    relatedPages: [],
+    relatedPages: [{ href: "/steel-detailing-saudi-arabia", label: "Detailing for Saudi Arabia Projects" }],
     sources: [
       { title: "Details and Detailing of Concrete Reinforcement (ACI 315)", url: "https://regbar.com/wp-content/uploads/2019/09/ACI-315.pdf", publisher: "ACI (copy hosted by Regbar)" },
       { title: "BS 8666:2020 shape codes", url: "https://kbrebar.co.uk/downloads/kbshapecodes.pdf", publisher: "KB Rebar (summary of BSI standard)" },
@@ -167,7 +167,7 @@ export const resources: Resource[] = [
     primaryKeyword: "",
     readingMinutes: 3,
     relatedServices: ["material-takeoffs-documentation"],
-    relatedPages: [],
+    relatedPages: [{ href: "/pipe-rack-detailing", label: "Pipe Rack Detailing" }],
     sources: [
       { title: "Takeoff (construction)", url: "https://en.wikipedia.org/wiki/Takeoff_(construction)", publisher: "Wikipedia" },
       { title: "Q&A: Difference between BOM and MTO", url: "https://www.researchgate.net/post/Whats_the_difference_between_bill_of_materials_BOM_and_material_take_off_MTO", publisher: "ResearchGate (practitioner discussion)" },
@@ -185,7 +185,7 @@ export const resources: Resource[] = [
     primaryKeyword: "",
     readingMinutes: 4,
     relatedServices: ["brownfield-structural-modifications"],
-    relatedPages: [],
+    relatedPages: [{ href: "/offshore-structural-detailing", label: "Offshore Structural Detailing" }],
     sources: [
       { title: "Laser scanning and 3D modelling in brownfield offshore facilities: Case studies", url: "https://www.researchgate.net/publication/325687504_Laser_scanning_and_3D_modelling_in_brownfield_offshore_facilities_Case_studies", publisher: "ResearchGate (paper abstract)" },
     ],
@@ -222,7 +222,7 @@ export const resources: Resource[] = [
     primaryKeyword: "",
     readingMinutes: 4,
     relatedServices: [],
-    relatedPages: [{ href: "/engineering-outsourcing", label: "Engineering Outsourcing & Subcontract Support" }, { href: "/quality-delivery", label: "Quality & Delivery" }],
+    relatedPages: [{ href: "/engineering-outsourcing", label: "Engineering Outsourcing & Subcontract Support" }, { href: "/quality-delivery", label: "Quality & Delivery" }, { href: "/pilot", label: "Fixed-Price Detailing Pilot" }],
     sources: [
       { title: "PetroHill FAQs", url: `${site.url}/faq`, publisher: "PetroHill" },
       { title: "Tekla data exchange formats", url: "https://support.tekla.com/doc/tekla-structures/2026/int_compatible_software", publisher: "Trimble" },
