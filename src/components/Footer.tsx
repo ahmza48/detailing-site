@@ -86,8 +86,8 @@ export function Footer() {
               WhatsApp us
             </a>
             {[
-              { label: "For General Inquiries Email us at:", address: site.email.info },
-              { label: "For Project Discussions Email us at:", address: site.email.projects },
+              { label: "For general inquiries email us at:", address: site.email.info },
+              { label: "For project discussions email us at:", address: site.email.projects },
             ].map(({ label, address }) => (
               <a key={address} href={`mailto:${address}`} className={contactClass}>
                 <Mail aria-hidden className="mt-1 size-4 shrink-0 text-energy" />
