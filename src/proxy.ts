@@ -1,8 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-const denied = `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="robots" content="noindex"><title>For clients only</title>
+const denied = `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="robots" content="noindex"><title>For study only</title>
 <body style="font-family:system-ui,sans-serif;display:grid;place-items:center;min-height:90vh;margin:0;padding:1rem;color:#002438;text-align:center">
-<main><h1>For clients only</h1><p>Our project drawings are confidential.</p><a href="/contact">Contact us</a></main></body></html>`;
+<main><h1>For study only</h1><p>Our project drawings are confidential and available exclusively to authorized clients only.</p><a href="/contact">Contact us</a></main></body></html>`;
 
 /** Browsers send Sec-Fetch-* on real page loads; the Referer check covers those that predate them. */
 function isEmbeddedInOwnPage(request: NextRequest) {

@@ -336,7 +336,7 @@ export function Navbar() {
         }`}
       >
         <Link href="/" aria-label={`${site.name} home`} className="shrink-0 text-white">
-          <Logo eager className="h-12 w-auto sm:h-14 xl:h-[50px]" />
+          <Logo eager className="h-10 w-auto sm:h-11 xl:h-[50px]" />
         </Link>
 
         <nav aria-label="Primary" className="hidden xl:block">
