@@ -129,11 +129,11 @@ export function DrawingProtection() {
           <Lock aria-hidden className="size-5" />
         </span>
         <p id="clients-only-title" className="mt-5 text-xl font-extrabold text-navy-900">
-          For Clients Only
+          For Study Only
         </p>
         <p className="mt-3 text-[0.9375rem] leading-7 text-ink">
-          Our project drawings are confidential. Full views, downloads and copies are available to clients only. Contact
-          us to discuss samples relevant to your scope.
+          Our project drawings are confidential and available exclusively to authorized clients only. PetroHill retains
+          them for its own study and internal record keeping. Contact us to discuss relevant samples.
         </p>
         <Link
           href={quoteCta.href}

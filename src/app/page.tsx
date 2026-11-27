@@ -138,7 +138,7 @@ export default function HomePage() {
         eyebrow="Steel & RCC detailing, 3D modelling and CAD drafting"
         title="Structural Steel Detailing & Tekla Modelling"
         accent="for Oil & Gas EPC Projects"
-        intro="A senior team with 30+ years of experience, including ADNOC, Saudi Aramco and Dolphin Energy projects, working GCC hours from Lahore. Shop, erection and pipe-rack packages to AISC, BS EN and client specifications."
+        intro="Shop, erection and GA drawings, Tekla models and NC/DSTV files to AISC, BS EN and your project specifications, from a senior team with 30+ years’ combined experience on GCC oil & gas projects, working your hours."
         image="/images/hero-offshore.jpg"
         imageAlt="Offshore jack-up rig beside a crane vessel at sunset"
         footer={
